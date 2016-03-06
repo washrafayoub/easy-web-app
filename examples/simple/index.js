@@ -4,3 +4,27 @@ var gui = require('../../');
 
 gui.init();
 
+gui.addView(  
+		{ 'id':'myFirstView', 'type':'pong-easyform' },
+		{
+			"id":"tstFormId",
+			"easyFormFields":[
+				"id",
+				"c1|Name",
+				"c1|Date|date",
+				"c1|separator",
+				"c1|Remark|3rows",
+				"c2|Mailings|label",
+				"c2|Send~Ads~~|checkbox_infomails_ads",
+				"c2|Newsletter|checkbox_infomails_newsletter",
+				"c2|Pass~Word"
+			],
+			"actions":[
+				{
+					"id":"Chk",
+					"actionName":"Check",
+					"actionURL":"svc/test/check"
+				}
+			]
+		}
+	); 

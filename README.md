@@ -3,6 +3,21 @@ Create web applications easily.
 
 This is a Node.js API for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
+Focus is on _web applications_ (not simple web pages). Ready to use plug-ins for interactive
+* forms
+* tables / lists
+* content
+* I/O: controll switches/drawer, gauges, graphs, LEDs, displays, ...
+* i18n: switch language
+* maps: POIs, routes, traffic, ...
+* page to page navigation with navigation tabs, menues, links and session data
+* source code display
+* basic OAuth security
+
+## Campared with ...
+* jade -- descriptive, but low level, more focus to simplify the creation of web pages
+* angular -- can do everything, but programming is required
+
 ## 20 sec Test
 Get a local copy and start example:
 
