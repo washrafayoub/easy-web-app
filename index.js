@@ -21,10 +21,6 @@ gui.init = function init( port ) {
 	
 	console.log( 'GUI: http://localhost:'+wsPort+'/' );
 	
-	webservices.use( '/css', express.static( gui.staticCSS ) );
-	webservices.use( '/js', express.static( gui.staticJS ) );
-	webservices.use( '/img', express.static( gui.staticImg ) );
-	webservices.use( '/modules', express.static( gui.staticMod ) );
 
 };
 
@@ -41,13 +37,12 @@ gui.setDefaults = function setDefaults() {
 				'copyrightText':'powered by <a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>' 
 			}
 	};
-	
-//	this.staticCSS =  __dirname + '/css';
-//	this.staticJS  =  __dirname + '/js';
-//	this.staticImg =  __dirname + '/img';
-//	this.staticMod =  __dirname + '/modules';
-	
 };
+
+webservices.use( '/css',     express.static( __dirname + '/node_modules/rest-web-gui/css' ) );
+webservices.use( '/js',      express.static( __dirname + '/node_modules/rest-web-gui/js'  ) );
+webservices.use( '/img',     express.static( __dirname + '/node_modules/rest-web-gui/img'  ) );
+webservices.use( '/modules', express.static( __dirname + '/node_modules/rest-web-gui/modules'  ) );
 
 
 /** REST web service to GET layout structure: */
@@ -55,7 +50,8 @@ webservices.get(
 	'/svc/layout/:id', 
 	function( req, res ){
 		if (  gui.pages[ req.params.id ] ) {
-			res.send( JSON.stringify( gui.pages[req.params.id ] ) );
+			var layout = { 'layout': gui.pages[req.params.id ]  };
+			res.send( JSON.stringify( layout) );
 		} else {
 		    res.statusCode = 404;
 		    return res.send('Error 404: No quote found');
