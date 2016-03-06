@@ -1,29 +1,33 @@
 {
-  "name": "easy-web-gui",
-  "version": "0.0.1",
-  "description": "Create web applications easily.",
-  "author": "ma-ha",
-  "license": "MIT",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "GUI",
-    "web",
-    "app",
-    "browser",
-    "AJAX",
-    "easy",
-    "portal",
-    "REST",
-    "RESTful",
-    "web",
-    "service",
-    "form",
-    "table"
-  ],
-  "dependencies": {
-    "express": "^3.21.2"
-  }
+	"name":"easy-web-gui",
+	"version":"0.0.1",
+	"description":"Create web applications easily.",
+	"author":"ma-ha",
+	"license":"MIT",
+	"main":"index.js",
+	"scripts":{
+		"test":"echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords":[
+		"GUI",
+		"web",
+		"app",
+		"browser",
+		"AJAX",
+		"easy",
+		"portal",
+		"REST",
+		"RESTful",
+		"web",
+		"service",
+		"form",
+		"table"
+	],
+	"repository":{
+		"type":"git",
+		"url":"https://github.com/npm/npm.git"
+	},
+	"dependencies":{
+		"express":">4.8.0"
+	}
 }
