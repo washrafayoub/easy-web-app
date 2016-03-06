@@ -18,6 +18,20 @@ Focus is on _web applications_ (not simple web pages). Ready to use plug-ins for
 * jade -- descriptive, but low level, more focus to simplify the creation of web pages
 * angular -- can do everything, but programming is required
 
+## Node.js example
+This creates a web page with a form view to add customers and a result view:
+
+	// initialize:
+	var gui = require('../../');
+	
+	gui.init();
+	
+	// create a simple form:
+	gui.addView( 
+		{ ... view config ... },
+		{ ... plug in congig ... }
+	);	
+	
 ## 20 sec Test
 Get a local copy and start example:
 
@@ -26,27 +40,4 @@ Get a local copy and start example:
 	npm install express --save
 	nodejs simple.js
 
-
-## Node.js example
-This creates a web page with a form view to add customers and a result view:
-
-	// initialize:
-	var gui = new easyWebGui.Page();
-	
-	// create a Form an link it to the "/customer" REST service
-	var form = gui.addView( "Search Customers", easyWebGui.baseForm );	
-	
-	// define some input fields, c1 means 1st column, c2 ... I think you got it ;-)
-	// by default all inputs are text inputs -- but there is some "intelligency" for some key words 
-	form.easyFormField.push( "c1|Name" );							
-	form.easyFormField.push( "c1|Email" );  						
-	form.easyFormField.push( "c2|Web Page" );  						
-	form.easyFormField.push( "c2|Birthday" );
-	  						
-	// add a action button, doing a HTTP GET to the service ULR "/customer"
-	form.action.push( { "id":"AddCustomer", "actionName": "Add Customer", "method":"POST" ,"actionURL": "/customer", "taget": "actionResult" );
-	
-	var status = gui.addView( "Web Service Response");	
- 	status.setId( "actionResult" ); 	// this ID is referenced by the form, to set the response of the REST web service request
-	
 	
