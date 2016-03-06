@@ -3,6 +3,15 @@ Create web applications easily.
 
 This is a Node.js API for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
+## 20 sec Test
+Get a local copy and start example:
+
+	git clone https://github.com/ma-ha/easy-web-gui.git
+	cd easy-web-gui/examples/simple
+	npm install express --save
+	nodejs simple.js
+
+
 ## Node.js example
 This creates a web page with a form view to add customers and a result view:
 
