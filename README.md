@@ -26,12 +26,13 @@ This creates a web page with a form view to add customers and a result view:
 	
 	gui.init();
 	
-	// [create a simple form](https://github.com/ma-ha/easy-web-gui/blob/master/examples/simple/index.js):
+	// Create a form view:
 	gui.addView( 
 		{ ... view config ... },
 		{ ... plug in congig ... }
 	);	
-	
+
+Full example: [simple form](https://github.com/ma-ha/easy-web-gui/blob/master/examples/simple/index.js)
 
 	
 ## 20 sec Test
@@ -40,7 +41,7 @@ Get a local copy and start example:
 	git clone https://github.com/ma-ha/easy-web-gui.git
 	cd easy-web-gui/examples/simple
 	npm install express --save
-	nodejs [index.js](https://github.com/ma-ha/easy-web-gui/blob/master/examples/simple/index.js)
+	nodejs index.js
 
 Open GUI: http://localhost:8888/ in your Browser
 	

@@ -2,8 +2,13 @@
 
 var gui = require('../../');
 
+/** Initialize the framework and the default page */
 gui.init();
 
+/** Add a view of type "pong-easy-form" (= plug-in) to the default page 
+    the first parameter of addView is the view configuration,
+    a second parameter can define the plug-in configuration,
+    a third parameter can specify the page. */
 gui.addView(  
 		{ 'id':'myFirstView', 'type':'pong-easyform' },
 		{
