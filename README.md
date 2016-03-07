@@ -15,8 +15,11 @@ Focus is on _web applications_ (not simple web pages). Ready to use plug-ins for
 * basic OAuth security
 
 ## Compared with ...
-* jade -- descriptive, but low level, more focus to simplify the creation of web pages
-* angular -- can do everything, but programming is required
+* jade
+  * descriptive, but low level
+  *  more focus to simplify the creation of web pages, not applications
+* angular 
+  * can do everything, but programming is required
 
 ## Node.js example
 This creates a web page with a form view to add customers and a result view:
