@@ -10,5 +10,6 @@ gui.addView( { 'id':'myFirstView' } );
 
 /** Add a second page page. */
 gui.addPage( 'secondpage' );
+
 /** Add an empty view to the second page page. */
-gui.addView( { 'id':'viewOnSecondPage' }, null, 'secondpage' ); 
+gui.addView( { 'id':'viewOnSecondPage' }, null, 'secondpage' );
