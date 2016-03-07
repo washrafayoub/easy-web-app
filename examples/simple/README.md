@@ -1,4 +1,4 @@
-## Simple Form example
+## Simple Form Example
 This create a page with header, form and footer.
 
 The [pong-easy-form](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-easyform) 

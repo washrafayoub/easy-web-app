@@ -23,6 +23,7 @@ gui.init = function init( port ) {
 
 };
 
+
 /** Set defaults for all required configurations */
 gui.setDefaults = function setDefaults() {
 	// create a default "main" page minimum config
@@ -41,6 +42,7 @@ gui.setDefaults = function setDefaults() {
 	};
 };
 
+
 gui.addPage = function addPage( page ) {
 	if ( this.pages[ encodeURIComponent( page ) ] ) {
 		console.log('gui.addPage: Page "'+pg+'" already exists in GUI.');				
@@ -57,6 +59,7 @@ gui.addPage = function addPage( page ) {
 	
 gui.addView = function addView( def, config, page ) {
 	var pg = page || 'main';
+	pg = encodeURIComponent( pg );
 	var view = {};
 	if ( ! this.pages[ pg ] ) {
 		console.log('gui.addView: Page "'+pg+'" not found in GUI!');
@@ -108,6 +111,7 @@ webservices.get(
 	}
 );
 
+
 /** single page does it all, the layout parameter references the "page". default is the "main" page */
 webservices.get( 
 		'/', 
@@ -118,7 +122,7 @@ webservices.get(
 webservices.get( 
 		'/index.html', 
 		function( req, res ) {
-			res.sendFile( __dirname + '/index.html' ); // TODO: pass URL-parameters
+			res.sendFile( __dirname + '/index.html' ); 
 		}
 	);
 
@@ -138,13 +142,3 @@ webservices.get(
 		res.json( { 'navigations':navTabs } );
 	}
 );
-
-//{
-//	   "navigations" : [
-//	      { "layout":"main", "label":"Main"  },
-//	      { "layout":"demo_docker", "label":"Docker"  },
-//	      { "layout":"demo_ebay", "label":"eBay"  },
-//	      { "layout":"demo_wiki", "label":"Wiki"  },
-//	      { "layout":"demo_io", "label":"IO Lab"  }
-//	   ]
-//	}

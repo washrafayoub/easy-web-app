@@ -14,6 +14,8 @@ Focus is on _web applications_ (not simple web pages). Ready to use plug-ins for
 * source code display
 * basic OAuth security
 
+Check out [rest-web.gui](https://github.com/ma-ha/rest-web-ui/) for some demos and docu of all features.
+
 ## Compared with ...
 * jade
   * descriptive, but low level
