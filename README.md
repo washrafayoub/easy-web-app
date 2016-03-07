@@ -39,7 +39,7 @@ Full example: [simple form](https://github.com/ma-ha/easy-web-gui/blob/master/ex
 
 	
 ## 20 sec Test
-Requires [node.ns installed}(https://nodejs.org/en/download/) -- which is always a good idea to have it.
+Requires [node.ns installed](https://nodejs.org/en/download/) -- which is always a good idea to have it.
 
 Get a local copy and start example:
 
