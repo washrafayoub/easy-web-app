@@ -74,7 +74,7 @@ gui.addView = function addView( def, config, page ) {
 		}
 		this.pages[ pg ].rows.push( view );
 	}
-	console.log( JSON.stringify( this.pages[ pg ] ) );
+	//console.log( JSON.stringify( this.pages[ pg ] ) );
 	return view;
 };
 
