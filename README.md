@@ -7,14 +7,14 @@ Focus is on _web applications_ (not simple web pages). Ready to use plug-ins for
 * forms
 * tables / lists
 * content
-* I/O: controll switches/drawer, gauges, graphs, LEDs, displays, ...
+* I/O: control switches/drawer, gauges, graphs, LEDs, displays, ...
 * i18n: switch language
 * maps: POIs, routes, traffic, ...
-* page to page navigation with navigation tabs, menues, links and session data
+* page to page navigation with navigation tabs, menus, links and session data
 * source code display
 * basic OAuth security
 
-## Campared with ...
+## Compared with ...
 * jade -- descriptive, but low level, more focus to simplify the creation of web pages
 * angular -- can do everything, but programming is required
 
@@ -36,6 +36,8 @@ Full example: [simple form](https://github.com/ma-ha/easy-web-gui/blob/master/ex
 
 	
 ## 20 sec Test
+Requires [node.ns installed}(https://nodejs.org/en/download/) -- which is always a good idea to have it.
+
 Get a local copy and start example:
 
 	git clone https://github.com/ma-ha/easy-web-gui.git
