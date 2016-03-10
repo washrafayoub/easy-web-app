@@ -56,7 +56,64 @@ gui.addPage = function addPage( page ) {
 	}
 };
 
+
+/** High level API to add a IO view */
+gui.addIoView = function addIoView( page) {
+	if ( ! this.io ) { 
+		this.io = [];
+		/** REST web service to GET IO data */
+		webservices.get(
+				'/svc/io/:ioId', 
+				function( req, res ){
+					//console.log( 'pinnnng ' + req.params.ioId );
+					res.json( gui.io[ req.params.ioId ] );
+				}
+			);
+		webservices.post(
+				'/svc/io/:ioId', 
+				function( req, res ){
+					console.log( 'pinnnng ' + req.body );
+					// TODO: why is req.body undefined here?
+// Dummy code
+gui.io[ req.params.ioId ]["myFirstLED"] = { "value":-1 }; 
+gui.io[ req.params.ioId ]["mySwitch"] = { "value":"off" }; 
+					res.statusCode = 200;
+					return res.json( gui.io[ req.params.ioId ] );
+				}
+			);
+	}
+	var ioId = this.io.length;
+	this.io.push( {} );
+	var io = gui.addView( 
+			{ 'id':'io'+ioId, 'type':'pong-io' },
+			{ "imgURL":"img.png", "dataURL":"svc/io/"+ioId, "poll":"10000", "io":[] },
+			page );
+	io.ioId = ioId;
+	io.setUpdateMilliSec = function( ms ) {
+		this.moduleConfig.poll = ms;
+	};
 	
+	io.addLED = function( id, x, y, value ) {
+		this.moduleConfig.io.push( { "id":id, "type":"LED", "pos":{ "x":x, "y":y } } );
+		gui.io[ this.ioId ][id] = { "value":value }; 
+	};
+	io.setLED = function( id, value ) {
+		gui.io[ this.ioId ][id].value = value;
+	};
+	
+	io.addSwitch = function( id, x, y, values ) {
+		if ( values && values.length > 0 ) {
+			this.moduleConfig.io.push( { "id":id, "type":"Switch", "pos":{ "x":x, "y":y }, "values":values } );
+			gui.io[ this.ioId ][id] = { "value":values[0] }; 			
+		} else {
+			console.log( "addSwitch: Ignored, values should be an array!" );
+		}
+	};
+	return io;
+};	
+
+
+/** add a view to the page */
 gui.addView = function addView( def, config, page ) {
 	var pg = page || 'main';
 	pg = encodeURIComponent( pg );
@@ -142,3 +199,5 @@ webservices.get(
 		res.json( { 'navigations':navTabs } );
 	}
 );
+
+
