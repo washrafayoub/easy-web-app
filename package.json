@@ -1,6 +1,6 @@
 {
 	"name":"easy-web-app",
-	"version":"0.1.0",
+	"version":"0.1.1",
 	"description":"Create web applications easily.",
 	"author":"ma-ha",
 	"license":"MIT",
@@ -29,6 +29,7 @@
 	},
 	"dependencies":{
 		"express":">4.8.0"
+		"express":">1.15.0"
 	},
 	"files":[
 		"Readme.md",

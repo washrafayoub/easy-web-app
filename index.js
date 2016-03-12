@@ -7,8 +7,10 @@
 var gui = exports = module.exports = { pages:{} }; 
 
 // use express for REST services
-var express = require('express');
+var express     = require('express');
+var bodyParser  = require('body-parser');
 var webservices = express();
+var jsonParser  = bodyParser.json();
 
 
 /** Initialize the Web GUI*/
@@ -19,8 +21,6 @@ gui.init = function init( port ) {
 	webservices.listen( wsPort );
 	
 	console.log( 'Web GUI: http://localhost:'+wsPort+'/' );
-	
-
 };
 
 
@@ -70,9 +70,10 @@ gui.addIoView = function addIoView( page) {
 				}
 			);
 		webservices.post(
-				'/svc/io/:ioId', 
+				'/svc/io/:ioId',
+				jsonParser,
 				function( req, res ){
-					console.log( 'pinnnng ' + req.body );
+					console.log( 'pinnnng ' + JSON.stringify( req.body ) );
 					// TODO: why is req.body undefined here?
 // Dummy code
 gui.io[ req.params.ioId ]["myFirstLED"] = { "value":-1 }; 

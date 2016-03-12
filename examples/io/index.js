@@ -10,7 +10,7 @@ const on = 1, off = 0;
 var ioView = gui.addIoView();
 
 // change update speed to 1 sec (= 1000 ms)
-ioView.setUpdateMilliSec( 1000 );
+ioView.setUpdateMilliSec( 10000 );
 
 // add a "LED" at x/y 100px/100px and stich it to "on" (=1)
 var led = on;
