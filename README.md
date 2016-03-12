@@ -53,5 +53,5 @@ Get a local copy and start example:
 	cd examples/simple
 	nodejs index.js
 
-No open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
+Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
