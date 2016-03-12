@@ -1,6 +1,6 @@
 {
 	"name":"easy-web-app",
-	"version":"0.1.1",
+	"version":"0.2.0",
 	"description":"Create web applications easily.",
 	"author":"ma-ha",
 	"license":"MIT",
@@ -20,7 +20,8 @@
 	"dependencies":{
 		"express":">=4.8.0",
 		"body-parser":">=1.15.0",
-		"rest-web-gui":"https://github.com/ma-ha/rest-web-ui.git"
+		"npmlog":">=2.0.0",
+		"rest-web-gui":"ma-ha/rest-web-ui"
 	},
 	"files":[
 		"Readme.md",
