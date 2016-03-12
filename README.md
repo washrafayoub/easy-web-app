@@ -64,7 +64,7 @@ Create a demo folder and install _easy-web-app_ via _npm_
 	cd demo
 	npm install easy-web-app
 
-Create a _simpleForm.js_ file with following content (this is the [form example](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js):
+Create a _simpleForm.js_ file with following content (this is the [form example](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)):
 
 	/** Simple example: Create a web page with form */
 	var gui = require ( 'easy-web-app' )
