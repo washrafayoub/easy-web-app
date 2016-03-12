@@ -65,7 +65,7 @@ gui.addIoView = function addIoView( page) {
 		webservices.get(
 				'/svc/io/:ioId', 
 				function( req, res ){
-					//console.log( 'pinnnng ' + req.params.ioId );
+					//console.log( 'ping: ' + req.params.ioId );
 					res.json( gui.io[ req.params.ioId ] );
 				}
 			);
@@ -73,11 +73,18 @@ gui.addIoView = function addIoView( page) {
 				'/svc/io/:ioId',
 				jsonParser,
 				function( req, res ){
-					console.log( 'pinnnng ' + JSON.stringify( req.body ) );
-					// TODO: why is req.body undefined here?
-// Dummy code
-gui.io[ req.params.ioId ]["myFirstLED"] = { "value":-1 }; 
-gui.io[ req.params.ioId ]["mySwitch"] = { "value":"off" }; 
+					//console.log( JSON.stringify( req.body ) );
+					if ( req.body && req.body.id && req.body.value ) {
+						if ( gui.io[ req.params.ioId ][ req.body.id ] ) {
+							gui.io[ req.params.ioId ][ req.body.id ].value = req.body.value;
+							if ( gui.io[ req.params.ioId ][ req.body.id ].callBack ) {
+								gui.io[ req.params.ioId ][ req.body.id ].callBack( req.body.value );								
+							} else {
+								console.log( 'WARNING: no CallBack for ID "'+req.body.id +'" defined' );
+							}
+						}
+						
+					}
 					res.statusCode = 200;
 					return res.json( gui.io[ req.params.ioId ] );
 				}
@@ -87,7 +94,7 @@ gui.io[ req.params.ioId ]["mySwitch"] = { "value":"off" };
 	this.io.push( {} );
 	var io = gui.addView( 
 			{ 'id':'io'+ioId, 'type':'pong-io' },
-			{ "imgURL":"img.png", "dataURL":"svc/io/"+ioId, "poll":"10000", "io":[] },
+			{ 'imgURL':'img.png', 'dataURL':'svc/io/'+ioId, 'poll':'10000', 'io':[] },
 			page );
 	io.ioId = ioId;
 	io.setUpdateMilliSec = function( ms ) {
@@ -95,19 +102,33 @@ gui.io[ req.params.ioId ]["mySwitch"] = { "value":"off" };
 	};
 	
 	io.addLED = function( id, x, y, value ) {
-		this.moduleConfig.io.push( { "id":id, "type":"LED", "pos":{ "x":x, "y":y } } );
-		gui.io[ this.ioId ][id] = { "value":value }; 
+		if ( id && ( x >= 0 ) && ( y >= 0 ) ) {
+			this.moduleConfig.io.push( { "id":id, "type":"LED", "pos":{ "x":x, "y":y } } );
+			gui.io[ this.ioId ][id] = { "value": (value || 0) }; 
+			
+		} else {
+			console.log( 'WARNING: addLED needs proper ID and x,y values!' );
+		}
 	};
 	io.setLED = function( id, value ) {
-		gui.io[ this.ioId ][id].value = value;
+		if ( id && gui.io[ this.ioId ][id] ) {
+			if (  [-1,0,1].indexOf( value ) >= 0 ) {
+				gui.io[ this.ioId ][id].value = value;	
+				console.log( value );
+			} else {
+				console.log( 'WARNING: setLED: value "'+value +'" ignored' );	
+			}
+		} else {
+			console.log( 'WARNING: setLED: id "'+io+'" unknown' );
+		}
 	};
 	
-	io.addSwitch = function( id, x, y, values ) {
+	io.addSwitch = function( id, x, y, values, callBack ) {
 		if ( values && values.length > 0 ) {
 			this.moduleConfig.io.push( { "id":id, "type":"Switch", "pos":{ "x":x, "y":y }, "values":values } );
-			gui.io[ this.ioId ][id] = { "value":values[0] }; 			
+			gui.io[ this.ioId ][id] = { "value":values[0], "callBack":callBack }; 			
 		} else {
-			console.log( "addSwitch: Ignored, values should be an array!" );
+			console.log( "WARNING: addSwitch: Ignored, values should be an array!" );
 		}
 	};
 	return io;
