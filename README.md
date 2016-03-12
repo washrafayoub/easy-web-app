@@ -46,9 +46,12 @@ Requires [node.ns installed](https://nodejs.org/en/download/) -- which is always
 Get a local copy and start example:
 
 	git clone https://github.com/ma-ha/easy-web-app.git
-	cd easy-web-gui/examples/simple
-	npm install express --save
+	
+	cd easy-web-gui
+	npm install
+	 
+	cd examples/simple
 	nodejs index.js
 
-Open GUI: http://localhost:8888/ in your Browser
+No open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
