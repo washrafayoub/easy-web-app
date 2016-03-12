@@ -16,10 +16,8 @@ var jsonParser  = bodyParser.json();
 /** Initialize the Web GUI*/
 gui.init = function init( port ) {
 	this.setDefaults();
-
 	var wsPort = port || 8888;
 	webservices.listen( wsPort );
-	
 	console.log( 'Web GUI: http://localhost:'+wsPort+'/' );
 };
 
@@ -32,12 +30,17 @@ gui.setDefaults = function setDefaults() {
 		'header':{
 			'logoText':'Test',
 			"modules" : [ 
-	             { "id": "MainNav", "type": "pong-navbar", "param": { "confURL":"/svc/nav" } },
+         { "id": "MainNav"
+           ,"type": "pong-navbar" 
+           ,"param": { "confURL":"/svc/nav" } 
+         }
 			]
 		},
 		'rows':[],
 		'footer':{
-			'copyrightText':'powered by <a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>' 
+			'copyrightText':
+				'powered by <a href="https://github.com/ma-ha/rest-web-ui">'+
+				'ReST-Web-GUI</a>'
 		}
 	};
 };
@@ -45,7 +48,7 @@ gui.setDefaults = function setDefaults() {
 
 gui.addPage = function addPage( page ) {
 	if ( this.pages[ encodeURIComponent( page ) ] ) {
-		console.log('gui.addPage: Page "'+pg+'" already exists in GUI.');				
+		console.log('gui.addPage: Page "'+pg+'" already exists in GUI.');
 	} else {
 		this.pages[ encodeURIComponent( page ) ] = {
 				'title':page,
@@ -63,38 +66,43 @@ gui.addIoView = function addIoView( page) {
 		this.io = [];
 		/** REST web service to GET IO data */
 		webservices.get(
-				'/svc/io/:ioId', 
-				function( req, res ){
-					//console.log( 'ping: ' + req.params.ioId );
-					res.json( gui.io[ req.params.ioId ] );
-				}
-			);
+			'/svc/io/:ioId', 
+			function( req, res ){
+				//console.log( 'ping: ' + req.params.ioId );
+				res.json( gui.io[ req.params.ioId ] );
+			}
+		);
 		webservices.post(
-				'/svc/io/:ioId',
-				jsonParser,
-				function( req, res ){
-					//console.log( JSON.stringify( req.body ) );
-					if ( req.body && req.body.id && req.body.value ) {
-						if ( gui.io[ req.params.ioId ][ req.body.id ] ) {
-							gui.io[ req.params.ioId ][ req.body.id ].value = req.body.value;
-							if ( gui.io[ req.params.ioId ][ req.body.id ].callBack ) {
-								gui.io[ req.params.ioId ][ req.body.id ].callBack( req.body.value );								
-							} else {
-								console.log( 'WARNING: no CallBack for ID "'+req.body.id +'" defined' );
-							}
+			'/svc/io/:ioId',
+			jsonParser,
+			function( req, res ){
+				//console.log( JSON.stringify( req.body ) );
+				if ( req.body && req.body.id && 
+					 req.body.value && req.params.ioId) {
+					var ioID = req.params.ioId;
+					var ctlID = req.body.id;
+					if ( gui.io[ ioID ][ ctlID ] ) {
+						gui.io[ ioID ][ ctlID ].value = req.body.value;
+						if ( gui.io[ ioID ][ ctlID ].callBack ) {
+							gui.io[ ioID ][ ctlID ].callBack( req.body.value );
+						} else {
+							console.log( 'WARNING: no CallBack for ID "'+
+									ctlIDreq.body.id +'" defined' );
 						}
-						
 					}
-					res.statusCode = 200;
-					return res.json( gui.io[ req.params.ioId ] );
+					
 				}
-			);
+				res.statusCode = 200;
+				return res.json( gui.io[ req.params.ioId ] );
+			}
+		);
 	}
 	var ioId = this.io.length;
 	this.io.push( {} );
 	var io = gui.addView( 
 			{ 'id':'io'+ioId, 'type':'pong-io' },
-			{ 'imgURL':'img.png', 'dataURL':'svc/io/'+ioId, 'poll':'10000', 'io':[] },
+			{ 'imgURL':'img.png', 'dataURL':'svc/io/'+ioId, 
+			'poll':'10000', 'io':[] },
 			page );
 	io.ioId = ioId;
 	io.setUpdateMilliSec = function( ms ) {
@@ -103,7 +111,9 @@ gui.addIoView = function addIoView( page) {
 	
 	io.addLED = function( id, x, y, value ) {
 		if ( id && ( x >= 0 ) && ( y >= 0 ) ) {
-			this.moduleConfig.io.push( { "id":id, "type":"LED", "pos":{ "x":x, "y":y } } );
+			this.moduleConfig.io.push( 
+				{ "id":id, "type":"LED", "pos":{ "x":x, "y":y } } 
+			);
 			gui.io[ this.ioId ][id] = { "value": (value || 0) }; 
 			
 		} else {
@@ -125,10 +135,15 @@ gui.addIoView = function addIoView( page) {
 	
 	io.addSwitch = function( id, x, y, values, callBack ) {
 		if ( values && values.length > 0 ) {
-			this.moduleConfig.io.push( { "id":id, "type":"Switch", "pos":{ "x":x, "y":y }, "values":values } );
-			gui.io[ this.ioId ][id] = { "value":values[0], "callBack":callBack }; 			
+			this.moduleConfig.io.push( 
+				{ "id":id, "type":"Switch", 
+				  "pos":{ "x":x, "y":y }, "values":values } 
+			);
+			gui.io[ this.ioId ][id] = 
+				{ "value":values[0], "callBack":callBack }; 
 		} else {
-			console.log( "WARNING: addSwitch: Ignored, values should be an array!" );
+			console.log( "WARNING: addSwitch: "+
+					"Ignored, values should be an array!" );
 		}
 	};
 	return io;
@@ -169,11 +184,12 @@ gui.addView = function addView( def, config, page ) {
 
 
 /* define static directories to load the framework into the web page */
-webservices.use( '/css',     express.static( __dirname + '/node_modules/rest-web-gui/css' ) );
-webservices.use( '/js',      express.static( __dirname + '/node_modules/rest-web-gui/js'  ) );
-webservices.use( '/img',     express.static( __dirname + '/node_modules/rest-web-gui/img'  ) );
-webservices.use( '/modules', express.static( __dirname + '/node_modules/rest-web-gui/modules'  ) );
-webservices.use( '/i18n',    express.static( __dirname + '/node_modules/rest-web-gui/i18n'  ) );
+var staticDir = __dirname + '/node_modules/rest-web-gui';
+webservices.use( '/css',     express.static( staticDir+'/css' ) );
+webservices.use( '/js',      express.static( staticDir+'/js'  ) );
+webservices.use( '/img',     express.static( staticDir+'/img'  ) );
+webservices.use( '/modules', express.static( staticDir+'/modules'  ) );
+webservices.use( '/i18n',    express.static( staticDir+'/i18n'  ) );
 
 
 /** REST web service to GET layout structure: */
@@ -191,7 +207,8 @@ webservices.get(
 );
 
 
-/** single page does it all, the layout parameter references the "page". default is the "main" page */
+/** Single page does it all, the layout parameter references the "page". 
+    Default is the "main" page */
 webservices.get( 
 		'/', 
 		function( req, res ) {
@@ -215,11 +232,11 @@ webservices.get(
 		for ( var layoutId in gui.pages ) {
 			//console.log( '>>'+layoutId );
 		    if ( gui.pages.hasOwnProperty( layoutId ) ) {
-		    	navTabs.push( { 'layout': layoutId, 'label': gui.pages[ layoutId ].title } );
+		    	navTabs.push( 
+		    		{ 'layout': layoutId, 
+		    		  'label': gui.pages[ layoutId ].title } );
 		    }
 		}
 		res.json( { 'navigations':navTabs } );
 	}
 );
-
-

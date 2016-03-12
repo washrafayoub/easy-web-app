@@ -18,8 +18,9 @@
 		"url":"https://github.com/ma-ha/easy-web-app.git"
 	},
 	"dependencies":{
-		"express":">4.8.0",
-		"body-parser":">1.15.0"
+		"express":">=4.8.0",
+		"body-parser":">=1.15.0",
+		"rest-web-gui":"https://github.com/ma-ha/rest-web-ui.git"
 	},
 	"files":[
 		"Readme.md",

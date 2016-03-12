@@ -1,6 +1,6 @@
 /** Simple example: Create a web page with form */
 
-var gui = require('../../');
+var gui = require( '../../' );
 
 /** Initialize the framework and the default page */
 gui.init();
@@ -14,4 +14,7 @@ gui.addPage( 'secondpage' );
 gui.pages['secondpage'].title = '2nd Page';
 
 /** Add an empty view to the second page page. */
-gui.addView( { 'id':'viewOnSecondPage' }, null, 'secondpage' );
+gui.addView( 
+    { 'id':'viewOnSecondPage' }
+  , null
+  , 'secondpage' );
