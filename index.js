@@ -9,17 +9,20 @@ var gui = exports = module.exports = {
 };
 
 // use express for REST services
-var express = require ( 'express' );
-var bodyParser = require ( 'body-parser' );
-var webservices = express ();
-var jsonParser = bodyParser.json ();
+var express     = require( 'express' );
+var webservices = express();
+var bodyParser  = require( 'body-parser' );
+var jsonParser  = bodyParser.json ();
+
+// logger
+var log = require('npmlog');
 
 /** Initialize the Web GUI */
 gui.init = function init(port) {
-  this.setDefaults ();
+  this.setDefaults();
   var wsPort = port || 8888;
-  webservices.listen ( wsPort );
-  console.log ( 'Web GUI: http://localhost:' + wsPort + '/' );
+  webservices.listen( wsPort );
+  log.info( 'Web GUI', 'http://localhost:' + wsPort + '/' );
 };
 
 /** Set defaults for all required configurations */
@@ -45,9 +48,9 @@ gui.setDefaults = function setDefaults() {
   };
 };
 
-gui.addPage = function addPage(page) {
+gui.addPage = function addPage( page ) {
   if ( this.pages[ encodeURIComponent ( page ) ] ) {
-    console.log ( 'gui.addPage: Page "' + pg + '" already exists in GUI.' );
+    log.warn( 'gui.addPage', 'Page "' + pg + '" already exists in GUI.' );
   } else {
     this.pages[ encodeURIComponent ( page ) ] = {
       'title' : page,
@@ -59,23 +62,23 @@ gui.addPage = function addPage(page) {
 };
 
 /** High level API to add a IO view */
-gui.addIoView = function addIoView(page) {
+gui.addIoView = function addIoView( page ) {
   if ( !this.io ) {  // first initialization
     this.io = [];
 
     /** REST web service to GET IO data */
     webservices.get ( 
         '/svc/io/:ioId', 
-        function(req, res) {
+        function ( req, res ) {
           // console.log( 'ping: ' + req.params.ioId );
-          res.json ( gui.io[ req.params.ioId ] );
+          res.json( gui.io[ req.params.ioId ] );
         } 
     );
 
-    webservices.post ( 
+    webservices.post( 
       '/svc/io/:ioId', 
       jsonParser, 
-      function(req, res) {
+      function ( req, res ) {
         // console.log( JSON.stringify( req.body ) );
         if ( req.body && req.body.id && req.body.value && req.params.ioId ) {
           var ioID = req.params.ioId;
@@ -85,21 +88,21 @@ gui.addIoView = function addIoView(page) {
             if ( gui.io[ ioID ][ ctlID ].callBack ) {
               gui.io[ ioID ][ ctlID ].callBack ( req.body.value );
             } else {
-              console.log ( 'WARNING: no CallBack for ID "' + ctlIDreq.body.id
-                  + '" defined' );
+              log.warn( 'POST /svc/io', 
+                  'no CallBack for ID "' + ctlIDreq.body.id + '" defined' );
             }
           }
         }
         res.statusCode = 200;
-        return res.json ( gui.io[ req.params.ioId ] );
+        return res.json( gui.io[ req.params.ioId ] );
       } 
     );
   }
   var ioId = this.io.length;
-  this.io.push ( {} );
+  this.io.push( {} );
   
   // define IO Object
-  var io = gui.addView ( {
+  var io = gui.addView( {
       'id' : 'io' + ioId,
       'type' : 'pong-io'
     }, 
@@ -114,11 +117,11 @@ gui.addIoView = function addIoView(page) {
   io.ioId = ioId;
 
   // IO method to define update polling 
-  io.setUpdateMilliSec = function(ms) {
+  io.setUpdateMilliSec = function (ms ) {
       this.moduleConfig.poll = ms;
   };
 
-  io.addLED = function(id, x, y, value) {
+  io.addLED = function ( id, x, y, value ) {
     if ( id && (x >= 0) && (y >= 0) ) {
       this.moduleConfig.io.push ( 
         {
@@ -132,24 +135,24 @@ gui.addIoView = function addIoView(page) {
       };
 
     } else {
-      console.log ( 'WARNING: addLED needs proper ID and x,y values!' );
+      log.warn( 'addLED', 'need proper "ID", "x" and "y" values!' );
     }
   };
 
-  io.setLED = function(id, value) {
+  io.setLED = function( id, value ) {
     if ( id && gui.io[ this.ioId ][ id ] ) {
       if ( [ -1, 0, 1 ].indexOf ( value ) >= 0 ) {
         gui.io[ this.ioId ][ id ].value = value;
-        console.log ( value );
+        //console.log( value );
       } else {
-        console.log ( 'WARNING: setLED: value "' + value + '" ignored' );
+        log.warn( 'setLED', 'value "' + value + '" ignored' );
       }
     } else {
-      console.log ( 'WARNING: setLED: id "' + io + '" unknown' );
+      log.warn( 'setLED',':id "' + io + '" unknown' );
     }
   };
 
-  io.addSwitch = function(id, x, y, values, callBack) {
+  io.addSwitch = function( id, x, y, values, callBack ) {
     if ( values && values.length > 0 ) {
       this.moduleConfig.io.push ( {
         "id" : id,
@@ -165,28 +168,27 @@ gui.addIoView = function addIoView(page) {
         "callBack" : callBack
       };
     } else {
-      console.log ( "WARNING: addSwitch: "
-          + "Ignored, values should be an array!" );
+      log.warn( 'addSwitch: ', 'Ignored, values should be an array!' );
     }
   };
   return io;
 };
 
 /** add a view to the page */
-gui.addView = function addView(def, config, page) {
+gui.addView = function addView( def, config, page ) {
   var pg = page || 'main';
   pg = encodeURIComponent ( pg );
   var view = {};
   if ( !this.pages[ pg ] ) {
-    console.log ( 'gui.addView: Page "' + pg + '" not found in GUI!' );
+    log.warn( 'gui.addView', 'Page "' + pg + '" not found in GUI!' );
     return null;
   }
   if ( !def ) {
-    console.log ( 'gui.addView: "def" is required parameter!' );
+    log.warn( 'gui.addView', '"def" is required parameter!' );
     return null;
   }
   if ( !def.id ) {
-    console.log ( 'gui.addView: "def.id" is required!' );
+    log.warn( 'gui.addView','"def.id" is required!' );
     return null;
   } else { // OK, add view
     view[ 'rowId' ]  = def.id;
@@ -208,7 +210,7 @@ gui.addView = function addView(def, config, page) {
 
 
 /* define static directories to load the framework into the web page */
-var staticDir = __dirname + '/node_modules/rest-web-gui';
+var staticDir = __dirname + '/node_modules/rest-web-gui/html';
 webservices.use ( '/css', express.static ( staticDir + '/css' ) );
 webservices.use ( '/js', express.static ( staticDir + '/js' ) );
 webservices.use ( '/img', express.static ( staticDir + '/img' ) );
@@ -219,7 +221,7 @@ webservices.use ( '/i18n', express.static ( staticDir + '/i18n' ) );
 /** REST web service to GET layout structure: */
 webservices.get( 
   '/svc/layout/:id/structure', 
-  function(req, res) {
+  function( req, res ) {
     if ( gui.pages[ req.params.id ] ) {
       var layout = {
         'layout' : gui.pages[ req.params.id ]
@@ -227,7 +229,7 @@ webservices.get(
       res.send ( JSON.stringify ( layout ) );
     } else {
       res.statusCode = 404;
-      return res.send ( 'Error 404: No quote found' );
+      return res.send( 'Error 404: No quote found' );
     }
   } 
 );
@@ -239,16 +241,16 @@ webservices.get(
  */
 webservices.get ( 
   '/', 
-  function(req, res) {
-    res.redirect ( '/index.html' );
+  function( req, res ) {
+    res.redirect( '/index.html' );
   }
 );
 
 
 webservices.get( 
   '/index.html', 
-  function(req, res) {
-    res.sendFile ( __dirname + '/index.html' );
+  function( req, res ) {
+    res.sendFile( __dirname + '/index.html' );
   }
 );
 
@@ -256,18 +258,18 @@ webservices.get(
 /** web service for multi page navigation bar */
 webservices.get( 
   '/svc/nav', 
-  function(req, res) {
+  function( req, res ) {
     var navTabs = [];
     // console.log( 'GET /svc/nav '+gui.pages.length );
     for ( var layoutId in gui.pages ) {
       // console.log( '>>'+layoutId );
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
-        navTabs.push ( {
+        navTabs.push( {
           'layout' : layoutId,
           'label' : gui.pages[ layoutId ].title
         } );
       }
     }
-    res.json ( { 'navigations' : navTabs } );
+    res.json( { 'navigations' : navTabs } );
   }
 );
