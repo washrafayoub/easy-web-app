@@ -1,9 +1,9 @@
 /** Simple example: Create a web page with form */
 
-var gui = require ( '../../' );
+var gui = require ( '../../' )
 
 /** Initialize the framework and the default page */
-gui.init ();
+gui.init ()
 
 /**
  * Add a view of type "pong-easy-form" (= plug-in) to the default page the first
@@ -36,4 +36,4 @@ gui.addView (
       }
     ]
   }
-);
+)
