@@ -225,7 +225,7 @@ webservices.get(
 webservices.get( 
   '/svc/nav', 
   function( req, res ) {
-    var navTabs = [];
+    var navTabs = []
     // console.log( 'GET /svc/nav '+gui.pages.length );
     for ( var layoutId in gui.pages ) {
       // console.log( '>>'+layoutId );
@@ -233,10 +233,11 @@ webservices.get(
         navTabs.push( {
           'layout' : layoutId,
           'label' : gui.pages[ layoutId ].title
-        } );
+        } )
       }
     }
-    res.json( { 'navigations' : navTabs } );
+    if ( navTabs.length == 1 )  navTabs = [] 
+    res.json( { 'navigations' : navTabs } )
   }
 );
 
