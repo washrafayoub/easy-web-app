@@ -120,6 +120,16 @@ gui.addIoView = function addIoView( page ) {
   io.setUpdateMilliSec = function (ms ) {
       this.moduleConfig.poll = ms;
   };
+  // IO method to define update polling 
+  io.setBackgroundImage = function ( imgFullPath ) {
+    
+      var bgImgName = '/local'+imgFullPath.substring( imgFullPath.lastIndexOf( '/' ) );
+      var bgImgPath = imgFullPath.substring( 0, imgFullPath.lastIndexOf( '/' ) );
+//      log.info( 'static /local', bgImgPath +' '+ bgImgName);
+      this.moduleConfig.imgURL = bgImgName;
+      webservices.use ( '/local', express.static( bgImgPath ) );
+
+  };
 
   io.addLED = function ( id, x, y, value ) {
     if ( id && (x >= 0) && (y >= 0) ) {
@@ -211,11 +221,11 @@ gui.addView = function addView( def, config, page ) {
 
 /* define static directories to load the framework into the web page */
 var staticDir = __dirname + '/node_modules/rest-web-gui/html';
-webservices.use ( '/css', express.static ( staticDir + '/css' ) );
-webservices.use ( '/js', express.static ( staticDir + '/js' ) );
-webservices.use ( '/img', express.static ( staticDir + '/img' ) );
-webservices.use ( '/modules', express.static ( staticDir + '/modules' ) );
-webservices.use ( '/i18n', express.static ( staticDir + '/i18n' ) );
+webservices.use ( '/css',     express.static( staticDir + '/css' ) );
+webservices.use ( '/js',      express.static( staticDir + '/js' ) );
+webservices.use ( '/img',     express.static( staticDir + '/img' ) );
+webservices.use ( '/modules', express.static( staticDir + '/modules' ) );
+webservices.use ( '/i18n',    express.static( staticDir + '/i18n' ) );
 
 
 /** REST web service to GET layout structure: */

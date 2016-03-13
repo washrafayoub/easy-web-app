@@ -11,14 +11,15 @@ var ioView = gui.addIoView()
 
 // change update speed to 1 sec (= 1000 ms)
 ioView.setUpdateMilliSec( 10000 )
+ioView.setBackgroundImage(  __dirname + '/demo.png' )
 
 // add a 'LED' at x/y 100px/100px and stich it to 'on' (=1)
 var led = LED_GREEN
-ioView.addLED( 'myFirstLED', 200, 100, led )
+ioView.addLED( 'myFirstLED', 300, 210, led )
 
 ioView.addSwitch( 
     'mySwitch',                   // the ID
-    100, 100,                     // x,y pos of switch
+    60, 85,                       // x,y pos of switch
     [ SWITCH_ON, SWITCH_OFF ],    // possible values
     function ( switchValue ) {
       log.info( 'Switch "mySwitch"', 'now %j', switchValue );
