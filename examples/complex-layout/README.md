@@ -1,7 +1,7 @@
 # Complex Page Layout Example
 Layout principle is to nest rows in columns and columns in rows.
 
-Result:
+Result layout:
 
 	  ----------------------------
 	  |  Row 1 View              |

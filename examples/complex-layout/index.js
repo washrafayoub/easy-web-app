@@ -24,6 +24,8 @@ var log = require( 'npmlog' )
 
 // Initialize the framework and the default page
 var mainPage = gui.init()
+mainPage.title = 'Complex Layout Demo'
+mainPage.header.logoText = 'Complex Layout Demo'
 
 mainPage.addView( { 'id':'row1view', 'title':'Row 1 View', 'height':'100px' } )
 mainPage.addView( { 'id':'row2view', 'title':'Row 2 View', 'height':'100px' } )
