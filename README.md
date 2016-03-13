@@ -3,7 +3,7 @@ Create web applications easily.
 
 This is a Node.js API for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
-Focus is on _web applications_ (not simple web pages). Ready to use plug-ins for interactive
+Focus is on _web applications_ (not simple web pages). A lot of "make-it-simple" plug-ins are available:
 * forms
 * tables / lists
 * content
@@ -13,13 +13,14 @@ Focus is on _web applications_ (not simple web pages). Ready to use plug-ins for
 * page to page navigation with navigation tabs, menus, links and session data
 * source code display
 * basic OAuth security
+* ...
 
 Check out [rest-web.gui](https://github.com/ma-ha/rest-web-ui/) for some demos and docu of all features.
 
 ## Compared with ...
 * jade
   * jade is descriptive, but low level (HTML structure)
-  * jade has more focus to simplify the creation of web pages, not applications
+  * jade is perfect for web pages, not for web applications
 * angular 
   * angular can do everything, but JS programming is required
 
@@ -113,4 +114,13 @@ Open the URL [http://localhost:8888/](http://localhost:8888/) in your Browser.
 
 Remark: To keep this demo simple, there is no REST service backend for the 
 "Chk" button implemented. 
-Please have a look at the [I/O example](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) -- this includes a fully working service backend.
+Please have a look at the [I/O example](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) -- 
+this includes a fully working service backend.
+
+## Examples
+Have a look at some feature demos: 
+* [Simple page with one web form](https://github.com/ma-ha/easy-web-app/tree/master/examples/simple)
+* [Two page with navigation tabs](https://github.com/ma-ha/easy-web-app/tree/master/examples/multi-page)
+* [Table demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-demo)
+* [Complex layout demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
+* [I/O demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/io)
