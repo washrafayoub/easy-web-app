@@ -2,6 +2,7 @@
 This small example creates an I/O view with a 
 * switch
 * LED
+* background image 
 
 The "call back" method of the switch is configured to set the LED.
  

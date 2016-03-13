@@ -1,6 +1,6 @@
 const LED_GREEN = 1, LED_OFF = 0, SWITCH_ON = 'on', SWITCH_OFF = 'off'
 
-var gui = require( '../../' )
+var gui = require( '../../' )     // stand alone: relpace with  require( 'easy-web-app' ) 
 var log = require( 'npmlog' )
 
 // Initialize the framework and the default page
