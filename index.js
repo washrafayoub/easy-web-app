@@ -26,6 +26,10 @@ gui.init = function init(port) {
   return mainPage
 }
 
+gui.getExpress = function getExpress() {
+  return webservices;
+}
+
 /** Set defaults for all required configurations */
 gui.setDefaults = function setDefaults() {
   // create a default "main" page minimum config
