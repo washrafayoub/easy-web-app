@@ -172,6 +172,9 @@ gui.addView = function addView( def, config, page ) {
     if ( config ) {
       view[ 'moduleConfig' ] = config;
     }
+    if (def. actions ) {
+      view[ 'actions' ] = def.actions;
+    }
     this.pages[ pg ].rows.push ( view );
   }
   // console.log( JSON.stringify( this.pages[ pg ] ) );

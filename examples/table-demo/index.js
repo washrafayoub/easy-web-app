@@ -16,7 +16,8 @@ gui.addView (
     'actions':
       [
         {
-           'type':'pong-help',
+           'type':'pong-help', 
+           'modalName':'Show how easy it is to configure of this view',
            'param': { 'showConfig':'tableView' }
         }  
       ]
