@@ -10,7 +10,7 @@ gui.addView (
   // view config
   {
     'id'   : 'tableView',
-    'title':'Table Demo',
+    'title':'Table Demo (sorry, zoom is always a flower ;-)',
     'type':'pong-easytable',
     'resourceURL':'/products',
     'actions':
