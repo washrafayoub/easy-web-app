@@ -1,5 +1,5 @@
 
-var gui = require( '../../' )     // stand alone: relpace with  require( 'easy-web-app' ) 
+var gui = require( '../../' )     // stand alone: replace with:  require( 'easy-web-app' ) 
 var log = require( 'npmlog' )
 
 // Initialize the framework and the default page
