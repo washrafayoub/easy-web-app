@@ -188,7 +188,7 @@ webservices.use ( '/css',     express.static( staticDir + '/css' ) );
 webservices.use ( '/js',      express.static( staticDir + '/js' ) );
 webservices.use ( '/img',     express.static( staticDir + '/img' ) );
 webservices.use ( '/modules', express.static( staticDir + '/modules' ) );
-webservices.use ( '/i18n',    express.static( staticDir + '/i18n' ) );
+//webservices.use ( '/i18n',    express.static( staticDir + '/i18n' ) );
 
 
 /** REST web service to GET layout structure: */
