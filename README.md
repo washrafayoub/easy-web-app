@@ -15,7 +15,8 @@ Focus is on _web applications_ (not simple web pages). A lot of "make-it-simple"
 * basic OAuth security
 * ...
 
-Check out [rest-web.gui](https://github.com/ma-ha/rest-web-ui/) for some demos and docu of all features.
+Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/) 
+and [online demos](http://mh-svr.de/pong_dev) of features.
 
 ## Compared with ...
 * jade
