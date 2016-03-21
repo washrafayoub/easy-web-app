@@ -28,16 +28,18 @@ and [online demos](http://mh-svr.de/pong_dev) of features.
 ## Node.js example
 This creates a web page with a form view to add customers and a result view:
 
+```javascript
 	// initialize:
-	var gui = require('../../');
+	var gui = require ( 'easy-web-app' )
 	
-	gui.init();
+	gui.init()
 	
 	// Create a form view:
 	gui.addView( 
 		{ ... view config ... },
 		{ ... plug in congig ... }
-	);	
+	)
+```
 
 Full example: [simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
 	
@@ -46,6 +48,7 @@ Requires [node.ns installed](https://nodejs.org/en/download/) -- which is always
 
 Get a local copy and start example:
 
+```bash
 	git clone https://github.com/ma-ha/easy-web-app.git
 	
 	cd easy-web-gui
@@ -54,6 +57,7 @@ Get a local copy and start example:
 	cd examples
 	cd simple
 	nodejs index.js
+```
 
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
@@ -62,12 +66,15 @@ Requires [node.ns installed](https://nodejs.org/en/download/) -- it really don't
 
 Create a demo folder and install _easy-web-app_ via _npm_
 
+```bash
 	mkdir demo
 	cd demo
 	npm install easy-web-app
+```
 
 Create a _simpleForm.js_ file with following content (this is the [form example](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)):
 
+```javascript
 	/** Simple example: Create a web page with form */
 	var gui = require ( 'easy-web-app' )
 	
@@ -106,6 +113,7 @@ Create a _simpleForm.js_ file with following content (this is the [form example]
 	    ]
 	  }
 	)
+```
 
 Run the demo:
 
