@@ -29,16 +29,16 @@ and [online demos](http://mh-svr.de/pong_dev) of features.
 This creates a web page with a form view to add customers and a result view:
 
 ```javascript
-	// initialize:
-	var gui = require ( 'easy-web-app' )
-	
-	gui.init()
-	
-	// Create a form view:
-	gui.addView( 
-		{ ... view config ... },
-		{ ... plug in congig ... }
-	)
+// initialize:
+var gui = require ( 'easy-web-app' )
+
+gui.init()
+
+// Create a form view:
+gui.addView( 
+	{ ... view config ... },
+	{ ... plug in congig ... }
+)
 ```
 
 Full example: [simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
@@ -49,14 +49,14 @@ Requires [node.ns installed](https://nodejs.org/en/download/) -- which is always
 Get a local copy and start example:
 
 ```bash
-	git clone https://github.com/ma-ha/easy-web-app.git
-	
-	cd easy-web-gui
-	npm install
-	 
-	cd examples
-	cd simple
-	nodejs index.js
+git clone https://github.com/ma-ha/easy-web-app.git
+
+cd easy-web-gui
+npm install
+ 
+cd examples
+cd simple
+nodejs index.js
 ```
 
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
@@ -67,52 +67,52 @@ Requires [node.ns installed](https://nodejs.org/en/download/) -- it really don't
 Create a demo folder and install _easy-web-app_ via _npm_
 
 ```bash
-	mkdir demo
-	cd demo
-	npm install easy-web-app
+mkdir demo
+cd demo
+npm install easy-web-app
 ```
 
 Create a _simpleForm.js_ file with following content (this is the [form example](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)):
 
 ```javascript
-	/** Simple example: Create a web page with form */
-	var gui = require ( 'easy-web-app' )
-	
-	/** Initialize the framework and the default page */
-	gui.init ()
-	
-	/**
-	 * Add a view of type "pong-easy-form" (= plug-in) to the default page the first
-	 * parameter of addView is the view configuration, a second parameter can define
-	 * the plug-in configuration, a third parameter can specify the page.
-	 */
-	gui.addView ( 
-	  {
-	    'id'   : 'myFirstView',
-	    'type' : 'pong-easyform'
-	  },
-	  {
-	    "id" : "tstFormId",
-	    "easyFormFields" : [ 
-	        "id"
-	      , "c1|Name"
-	      , "c1|Date|date"
-	      , "c1|separator"
-	      , "c1|Remark|3rows"
-	      , "c2|Mailings|label"
-	      , "c2|Send~Ads~~|checkbox_infomails_ads"
-	      , "c2|Newsletter|checkbox_infomails_newsletter"
-	      , "c2|Pass~Word" 
-	    ],
-	    "actions" : [ 
-	      {
-	        "id" : "Chk",
-	        "actionName" : "Check",
-	        "actionURL"  : "svc/test/check"
-	      }
-	    ]
-	  }
-	)
+/** Simple example: Create a web page with form */
+var gui = require ( 'easy-web-app' )
+
+/** Initialize the framework and the default page */
+gui.init ()
+
+/**
+ * Add a view of type "pong-easy-form" (= plug-in) to the default page the first
+ * parameter of addView is the view configuration, a second parameter can define
+ * the plug-in configuration, a third parameter can specify the page.
+ */
+gui.addView ( 
+  {
+    'id'   : 'myFirstView',
+    'type' : 'pong-easyform'
+  },
+  {
+    "id" : "tstFormId",
+    "easyFormFields" : [ 
+        "id"
+      , "c1|Name"
+      , "c1|Date|date"
+      , "c1|separator"
+      , "c1|Remark|3rows"
+      , "c2|Mailings|label"
+      , "c2|Send~Ads~~|checkbox_infomails_ads"
+      , "c2|Newsletter|checkbox_infomails_newsletter"
+      , "c2|Pass~Word" 
+    ],
+    "actions" : [ 
+      {
+        "id" : "Chk",
+        "actionName" : "Check",
+        "actionURL"  : "svc/test/check"
+      }
+    ]
+  }
+)
 ```
 
 Run the demo:
