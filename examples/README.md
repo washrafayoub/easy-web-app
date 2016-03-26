@@ -12,6 +12,7 @@ Perhaps start here:
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
 * [i18n / internationalization](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/index.js) \*
 * ["complex" layout demo -- more than one view on a page](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/index.js)
+* [change view configuration "on-the-fly"](https://github.com/ma-ha/easy-web-app/blob/master/examples/on-the-fly-config/index.js)
 
 <sub>_Remark: (\*) includes a REST/JSON web service implementation_</sub>  
  
