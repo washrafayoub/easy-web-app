@@ -4,7 +4,7 @@ You can modify the table in the browser by clicking the configure icon (top righ
 
 The code is more complex, because all required REST/JSON web services are implemented.
 
-API is:
+Implemented API is:
 * GET /products
 ** get list of products
 * POST /products
@@ -17,6 +17,8 @@ API is:
 ** load a configuration template
 * POST /products/pong-easytable
 ** save table view configuration
+
+125 LoC :-D
 
 ## Run example
 1. You need to [get a local copy of the easy-web gui](https://github.com/ma-ha/easy-web-gui).
