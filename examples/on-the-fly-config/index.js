@@ -26,7 +26,7 @@ gui.addView (
 
 // the table requires a REST web service to serve the data: 
 var svc  = gui.getExpress()
-var bodyParser  = require( 'body-parser' );
+var bodyParser  = require( 'body-parser' )
 var jsonParser  = bodyParser.json()
 
 // this is the table config at statup -- but you can change it in the browser
@@ -89,6 +89,17 @@ svc.post(
     }
   )
 
+// table can store back single rows
+svc.post( 
+    '/products', 
+    jsonParser,
+    function( req, res ) {
+      // ... implementaion should go here ....
+      res.statusCode = 200  // request OK
+      return res.json( {} ) 
+    }
+  )
+// serve some dummy table content 
 svc.get( 
     '/products', 
     function( req, res ) {

@@ -13,7 +13,7 @@ gui.init ()
 gui.addView ( 
   {
     'id'   : 'myFirstView',
-    'type' : 'pong-easyform'
+    'type' : 'pong-easyform'    
   },
   {
     "id" : "tstFormId",
@@ -32,8 +32,26 @@ gui.addView (
       {
         "id" : "Chk",
         "actionName" : "Check",
-        "actionURL"  : "svc/test/check"
+        "actionURL"  : "/dummy"
       }
     ]
   }
 )
+
+// ... Stop here! That's all of easy-web gui :-)
+// -----------------------------------------------------------
+// For a complete example we need REST web service:
+// The browser will send the the data via POST request. 
+var svc  = gui.getExpress()
+var bodyParser  = require( 'body-parser' )
+var jsonParser  = bodyParser.json()
+
+// save changed table config back
+svc.post( 
+    '/dummy', 
+    jsonParser,
+    function( req, res ) {
+      res.statusCode = 200    // = OK
+      return res.json( {} )   // empty, but valid response object
+    }
+  )
