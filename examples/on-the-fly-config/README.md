@@ -13,7 +13,7 @@ API is:
 ** load table view configuration
 * GET /products/pong-easytable
 ** load table view configuration
-* /products/pong-easytable/columns-available
+* GET /products/pong-easytable/columns-available
 ** load a configuration template
 * POST /products/pong-easytable
 ** save table view configuration
