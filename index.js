@@ -34,21 +34,22 @@ gui.getExpress = function getExpress() {
 gui.setDefaults = function setDefaults() {
   // create a default "main" page minimum config
   this.pages[ 'main' ] = {
-      'title' : 'Test'
-    , 'header' : {
-                  'logoText' : 'Test'
-                  ,'modules' : [ {
-                                  'id' : 'MainNav'
-                                  , 'type' : 'pong-navbar'
-                                  , 'param' : {
-                                                'confURL' : '/svc/nav'
+      title : 'Test'
+    , header : {
+                  logoText : 'Test'
+                  ,modules : [ {
+                                  id : 'MainNav'
+                                  , type : 'pong-navbar'
+                                  , param : {
+                                                confURL : '/svc/nav' // you must define a web service for that ;-)
                                               }
                                 } ]
                 }
-    , 'rows' : []
-    , 'footer' : {
-      'copyrightText' : 'powered by '+
-        '<a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>'
+    , rows : []
+    , footer : {
+        copyrightText : 'powered by '+
+          '<a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>'
+      , modules: []
     }
   }
   this.pages[ 'main' ].addColumnsRow = 

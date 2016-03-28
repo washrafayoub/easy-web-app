@@ -23,7 +23,7 @@ and [online demos](http://mh-svr.de/pong_dev) of features.
   * jade is descriptive, but low level (HTML structure)
   * jade is perfect for web pages, not for web applications
 * angular 
-  * angular can do everything, but JS programming is required
+  * angular can do everything, but JS programming is required 
 
 ## Node.js example
 This creates a web page with a form view to add customers and a result view:
@@ -42,6 +42,9 @@ gui.addView(
 ```
 
 Full example: [simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
+
+The heart of the page is the JSON specification for the "Rest web GUI", containing different "views".
+This Node.js package helps to set up a web service to serve the specification to the browser.
 	
 ## 20 sec Test
 Requires [node.ns installed](https://nodejs.org/en/download/) -- which is always a good idea to have it.
@@ -61,7 +64,7 @@ nodejs index.js
 
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
-## First project (30 sec)
+## First project (less than 1 min)
 Requires [node.ns installed](https://nodejs.org/en/download/) -- it really don't hurt and it's always a good idea to have.
 
 Create a demo folder and install _easy-web-app_ via _npm_
@@ -122,7 +125,7 @@ Run the demo:
 Open the URL [http://localhost:8888/](http://localhost:8888/) in your Browser.
 
 Remark: To keep this demo simple, there is no REST service backend for the 
-"Chk" button implemented. 
+"Check" button implemented. 
 Please have a look at the [I/O example](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) -- 
 this includes a fully working service backend.
 
