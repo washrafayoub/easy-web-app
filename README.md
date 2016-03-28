@@ -64,7 +64,7 @@ nodejs index.js
 
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
-## First project (less than 1 min)
+## First project (< 1 min)
 Requires [node.ns installed](https://nodejs.org/en/download/) -- it really don't hurt and it's always a good idea to have.
 
 Create a demo folder and install _easy-web-app_ via _npm_
