@@ -234,14 +234,31 @@ webservices.get(
   '/svc/nav', 
   function( req, res ) {
     var navTabs = []
+    var subMenus = {}
     // console.log( 'GET /svc/nav '+gui.pages.length );
     for ( var layoutId in gui.pages ) {
       // console.log( '>>'+layoutId );
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
-        navTabs.push( {
-          'layout' : layoutId,
-          'label' : gui.pages[ layoutId ].title
-        } )
+        var slashPos = layoutId.indexOf( encodeURIComponent( '/' ) ) 
+        if ( slashPos == -1 ) {
+          navTabs.push( {
+            'layout' : layoutId,
+            'label' : gui.pages[ layoutId ].title
+          } )
+        } else { // sub-menu
+          var subMenu = layoutId.substr( 0 , slashPos )
+          if ( ! subMenus[subMenu ] ) {
+            subMenus[ subMenu ] = navTabs.length
+            navTabs.push( {
+              label : subMenu,
+              menuItems: []
+            } )
+          }
+          navTabs[ subMenus[ subMenu ] ].menuItems.push({
+            'layout' : layoutId,
+            'label' : gui.pages[ layoutId ].title
+          } )
+        }
       }
     }
     if ( navTabs.length == 1 )  navTabs = [] 
