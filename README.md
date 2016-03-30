@@ -3,7 +3,8 @@ Create web applications easily.
 
 This is a Node.js API for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
-Focus is on _web applications_ (not simple web pages). A lot of "make-it-simple" plug-ins are available:
+Focus is on _web applications_ (not simple web pages). 
+A lot of "make-it-simple" plug-ins are available:
 * forms
 * tables / lists
 * content
@@ -32,9 +33,10 @@ This creates a web page with a form view to add customers and a result view:
 // initialize:
 var gui = require ( 'easy-web-app' )
 
-gui.init()
+// start REST services and create a main page
+gui.init()  
 
-// Create a form view:
+// Create a form view on the main page:
 gui.addView( 
 	{ ... view config ... },
 	{ ... plug in congig ... }
@@ -47,7 +49,8 @@ The heart of the page is the JSON specification for the "Rest web GUI", containi
 This Node.js package helps to set up a web service to serve the specification to the browser.
 	
 ## 20 sec Test
-Requires [node.ns installed](https://nodejs.org/en/download/) -- which is always a good idea to have it.
+Requires [node.ns installed](https://nodejs.org/en/download/) -- 
+which is always a good idea to have it.
 
 Get a local copy and start example:
 
@@ -65,7 +68,8 @@ nodejs index.js
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
 ## First project (< 1 min)
-Requires [node.ns installed](https://nodejs.org/en/download/) -- it really don't hurt and it's always a good idea to have.
+Requires [node.ns installed](https://nodejs.org/en/download/) -- 
+it really don't hurt and it's always a good idea to have.
 
 Create a demo folder and install _easy-web-app_ via _npm_
 
@@ -75,7 +79,8 @@ cd demo
 npm install easy-web-app
 ```
 
-Create a _simpleForm.js_ file with following content (this is the [form example](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)):
+Create a _simpleForm.js_ file with following content 
+(this is the [form example](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)):
 
 ```javascript
 /** Simple example: Create a web page with form */
@@ -124,15 +129,9 @@ Run the demo:
 	
 Open the URL [http://localhost:8888/](http://localhost:8888/) in your Browser.
 
-Remark: To keep this demo simple, there is no REST service backend for the 
-"Check" button implemented. 
-Please have a look at the [I/O example](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) -- 
-this includes a fully working service backend.
+Remark: To keep this demo simple, there is no REST web service for the 
+"Check" button shown here. 
+
 
 ## Examples
-Have a look at some feature demos: 
-* [Simple page with one web form](https://github.com/ma-ha/easy-web-app/tree/master/examples/simple)
-* [Two page with navigation tabs](https://github.com/ma-ha/easy-web-app/tree/master/examples/multi-page)
-* [Table demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-demo)
-* [Complex layout demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
-* [I/O demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/io)
+Have a look at [some feature demos](https://github.com/ma-ha/easy-web-app/tree/master/examples/)
