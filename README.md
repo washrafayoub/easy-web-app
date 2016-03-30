@@ -25,6 +25,8 @@ and [online demos](http://mh-svr.de/pong_dev) of features.
   * jade is perfect for web pages, not for web applications
 * angular 
   * angular can do everything, but JS programming is required 
+* react
+  * build web apps with JavaScript in a component way -- but not descriptive
 
 ## Node.js example
 This creates a web page with a form view to add customers and a result view:
