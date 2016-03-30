@@ -10,7 +10,7 @@ page.header.modules.push(
   { 
     'id': 'LangSel'
     ,'type': 'i18n'
-    ,'param': { 'langList': [ 'US','EN','DE' ] }     // need other languages? try it
+    ,'param': { 'langList': [ 'EN','DE' ] }     // need other languages? try it
   }
 )
   
@@ -35,15 +35,8 @@ svc.get(
               ,'Internationalization Demo':'Sparch Demo'
             } 
         )      
-      } else if ( req.params.lang == 'EN.json' ) {
-        // the language map is a key/value object, key is the default label
-        res.json( 
-            { 
-              'Internationalization Demo':'Internationalisation Demo'
-            } 
-        )      
       } else if ( req.params.lang == 'XYZ.json' ) {
-          // you can try to add another langugage -- guess what you need to do?
+          // you can try to add another language -- guess what you need to do?
           res.json( 
               { 
                 'Test Language Support':'...'

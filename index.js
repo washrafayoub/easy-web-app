@@ -18,8 +18,9 @@ var jsonParser  = bodyParser.json ();
 var log = require('npmlog');
 
 /** Initialize the Web GUI */
-gui.init = function init(port) {
+gui.init = function init( logoText, port ) {
   var mainPage = this.setDefaults()
+  mainPage.header.logoText = logoText
   var wsPort = port || 8888
   webservices.listen( wsPort )
   log.info( 'Web GUI', 'http://localhost:' + wsPort + '/' )
@@ -66,16 +67,21 @@ gui.setDefaults = function setDefaults() {
 }
 
 /** add new page to portal, navigation tabs included */
-gui.addPage = function addPage( page ) {
-  if ( this.pages[ encodeURIComponent ( page ) ] ) {
-    log.warn( 'gui.addPage', 'Page "' + pg + '" already exists in GUI.' );
+gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
+  if ( ! pageId ) {
+    log.warn( 'gui.addPage', 'pageID not defined propperly' );
+  } else if ( this.pages[ pageId ] ) {
+    log.warn( 'gui.addPage', 'Page "' + pageId + '" already exists in GUI.' );
   } else {
     var pgObj = {
-        'title' : page
-      , 'includeHeader' : 'main'
-      , 'rows' : []
-      , 'includeFooter' : 'main'
+        title : pageId
+      , includeHeader : 'main'
+      , rows : []
+      , includeFooter : 'main'
     }
+    if ( title ) 
+      pgObj.title = title 
+      
     pgObj.addColumnsRow = 
         function ( id, height) {
           //log.info( 'pages[].addColumns', id )
@@ -86,7 +92,11 @@ gui.addPage = function addPage( page ) {
           def.rowId = def.rowId || def.id;   
           return gui.addViewIn( def, config, this.rows )          
         }
-    this.pages[ encodeURIComponent ( page ) ] = pgObj
+    
+    if ( viewDef )  
+      pgObj.addView( viewDef, viewConfig )
+    
+    this.pages[ pageId ] = pgObj
     return pgObj
   }
 }
@@ -96,9 +106,9 @@ gui.addPage = function addPage( page ) {
 gui.addColumnsRow = function addColumnsRow( id, colArr, height ) {
   //log.info( 'addColumns', id )
   var colsObj = {
-      'rowId' : id
-    , 'height': height || "300px"
-    , 'cols' : []
+      rowId : id
+    , height: height || "300px"
+    , cols : []
   }
   colsObj.addRowsColumn = 
       function ( id, width ) {
@@ -117,9 +127,9 @@ gui.addColumnsRow = function addColumnsRow( id, colArr, height ) {
 /** split the row into a columns, to add views */
 gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
   var newCol = {
-      'columnId': id
-    , 'width': width || "300px"
-    , 'rows' : []
+      columnId: id
+    , width: width || "300px"
+    , rows : []
   }
   newCol.addRows = 
       function ( height ) {
@@ -134,10 +144,11 @@ gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
 }
 
 gui.addViewIn = function addViewIn( def, config, arr ) {
-  var view = def
-  def.title = def.title || def.id || "View:"
-  def.decor = def.decor || 'decor'
-  def.resourceURL = def.resourceURL || "none"
+  var view = JSON.parse( JSON.stringify( def ) ) // clone it
+  view.title = def.title || def.id || "View:"
+  view.decor = def.decor || 'decor'
+  view.resourceURL = def.resourceURL || "none"
+  view.height = def.height || '400px'
   if ( config ) {
     def.moduleCOnfig = config
   }
@@ -148,7 +159,7 @@ gui.addViewIn = function addViewIn( def, config, arr ) {
 /** add a view (new row) to the page */
 gui.addView = function addView( def, config, page ) {
   var pg = page || 'main';
-  pg = encodeURIComponent ( pg );
+  //pg = encodeURIComponent ( pg );
   var view = {};
   if ( !this.pages[ pg ] ) {
     log.warn( 'gui.addView', 'Page "' + pg + '" not found in GUI!' );
@@ -208,6 +219,22 @@ webservices.get(
   } 
 );
 
+/** REST web service to GET layout structure for sub menu pages: */
+webservices.get( 
+  '/svc/layout/:id/:subid/structure', 
+  function( req, res ) {
+    if ( gui.pages[ req.params.id +'/'+ req.params.subid ] ) {
+      var layout = {
+        'layout' : gui.pages[ req.params.id +'/'+ req.params.subid ]
+      };
+      res.send ( JSON.stringify ( layout ) );
+    } else {
+      res.statusCode = 404;
+      return res.send( 'Error 404: No quote found' );
+    }
+  } 
+);
+
 
 /**
  * Single page does it all, the layout parameter references the "page". Default
@@ -239,15 +266,14 @@ webservices.get(
     for ( var layoutId in gui.pages ) {
       // console.log( '>>'+layoutId );
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
-        var slashPos = layoutId.indexOf( encodeURIComponent( '/' ) ) 
-        if ( slashPos == -1 ) {
+        if ( layoutId.indexOf( '/' ) == -1 ) {
           navTabs.push( {
             'layout' : layoutId,
             'label' : gui.pages[ layoutId ].title
           } )
         } else { // sub-menu
-          var subMenu = layoutId.substr( 0 , slashPos )
-          if ( ! subMenus[subMenu ] ) {
+          var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
+          if ( ! subMenus[subMenu ] ) { // first sub menu item creates menu
             subMenus[ subMenu ] = navTabs.length
             navTabs.push( {
               label : subMenu,

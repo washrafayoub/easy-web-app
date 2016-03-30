@@ -3,7 +3,7 @@
 var gui = require ( '../../' )       // stand alone: relpace with  require( 'easy-web-app' )
 
 /** Initialize the framework and the default page */
-gui.init ()
+gui.init ( 'My First Page' )
 
 /**
  * Add a view of type "pong-easy-form" (= plug-in) to the default page the first
@@ -13,6 +13,7 @@ gui.init ()
 gui.addView ( 
   {
     'id'   : 'myFirstView',
+    'title': 'Form view showing all field types',
     'type' : 'pong-easyform'    
   },
   {
