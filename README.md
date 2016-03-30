@@ -28,8 +28,10 @@ and [online demos](http://mh-svr.de/pong_dev) of features.
 * react
   * build web apps with JavaScript in a component way -- but not descriptive
 
-## Node.js example
-This creates a web page with a form view to add customers and a result view:
+They may work behind the scenes, i.e. for view plug-ins. 
+
+## How does it work
+To create a web page with one view you simple do:
 
 ```javascript
 // initialize:
@@ -41,11 +43,12 @@ gui.init()
 // Create a form view on the main page:
 gui.addView( 
 	{ ... view config ... },
-	{ ... plug in config ... }
+	{ ... plug in config ... } 
 )
 ```
 
-Full example: [simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
+You'll find the full example here:
+[simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
 
 The heart of the page is the JSON specification for the "Rest web GUI", containing different "views".
 This Node.js package helps to set up a web service to serve the specification to the browser.
@@ -109,7 +112,7 @@ gui.addView (
       , "c1|Date|date"
       , "c1|separator"
       , "c1|Remark|3rows"
-      , "c2|Mailings|label"
+      , "c2|Mailings|label"   // second starts here column
       , "c2|Send~Ads~~|checkbox_infomails_ads"
       , "c2|Newsletter|checkbox_infomails_newsletter"
       , "c2|Pass~Word" 
