@@ -41,7 +41,7 @@ gui.init()
 // Create a form view on the main page:
 gui.addView( 
 	{ ... view config ... },
-	{ ... plug in congig ... }
+	{ ... plug in config ... }
 )
 ```
 
