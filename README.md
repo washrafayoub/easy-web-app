@@ -48,7 +48,7 @@ gui.addView(
 ```
 
 You'll find the full example here:
-[simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
+[simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
 
 The heart of the page is the JSON specification for the "Rest web GUI", containing different "views".
 This Node.js package helps to set up a web service to serve the specification to the browser.
