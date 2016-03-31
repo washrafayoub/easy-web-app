@@ -20,44 +20,87 @@ Perhaps start here:
  
  
 # API Reference
+The API makes things simpler, but you can still work with plain JSON specifications 
+to render a page. Behind the 
+
+Notation: 
+* [  ] means optional
+* `abc` is a class or field name
+* "xyz" is a value
+* <abc> is a placeholder for value
+* (object), (String), (Array) are JavaScript tpyes
+
 ## "GUI" API
 ### gui.init ( [portalName] [,port] )
-Returns the main [page][page] object.
+Returns the main `page` object and starts a minimal REST/JSON
+web service eco system for the portal.
 
-The `portalName` appears on every page as "logoText".
-You may change that, e.g. define an "logoURL" for an image. 
+The `portalName` appears on every page as `logoText`.
+You are able to change that, or alternatively define an `logoURL` for an image. 
 
-The `port` default is 8888.
+The `port` defines the TCP port for the Web Services. Default `port` is "8888".
+
+Example code:
+
+```javascript
+var gui = require ( 'easy-web-app' )
+var mainPage = gui.init ( )
+...
+```
 
 ### gui.addPage ( pageId [, title] [, viewDef] [, viewConfig] )
-Returns the new [page][page] object.
+Returns the new `page` object.
 
-Header and footer will be included from the main page, 
-but of course you can change this in the [page][page].
+Header and footer will be included from the "main" `page`, 
+but of course you can change this in the `page`.
+
+Example code:
+```javascript
+...
+gui.addPage( '2ndPage', '2nd Page' ) // will be empty
+gui.addPage( 'XYZ/PageA', '3rd Page', { type:'pong-table', 'height:'500px' } ) 
+gui.addPage( 'XYZ/PageB', '3rd Page', { type:'pong-table', 'height:'500px' } ) 
+...
+```
+
+Remark: All pages are stored in the `gui.pages[]` array. 
+By `gui.addPage(...)` also a navigation menu for page navigation 
+will provided automatically. In the example "PageA" and "PageB" 
+are in a "XYZ" navigation pull-down menu.
 
 ### gui.addView ( viewDef, moduleConfig [, page] ) 
-Returns view object (part of the `page` object structure).
+Returns `view` object (part of the `page` object structure).
 
-By default it will add a view in a new row to the "main" page.
+By default it will add a `view` in a new row to the "main" page.
 
 The `viewDef` should at least define a `type` for the view.
 
-The `moduleConfig` defines the plug-in (=`viewDef.type`) parameters.  
+The `moduleConfig` holds the specific parameters for the `viewDef.type` plug-in.  
 
 The `moduleConfig` can be `null`, if there is a `viewDef.resourceURL` given.
 You are responsible to implement the REST/JSON web service for the `moduleConfig`.
 The view "type" is appended to "ressourceURL (`<resourceURL>/<type>`), so if you 
-have a resource like http://my.server/products/ you can define different views for that,
-e.g.  
+have a resource like http://my.server/products/ you can define different views 
+for that, e.g.  
 * GET http://my.server/products/pong-form/
 * GET http://my.server/products/pong-table/
 * GET http://my.server/products/pong-help/
 
+Example code:
+```javascript
+...
+gui.addView( '2ndPage', '2nd Page' )
+...
+```
+
+### gui.getExpress()
+Returns the "express" web service plug-in, so that you can implement 
+web services, e.g. for forms commits or loading i18n translations
+(ref. examples with \*). 
+
 ## "Page" API Reference
 Page object reference: 
-[structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/)
-
-_Remark: [...] means optional_
+[structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/Structure-Specification)
 
 For page the following structure will be set up:
 * `title` (String)
@@ -70,9 +113,24 @@ For page the following structure will be set up:
 * `footer`
   * `copyrightText` (String) 
   * `modules` (empty Array)
-  
+
 ### page.addView ( def [, config] )
-Adds a new `row` with a new `view` and returns the `view`, ref `gui.addView`.
+Adds a new `row` with a new `view` and returns the `view`, ref. `gui.addView`.
+
+Example code:
+```javascript
+...
+var gui = require ( 'easy-web-app' )
+var mainPage = gui.init ( )
+mainPage.addView( 
+	{ type:'pong-mediawiki', resourceURL:'http://${lang}.wikipedia.org/w/' },
+	{ page: { EN: "Main_Page",
+	          DE: "Wikipedia:Hauptseite",
+	          IT: "Pagina_principale" },
+	  wikiRef: "/wiki/" }
+	)
+...
+```
 
 #### View reference
 By default the view has
@@ -81,33 +139,51 @@ By default the view has
 * `decor` (String)
   * set to `def.decor` or "decor"
 * `resourceURL` (String)
-  * set to `def.resourceURL or "none" (TODO: check if it must be unset)
+  * set to `def.resourceURL` or "none" (TODO: check if it must be unset)
 * \[`type`\] (String)
 * \[`moduleConfig`\] (Object)
   * set to `config`, if that method parameter is defined
 * \[`actions`\] (Array)
   * set to `def.actions`, if that attribute is defined
 
-Details ref. [structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/)
+Details ref. [structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/Structure-Specification)
 
+Example code:
+```javascript
+...
+var myView = mainPage.addView( ... )
+// add help button for view
+myView.actions.push( { type:"pong-help" } ) 
+...
+```
 
 ### addColumnsRow ( id, width )
-Adds and returns a `row` object with `cols` array in it
+Adds and returns a `row` object with `cols` array in it.
+
+Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
 
 ## "Rows" API
 Used inside a `page`.
 
 ### row.addView ( def [, config] )
-Appends a row with new view and returns the view, see `gui.addView(...)`
+Appends a row with new view and returns the view, see `gui.addView(...)`.
+
+Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
 
 ### row.addColumnsRow ( id, height )
-Adds and returns a `row` object with `cols` array in it
+Adds and returns a `row` object with `cols` array in it.
+
+Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
 
 ## "Columns" API
 Used inside a `page`.
 
 ### row.addView ( def [, config] )
-Appends a column with new view and returns the view, see `gui.addView(...)`
+Appends a column with new view and returns the view, see `gui.addView(...)`.
+
+Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
 
 ### addRowsColumn ( id, width )
-Adds and return `rows` object
+Adds and return `rows` object.
+
+Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)

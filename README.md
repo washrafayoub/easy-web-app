@@ -1,7 +1,7 @@
 # Easy Web App
 Create web applications easily. 
 
-This is a Node.js API for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
+This is a [Node.js API package](https://www.npmjs.com/package/easy-web-app) for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
 Focus is on _web applications_ (not simple web pages). 
 A lot of "make-it-simple" plug-ins are available:
@@ -138,5 +138,5 @@ Remark: To keep this demo simple, there is no REST web service for the
 "Check" button shown here. 
 
 
-## Examples
+## Examples and API Reference
 Have a look at [some feature demos](https://github.com/ma-ha/easy-web-app/tree/master/examples/)
