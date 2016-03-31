@@ -58,8 +58,8 @@ Example code:
 ```javascript
 ...
 gui.addPage( '2ndPage', '2nd Page' ) // will be empty
-gui.addPage( 'XYZ/PageA', '3rd Page', { type:'pong-table', 'height:'500px' } ) 
-gui.addPage( 'XYZ/PageB', '3rd Page', { type:'pong-table', 'height:'500px' } ) 
+gui.addPage( 'XYZ/PageA', '3rd Page', { id:'a1', type:'pong-table', height:'500px' } ) 
+gui.addPage( 'XYZ/PageB', '3rd Page', { id:'b1', type:'pong-table', height:'500px' } ) 
 ...
 ```
 
@@ -68,12 +68,13 @@ By `gui.addPage(...)` also a navigation menu for page navigation
 will provided automatically. In the example "PageA" and "PageB" 
 are in a "XYZ" navigation pull-down menu.
 
-### gui.addView ( viewDef, moduleConfig [, page] ) 
+### gui.addView ( viewDef [, moduleConfig] [, page] ) 
 Returns `view` object (part of the `page` object structure).
 
 By default it will add a `view` in a new row to the "main" page.
 
-The `viewDef` should at least define a `type` for the view.
+The `viewDef` must at least define an `id` and should define `type` (check: 
+[available view types](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules)).
 
 The `moduleConfig` holds the specific parameters for the `viewDef.type` plug-in.  
 
@@ -89,7 +90,7 @@ for that, e.g.
 Example code:
 ```javascript
 ...
-gui.addView( '2ndPage', '2nd Page' )
+gui.addView( { id:'X' } ) // ads another empty view to the main page
 ...
 ```
 
@@ -123,7 +124,7 @@ Example code:
 var gui = require ( 'easy-web-app' )
 var mainPage = gui.init ( )
 mainPage.addView( 
-	{ type:'pong-mediawiki', resourceURL:'http://${lang}.wikipedia.org/w/' },
+	{ id:'42', type:'pong-mediawiki', resourceURL:'http://${lang}.wikipedia.org/w/' },
 	{ page: { EN: "Main_Page",
 	          DE: "Wikipedia:Hauptseite",
 	          IT: "Pagina_principale" },
