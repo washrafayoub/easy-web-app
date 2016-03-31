@@ -52,7 +52,6 @@ e.g.
 * GET http://my.server/products/pong-table/
 * GET http://my.server/products/pong-help/
 
-[page]:
 # Page API Reference
 Page object reference: 
 (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
@@ -65,7 +64,6 @@ Adds and returns a `row` object with `cols` array in it
 
 ref `Rows API`
 
-[row]: 
 # Rows API
 
 ## row.addView ( def, config )
@@ -74,8 +72,8 @@ append a row with new view, see gui.addView(...)
 ## row.addColumnsRow ( id, height )
 adds and returns a `row` object with `cols` array in it
 
-[column]:
 # Columns API
+
 ## row.addView ( def, config )
 append a column with new new, see gui.addView(...)
 
