@@ -19,8 +19,9 @@ Perhaps start here:
 <sub>_Remark: (\*) includes a REST/JSON web service implementation_</sub>  
  
  
-# GUI API Reference
-## gui.init ( [portalName] [,port] )
+# API Reference
+## "GUI" API
+### gui.init ( [portalName] [,port] )
 Returns the main [page][page] object.
 
 The `portalName` appears on every page as "logoText".
@@ -28,13 +29,13 @@ You may change that, e.g. define an "logoURL" for an image.
 
 The `port` default is 8888.
 
-## gui.addPage ( pageId [, title] [, viewDef] [, viewConfig] )
+### gui.addPage ( pageId [, title] [, viewDef] [, viewConfig] )
 Returns the new [page][page] object.
 
 Header and footer will be included from the main page, 
 but of course you can change this in the [page][page].
 
-## gui.addView ( viewDef, moduleConfig [, page] ) 
+### gui.addView ( viewDef, moduleConfig [, page] ) 
 Returns view object (part of the `page` object structure).
 
 By default it will add a view in a new row to the "main" page.
@@ -52,7 +53,7 @@ e.g.
 * GET http://my.server/products/pong-table/
 * GET http://my.server/products/pong-help/
 
-# Page API Reference
+## "Page" API Reference
 Page object reference: 
 (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
 
@@ -70,10 +71,10 @@ For page the following structure will be set up:
   * `copyrightText` (String) 
   * `modules` (empty Array)
   
-## page.addView ( def, config )
+### page.addView ( def, config )
 adds a new `row` with a new `view` and returns the `view`, ref `gui.addView`
 
-### View reference
+#### View reference
 By default the view has
 * `title` (String) 
   * set to `def.title` or `def.id` or "View: "
@@ -90,21 +91,21 @@ By default the view has
 Details ref (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
 
 
-## addColumnsRow ( id, width )
+### addColumnsRow ( id, width )
 Adds and returns a `row` object with `cols` array in it
 
-# Rows API
+## "Rows" API
 
-## row.addView ( def, config )
+### row.addView ( def, config )
 append a row with new view, see `gui.addView(...)`
 
-## row.addColumnsRow ( id, height )
+### row.addColumnsRow ( id, height )
 adds and returns a `row` object with `cols` array in it
 
-# Columns API
+## "Columns" API
 
-## row.addView ( def, config )
+### row.addView ( def, config )
 append a column with new new, see `gui.addView(...)`
 
-## addRowsColumn ( id, width )
+### addRowsColumn ( id, width )
 adds and return `rows` object
