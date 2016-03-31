@@ -88,7 +88,7 @@ By default the view has
 * \[`actions`\] (Array)
   * set to `def.actions`, if that attribute is defined
 
-Details ref. (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
+Details ref. [structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/)
 
 
 ### addColumnsRow ( id, width )
