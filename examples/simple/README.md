@@ -15,6 +15,7 @@ The example contains also a simple REST/JSON web service (template) to POST form
 
 ## Explained
 The code is all about some easy steps:
+
 1. load the module ```require( 'easy-web-app' )```
 2. start the server and set up main ```page gui.init()```
 3. add a view to the main page ```page gui.addView( <view config>, <plug in config> )```
@@ -24,13 +25,15 @@ requests from the form button.
 
 The server (step 2) will serve some static files to the browser, 
 most imporant ones are
-* `http://localhost:8888/index.html`  empty page just loading the JS, CSS etc.
-* `http://localhost:8888/js/portal-ng.js` the heart of the framework
+* `http://localhost:8888/index.html` 
+  * empty page just loading the JS, CSS etc.
+* `http://localhost:8888/js/portal-ng.js` 
+  * the heart of the framework
 
 Then the server will set up some REST/JSON web service which are expected 
 by the client. The most importan one is to load the structure definition
 of the page:
-* http://localhost:8888/svc/layout/main/structure
+* [http://localhost:8888/svc/layout/main/structure](http://localhost:8888/svc/layout/main/structure)
 Please click the link and have a look at the JSON structure. 
 That is all about! 
 
