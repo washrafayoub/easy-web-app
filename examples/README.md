@@ -67,7 +67,7 @@ For page the following structure will be set up:
 * `rows` (empty Array, use `page.addView(...)` or 
   `page.addColumnsRow(...)` to add elements	)
 * `footer`
-  * `copyrightText` (string) 
+  * `copyrightText` (String) 
   * `modules` (empty Array)
   
 ## page.addView ( def, config )
@@ -81,10 +81,10 @@ By default the view has
   * set to `def.decor` or "decor"
 * `resourceURL` (String)
   * set to `def.resourceURL or "none" (TODO: check if it must be unset)
-* [`type`] (String)
-* [`moduleConfig`] (Object)
+* \[`type`\] (String)
+* \[`moduleConfig`\] (Object)
   * set to `config`, if that method parameter is defined
-* [`actions`] (Array)
+* \[`actions`\] (Array)
   * set to `def.actions`, if that attribute is defined
 
 Details ref (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
