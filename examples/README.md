@@ -55,7 +55,7 @@ e.g.
 
 ## "Page" API Reference
 Page object reference: 
-(structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
+[structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/)
 
 _Remark: [...] means optional_
 
@@ -71,8 +71,8 @@ For page the following structure will be set up:
   * `copyrightText` (String) 
   * `modules` (empty Array)
   
-### page.addView ( def, config )
-adds a new `row` with a new `view` and returns the `view`, ref `gui.addView`
+### page.addView ( def [, config] )
+Adds a new `row` with a new `view` and returns the `view`, ref `gui.addView`.
 
 #### View reference
 By default the view has
@@ -88,24 +88,26 @@ By default the view has
 * \[`actions`\] (Array)
   * set to `def.actions`, if that attribute is defined
 
-Details ref (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
+Details ref. (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
 
 
 ### addColumnsRow ( id, width )
 Adds and returns a `row` object with `cols` array in it
 
 ## "Rows" API
+Used inside a `page`.
 
-### row.addView ( def, config )
-append a row with new view, see `gui.addView(...)`
+### row.addView ( def [, config] )
+Appends a row with new view and returns the view, see `gui.addView(...)`
 
 ### row.addColumnsRow ( id, height )
-adds and returns a `row` object with `cols` array in it
+Adds and returns a `row` object with `cols` array in it
 
 ## "Columns" API
+Used inside a `page`.
 
-### row.addView ( def, config )
-append a column with new new, see `gui.addView(...)`
+### row.addView ( def [, config] )
+Appends a column with new view and returns the view, see `gui.addView(...)`
 
 ### addRowsColumn ( id, width )
-adds and return `rows` object
+Adds and return `rows` object
