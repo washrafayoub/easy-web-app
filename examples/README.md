@@ -56,6 +56,8 @@ e.g.
 Page object reference: 
 (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
 
+_Remark: [...] means optional_
+
 For page the following structure will be set up:
 * `title` (String)
 * `header` (object)
@@ -69,7 +71,24 @@ For page the following structure will be set up:
   * `modules` (empty Array)
   
 ## page.addView ( def, config )
-adds a new `row` with a new view, ref `gui.addView`
+adds a new `row` with a new `view` and returns the `view`, ref `gui.addView`
+
+### View reference
+By default the view has
+* `title` (String) 
+  * set to `def.title` or `def.id` or "View: "
+* `decor` (String)
+  * set to `def.decor` or "decor"
+* `resourceURL` (String)
+  * set to `def.resourceURL or "none" (TODO: check if it must be unset)
+* [`type`] (String)
+* [`moduleConfig`] (Object)
+  * set to `config`, if that method parameter is defined
+* [`actions`] (Array)
+  * set to `def.actions`, if that attribute is defined
+
+Details ref (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
+
 
 ## addColumnsRow ( id, width )
 Adds and returns a `row` object with `cols` array in it
