@@ -37,15 +37,15 @@ gui.setDefaults = function setDefaults() {
   this.pages[ 'main' ] = {
       title : 'Test'
     , header : {
-                  logoText : 'Test'
-                  ,modules : [ {
-                                  id : 'MainNav'
-                                  , type : 'pong-navbar'
-                                  , param : {
-                                                confURL : '/svc/nav' // you must define a web service for that ;-)
-                                              }
-                                } ]
-                }
+          logoText : 'Test'
+          ,modules : [ {
+            id : 'MainNav'
+            , type : 'pong-navbar'
+            , param : {
+                confURL : '/svc/nav' // please define a web service for that ;-)
+            }
+          } ]
+        }
     , rows : []
     , footer : {
         copyrightText : 'powered by '+
@@ -211,7 +211,7 @@ webservices.get(
       var layout = {
         'layout' : gui.pages[ req.params.id ]
       };
-      res.send ( JSON.stringify ( layout ) );
+      res.json( layout );
     } else {
       res.statusCode = 404;
       return res.send( 'Error 404: No quote found' );
@@ -227,7 +227,7 @@ webservices.get(
       var layout = {
         'layout' : gui.pages[ req.params.id +'/'+ req.params.subid ]
       };
-      res.send ( JSON.stringify ( layout ) );
+      res.json( layout );
     } else {
       res.statusCode = 404;
       return res.send( 'Error 404: No quote found' );

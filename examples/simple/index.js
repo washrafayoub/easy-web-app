@@ -43,12 +43,16 @@ gui.addView (
 // -----------------------------------------------------------
 // For a complete example we need REST web service:
 // The browser will send the the data via POST request. 
-var svc  = gui.getExpress()
+var app  = gui.getExpress()
 var bodyParser  = require( 'body-parser' )
 var jsonParser  = bodyParser.json()
 
+app.locals.pretty = true
+app.set('json spaces', 2)
+
+
 // save changed table config back
-svc.post( 
+app.post( 
     '/dummy', 
     jsonParser,
     function( req, res ) {

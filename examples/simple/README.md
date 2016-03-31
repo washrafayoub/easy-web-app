@@ -11,7 +11,7 @@ The example contains also a simple REST/JSON web service (template) to POST form
 1. You need to [get a local copy of the easy-web gui](https://github.com/ma-ha/easy-web-app).
 2. and run the set up ther `npm install easy-web-gui`
 3. In this directory simply run: `nodejs index.js` 
-4. Open http://localhost:8888/ in your browser
+4. Open [http://localhost:8888/](http://localhost:8888/) in your browser
 
 ## Explained
 The code is all about some easy steps:
@@ -24,16 +24,72 @@ The rest of the example defines a REST/JSON web service to handle the POST
 requests from the form button.
 
 The server (step 2) will serve some static files to the browser, 
-most imporant ones are
+most important ones are
 * `http://localhost:8888/index.html` 
   * empty page just loading the JS, CSS etc.
 * `http://localhost:8888/js/portal-ng.js` 
   * the heart of the framework
 
 Then the server will set up some REST/JSON web service which are expected 
-by the client. The most importan one is to load the structure definition
+by the client. The most important one is to load the structure definition
 of the page:
 * [http://localhost:8888/svc/layout/main/structure](http://localhost:8888/svc/layout/main/structure)
 Please click the link and have a look at the JSON structure. 
 That is all about! 
 
+Should look like this:
+
+```javascript
+{
+  "layout": {
+    "title": "Test",
+    "header": {
+      "logoText": "My First Page",
+      "modules": [
+        {
+          "id": "MainNav",
+          "type": "pong-navbar",
+          "param": {
+            "confURL": "/svc/nav"
+          }
+        }
+      ]
+    },
+    "rows": [
+      {
+        "rowId": "myFirstView",
+        "title": "Form view showing all field types",
+        "decor": "decor",
+        "height": "400px",
+        "resourceURL": "none",
+        "type": "pong-easyform",
+        "moduleConfig": {
+          "id": "tstFormId",
+          "easyFormFields": [
+            "id",
+            "c1|Name",
+            "c1|Date|date",
+            "c1|separator",
+            "c1|Remark|3rows",
+            "c2|Mailings|label",
+            "c2|Send~Ads~~|checkbox_infomails_ads",
+            "c2|Newsletter|checkbox_infomails_newsletter",
+            "c2|Pass~Word"
+          ],
+          "actions": [
+            {
+              "id": "Chk",
+              "actionName": "Check",
+              "actionURL": "/dummy"
+            }
+          ]
+        }
+      }
+    ],
+    "footer": {
+      "copyrightText": "powered by <a href=\"https://github.com/ma-ha/rest-web-ui\">ReST-Web-GUI</a>",
+      "modules": []
+    }
+  }
+}
+```
