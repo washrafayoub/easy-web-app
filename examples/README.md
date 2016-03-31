@@ -18,3 +18,63 @@ Perhaps start here:
 
 <sub>_Remark: (\*) includes a REST/JSON web service implementation_</sub>  
  
+ 
+# GUI API Reference
+## gui.init ( [portalName] [,port] )
+Returns the main [page][page] object.
+
+The `portalName` appears on every page as "logoText".
+You may change that, e.g. define an "logoURL" for an image. 
+
+The `port` default is 8888.
+
+## gui.addPage ( pageId [, title] [, viewDef] [, viewConfig] )
+Returns the new [page][page] object.
+
+Header and footer will be included from the main page, 
+but of course you can change this in the [page][page].
+
+## gui.addView ( viewDef, moduleConfig [, page] ) 
+Returns view object (part of the [page][page] object structure).
+
+By default it will add a view in a new row to the "main" page.
+
+The `viewDef` should at least define a `type` for the view.
+
+The `moduleConfig` defines the plug-in (=`viewDef.type`) parameters.  
+
+The `moduleConfig` can be `null`, if there is a `viewDef.resourceURL` given.
+You are responsible to implement the REST/JSON web service for the `moduleConfig`.
+The view "type" is appended to "ressourceURL (`<resourceURL>/<type>`), so if you 
+have a resource like http://my.server/products/ you can define different views for that,
+e.g.  
+* GET http://my.server/products/pong-form/
+* GET http://my.server/products/pong-table/
+* GET http://my.server/products/pong-help/
+
+# [page]: Page API Reference
+Page object reference: 
+(structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
+
+## page.addView ( def, config )
+adds a new row with a new view, ref gui.addView
+
+## addColumnsRow ( id, width )
+Adds and returns a `row` object with `cols` array in it
+
+ref `Rows API`
+
+# [row]: Rows API
+
+## row.addView ( def, config )
+append a row with new view, see gui.addView(...)
+
+## row.addColumnsRow ( id, height )
+adds and returns a `row` object with `cols` array in it
+
+# Columns API
+## row.addView ( def, config )
+append a column with new new, see gui.addView(...)
+
+## addRowsColumn ( id, width )
+adds and return `rows` object

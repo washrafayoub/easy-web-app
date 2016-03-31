@@ -93,3 +93,6 @@ Should look like this:
   }
 }
 ```
+
+You'll find more details about the _easyform_ at the
+[plug-in modules documentation](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules). 
