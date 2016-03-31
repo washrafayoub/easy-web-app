@@ -35,7 +35,7 @@ Header and footer will be included from the main page,
 but of course you can change this in the [page][page].
 
 ## gui.addView ( viewDef, moduleConfig [, page] ) 
-Returns view object (part of the [page][page] object structure).
+Returns view object (part of the `page` object structure).
 
 By default it will add a view in a new row to the "main" page.
 
@@ -56,18 +56,28 @@ e.g.
 Page object reference: 
 (structure specification of rest-web-ui)[https://github.com/ma-ha/rest-web-ui/wiki/]
 
+For page the following structure will be set up:
+* `title` (String)
+* `header` (object)
+  * `logoText` (String)
+  * `modules` (Array)
+    * "nav-bar" object 
+* `rows` (empty Array, use `page.addView(...)` or 
+  `page.addColumnsRow(...)` to add elements	)
+* `footer`
+  * `copyrightText` (string) 
+  * `modules` (empty Array)
+  
 ## page.addView ( def, config )
-adds a new row with a new view, ref gui.addView
+adds a new `row` with a new view, ref `gui.addView`
 
 ## addColumnsRow ( id, width )
 Adds and returns a `row` object with `cols` array in it
 
-ref `Rows API`
-
 # Rows API
 
 ## row.addView ( def, config )
-append a row with new view, see gui.addView(...)
+append a row with new view, see `gui.addView(...)`
 
 ## row.addColumnsRow ( id, height )
 adds and returns a `row` object with `cols` array in it
@@ -75,7 +85,7 @@ adds and returns a `row` object with `cols` array in it
 # Columns API
 
 ## row.addView ( def, config )
-append a column with new new, see gui.addView(...)
+append a column with new new, see `gui.addView(...)`
 
 ## addRowsColumn ( id, width )
 adds and return `rows` object
