@@ -153,7 +153,9 @@ Example code:
 ```javascript
 ...
 var myView = mainPage.addView( ... )
-// add help button for view
+// create empty actions array, if not already there:
+if ( ! myView.actions ) myView.actions = []
+// add help button for view:
 myView.actions.push( { type:"pong-help" } ) 
 ...
 ```
