@@ -73,8 +73,8 @@ Returns `view` object (part of the `page` object structure).
 
 By default it will add a `view` in a new row to the "main" page.
 
-The `viewDef` must at least define an `id` and should define `type` (check: 
-[available view types](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules)).
+The `viewDef` must at least define an `id` and should define `type` (check out the
+[available view types](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules#modulesviews)).
 
 The `moduleConfig` holds the specific parameters for the `viewDef.type` plug-in.  
 
