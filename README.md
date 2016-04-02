@@ -5,16 +5,16 @@ This is a [Node.js API package](https://www.npmjs.com/package/easy-web-app)
 for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
 Focus is on _web applications_ (not simple web pages). 
-A lot of "make-it-simple" plug-ins are available:
-* forms
-* tables / lists
-* content
+A lot of plug-ins are available to get a portal it quickly configured:
+* Forms
+* Tables / lists
+* Content: via MediaWiki API, plain HTML views, or help dialogs
 * I/O: control switches/drawer, gauges, graphs, LEDs, displays, ...
 * i18n: switch language
-* maps: POIs, routes, traffic, ...
-* page to page navigation with navigation tabs, menus, links and session data
-* source code display
-* basic OAuth security
+* Maps: POIs, routes, traffic, ...
+* Page to page navigation with navigation tabs, menus, links and session data
+* Source code display
+* Security: HTTP Basic authentication or OAuth 
 * ...
 
 Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/) 
@@ -70,10 +70,10 @@ gui.addView(
 You'll find the full example here:
 [simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
 
-The idea is to define page containing different "views" in a JSON format, and a portal as a set of pages.
+The idea is to define "page" containing different "views" in a JSON format and a "portal" as a set of "pages".
 This little package helps you to create the JSON configuration and 
 to set up [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) 
-web service to provide the specification to the browser.
+web service to provide the page specification to the browser.
 
 The JSON config of a whole page looks this way:
 * `title`: a simple String
@@ -85,8 +85,8 @@ The JSON config of a whole page looks this way:
   * `copyrightText` String 
   * `modules`:  Array of footer modules and configurations for them
 
-Inside the browser it is rendered to a complete web app by
-[the "rest-web-gui" JavaScript framework and it's plug-ins](https://github.com/ma-ha/rest-web-ui/).
+Inside the browser this is rendered to a full featured web app by
+[the "rest-web-gui" JavaScript framework and it's plug-ins](https://github.com/ma-ha/rest-web-ui/) -- magic!!
 
 Of course you may need to customize the CSS themes. You can also develop your own JavaScript view plug-ins.
 
