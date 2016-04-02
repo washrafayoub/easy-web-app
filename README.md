@@ -1,7 +1,8 @@
 # Easy Web App
 Create web applications easily. 
 
-This is a [Node.js API package](https://www.npmjs.com/package/easy-web-app) for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
+This is a [Node.js API package](https://www.npmjs.com/package/easy-web-app) 
+for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
 Focus is on _web applications_ (not simple web pages). 
 A lot of "make-it-simple" plug-ins are available:
@@ -69,13 +70,10 @@ gui.addView(
 You'll find the full example here:
 [simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
 
-The heart of the page is the JSON specification for the 
-["REST-Web-GUI"](https://github.com/ma-ha/rest-web-ui/)., 
-containing different "views".
-This Node.js package helps to set up a web service to serve the specification to the browser.
-
-A page in a portal (= set of pages) is described in a JSON format delivered by a 
-[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) web service.
+The idea is to define page containing different "views" in a JSON format, and a portal as a set of pages.
+This little package helps you to create the JSON configuration and 
+to set up [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) 
+web service to provide the specification to the browser.
 
 The JSON config of a whole page looks this way:
 * `title`: a simple String
@@ -87,10 +85,10 @@ The JSON config of a whole page looks this way:
   * `copyrightText` String 
   * `modules`:  Array of footer modules and configurations for them
 
-This little package helps you to create the JSON configuration
-and set up the web service. 
 Inside the browser it is rendered to a complete web app by
 [the "rest-web-gui" JavaScript framework and it's plug-ins](https://github.com/ma-ha/rest-web-ui/).
+
+Of course you may need to customize the CSS themes. You can also develop your own JavaScript view plug-ins.
 
 ## First project (< 1 min)
 Requires [node.ns installed](https://nodejs.org/en/download/) -- 
