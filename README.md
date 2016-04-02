@@ -69,7 +69,9 @@ gui.addView(
 You'll find the full example here:
 [simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
 
-The heart of the page is the JSON specification for the "Rest web GUI", containing different "views".
+The heart of the page is the JSON specification for the 
+["REST-Web-GUI"](https://github.com/ma-ha/rest-web-ui/)., 
+containing different "views".
 This Node.js package helps to set up a web service to serve the specification to the browser.
 
 A page in a portal (= set of pages) is described in a JSON format delivered by a 
@@ -80,7 +82,7 @@ The JSON config of a whole page looks this way:
 * `header` object
   * `logoText` (String) or `logoURL` (String) 
   * `modules`: Array of header plug-ins and their configuration
-* `rows` (an array of "views" or "columns" and their configuration) 
+* `rows`: an array of "views" or "columns" and their configuration 
 * `footer`
   * `copyrightText` String 
   * `modules`:  Array of footer modules and configurations for them
