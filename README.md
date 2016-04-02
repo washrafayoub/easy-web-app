@@ -30,29 +30,6 @@ and [online demos](http://mh-svr.de/pong_dev) of features.
 
 They may work behind the scenes, i.e. for view plug-ins. 
 
-## How does it work
-To create a web page with one view you simple do:
-
-```javascript
-// initialize:
-var gui = require ( 'easy-web-app' )
-
-// start REST services and create a main page
-gui.init()  
-
-// Create a form view on the main page:
-gui.addView( 
-	{ ... view config ... },
-	{ ... plug in config ... } 
-)
-```
-
-You'll find the full example here:
-[simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
-
-The heart of the page is the JSON specification for the "Rest web GUI", containing different "views".
-This Node.js package helps to set up a web service to serve the specification to the browser.
-	
 ## 20 sec Test
 Requires [node.ns installed](https://nodejs.org/en/download/) -- 
 which is always a good idea to have it.
@@ -72,6 +49,47 @@ nodejs index.js
 
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
+## How does it work
+To create a web page with one view you simple do:
+
+```javascript
+// initialize:
+var gui = require ( 'easy-web-app' )
+
+// start REST services and create a main page
+gui.init()  
+
+// Create a form view on the main page:
+gui.addView( 
+	{ ... view config JSON ... },
+	{ ... plug in config JSON ... } 
+)
+```
+
+You'll find the full example here:
+[simple form](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
+
+The heart of the page is the JSON specification for the "Rest web GUI", containing different "views".
+This Node.js package helps to set up a web service to serve the specification to the browser.
+
+A page in a portal (= set of pages) is described in a JSON format delivered by a 
+[REST](https://en.wikipedia.org/wiki/Representational_state_transfer) web service.
+
+The JSON config of a whole page looks this way:
+* `title`: a simple String
+* `header` object
+  * `logoText` (String) or `logoURL` (String) 
+  * `modules`: Array of header plug-ins and their configuration
+* `rows` (an array of "views" or "columns" and their configuration) 
+* `footer`
+  * `copyrightText` String 
+  * `modules`:  Array of footer modules and configurations for them
+
+This little package helps you to create the JSON configuration
+and set up the web service. 
+Inside the browser it is rendered to a complete web app by
+[the "rest-web-gui" JavaScript framework and it's plug-ins](https://github.com/ma-ha/rest-web-ui/).
+
 ## First project (< 1 min)
 Requires [node.ns installed](https://nodejs.org/en/download/) -- 
 it really don't hurt and it's always a good idea to have.
