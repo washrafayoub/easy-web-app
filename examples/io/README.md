@@ -8,4 +8,40 @@ The "call back" method of the switch is configured to set the LED.
  
 # Run example
 1. You need to [get a local copy of the easy-web gui](https://github.com/ma-ha/easy-web-gui).
-2. in this directory simply run: `nodejs index.js` 
+2. run `npm install`
+3. in this directory simply run: `node index.js`
+ 
+# I/O API
+Initialization:
+```javascript
+var gui = require( 'easy-web-app' ) 
+var ioView = gui.addIoView()
+...
+```
+
+All methods here are just helpers to set up the JSON configuration
+and to make the REST backend easier.
+
+See also 
+[I/O plug-in configuration reference](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-io).
+
+
+## ioView.setUpdateMilliSec ( milli_seconds )
+Set Polling interval to update data. 
+
+The data is also updated at any action on the view.
+
+## ioView.setBackgroundImage ( url )
+Load an image for the panel.
+
+## ioView.addLED ( id, x, y, ledValue )
+
+Values:
+* 0 = off = blcak
+* 1 = green
+* -1 = red
+* 2 = yellow
+* null = grey
+
+## ioView.addSwitch ( id, x, y, [ value1, value2 [,value3] ], callbackFunction )
+see [example code](https://github.com/ma-ha/rest-web-ui/blob/master/html/modules/pong-io/pong-io.js) 

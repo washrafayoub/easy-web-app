@@ -45,7 +45,7 @@ npm install
  
 cd examples
 cd simple
-nodejs index.js
+node index.js
 ```
 
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)

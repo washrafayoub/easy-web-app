@@ -131,7 +131,9 @@ mainPage.addView(
 	  wikiRef: "/wiki/" }
 	)
 ...
-```
+
+### page.addIoView ( def [, config] )
+Returns IoView, ref. [I/O example](https://github.com/ma-ha/easy-web-app/tree/master/examples/io).
 
 #### View reference
 By default the view has
