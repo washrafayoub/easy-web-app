@@ -29,7 +29,7 @@ and [online demos](http://mh-svr.de/pong_dev) of features.
 * react
   * build web apps with JavaScript in a component way -- but not descriptive
 
-They may work behind the scenes, i.e. for view plug-ins. 
+They can all work behind the scenes, i.e. for view plug-ins. 
 
 ## 20 sec Test
 Requires [node.ns installed](https://nodejs.org/en/download/) -- 
