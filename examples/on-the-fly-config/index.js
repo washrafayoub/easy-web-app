@@ -1,6 +1,6 @@
 /** Simple example: Create a web page with form */
 
-var gui = require ( '../../' )       // stand alone: relpace with  require( 'easy-web-app' )
+var gui = require ( '../../' )       // stand alone: replace with  require( 'easy-web-app' )
 
 // initialize the web app framework and a default main page
 gui.init ()
@@ -21,7 +21,7 @@ gui.addView (
         }
       ]
   }
-  // plug-in config will be loadad from http://localhost:8888/products/pong-table 
+  // plug-in config will be loaded from http://localhost:8888/products/pong-table 
 )
 
 // the table requires a REST web service to serve the data: 
@@ -29,7 +29,7 @@ var svc  = gui.getExpress()
 var bodyParser  = require( 'body-parser' )
 var jsonParser  = bodyParser.json()
 
-// this is the table config at statup -- but you can change it in the browser
+// this is the table config at startup -- but you can change it in the browser
 var moduleConfig =  {
     easyCols:
       [

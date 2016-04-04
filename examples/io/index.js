@@ -1,6 +1,6 @@
 const LED_GREEN = 1, LED_OFF = 0, SWITCH_ON = 'on', SWITCH_OFF = 'off'
 
-var gui = require( '../../' )     // stand alone: relpace with  require( 'easy-web-app' ) 
+var gui = require( '../../' )     // stand alone: replace with  require( 'easy-web-app' ) 
 var log = require( 'npmlog' )
 
 // Initialize the framework and the default page
@@ -13,7 +13,7 @@ var ioView = gui.addIoView()
 ioView.setUpdateMilliSec( 10000 )
 ioView.setBackgroundImage(  __dirname + '/demo.png' )
 
-// add a 'LED' at x/y 100px/100px and stich it to 'on' (=1)
+// add a 'LED' at x/y 100px/100px and switch it to 'on' (=1)
 var led = LED_GREEN
 ioView.addLED( 'myFirstLED', 300, 210, led )
 

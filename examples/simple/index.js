@@ -1,6 +1,6 @@
 /** Simple example: Create a web page with form */
 
-var gui = require ( '../../' )       // stand alone: relpace with  require( 'easy-web-app' )
+var gui = require ( '../../' )       // stand alone: replace with  require( 'easy-web-app' )
 
 /** Initialize the framework and the default page */
 gui.init ( 'My First Page' )
