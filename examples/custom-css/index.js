@@ -1,10 +1,9 @@
 var gui = require( '../../' )     // stand alone: relpace with  require( 'easy-web-app' ) 
+var express = require( 'express' )
 
 
 // define to load /css-custom/custom.css from local folder
-var express     = require( 'express' );
-var webservices = express();
-gui.getExpress().use( '/css-custom', express.static(__dirname ) );
+gui.getExpress().use( '/css-custom', express.static( __dirname ) )
   
 
 // define a main page
