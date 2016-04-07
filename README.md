@@ -87,7 +87,7 @@ The JSON config of a whole page looks this way:
 
 
 This is how it may look like:
-![table example](https://github.com/ma-ha/easy-web-app/blob/master/examples/demo-screen.png) 
+![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/demo-screen.png) 
 
 
 Inside the browser this is rendered to a full featured web app by
