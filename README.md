@@ -85,6 +85,11 @@ The JSON config of a whole page looks this way:
   * `copyrightText` String 
   * `modules`:  Array of footer modules and configurations for them
 
+
+This is how it may look like:
+![table example](https://github.com/ma-ha/easy-web-app/blob/master/examples/demo-screen.png) 
+
+
 Inside the browser this is rendered to a full featured web app by
 [the "rest-web-gui" JavaScript framework and it's plug-ins](https://github.com/ma-ha/rest-web-ui/) -- magic!!
 
