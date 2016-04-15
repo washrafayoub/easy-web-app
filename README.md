@@ -17,6 +17,9 @@ A lot of plug-ins are available to get a portal it quickly configured:
 * Security: HTTP Basic authentication or OAuth 
 * ...
 
+This is how it may look like:
+![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/demo-screen.png) 
+
 Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/) 
 and [online demos](http://mh-svr.de/pong_dev) of features.
 
@@ -85,12 +88,8 @@ The JSON config of a whole page looks this way:
   * `copyrightText` String 
   * `modules`:  Array of footer modules and configurations for them
 
-
 Inside the browser this is rendered to a full featured web app by
 [the "rest-web-gui" JavaScript framework and it's plug-ins](https://github.com/ma-ha/rest-web-ui/) -- magic!!
-
-This is how it may look like:
-![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/demo-screen.png) 
 
 Of course you may need to customize the CSS themes. You can also develop your own JavaScript view plug-ins.
 
@@ -161,4 +160,10 @@ Remark: To keep this demo simple, there is no REST web service for the
 
 
 ## Examples and API Reference
-Have a look at [some feature demos](https://github.com/ma-ha/easy-web-app/tree/master/examples/)
+Have a look at [some feature demos and the API reference](https://github.com/ma-ha/easy-web-app/tree/master/examples/)
+
+## Feedback and Support
+Please tell me what you like and what I need to improve! I'm also interested in use cases you do. 
+
+Please contact me: ma@mh-svr.de
+![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/email.png) 
