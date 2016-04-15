@@ -165,5 +165,9 @@ Have a look at [some feature demos and the API reference](https://github.com/ma-
 ## Feedback and Support
 Please tell me what you like and what I need to improve! I'm also interested in use cases you do. 
 
-Please contact me: ma@mh-svr.de
+Please contact me: 
+
 ![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/email.png) 
+
+
+How can I help you?
