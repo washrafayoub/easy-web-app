@@ -94,5 +94,12 @@ Should look like this:
 }
 ```
 
+Some words about the _easyFormFields_ definition: c1 and c2 are columns selector followed by the _label_ of the field. 
+If the field _name_ must be identically to the _label_, ~ are white spaces in _label_ and _ ignored in _name_. 
+There are some key words to make the definiton as easy as possible, otherwise you can specify the type after the a second | 
+
 You'll find more details about the _easyform_ at the
 [plug-in modules documentation](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules). 
+
+Remark: The _easyform_ is a wrapper for _form_ plug in with simplified definition of the form fields. 
+In _form_ you have an regular JSON object structure for each field.   
