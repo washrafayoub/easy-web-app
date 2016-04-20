@@ -25,7 +25,7 @@ var plugInConfig = {
                 }
             ]
         }
-    ],
+    ]
   }
   
 gui.addView ( viewConfig, plugInConfig ) 

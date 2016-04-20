@@ -37,7 +37,7 @@ var plugInConfig = {
                 }
             ]
         }
-    ],
+    ]
   }
   
 gui.addView ( viewConfig, plugInConfig ) 
@@ -47,8 +47,8 @@ The first line imports the _easy-web-app_ module.
 The second line initialize _easy-web-app_ module and 
 starts a web server with an empty "page" called 'Form Form Tutorial: Page 1'.
 
-Using the command `'gui.addView ( viewConfig, plugInConfig )'`  you add a new row with a _form_ view.
-Indicating inside the `viewConfig` the plug-in `'type':'pong-form'` the framework will load and initialize a form.  
+Using the command `gui.addView ( viewConfig, plugInConfig )`  you add a new row with a _form_ view.
+Indicating inside the `viewConfig` the plug-in `type:'pong-form'` the framework will load and initialize a form.  
 
 The 'plugInConfig' defines the parameter for the plug in, here it initializes a form with one field.
 It seems to be complex to have one field inside _formFields_ array, which is in a _columns_ array,
@@ -65,14 +65,54 @@ If you put this into a stand alone index.js you need to do
     node index.js
 
 If you open the URL http://localhost:8888 in your browser therResult will look like this:
-
-
-Of course this form is not useful, because an action button is not defined. 
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_1.png) 
 
+Of course this form is not useful, because an action button is not defined. 
 
-## Action: Post data to a backend 
-TODO
+## Action: Post data to a service 
+The basic structure of the code is the same as above, we only need to modify the `plugInConfig`:
+
+```javascript
+...
+var plugInConfig = {
+    id: 'myFormDef',
+    description: "shows second form",
+    fieldGroups: [
+        {
+            columns: [
+                {
+                    formFields: [
+                        {
+                            id:    "field1",
+                            label: "Say",
+                            type:  "text",
+                            defaultVal: "Hello world!"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    actions: [
+        {
+            id: 'myBtn',
+            actionName: 'Send greetings',
+            method: 'POST',
+            actionURL: 'test'
+        }
+    ]
+  }
+...
+```
+
+By adding the `actions` array with the _myBtn_ the form will have a POST button. 
+Pressing the button a POST request to `http://localhost:8888/test` is performed. 
+The page looks like this:
+
+![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_2.png) 
+ 
+The browsers netowrk debugger shows the request to the `http://localhost:8888/test` 
+-- of course it fails, because no service is implemented to respond at this URL.
 
 ## Post action result -- show it in another view
 TODO

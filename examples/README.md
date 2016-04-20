@@ -18,8 +18,10 @@ Perhaps start here:
 * [change view configuration "on-the-fly"](https://github.com/ma-ha/easy-web-app/blob/master/examples/on-the-fly-config/index.js)
 
 <sub>_Remark: (\*) includes a REST/JSON web service implementation_</sub>  
- 
- 
+
+# Tutorial  
+* [form tutorial](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/)
+
 # API Reference
 The API makes things simpler, but you can still work with plain JSON specifications 
 to render a page. Behind the 
