@@ -111,7 +111,7 @@ The page looks like this:
 
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_2.png) 
  
-The browsers netowrk debugger shows the request to the `http://localhost:8888/test` 
+The browser network debugger ("F12" is my friend) shows the request to the `http://localhost:8888/test` 
 -- of course it fails, because no service is implemented to respond at this URL.
 
 ## Post action result -- show it in another view
