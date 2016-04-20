@@ -59,12 +59,17 @@ To run this code open a command terminal, change into the `examples/form-tutoria
 
     node form-tutorial_1.js
 
-*) if you put this into a stand alone index.js you need to do
+If you put this into a stand alone index.js you need to do
 
     npm install easy-web-app
     node index.js
 
+If you open the URL http://localhost:8888 in your browser therResult will look like this:
+
+
 Of course this form is not useful, because an action button is not defined. 
+![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_1.png) 
+
 
 ## Action: Post data to a backend 
 TODO
