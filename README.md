@@ -162,6 +162,8 @@ Remark: To keep this demo simple, there is no REST web service for the
 ## Examples and API Reference
 Have a look at [some feature demos and the API reference](https://github.com/ma-ha/easy-web-app/tree/master/examples/)
 
+I also started a form tutorial there.
+
 ## Feedback and Support
 Please tell me what you like and what I need to improve! I'm also interested in use cases you do. 
 
