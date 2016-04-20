@@ -67,7 +67,7 @@ If you put this into a stand alone index.js you need to do
 If you open the URL http://localhost:8888 in your browser therResult will look like this:
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_1.png) 
 
-Of course this form is not useful, because an action button is not defined. 
+Of course this form is not very useful, because no action is defined. 
 
 ## Action: Post data to a service 
 The basic structure of the code is the same as above, we only need to modify the `plugInConfig`:
