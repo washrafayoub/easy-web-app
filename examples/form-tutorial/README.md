@@ -67,7 +67,7 @@ If you put this into a stand alone index.js you need to do
 If you open the URL http://localhost:8888 in your browser therResult will look like this:
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_1.png) 
 
-Of course this form is not very useful, because no action is defined. 
+This form is not very useful, because no action is defined. 
 
 ## Action: Post data to a service 
 The basic structure of the code is the same as above, we only need to modify the `plugInConfig`:
@@ -107,6 +107,9 @@ var plugInConfig = {
 
 By adding the `actions` array with the _myBtn_ the form will have a POST button. 
 Pressing the button a POST request to `http://localhost:8888/test` is performed. 
+
+Full example: [JS Code](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_2.js))
+
 The page looks like this:
 
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_2.png) 
@@ -115,10 +118,35 @@ The browser network debugger ("F12" is my friend) shows the request to the `http
 -- of course it fails, because no service is implemented to respond at this URL.
 
 ## Post action result -- show it in another view
-TODO
+Typical requirement is to provide a form to search or create data records and a table to display the data records.
+
+Example use case: In the form view an action button requests with a GET to load data 
+and the result should be displayed in a table view.
+
+```javascript
+var gui = require( 'easy-web-app' )   
+gui.init ( 'Form Tutorial: Page 1' )
+
+var formConfig = { id: 'myForm', title: 'Form View', type : 'pong-form' }
+var formPlugInConfig = { ... }
+gui.addView ( viewConfig, plugInConfig ) 
+
+var tableConfig = { id: 'myTable', title: 'Table View', type : 'pong-form' }
+var tablelugInConfig = { ... }
+gui.addView ( viewConfig, plugInConfig ) 
+```
+
+Full example JS Code: [form_tutorial_3.js](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_3.js)
+
+The page looks like this:
+
+![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_3.png) 
+
 
 ## Load form fields by after page loading
 TODO
 
 
-
+## Table as "Form"
+The table plug in provide _editable_ text cells. 
+This makes life much easier, because you can modify data records directly in the table. 
