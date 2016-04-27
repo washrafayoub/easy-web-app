@@ -3,7 +3,7 @@ The form plug in is complex and may be main functionality of a page.
 
 Therefore I will explain the usage scenarios step by step.
 
-There is a wrapper for _form_ plugin called _easy-form_. 
+To make definition of _form_ plugin easier, an _easy-form_ wrapper is available. 
 But let's understand _form_ first, before doing short cuts.
 
 ## General definition of the form view 
@@ -47,15 +47,18 @@ The first line imports the _easy-web-app_ module.
 The second line initialize _easy-web-app_ module and 
 starts a web server with an empty "page" called 'Form Form Tutorial: Page 1'.
 
-Using the command `gui.addView ( viewConfig, plugInConfig )`  you add a new row with a _form_ view.
-Indicating inside the `viewConfig` the plug-in `type:'pong-form'` the framework will load and initialize a form.  
+Using the command `gui.addView ( viewConfig, plugInConfig )`  you add a new row
+with a _form_ view. Indicating inside the `viewConfig` the plug-in 
+`type:'pong-form'` the framework will load and initialize a form.  
 
-The 'plugInConfig' defines the parameter for the plug in, here it initializes a form with one field.
-It seems to be complex to have one field inside _formFields_ array, which is in a _columns_ array,
-in a _fieldGroups_ array, but this gives maximum flexibility. 
-A simpler way is to use _easy-form_ as wrapper for the _form_, but it has it's limitations.
+The 'plugInConfig' defines the parameter for the plug in, here it initializes 
+a form with one field. It seems to be complex to have one field inside 
+_formFields_ array, which is in a _columns_ array, in a _fieldGroups_ array, 
+but this gives maximum flexibility. A simpler way is to use _easy-form_ as 
+wrapper for the _form_, but it has it's limitations.
 
-To run this code open a command terminal, change into the `examples/form-tutorial` directory and run
+To run this code open a command terminal, change into 
+the `examples/form-tutorial` directory and run
 
     node form-tutorial_1.js
 
@@ -64,13 +67,15 @@ If you put this into a stand alone index.js you need to do
     npm install easy-web-app
     node index.js
 
-If you open the URL http://localhost:8888 in your browser therResult will look like this:
+If you open the URL http://localhost:8888 in your browser therResult will look
+like this:
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_1.png) 
 
 This form is not very useful, because no action is defined. 
 
 ## Action: Post data to a service 
-The basic structure of the code is the same as above, we only need to modify the `plugInConfig`:
+The basic structure of the code is the same as above, we only need to modify 
+the `plugInConfig`:
 
 ```javascript
 ...
@@ -108,35 +113,67 @@ var plugInConfig = {
 By adding the `actions` array with the _myBtn_ the form will have a POST button. 
 Pressing the button a POST request to `http://localhost:8888/test` is performed. 
 
-Full example: [JS Code](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_2.js))
+Full example: [JS Code](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_2.js)
 
 The page looks like this:
 
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_2.png) 
  
-The browser network debugger ("F12" is my friend) shows the request to the `http://localhost:8888/test` 
--- of course it fails, because no service is implemented to respond at this URL.
+The browser network debugger ("F12" is my friend) shows the request to 
+the `http://localhost:8888/test` -- of course it fails, because no service 
+is implemented to respond at this URL.
 
 ## Post action result -- show it in another view
-Typical requirement is to provide a form to search or create data records and a table to display the data records.
+Typical requirement is to provide a form to search or create data records 
+and a table to display the data records.
 
-Example use case: In the form view an action button requests with a GET to load data 
-and the result should be displayed in a table view.
+Example use case: In the form view an action button requests with a GET to load 
+data and the result should be displayed in a table view.
 
 ```javascript
 var gui = require( 'easy-web-app' )   
 gui.init ( 'Form Tutorial: Page 1' )
 
 var formConfig = { id: 'myForm', title: 'Form View', type : 'pong-form' }
-var formPlugInConfig = { ... }
+var formPlugInConfig = { 
+    id: 'myFormDef',
+    fieldGroups: [
+		...
+    ],
+    actions: [
+        {
+            id: 'myBtn',
+            actionName: 'Ask',
+            method: 'GET',
+            actionURL: 'test',
+            setData: [
+                { 
+                  "resId": "myTable"
+                }
+           ]
+        }
+    ]
+  }
 gui.addView ( viewConfig, plugInConfig ) 
 
 var tableConfig = { id: 'myTable', title: 'Table View', type : 'pong-form' }
-var tablelugInConfig = { ... }
-gui.addView ( viewConfig, plugInConfig ) 
+var tablePlugInConfig = { 
+	...
+  }
+gui.addView ( tableConfig, tablePlugInConfig ) 
 ```
 
-Full example JS Code: [form_tutorial_3.js](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_3.js)
+As you see, two views are created:
+1. myForm
+2. myTable
+
+Please notice the `formPlugInConfig` is the `setData` array. 
+If the user presses the _Ask_ button an GET request to the URL `test`,
+precisely `GET http://localhost:8888/test?field1=Hello+world%3F` is done.
+The `setData` indicates to set the result data of the HTTP GET to any of the 
+defined views in the array, here only _myTable_. 
+
+Full example JS Code: [form_tutorial_3.js](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_3.js)
 
 The page looks like this:
 
@@ -147,6 +184,11 @@ The page looks like this:
 TODO
 
 
-## Table as "Form"
-The table plug in provide _editable_ text cells. 
-This makes life much easier, because you can modify data records directly in the table. 
+## Off-Topic: "Table" as "Form"
+The table plug in provides an _editable_ attribute for text cells: 
+`editable:'true'` 
+
+This makes life much easier, because you can modify data records directly in 
+the table. 
+
+
