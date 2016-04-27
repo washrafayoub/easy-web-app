@@ -93,6 +93,11 @@ Inside the browser this is rendered to a full featured web app by
 
 Of course you may need to customize the CSS themes. You can also develop your own JavaScript view plug-ins.
 
+All tested browsers and devices works fine:
+
+![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/gui-on-devices-s.png) 
+
+
 ## First project (< 1 min)
 Requires [node.ns installed](https://nodejs.org/en/download/) -- 
 it really don't hurt and it's always a good idea to have.
@@ -160,9 +165,8 @@ Remark: To keep this demo simple, there is no REST web service for the
 
 
 ## Examples and API Reference
-Have a look at [some feature demos and the API reference](https://github.com/ma-ha/easy-web-app/tree/master/examples/)
-
-I also started a form tutorial there.
+Have a look at [some feature demos and the API reference](https://github.com/ma-ha/easy-web-app/tree/master/examples/),
+which also contains a form tutorial.
 
 ## Feedback and Support
 Please tell me what you like and what I need to improve! I'm also interested in use cases you do. 
