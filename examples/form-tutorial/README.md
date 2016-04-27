@@ -164,6 +164,7 @@ gui.addView ( tableConfig, tablePlugInConfig )
 ```
 
 As you see, two views are created:
+
 1. myForm
 2. myTable
 
