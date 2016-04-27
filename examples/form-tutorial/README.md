@@ -163,7 +163,7 @@ var tablePlugInConfig = {
 gui.addView ( tableConfig, tablePlugInConfig ) 
 ```
 
-As you see, two views are created:
+Two views are created via `gui.addView(...)`:
 
 1. myForm
 2. myTable
