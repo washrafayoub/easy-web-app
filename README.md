@@ -175,5 +175,4 @@ Please contact me:
 
 ![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/email.png) 
 
-
 How can I help you?
