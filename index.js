@@ -207,6 +207,7 @@ webservices.use ( '/modules', express.static( staticDir + '/modules' ) );
 webservices.get( 
   '/svc/layout/:id/structure', 
   function( req, res ) {
+    console.log( '>>'+req.params.id );
     if ( gui.pages[ req.params.id ] ) {
       var layout = {
         'layout' : gui.pages[ req.params.id ]
@@ -223,6 +224,7 @@ webservices.get(
 webservices.get( 
   '/svc/layout/:id/:subid/structure', 
   function( req, res ) {
+    console.log( '>>'+req.params.subid );
     if ( gui.pages[ req.params.id +'/'+ req.params.subid ] ) {
       var layout = {
         'layout' : gui.pages[ req.params.id +'/'+ req.params.subid ]
@@ -264,21 +266,28 @@ webservices.get(
     var subMenus = {}
     // console.log( 'GET /svc/nav '+gui.pages.length );
     for ( var layoutId in gui.pages ) {
-      // console.log( '>>'+layoutId );
+      //console.log( '>>'+layoutId );
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
         if ( layoutId.indexOf( '/' ) == -1 ) {
-          navTabs.push( {
-            'layout' : layoutId,
-            'label' : gui.pages[ layoutId ].title
-          } )
+          if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
+               layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
+            navTabs.push( {
+              'layout' : layoutId,
+              'label' : gui.pages[ layoutId ].title
+            } )
+          }
         } else { // sub-menu
           var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
-          if ( ! subMenus[subMenu ] ) { // first sub menu item creates menu
-            subMenus[ subMenu ] = navTabs.length
-            navTabs.push( {
-              label : subMenu,
-              menuItems: []
-            } )
+          if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
+            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
+                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
+  
+              subMenus[ subMenu ] = navTabs.length
+              navTabs.push( {
+                label : subMenu,
+                menuItems: []
+              } )
+            }
           }
           navTabs[ subMenus[ subMenu ] ].menuItems.push({
             'layout' : layoutId,
@@ -287,6 +296,7 @@ webservices.get(
         }
       }
     }
+    console.log( navTabs.length )
     if ( navTabs.length == 1 )  navTabs = [] 
     res.json( { 'navigations' : navTabs } )
   }

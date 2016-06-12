@@ -11,6 +11,7 @@ Perhaps start here:
 
 ## Other Features
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
+* [mobile phone, tablet or desktop browser detection](https://github.com/ma-ha/easy-web-app/blob/master/examples/mobile-detect/index.js)
 * [how to customize the CSS](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)
 * [menu demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/menu-tabs/index.js)
 * [i18n / internationalization / multi-language support](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/index.js) \*

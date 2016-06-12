@@ -93,7 +93,7 @@ Inside the browser this is rendered to a full featured web app by
 
 Of course you may need to customize the CSS themes. You can also develop your own JavaScript view plug-ins.
 
-All tested browsers and devices works fine:
+All tested browsers and devices works fine (special layouts for mobile phones and tablets is now a feature):
 
 ![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/gui-on-devices-s.png) 
 
