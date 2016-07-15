@@ -6,51 +6,23 @@ var log = require( 'npmlog' )
 var page = gui.init()
 page.header.logoText = 'Internationalization Demo'
 
-page.header.modules.push( 
-  { 
-    'id': 'LangSel'
-    ,'type': 'i18n'
-    ,'param': { 'langList': [ 'EN','DE' ] }     // need other languages? try it
-  }
-)
+// add a EN as default language 
+gui.addLang( 'EN' ) 
+
+// add DE and some translations 
+gui.addLang( 'DE',
+    { 
+      'Test Language Support':'Test f&uuml;r Sprachunterst&uuml;tzung'
+      ,'Internationalization Demo':'Sparch Demo'
+    } 
+  )
+// adding translation for a label can be done also separately
+gui.addTranslation( 'DE',
+    'powered by <a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>',
+    'l&auml;uft mit <a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>'
+  )
   
 // create aIO view on page
 gui.addView( 
   { 'id':'tst', 'title':'Test Language Support'}
 )
-  
-// set up a web service for a translation list
-var svc = gui.getExpress()
-svc.get(
-  '/i18n/:lang',
-  function( req, res ) {
-    if ( req.params.lang  ) {
-      if ( req.params.lang == 'DE.json' ) {
-        // the language map is a key/value object, key is the default label
-        res.json( 
-            { 
-              'Test Language Support':'Test f&uuml;r Sprachunterst&uuml;tzung'
-              ,'powered by <a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>':
-                'betrieben mit <a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>'
-              ,'Internationalization Demo':'Sparch Demo'
-            } 
-        )      
-      } else if ( req.params.lang == 'XYZ.json' ) {
-          // you can try to add another language -- guess what you need to do?
-          res.json( 
-              { 
-                'Test Language Support':'...'
-                ,'powered by <a href="https://github.com/ma-ha/rest-web-ui">ReST-Web-GUI</a>':
-                  '...'
-                ,'Internationalization Demo':'...'
-              } 
-          )      
-      } else {
-        res.json( {} ) // don't offer any translations
-      }
-    } else {
-      res.json( {} ) // don't offer any translations
-    }
-  }
-)
- 

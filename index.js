@@ -53,6 +53,7 @@ gui.setDefaults = function setDefaults() {
       , modules: []
     }
   }
+    
   this.pages[ 'main' ].addColumnsRow = 
       function ( id, height ) {
         return gui.addColumnsRow( id, this.rows, height  )
@@ -65,6 +66,7 @@ gui.setDefaults = function setDefaults() {
     
   return this.pages[ 'main' ]
 }
+
 
 /** add new page to portal, navigation tabs included */
 gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
@@ -207,7 +209,7 @@ webservices.use ( '/modules', express.static( staticDir + '/modules' ) );
 webservices.get( 
   '/svc/layout/:id/structure', 
   function( req, res ) {
-    console.log( '>>'+req.params.id );
+    //console.log( '>>'+req.params.id );
     if ( gui.pages[ req.params.id ] ) {
       var layout = {
         'layout' : gui.pages[ req.params.id ]
@@ -224,7 +226,7 @@ webservices.get(
 webservices.get( 
   '/svc/layout/:id/:subid/structure', 
   function( req, res ) {
-    console.log( '>>'+req.params.subid );
+    //console.log( '>>'+req.params.subid );
     if ( gui.pages[ req.params.id +'/'+ req.params.subid ] ) {
       var layout = {
         'layout' : gui.pages[ req.params.id +'/'+ req.params.subid ]
@@ -296,11 +298,61 @@ webservices.get(
         }
       }
     }
-    console.log( navTabs.length )
+    //console.log( navTabs.length )
     if ( navTabs.length == 1 )  navTabs = [] 
     res.json( { 'navigations' : navTabs } )
   }
 );
+
+//----------------------------------------------------------------------------
+// i18n:
+
+
+/** first call switches on i18n, further calls add supported languages */
+gui.addLang = function addLang( langCode, translations ) {
+  var trnsl = {}
+  if ( translations ) { trnsl = translations } 
+  if ( ! this.lang ) {
+    this.lang = { }
+    this.lang[ langCode ] = trnsl
+    this.pages[ 'main' ].header.modules.push( 
+        { 
+          'id': 'LangSel', 'type': 'i18n'
+          ,'param': { 'langList': [ langCode ] } 
+        }
+      ) 
+  } else {
+    this.lang[ langCode ] = trnsl
+    for (var i = 0; i < this.pages[ 'main' ].header.modules.length; i++) {
+      var mod = this.pages[ 'main' ].header.modules[i]
+      if ( mod.id == 'LangSel' ) {     
+        mod.param.langList.push( langCode )
+      }
+    }
+  }
+}
+
+gui.addTranslation = function addTranslation( langCode, label, translation ) {
+  if ( gui.lang && gui.lang[ langCode ] ) {
+    gui.lang[ langCode ][label] = translation
+  }
+}
+
+webservices.get(
+    '/i18n/:lang',
+    function( req, res ) {
+      if ( req.params.lang  ) {
+        var langCode = req.params.lang.substring( 0, 2 )
+        if ( gui.lang && gui.lang[ langCode ] ) {
+          res.json( gui.lang[ langCode ] )
+        } else {
+          res.json( {} ) // don't offer any translations
+        }
+      } else {
+        res.json( {} ) // don't offer any translations
+      }
+    }
+  )
 
 
 // ----------------------------------------------------------------------------
