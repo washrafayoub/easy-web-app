@@ -13,7 +13,7 @@ gui.addLang( 'EN' )
 gui.addLang( 'DE',
     { 
       'Test Language Support':'Test f&uuml;r Sprachunterst&uuml;tzung'
-      ,'Internationalization Demo':'Sparch Demo'
+      ,'Internationalization Demo':'Sprach Demo'
     } 
   )
 // adding translation for a label can be done also separately

@@ -103,6 +103,34 @@ Returns the "express" web service plug-in, so that you can implement
 web services, e.g. for forms commits or loading i18n translations
 (ref. examples with \*). 
 
+### gui.addLang ( languageId [, translations] )
+Adds a supported language. 
+
+Translations can be added as an object with `label:translations`, e.g.
+```javascript
+// default language uses normal lables
+gui.addLang( 'EN' ) 
+// this language uses translations
+gui.addLang( 'DE',
+    { 
+      'Title':'Title'
+      ,'Language':'Sprache'
+      ,'Main Page':'Hauptseite'
+      , ...
+    } 
+  )
+```
+
+You may call `gui.addTranslation(...)` to add translations for labels one by one.
+
+### gui.addTranslation ( languageId, label, translation )
+Adds a translation for a single label to a supported language.
+```javascript
+gui.addLang( 'DE' ) 
+gui.addTranslation( 'DE', 'Language', 'Sprache' ) 
+gui.addTranslation( 'DE', 'Main Page', 'Hauptseite' )
+``` 
+
 ## "Page" API Reference
 Page object reference: 
 [structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/Structure-Specification)
