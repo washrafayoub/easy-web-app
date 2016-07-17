@@ -23,6 +23,8 @@ This is how it may look like:
 Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/) 
 and [online demos](http://mh-svr.de/pong_dev) of features.
 
+[Release notes](https://github.com/ma-ha/easy-web-app/blob/master/ReleaseNotes.md)
+
 ## Compared with ...
 * jade
   * jade is descriptive, but low level (HTML structure)
