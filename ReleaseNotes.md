@@ -1,3 +1,6 @@
+## v0.6.2
+* Custom [custom CSS example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css) extended 
+
 ## v0.6
 * [API](https://github.com/ma-ha/easy-web-app/tree/master/examples#guiaddlang--languageid--translations-) for i18n: [i18n example](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/index.js)
 

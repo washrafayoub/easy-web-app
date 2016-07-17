@@ -1,10 +1,54 @@
 /* You can add all your custom styles here */
-
 body {
-		font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
-		background-color: #EEE;
+	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana",
+		"sans-serif";
+	color: #55F;
+	background-color: #EEE;
+}
+
+#header {
+	color: #DDD;
+	background-image: url(/img-cust/g4631.png);
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-color: #33F;
+}
+
+.header-logo {
+    padding-top: 2px;
+    padding-left: 180px;
+}
+
+#footer {
+	color: #FFF;
+	height: 30px;
+	background-color: #55F;
+}
+
+#footer a:link {
+	color: #DFD;
+}
+
+#footer a:visited {
+	color: #DFD;
+}
+
+#footer a:hover {
+	color: #FFF;
+}
+
+#footer a:active {
+	color: #FFF;
+}
+
+#footer .copyright-div {
+	color: #FFF;
 }
 
 #maindiv {
 	margin: 0 auto;
+}
+
+.decor-inner {
+	background-color: #DDF;
 }
