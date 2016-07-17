@@ -1,5 +1,5 @@
 ## v0.6
-* [i18n as API](https://github.com/ma-ha/easy-web-app/tree/master/examples#guiaddlang--languageid--translations-): [i18n example](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/index.js)
+* [API](https://github.com/ma-ha/easy-web-app/tree/master/examples#guiaddlang--languageid--translations-) for i18n: [i18n example](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/index.js)
 
 ## v0.5
 *  mobile phone, tablet or desktop browser detection: [mobile layout example](https://github.com/ma-ha/easy-web-app/tree/master/examples/mobile-detect) 
