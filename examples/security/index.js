@@ -15,7 +15,7 @@ gui.enableSecurity()
 // "auth" is ok if any user id is given
 gui.authenticate =  
   function authenticate( user, password ) {
-    log.info( "login "+user )
+    log.info( 'Login user "'+user+'"' )
     if ( ! user ) {
       return false
     }
@@ -38,14 +38,17 @@ gui.authorize =
     return true  
   }
 
-/*
+/* Optional hooks for HA environment, typically using a distributed cache or a DB
 gui.createToken = function createToken( userId ){
-  //TODO: implement
+  //TODO: implement for HA cluster
   return token 
 }
 
 gui.getUserIdForToken = function getUserIdForToken( token ){
-  //TODO: implement
+  //TODO: implement for HA cluster
   return userId
+}
+gui.deleteUserIdForToken = function gui.deleteUserIdForToken( token ) {
+  // TODO: implement for HA cluster
 }
 */

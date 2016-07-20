@@ -543,7 +543,7 @@ webservices.post(
         if ( req.body && req.body.userid ) {
           //log.info( "calling authenticate ..." )
           if ( gui.authenticate( req.body.userid, req.body.password ) ) {
-            log.info( "Login OK" )
+            //log.info( "Login OK" )
             res.statusCode = 200
             // todo set up "session" for user via hook
             var token = ''
@@ -619,7 +619,9 @@ webservices.post(
         var token = req.cookies[ 'pong-security' ]
         //log.info( "token = "+token )
         //log.info( "user = " + gui.userTokens[ token ]  )
-        if ( gui.userTokens[ token ] ) {
+        if ( gui.deleteUserIdForToken ) {
+          gui.deleteUserIdForToken( token )
+        } else if ( gui.userTokens[ token ] ) {
           delete gui.userTokens[ token ]
         }
         res.statusCode = 200

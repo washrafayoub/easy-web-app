@@ -140,8 +140,9 @@ and a `gui.authorize(user,page){ ... return true/false}` function,
 see [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
 
 Remark:  In HA set up, you need also implement 
-* `createToken( userId ){ ... return token }` and  
+* `createToken( userId ){ ... return token }` 
 * `getUserIdForToken( token ){ ... return userId }`
+* `gui.deleteUserIdForToken(token)`
 functions, typically using a distributed cache.
 
 ### gui.getExpress()

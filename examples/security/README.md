@@ -7,4 +7,5 @@ To authenticate and authorization users on pages you need to tree easy steps:
 Optional: In HA set up, you need also implement 
 * `createToken(userId){ ... return token }` and  
 * `getUserIdForToken(token){ ... return userId }`
+* `gui.deleteUserIdForToken(token)`
 functions, typically using a distributed cache.
