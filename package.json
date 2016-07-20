@@ -22,6 +22,7 @@
 	"dependencies":{
 		"express":">=4.8.0",
 		"body-parser":">=1.15.0",
+		"cookie-parser":">=1.4.3",
 		"npmlog":">=2.0.0",
 		"rest-web-gui":"ma-ha/rest-web-ui"
 	},

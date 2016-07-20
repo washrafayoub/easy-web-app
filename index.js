@@ -6,16 +6,25 @@
 
 var gui = exports = module.exports = {
   pages : {}
+  ,userTokens : {}
 };
+
+//logger
+var log = require( 'npmlog' );
 
 // use express for REST services
 var express     = require( 'express' );
 var webservices = express();
-var bodyParser  = require( 'body-parser' );
-var jsonParser  = bodyParser.json ();
 
-// logger
-var log = require('npmlog');
+var bodyParser  = require( 'body-parser' );
+// for json payoad:
+var jsonParser  = bodyParser.json();
+//for parsing application/x-www-form-urlencoded:
+var formParser  = bodyParser.urlencoded( { extended: true } );
+
+var cookieParser = require( 'cookie-parser' )
+webservices.use( cookieParser() )
+
 
 /** Initialize the Web GUI */
 gui.init = function init( logoText, port ) {
@@ -479,3 +488,126 @@ gui.addIoView = function addIoView( page ) {
   };
   return io;
 };
+
+//----------------------------------------------------------------------------
+// security
+  
+gui.enableBasicAuth = 
+  function enableBasicAuth( paramObj ) {
+    var secParams = {}
+    if ( ! paramObj ) {paramObj = {} }
+    secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : '/login' )
+    secParams.loginPage = ( paramObj.loginPage ? paramObj.loginPage : 'main' )
+    secParams.registgerURL = ( paramObj.registgerURL ? paramObj.registgerURL : null )
+    secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
+    secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : '/logout' )
+    this.pages[ 'main' ].header.modules.push(
+      { 'id': 'Sec', 'type': 'pong-security', 'param': secParams }
+    ) 
+  }
+
+webservices.get( // todo delete after testing
+    '/login', 
+    function(req, res) {
+      log.info( "GET Login ..." )
+      if ( gui.authenticate != null ) {
+        if ( req.query && req.query.user && req.query.password ) {
+          log.info( "calling authenticate ..." )
+          if ( gui.authenticate( req.query.user, req.query.password ) ) {
+            log.info( "Login OK" )
+            res.statusCode = 200
+            res.send(  "Login OK" )
+          } else {
+            log.info( "Login failed!" )            
+            res.statusCode = 401
+            res.send(  "Login failed" )
+          }
+        } else {
+          log.info( "user and password required" )            
+          res.statusCode = 401
+          res.send( "Login failed" )          
+        }
+      } else {
+        log.info( "Please implement authenticate function:" )
+        log.info( " gui.authenticate = function authenticate(user, password)"+
+            " { ... return true/false }")
+        res.statusCode = 401
+        res.send( "Login failed" )                  
+      }
+    }
+  )
+
+webservices.post(
+    '/logout', 
+    formParser, 
+    function(req, res) {
+      log.info( "POST Logout ..." )
+      log.info( 'Cookies: ', req.cookies )
+      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+        log.info( "pong-security cookie ..." )
+
+        var token = req.cookies[ 'pong-security' ]
+        log.info( "token = "+token )
+        log.info( "user = " + gui.userTokens[ token ]  )
+        if ( gui.userTokens[ token ] ) {
+          delete gui.userTokens[ token ]
+        }
+        res.statusCode = 200
+        res.send( "" )
+      }
+    }
+  )
+  
+webservices.post(
+    '/login', 
+    formParser, 
+    function(req, res) {
+      log.info( "POST Login ..." )
+      if ( gui.authenticate != null ) {
+        if ( req.body && req.body.userid ) {
+          log.info( "calling authenticate ..." )
+          if ( gui.authenticate( req.body.userid, req.body.password ) ) {
+            log.info( "Login OK" )
+            res.statusCode = 200
+            var token = 'ksdkjv'
+            gui.userTokens[ token ] = req.body.userid 
+            res.cookie( 'pong-security', 
+                token, 
+                { expires: new Date(Date.now() + 6400000), httpOnly: true }
+            );
+            res.send(  "Login OK" )
+          } else {
+            log.info( "Login failed!" )            
+            res.statusCode = 401
+            res.send(  "Login failed" )
+          }
+        } else if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+          log.info( "pong-security cookie ..." )
+
+          var token = req.cookies[ 'pong-security' ]
+          log.info( "token = "+token )
+          log.info( "user = "+gui.userTokens[ token ]  )
+          if ( gui.userTokens[ token ] ) {
+            res.statusCode = 200
+            res.send( gui.userTokens[ token ] )
+            return
+          } else {
+            log.info( "cookie token not in list" )            
+            res.statusCode = 401
+            res.send( "Login failed" )         
+            return
+          }
+        } else {
+          log.info( "user/password or cookie required" )            
+          res.statusCode = 401
+          res.send( "Login failed" )          
+        }
+      } else {
+        log.info( "Please implement authenticate function:" )
+        log.info( " gui.authenticate = function authenticate(user, password)"+
+            " { ... return true/false }")
+        res.statusCode = 401
+        res.send( "Login failed" )                  
+      }
+    }
+  )
