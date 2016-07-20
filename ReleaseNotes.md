@@ -1,3 +1,8 @@
+## v0.7.0
+* Support [security plugin](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security),
+  see [API ref](https://github.com/ma-ha/easy-web-app/tree/master/examples#guienablesecurity-paramsobj-) 
+  and [example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js)
+
 ## v0.6.2
 * [custom CSS example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css) extended 
 
