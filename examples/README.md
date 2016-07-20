@@ -125,7 +125,7 @@ gui.addTranslation( 'DE', 'Language', 'Sprache' )
 gui.addTranslation( 'DE', 'Main Page', 'Hauptseite' )
 ``` 
 
-### gui.enableBasicAuth( paramsObj )
+### gui.enableSecurity( paramsObj )
 Add [pong-security module](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security) to the header. 
 
 `paramsObj` can be empty, but you can specify:
@@ -138,6 +138,11 @@ Add [pong-security module](https://github.com/ma-ha/rest-web-ui/tree/master/html
 IMPORTANT: You need to implement a `gui.authenticate(user,password){ ... return true/false}` 
 and a `gui.authorize(user,page){ ... return true/false}` function,
 see [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
+
+Remark:  In HA set up, you need also implement 
+* `createToken( userId ){ ... return token }` and  
+* `getUserIdForToken( token ){ ... return userId }`
+functions, typically using a distributed cache.
 
 ### gui.getExpress()
 Returns the "express" web service plug-in, so that you can implement 

@@ -1,8 +1,6 @@
 var gui     = require( '../../' )     // stand alone: replace with  require( 'easy-web-app' ) 
 var log = require('npmlog');
 
-log.info( __dirname )
-
 // define a main page
 var mainPage = gui.init()
 mainPage.title = 'Home'
@@ -11,8 +9,8 @@ mainPage.addView( { 'id':'row1view', 'title':'Login with any (non empty) user id
 
 var secretPage = gui.addPage( 'secretPage', 'Private Page',  { id:'Page xyz' }, null )
 
-
-gui.enableBasicAuth( )
+// switch securiy on:
+gui.enableSecurity()
 
 // "auth" is ok if any user id is given
 gui.authenticate =  
@@ -26,12 +24,28 @@ gui.authenticate =
 
 // grant all to "main" page
 // if user != null then "granted"
-//gui.authorize =  
-//  function authenticate( user, page ) {
-//    log.info( 'authorize "'+user+'" for page "'+page+'"' )
-//    if ( page == 'main') return true;
-//    if ( ! user ) {
-//      return false
-//    }
-//    return true  
-//  }
+gui.authorize =  
+  function authenticate( user, page ) {
+    if ( page == 'main') {
+      log.info( 'All users are authorized for page "'+page+'", also "'+user+'"' )
+      return true;
+    }
+    if ( ! user ) {
+      log.info( 'User "'+user+'" is not authorized for page "'+page+'"' )
+      return false
+    }
+    log.info( 'User "'+user+'" is authorized for page "'+page+'"' )
+    return true  
+  }
+
+/*
+gui.createToken = function createToken( userId ){
+  //TODO: implement
+  return token 
+}
+
+gui.getUserIdForToken = function getUserIdForToken( token ){
+  //TODO: implement
+  return userId
+}
+*/

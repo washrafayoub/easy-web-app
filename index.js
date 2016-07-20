@@ -518,7 +518,7 @@ gui.addIoView = function addIoView( page ) {
 // security
 
 /** add pong-security plug in to header */
-gui.enableBasicAuth = 
+gui.enableSecurity = 
   function enableBasicAuth( paramObj ) {
     var secParams = {}
     if ( ! paramObj ) {paramObj = {} }
@@ -530,6 +530,7 @@ gui.enableBasicAuth =
     this.pages[ 'main' ].header.modules.push(
       { 'id': 'Sec', 'type': 'pong-security', 'param': secParams }
     ) 
+    log.info( "Security is enabled!" )
   }
 
 
@@ -537,15 +538,25 @@ webservices.post(
     '/login', 
     formParser, 
     function(req, res) {
-      log.info( "POST Login ..." )
+      //log.info( "POST Login ..." )
       if ( gui.authenticate != null ) {
         if ( req.body && req.body.userid ) {
-          log.info( "calling authenticate ..." )
+          //log.info( "calling authenticate ..." )
           if ( gui.authenticate( req.body.userid, req.body.password ) ) {
             log.info( "Login OK" )
             res.statusCode = 200
             // todo set up "session" for user via hook
-            var token = 'ksdkjv'
+            var token = ''
+            if ( gui.createToken ) { 
+              token = gui.createToken( req.body.userid ) 
+            } else {
+              var chrs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+              for ( var i = 0; i < 32; i++ ) {
+                var iRnd = Math.floor( Math.random() * chrs.length )
+                token += chrs.substring( iRnd, iRnd+1 )
+              }
+            }
+            //log.info( "Token: "+token )
             gui.userTokens[ token ] = req.body.userid 
             res.cookie( 'pong-security', 
                 token, 
@@ -553,7 +564,7 @@ webservices.post(
             );
             res.send(  "Login OK" )
           } else {
-            log.info( "Login failed!" )            
+            //log.info( "Login failed!" )            
             res.statusCode = 401
             res.send(  "Login failed" )
           }
@@ -561,32 +572,15 @@ webservices.post(
           res.statusCode = 200
           res.send( gui.getUserId( req ) )
           return
-          
-//        } else if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-//          log.info( "pong-security cookie ..." )
-//
-//          var token = req.cookies[ 'pong-security' ]
-//          log.info( "token = "+token )
-//          log.info( "user = "+gui.userTokens[ token ]  )
-//          if ( gui.userTokens[ token ] ) {
-//            res.statusCode = 200
-//            res.send( gui.userTokens[ token ] )
-//            return
-//          } else {
-//            log.info( "cookie token not in list" )            
-//            res.statusCode = 401
-//            res.send( "Login failed" )         
-//            return
-//          }
         } else {
-          log.info( "user/password or cookie required" )            
+          //log.info( "user/password or cookie required" )            
           res.statusCode = 401
           res.send( "Login failed" )          
         }
       } else {
-        log.info( "Please implement authenticate function:" )
-        log.info( " gui.authenticate = function authenticate(user, password)"+
-            " { ... return true/false }")
+        //log.info( "Please implement authenticate function:" )
+        //log.info( " gui.authenticate = function authenticate(user, password)"+
+        //    " { ... return true/false }")
         res.statusCode = 401
         res.send( "Login failed" )                  
       }
@@ -596,13 +590,18 @@ webservices.post(
 gui.getUserId = function getUserId( req ) {
   var userId = null
   if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-    log.info( "getUserId: pong-security cookie ..." )
+    //log.info( "getUserId: pong-security cookie ..." )
 
     var token = req.cookies[ 'pong-security' ]
-    log.info( "getUserId: token = "+token )
-    log.info( "getUserId: userId = "+gui.userTokens[ token ]  )
-    if ( token && gui.userTokens[ token ] ) {
-      userId = gui.userTokens[ token ]
+    //log.info( "getUserId: token = "+token )
+    if ( token ) {
+      if ( gui.getUserIdForToken ) {
+        //log.info( "gui.getUserIdForToken..." )
+        userId = gui.getUserIdForToken( token )      
+      } else if ( gui.userTokens[ token ] ) {
+        //log.info( "getUserId: userId = "+gui.userTokens[ token ] )
+        userId = gui.userTokens[ token ]
+      }
     }
   }
   return userId
@@ -612,14 +611,14 @@ webservices.post(
     '/logout', 
     formParser, 
     function(req, res) {
-      log.info( "POST Logout ..." )
-      log.info( 'Cookies: ', req.cookies )
+      //log.info( "POST Logout ..." )
+      //log.info( 'Cookies: ', req.cookies )
       if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-        log.info( "pong-security cookie ..." )
+        //log.info( "pong-security cookie ..." )
 
         var token = req.cookies[ 'pong-security' ]
-        log.info( "token = "+token )
-        log.info( "user = " + gui.userTokens[ token ]  )
+        //log.info( "token = "+token )
+        //log.info( "user = " + gui.userTokens[ token ]  )
         if ( gui.userTokens[ token ] ) {
           delete gui.userTokens[ token ]
         }
