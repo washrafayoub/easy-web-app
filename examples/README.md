@@ -97,12 +97,6 @@ Example code:
 gui.addView( { id:'X' } ) // ads another empty view to the main page
 ...
 ```
-
-### gui.getExpress()
-Returns the "express" web service plug-in, so that you can implement 
-web services, e.g. for forms commits or loading i18n translations
-(ref. examples with \*). 
-
 ### gui.addLang ( languageId [, translations] )
 Adds a supported language. 
 
@@ -130,6 +124,25 @@ gui.addLang( 'DE' )
 gui.addTranslation( 'DE', 'Language', 'Sprache' ) 
 gui.addTranslation( 'DE', 'Main Page', 'Hauptseite' )
 ``` 
+
+### gui.enableBasicAuth( paramsObj )
+Add [pong-security module](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security) to the header. 
+
+`paramsObj` can be empty, but you can specify:
+* `loginURL`: request login web service URL to POST the userid and password, default is `/login`
+* `loginPage`: page id to show after a successful login, default is `main`   
+* `logoutURL`: request logout web service URL (POST), default is `/logout` 
+* `logoutPage`: page id to show after a successful logout, default is `main`
+* `registgerURL`: if you need a link to a registration page id, default is `null` 
+
+IMPORTANT: You need to implement a `gui.authenticate(user,password){ ... return true/false}` 
+and a `gui.authorize(user,page){ ... return true/false}` function,
+see [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
+
+### gui.getExpress()
+Returns the "express" web service plug-in, so that you can implement 
+web services, e.g. for forms commits or loading i18n translations
+(ref. examples with \*). 
 
 ## "Page" API Reference
 Page object reference: 

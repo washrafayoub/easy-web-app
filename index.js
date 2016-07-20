@@ -218,6 +218,12 @@ webservices.use ( '/modules', express.static( staticDir + '/modules' ) );
 webservices.get( 
   '/svc/layout/:id/structure', 
   function( req, res ) {
+    
+    if ( gui.authorize && ! gui.authorize( gui.getUserId(req), req.params.id ) ) {
+      res.statusCode = 401;
+      return res.send( 'Not authorized' );      
+    }
+
     //console.log( '>>'+req.params.id );
     if ( gui.pages[ req.params.id ] ) {
       var layout = {
@@ -235,10 +241,15 @@ webservices.get(
 webservices.get( 
   '/svc/layout/:id/:subid/structure', 
   function( req, res ) {
+    var page = req.params.id +'/'+ req.params.subid
     //console.log( '>>'+req.params.subid );
-    if ( gui.pages[ req.params.id +'/'+ req.params.subid ] ) {
+    if ( gui.authorize && ! gui.authorize( gui.getUserId(req), page ) ) {
+      res.statusCode = 401;
+      return res.send( 'Not authorized' );      
+    }
+    if ( gui.pages[ page ] ) {
       var layout = {
-        'layout' : gui.pages[ req.params.id +'/'+ req.params.subid ]
+        'layout' : gui.pages[ page ]
       };
       res.json( layout );
     } else {
@@ -275,6 +286,7 @@ webservices.get(
   function( req, res ) {
     var navTabs = []
     var subMenus = {}
+    var userId = gui.getUserId( req )
     // console.log( 'GET /svc/nav '+gui.pages.length );
     for ( var layoutId in gui.pages ) {
       //console.log( '>>'+layoutId );
@@ -282,10 +294,15 @@ webservices.get(
         if ( layoutId.indexOf( '/' ) == -1 ) {
           if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
-            navTabs.push( {
-              'layout' : layoutId,
-              'label' : gui.pages[ layoutId ].title
-            } )
+            // check authorization for page
+            if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+              // not visible for this user
+            } else {
+              navTabs.push( {
+                'layout' : layoutId,
+                'label' : gui.pages[ layoutId ].title
+              } )              
+            }
           }
         } else { // sub-menu
           var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
@@ -293,17 +310,25 @@ webservices.get(
             if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
                 layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
   
-              subMenus[ subMenu ] = navTabs.length
-              navTabs.push( {
-                label : subMenu,
-                menuItems: []
-              } )
+              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+                // not visible for this user
+              } else {
+                subMenus[ subMenu ] = navTabs.length
+                navTabs.push( {
+                  label : subMenu,
+                  menuItems: []
+                } )
+              }
             }
           }
-          navTabs[ subMenus[ subMenu ] ].menuItems.push({
-            'layout' : layoutId,
-            'label' : gui.pages[ layoutId ].title
-          } )
+          if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+            // not visible for this user
+          } else {
+            navTabs[ subMenus[ subMenu ] ].menuItems.push({
+              'layout' : layoutId,
+              'label' : gui.pages[ layoutId ].title
+            } )
+          }
         }
       }
     }
@@ -491,7 +516,8 @@ gui.addIoView = function addIoView( page ) {
 
 //----------------------------------------------------------------------------
 // security
-  
+
+/** add pong-security plug in to header */
 gui.enableBasicAuth = 
   function enableBasicAuth( paramObj ) {
     var secParams = {}
@@ -506,24 +532,54 @@ gui.enableBasicAuth =
     ) 
   }
 
-webservices.get( // todo delete after testing
+
+webservices.post(
     '/login', 
+    formParser, 
     function(req, res) {
-      log.info( "GET Login ..." )
+      log.info( "POST Login ..." )
       if ( gui.authenticate != null ) {
-        if ( req.query && req.query.user && req.query.password ) {
+        if ( req.body && req.body.userid ) {
           log.info( "calling authenticate ..." )
-          if ( gui.authenticate( req.query.user, req.query.password ) ) {
+          if ( gui.authenticate( req.body.userid, req.body.password ) ) {
             log.info( "Login OK" )
             res.statusCode = 200
+            // todo set up "session" for user via hook
+            var token = 'ksdkjv'
+            gui.userTokens[ token ] = req.body.userid 
+            res.cookie( 'pong-security', 
+                token, 
+                { expires: new Date(Date.now() + 6400000), httpOnly: true }
+            );
             res.send(  "Login OK" )
           } else {
             log.info( "Login failed!" )            
             res.statusCode = 401
             res.send(  "Login failed" )
           }
+        } else if ( gui.getUserId( req ) ) {
+          res.statusCode = 200
+          res.send( gui.getUserId( req ) )
+          return
+          
+//        } else if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+//          log.info( "pong-security cookie ..." )
+//
+//          var token = req.cookies[ 'pong-security' ]
+//          log.info( "token = "+token )
+//          log.info( "user = "+gui.userTokens[ token ]  )
+//          if ( gui.userTokens[ token ] ) {
+//            res.statusCode = 200
+//            res.send( gui.userTokens[ token ] )
+//            return
+//          } else {
+//            log.info( "cookie token not in list" )            
+//            res.statusCode = 401
+//            res.send( "Login failed" )         
+//            return
+//          }
         } else {
-          log.info( "user and password required" )            
+          log.info( "user/password or cookie required" )            
           res.statusCode = 401
           res.send( "Login failed" )          
         }
@@ -536,6 +592,21 @@ webservices.get( // todo delete after testing
       }
     }
   )
+
+gui.getUserId = function getUserId( req ) {
+  var userId = null
+  if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+    log.info( "getUserId: pong-security cookie ..." )
+
+    var token = req.cookies[ 'pong-security' ]
+    log.info( "getUserId: token = "+token )
+    log.info( "getUserId: userId = "+gui.userTokens[ token ]  )
+    if ( token && gui.userTokens[ token ] ) {
+      userId = gui.userTokens[ token ]
+    }
+  }
+  return userId
+}
 
 webservices.post(
     '/logout', 
@@ -558,56 +629,3 @@ webservices.post(
     }
   )
   
-webservices.post(
-    '/login', 
-    formParser, 
-    function(req, res) {
-      log.info( "POST Login ..." )
-      if ( gui.authenticate != null ) {
-        if ( req.body && req.body.userid ) {
-          log.info( "calling authenticate ..." )
-          if ( gui.authenticate( req.body.userid, req.body.password ) ) {
-            log.info( "Login OK" )
-            res.statusCode = 200
-            var token = 'ksdkjv'
-            gui.userTokens[ token ] = req.body.userid 
-            res.cookie( 'pong-security', 
-                token, 
-                { expires: new Date(Date.now() + 6400000), httpOnly: true }
-            );
-            res.send(  "Login OK" )
-          } else {
-            log.info( "Login failed!" )            
-            res.statusCode = 401
-            res.send(  "Login failed" )
-          }
-        } else if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-          log.info( "pong-security cookie ..." )
-
-          var token = req.cookies[ 'pong-security' ]
-          log.info( "token = "+token )
-          log.info( "user = "+gui.userTokens[ token ]  )
-          if ( gui.userTokens[ token ] ) {
-            res.statusCode = 200
-            res.send( gui.userTokens[ token ] )
-            return
-          } else {
-            log.info( "cookie token not in list" )            
-            res.statusCode = 401
-            res.send( "Login failed" )         
-            return
-          }
-        } else {
-          log.info( "user/password or cookie required" )            
-          res.statusCode = 401
-          res.send( "Login failed" )          
-        }
-      } else {
-        log.info( "Please implement authenticate function:" )
-        log.info( " gui.authenticate = function authenticate(user, password)"+
-            " { ... return true/false }")
-        res.statusCode = 401
-        res.send( "Login failed" )                  
-      }
-    }
-  )
