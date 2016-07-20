@@ -4,7 +4,10 @@ To authenticate and authorization users on pages you need to tree easy steps:
 2. implement an `authenticate(user,password)` function and
 3. implement an `authorize(user,page)` function.
 
-Optional: In HA set up, you need also implement 
+__Remark__: Please notice, that the "secret page" in the example
+is also not visible in the menu, if not logged in.
+
+__Optional__: In HA set up, you need also implement 
 * `createToken(userId){ ... return token }` and  
 * `getUserIdForToken(token){ ... return userId }`
 * `gui.deleteUserIdForToken(token)`

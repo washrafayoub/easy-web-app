@@ -12,11 +12,12 @@ Perhaps start here:
 ## Other Features
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
 * [mobile phone, tablet or desktop browser detection](https://github.com/ma-ha/easy-web-app/blob/master/examples/mobile-detect/index.js)
-* [how to customize the CSS](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)
+* [how to provide a customized CSS](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)
 * [menu demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/menu-tabs/index.js)
 * [i18n / internationalization / multi-language support](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/index.js) \*
 * ["complex" layout demo -- more than one view on a page](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/index.js)
 * [change view configuration "on-the-fly"](https://github.com/ma-ha/easy-web-app/blob/master/examples/on-the-fly-config/index.js)
+* [Security: Login, logout and page authorization](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/)
 
 <sub>_Remark: (\*) includes a REST/JSON web service implementation_</sub>  
 
