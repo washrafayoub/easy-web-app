@@ -14,7 +14,7 @@ A lot of plug-ins are available to get a portal it quickly configured:
 * Maps: POIs, routes, traffic, ...
 * Page to page navigation with navigation tabs, menus, links and session data
 * Source code display
-* Security: HTTP Basic authentication or OAuth 
+* Security: RESTful, HTTP Basic or OAuth authentication support 
 * ...
 
 This is how it may look like:

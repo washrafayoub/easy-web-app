@@ -9,7 +9,7 @@ The example contains also a simple REST/JSON web service (template) to POST form
 
 ## Run example
 1. You need to [get a local copy of the easy-web gui](https://github.com/ma-ha/easy-web-app).
-2. and run the set up ther `npm install easy-web-gui`
+2. and run the set up: `npm install easy-web-gui`
 3. In this directory simply run: `nodejs index.js` 
 4. Open [http://localhost:8888/](http://localhost:8888/) in your browser
 
