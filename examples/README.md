@@ -1,4 +1,5 @@
 # Examples
+## How to run the examples:
 There are two ways to run the examples:
 
 1. Clone the GIT repo (recommended): 
@@ -9,8 +10,9 @@ There are two ways to run the examples:
 2. Run the examples stand alone: 
 	* Copy the `index.js` to a local folder and change into that folder
 	* Open the `index.js` in an editor and 
-	  change the line `var gui = require ( '../../' )` 
-	  to  `var gui = require( 'easy-web-app' )`
+	  change the line 
+	  	* `var gui = require ( '../../' )` 
+	  	* to  `var gui = require( 'easy-web-app' )`
 	* Run `npm install easy-web-app npmlog` (some examples also need `express` to be installed)
 	* Start the example: `node index.js`  
 
@@ -20,6 +22,7 @@ info Web GUI http://localhost:8888/
 ```
 Open this URL in your browser.
 
+## First Steps
 Perhaps start here:
 * [Simple form explained -- showing all currently supported field types](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
   *  [Simple form JS source](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
