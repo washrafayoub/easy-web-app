@@ -1,5 +1,6 @@
 # Examples
 There are two ways to run the examples:
+
 1. Clone the GIT repo (recommended): 
 	* Do a `git clone https://github.com/ma-ha/easy-web-app.git`
 	* Change into the `easy-web-app` directory
@@ -13,8 +14,11 @@ There are two ways to run the examples:
 	* Run `npm install easy-web-app npmlog` (some examples also need `express` to be installed)
 	* Start the example: `node index.js`  
 
-After starting the example, the console log should give you a line 
-`info Web GUI http://localhost:8888/`. Open this URL in your browser.
+After starting the example, the console log should show you a line 
+```
+info Web GUI http://localhost:8888/
+```
+Open this URL in your browser.
 
 Perhaps start here:
 * [Simple form explained -- showing all currently supported field types](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/)
