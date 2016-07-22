@@ -33,7 +33,7 @@ Perhaps start here:
 * [Content via MediaWiki API](https://github.com/ma-ha/easy-web-app/blob/master/examples/wiki-demo/index.js)
 * [I/O demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) \*
 
-## Other Features
+## Other Feature Demos
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
 * [mobile phone, tablet or desktop browser detection](https://github.com/ma-ha/easy-web-app/blob/master/examples/mobile-detect/index.js)
 * [how to provide a customized CSS](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)
