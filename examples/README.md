@@ -95,7 +95,15 @@ gui.addPage( 'XYZ/PageB', '3rd Page', { id:'b1', type:'pong-table', height:'500p
 Remark: All pages are stored in the `gui.pages[]` array. 
 By `gui.addPage(...)` also a navigation menu for page navigation 
 will provided automatically. In the example "PageA" and "PageB" 
-are in a "XYZ" navigation pull-down menu.
+are in a "XYZ" navigation menu tab.
+
+### gui.addPullDownMenu ( menuId, menuLabel ) 
+Add a pull down menu. Pages can be assigned to this menu by labeling them
+`menuID/mageId`.
+
+### gui.addPullDownMenuHtmlItem( menuId, htmlString ) 
+Add a line to the pull down menu with static HTML.
+
 
 ### gui.addView ( viewDef [, moduleConfig] [, page] ) 
 Returns `view` object (part of the `page` object structure).
