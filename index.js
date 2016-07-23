@@ -7,6 +7,7 @@
 var gui = exports = module.exports = {
   pages : {}
   ,userTokens : {}
+  ,pullDownMenu : {}
 };
 
 //logger
@@ -17,9 +18,9 @@ var express     = require( 'express' );
 var webservices = express();
 
 var bodyParser  = require( 'body-parser' );
-// for json payoad:
+// body-parser for JSON payload:
 var jsonParser  = bodyParser.json();
-//for parsing application/x-www-form-urlencoded:
+// body-parser for parsing application/x-www-form-urlencoded:
 var formParser  = bodyParser.urlencoded( { extended: true } );
 
 var cookieParser = require( 'cookie-parser' )
@@ -76,6 +77,20 @@ gui.setDefaults = function setDefaults() {
   return this.pages[ 'main' ]
 }
 
+/** add new pull down menu */
+gui.addPullDownMenu = function addPullDownMenu( menuId, menuLabel ) {
+	var newMenu = 
+	  { id: menuId, 
+		type: 'pong-pulldown', 
+	    moduleConfig: {
+	      title: menuLabel,
+	      menuItems : [ ]   
+	    } 
+	  }
+	this.pullDownMenu[ menuId ] = newMenu
+	this.pages[ 'main' ].header.modules.push( newMenu )
+}
+
 
 /** add new page to portal, navigation tabs included */
 gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
@@ -108,6 +123,17 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
       pgObj.addView( viewDef, viewConfig )
     
     this.pages[ pageId ] = pgObj
+
+    // check if pag is for pull down menu:
+    if ( pageId.indexOf( '/' ) != -1 ) {
+    	var menuId = pageId.substr( 0 , pageId.indexOf( '/' ) )
+    	//log.info( ' ... '+menuId )
+    	if ( this.pullDownMenu[ menuId ] ) {
+    		//log.info( 'pullDownMenu: '+menuId )
+    		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( { pageLink:pageId, label:title } )
+    	}
+    }
+
     return pgObj
   }
 }
@@ -306,34 +332,36 @@ webservices.get(
           }
         } else { // sub-menu
           var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
-          if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
-            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
-                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
-  
-              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
-                // not visible for this user
-              } else {
-                subMenus[ subMenu ] = navTabs.length
-                navTabs.push( {
-                  label : subMenu,
-                  menuItems: []
-                } )
-              }
-            }
-          }
-          if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
-            // not visible for this user
-          } else {
-            navTabs[ subMenus[ subMenu ] ].menuItems.push({
-              'layout' : layoutId,
-              'label' : gui.pages[ layoutId ].title
-            } )
-          }
+          if ( ! gui.pullDownMenu[ subMenu ] ) { // if this is not a pull down
+	          if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
+	            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
+	                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
+	  
+	              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+	                // not visible for this user
+	              } else {
+	                subMenus[ subMenu ] = navTabs.length
+	                navTabs.push( {
+	                  label : subMenu,
+	                  menuItems: []
+	                } )
+	              }
+	            }
+	          }
+	          if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+	            // not visible for this user
+	          } else {
+	            navTabs[ subMenus[ subMenu ] ].menuItems.push({
+	              'layout' : layoutId,
+	              'label' : gui.pages[ layoutId ].title
+	            } )
+	          }
+	        }
         }
       }
     }
-    //console.log( navTabs.length )
-    if ( navTabs.length == 1 )  navTabs = [] 
+    // show only menu, if it's  more than one page
+    if ( navTabs.length == 1 && ! Object.keys( gui.pullDownMenu ).length > 0 )  navTabs = [] 
     res.json( { 'navigations' : navTabs } )
   }
 );
