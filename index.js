@@ -91,6 +91,13 @@ gui.addPullDownMenu = function addPullDownMenu( menuId, menuLabel ) {
 	this.pages[ 'main' ].header.modules.push( newMenu )
 }
 
+gui.addPullDownMenuHtmlItem = function addPullDownMenuHtmlItem( menuId, htmlString ) {
+	if ( this.pullDownMenu[ menuId ] ) { 
+		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( { html:htmlString } )
+	} else {
+		log.warn( 'addPullDownMenuHtmlItem: Menu "'+menuId+'" not available!')
+	}
+}
 
 /** add new page to portal, navigation tabs included */
 gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
@@ -131,7 +138,7 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     	if ( this.pullDownMenu[ menuId ] ) {
     		//log.info( 'pullDownMenu: '+menuId )
     		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( { pageLink:pageId, label:title } )
-    	}
+    	} 
     }
 
     return pgObj
