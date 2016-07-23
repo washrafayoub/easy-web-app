@@ -61,7 +61,7 @@ Notation:
 * (object), (String), (Array) are JavaScript tpyes
 
 ## "GUI" API
-### gui.init ( [portalName] [,port] )
+### gui.init ( \[portalName\] \[,port\] )
 Returns the main `page` object and starts a minimal REST/JSON
 web service eco system for the portal.
 
@@ -78,7 +78,7 @@ var mainPage = gui.init ( )
 ...
 ```
 
-### gui.addPage ( pageId [, title] [, viewDef] [, viewConfig] )
+### gui.addPage ( pageId \[, title\] \[, viewDef\] \[, viewConfig\] )
 Returns the new `page` object.
 
 Header and footer will be included from the "main" `page`, 
@@ -106,7 +106,7 @@ Add a pull down menu. Pages can be assigned to this menu by labeling them
 Add a line to the pull down menu with static HTML.
 
 
-### gui.addView ( viewDef [, moduleConfig] [, page] ) 
+### gui.addView ( viewDef \[, moduleConfig\] \[, page\] ) 
 Returns `view` object (part of the `page` object structure).
 
 By default it will add a `view` in a new row to the "main" page.
@@ -200,7 +200,7 @@ For page the following structure will be set up:
   * `copyrightText` (String) 
   * `modules` (empty Array)
 
-### page.addView ( def [, config] )
+### page.addView ( def \[, config\] )
 Adds a new `row` with a new `view` and returns the `view`, ref. `gui.addView`.
 
 Example code:
@@ -218,7 +218,7 @@ mainPage.addView(
 ...
 ```
 
-### page.addIoView ( def [, config] )
+### page.addIoView ( def \[, config\] )
 Returns IoView, ref. [I/O example](https://github.com/ma-ha/easy-web-app/tree/master/examples/io).
 
 #### View reference
@@ -256,7 +256,7 @@ Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-a
 ## "Rows" API
 Used inside a `page`.
 
-### row.addView ( def [, config] )
+### row.addView ( def \[, config\] )
 Appends a row with new view and returns the view, see `gui.addView(...)`.
 
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
@@ -269,7 +269,7 @@ Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-a
 ## "Columns" API
 Used inside a `page`.
 
-### row.addView ( def [, config] )
+### row.addView ( def \[, config\] )
 Appends a column with new view and returns the view, see `gui.addView(...)`.
 
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
