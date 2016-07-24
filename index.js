@@ -10,7 +10,7 @@ var gui = exports = module.exports = {
   ,pullDownMenu : {}
 };
 
-//logger
+// logger
 var log = require( 'npmlog' );
 
 // use express for REST services
@@ -52,7 +52,8 @@ gui.setDefaults = function setDefaults() {
             id : 'MainNav'
             , type : 'pong-navbar'
             , param : {
-                confURL : '/svc/nav' // please define a web service for that ;-)
+                confURL : '/svc/nav' // please define a web service for that
+                                      // ;-)
             }
           } ]
         }
@@ -117,7 +118,7 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
       
     pgObj.addColumnsRow = 
         function ( id, height) {
-          //log.info( 'pages[].addColumns', id )
+          // log.info( 'pages[].addColumns', id )
           return gui.addColumnsRow( id, this.rows, height )
         }
     pgObj.addView =  
@@ -134,9 +135,9 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     // check if pag is for pull down menu:
     if ( pageId.indexOf( '/' ) != -1 ) {
     	var menuId = pageId.substr( 0 , pageId.indexOf( '/' ) )
-    	//log.info( ' ... '+menuId )
+    	// log.info( ' ... '+menuId )
     	if ( this.pullDownMenu[ menuId ] ) {
-    		//log.info( 'pullDownMenu: '+menuId )
+    		// log.info( 'pullDownMenu: '+menuId )
     		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( { pageLink:pageId, label:title } )
     	} 
     }
@@ -148,7 +149,7 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
 
 /** split the column into a rows, to add views */
 gui.addColumnsRow = function addColumnsRow( id, colArr, height ) {
-  //log.info( 'addColumns', id )
+  // log.info( 'addColumns', id )
   var colsObj = {
       rowId : id
     , height: height || "300px"
@@ -163,7 +164,7 @@ gui.addColumnsRow = function addColumnsRow( id, colArr, height ) {
         return gui.addViewIn( def, config, this.cols )          
       }
   colArr.push( colsObj )
-  //log.info( 'addColumns', 'colsObj='+JSON.stringify( colsObj ) )
+  // log.info( 'addColumns', 'colsObj='+JSON.stringify( colsObj ) )
   return colsObj
 }
 
@@ -203,7 +204,7 @@ gui.addViewIn = function addViewIn( def, config, arr ) {
 /** add a view (new row) to the page */
 gui.addView = function addView( def, config, page ) {
   var pg = page || 'main';
-  //pg = encodeURIComponent ( pg );
+  // pg = encodeURIComponent ( pg );
   var view = {};
   if ( !this.pages[ pg ] ) {
     log.warn( 'gui.addView', 'Page "' + pg + '" not found in GUI!' );
@@ -244,7 +245,7 @@ webservices.use ( '/css',     express.static( staticDir + '/css' ) );
 webservices.use ( '/js',      express.static( staticDir + '/js' ) );
 webservices.use ( '/img',     express.static( staticDir + '/img' ) );
 webservices.use ( '/modules', express.static( staticDir + '/modules' ) );
-//webservices.use ( '/i18n',    express.static( staticDir + '/i18n' ) );
+// webservices.use ( '/i18n', express.static( staticDir + '/i18n' ) );
 
 
 /** REST web service to GET layout structure: */
@@ -257,15 +258,29 @@ webservices.get(
       return res.send( 'Not authorized' );      
     }
 
-    //console.log( '>>'+req.params.id );
+    // console.log( '>>'+req.params.id );
     if ( gui.pages[ req.params.id ] ) {
+      var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloneed
+      if ( gui.authorize ) { // check authorization for header modules
+        var user = gui.getUserId( req )
+        for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
+          log.info(  pg.header.modules[i].type )
+          if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
+            // all others should be checked for authorization
+            if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
+              delete pg.header.modules[i] // not authorizes
+            }
+          }
+        }
+      }
+      
       var layout = {
-        'layout' : gui.pages[ req.params.id ]
-      };
-      res.json( layout );
+        'layout' : pg 
+      }
+      res.json( layout )
     } else {
-      res.statusCode = 404;
-      return res.send( 'Error 404: No quote found' );
+      res.statusCode = 404
+      return res.send( 'Error 404: No quote found' )
     }
   } 
 );
@@ -275,7 +290,7 @@ webservices.get(
   '/svc/layout/:id/:subid/structure', 
   function( req, res ) {
     var page = req.params.id +'/'+ req.params.subid
-    //console.log( '>>'+req.params.subid );
+    // console.log( '>>'+req.params.subid );
     if ( gui.authorize && ! gui.authorize( gui.getUserId(req), page ) ) {
       res.statusCode = 401;
       return res.send( 'Not authorized' );      
@@ -322,11 +337,17 @@ webservices.get(
     var userId = gui.getUserId( req )
     // console.log( 'GET /svc/nav '+gui.pages.length );
     for ( var layoutId in gui.pages ) {
-      //console.log( '>>'+layoutId );
+      // console.log( '>>'+layoutId );
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
         if ( layoutId.indexOf( '/' ) == -1 ) {
-          if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
-               layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
+          if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore
+                                                                  // alternate
+                                                                  // mobile
+                                                                  // layouts
+               layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore
+                                                                    // alternate
+                                                                    // tablet
+                                                                    // layouts
             // check authorization for page
             if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
               // not visible for this user
@@ -340,9 +361,16 @@ webservices.get(
         } else { // sub-menu
           var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
           if ( ! gui.pullDownMenu[ subMenu ] ) { // if this is not a pull down
-	          if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
-	            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore alternate mobile layouts  
-	                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore alternate tablet layouts
+	          if ( ! subMenus[ subMenu ] ) { // first sub menu item creates
+                                              // menu
+	            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore
+                                                                        // alternate
+                                                                        // mobile
+                                                                        // layouts
+	                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore
+                                                                        // alternate
+                                                                        // tablet
+                                                                        // layouts
 	  
 	              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
 	                // not visible for this user
@@ -367,13 +395,13 @@ webservices.get(
         }
       }
     }
-    // show only menu, if it's  more than one page
+    // show only menu, if it's more than one page
     if ( navTabs.length == 1 && ! Object.keys( gui.pullDownMenu ).length > 0 )  navTabs = [] 
     res.json( { 'navigations' : navTabs } )
   }
 );
 
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // i18n:
 
 
@@ -481,16 +509,16 @@ gui.addIoView = function addIoView( page ) {
   );
   io.ioId = ioId;
 
-  // IO method to define update polling 
+  // IO method to define update polling
   io.setUpdateMilliSec = function (ms ) {
       this.moduleConfig.poll = ms;
   };
-  // IO method to define update polling 
+  // IO method to define update polling
   io.setBackgroundImage = function ( imgFullPath ) {
     
       var bgImgName = '/local'+imgFullPath.substring( imgFullPath.lastIndexOf( '/' ) );
       var bgImgPath = imgFullPath.substring( 0, imgFullPath.lastIndexOf( '/' ) );
-//      log.info( 'static /local', bgImgPath +' '+ bgImgName);
+// log.info( 'static /local', bgImgPath +' '+ bgImgName);
       this.moduleConfig.imgURL = bgImgName;
       webservices.use ( '/local', express.static( bgImgPath ) );
 
@@ -518,7 +546,7 @@ gui.addIoView = function addIoView( page ) {
     if ( id && gui.io[ this.ioId ][ id ] ) {
       if ( [ -1, 0, 1 ].indexOf ( value ) >= 0 ) {
         gui.io[ this.ioId ][ id ].value = value;
-        //console.log( value );
+        // console.log( value );
       } else {
         log.warn( 'setLED', 'value "' + value + '" ignored' );
       }
@@ -549,7 +577,7 @@ gui.addIoView = function addIoView( page ) {
   return io;
 };
 
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // security
 
 /** add pong-security plug in to header */
@@ -573,12 +601,12 @@ webservices.post(
     '/login', 
     formParser, 
     function(req, res) {
-      //log.info( "POST Login ..." )
+      // log.info( "POST Login ..." )
       if ( gui.authenticate != null ) {
         if ( req.body && req.body.userid ) {
-          //log.info( "calling authenticate ..." )
+          // log.info( "calling authenticate ..." )
           if ( gui.authenticate( req.body.userid, req.body.password ) ) {
-            //log.info( "Login OK" )
+            // log.info( "Login OK" )
             res.statusCode = 200
             // todo set up "session" for user via hook
             var token = ''
@@ -591,7 +619,7 @@ webservices.post(
                 token += chrs.substring( iRnd, iRnd+1 )
               }
             }
-            //log.info( "Token: "+token )
+            // log.info( "Token: "+token )
             gui.userTokens[ token ] = req.body.userid 
             res.cookie( 'pong-security', 
                 token, 
@@ -599,7 +627,7 @@ webservices.post(
             );
             res.send(  "Login OK" )
           } else {
-            //log.info( "Login failed!" )            
+            // log.info( "Login failed!" )
             res.statusCode = 401
             res.send(  "Login failed" )
           }
@@ -608,14 +636,15 @@ webservices.post(
           res.send( gui.getUserId( req ) )
           return
         } else {
-          //log.info( "user/password or cookie required" )            
+          // log.info( "user/password or cookie required" )
           res.statusCode = 401
           res.send( "Login failed" )          
         }
       } else {
-        //log.info( "Please implement authenticate function:" )
-        //log.info( " gui.authenticate = function authenticate(user, password)"+
-        //    " { ... return true/false }")
+        // log.info( "Please implement authenticate function:" )
+        // log.info( " gui.authenticate = function authenticate(user,
+        // password)"+
+        // " { ... return true/false }")
         res.statusCode = 401
         res.send( "Login failed" )                  
       }
@@ -625,16 +654,16 @@ webservices.post(
 gui.getUserId = function getUserId( req ) {
   var userId = null
   if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-    //log.info( "getUserId: pong-security cookie ..." )
+    // log.info( "getUserId: pong-security cookie ..." )
 
     var token = req.cookies[ 'pong-security' ]
-    //log.info( "getUserId: token = "+token )
+    // log.info( "getUserId: token = "+token )
     if ( token ) {
       if ( gui.getUserIdForToken ) {
-        //log.info( "gui.getUserIdForToken..." )
+        // log.info( "gui.getUserIdForToken..." )
         userId = gui.getUserIdForToken( token )      
       } else if ( gui.userTokens[ token ] ) {
-        //log.info( "getUserId: userId = "+gui.userTokens[ token ] )
+        // log.info( "getUserId: userId = "+gui.userTokens[ token ] )
         userId = gui.userTokens[ token ]
       }
     }
@@ -646,14 +675,14 @@ webservices.post(
     '/logout', 
     formParser, 
     function(req, res) {
-      //log.info( "POST Logout ..." )
-      //log.info( 'Cookies: ', req.cookies )
+      // log.info( "POST Logout ..." )
+      // log.info( 'Cookies: ', req.cookies )
       if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-        //log.info( "pong-security cookie ..." )
+        // log.info( "pong-security cookie ..." )
 
         var token = req.cookies[ 'pong-security' ]
-        //log.info( "token = "+token )
-        //log.info( "user = " + gui.userTokens[ token ]  )
+        // log.info( "token = "+token )
+        // log.info( "user = " + gui.userTokens[ token ] )
         if ( gui.deleteUserIdForToken ) {
           gui.deleteUserIdForToken( token )
         } else if ( gui.userTokens[ token ] ) {

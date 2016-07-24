@@ -38,6 +38,15 @@ gui.authorize =
     return true  
   }
 
+// pull down menu
+
+//now add the pull down menu:
+gui.addPullDownMenu( 'testMenu', 'Menu' )
+// add static HTML dummy content to menu:
+gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 1' )
+gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 2' )
+
+
 /* Optional hooks for HA environment, typically using a distributed cache or a DB
 gui.createToken = function createToken( userId ){
   //TODO: implement for HA cluster
