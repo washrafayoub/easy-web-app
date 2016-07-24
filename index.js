@@ -260,15 +260,14 @@ webservices.get(
 
     // console.log( '>>'+req.params.id );
     if ( gui.pages[ req.params.id ] ) {
-      var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloneed
-      if ( gui.authorize ) { // check authorization for header modules
+      var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloned
+      if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = gui.getUserId( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
-          log.info(  pg.header.modules[i].type )
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
             // all others should be checked for authorization
             if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
-              delete pg.header.modules[i] // not authorizes
+              delete pg.header.modules[i] // not a
             }
           }
         }
