@@ -15,21 +15,18 @@ gui.addPullDownMenu( 'testMenu', 'Menu' )
 gui.addPullDownMenuHtmlItem( 'testMenu', '<b>Some more menu tests:</b>' )
 
 // Add a 2nd page page, visible in the pull-down menu
-var page2 = gui.addPage( 'testMenu/secondpage', 'Page 2',  
-		{ id:'Page 2' }, null )
+gui.addPage( 'testMenu/secondpage', 'Page 2', { id:'Page 2' } )
 
 // Add a 3rd page page, visible in the pull-down menu
-var page3 = gui.addPage( 'testMenu/thirdpage', 'Page 3', 
-		{ id:'Page 3' } )
+gui.addPage( 'testMenu/thirdpage', 'Page 3', { id:'Page 3' } )
 
 // Add a 4th page page, visible in the pull-down menu
-var page4 = gui.addPage( 'testMenu/fourthpage', 'Page 4',
-		{ id:'Page 4' }, null )
+gui.addPage( 'testMenu/fourthpage', 'Page 4', { id:'Page 4' } )
 
 // add further static HTML content to menu:
 gui.addPullDownMenuHtmlItem( 'testMenu', '<hr/>' )
 gui.addPullDownMenuHtmlItem( 'testMenu', 
 	'<span class="ui-icon ui-icon-extlink tbl-link-icon" '+
-    'style="display: inline-block; vertical-align: bottom;"></span>'+
-    '<a href="https://www.npmjs.com/package/easy-web-app" '+
+	'style="display: inline-block; vertical-align: bottom;"></span>'+
+	'<a href="https://www.npmjs.com/package/easy-web-app" '+
 	'target="_blank">npm package</a>' )
