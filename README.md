@@ -6,8 +6,7 @@ for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
 
 Focus is on _web applications_ (not simple web pages). 
 A lot of plug-ins are available to get a portal it quickly configured:
-* Forms
-* Tables / lists
+* Forms, Tables, Lists, Trees
 * Content: via MediaWiki API, plain HTML views, or help dialogs
 * I/O: control switches/drawer, gauges, graphs, LEDs, displays, ...
 * i18n: switch language
