@@ -74,6 +74,12 @@ gui.setDefaults = function setDefaults() {
         def.rowId = def.rowId || def.id;   
         return gui.addViewIn( def, config, this.rows )          
       }
+
+  /** set page width attribute and override CSS */
+  this.pages[ 'main' ].setPageWidth = 
+    function setPageWidth( width  ) {
+      this[ 'page_width' ] = width
+    }
     
   return this.pages[ 'main' ]
 }
@@ -92,6 +98,7 @@ gui.addPullDownMenu = function addPullDownMenu( menuId, menuLabel ) {
 	this.pages[ 'main' ].header.modules.push( newMenu )
 }
 
+/** add a new pull down menu header module */
 gui.addPullDownMenuHtmlItem = function addPullDownMenuHtmlItem( menuId, htmlString ) {
 	if ( this.pullDownMenu[ menuId ] ) { 
 		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( { html:htmlString } )
@@ -126,6 +133,11 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
           def.rowId = def.rowId || def.id;   
           return gui.addViewIn( def, config, this.rows )          
         }
+    /** set page width attribute and override CSS */
+    pgObj.setPageWidth = 
+      function setPageWidth( width  ) {
+        this[ 'page_width' ] = width
+      }
     
     if ( viewDef )  
       pgObj.addView( viewDef, viewConfig )

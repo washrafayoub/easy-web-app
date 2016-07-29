@@ -13,6 +13,7 @@ gui.getExpress().use( '/img-cust', express.static( __dirname + '/img-cust' ) )
 var mainPage = gui.init()
 mainPage.title = 'Customize CSS Demo'
 mainPage.header.logoText = 'Customize CSS Demo'
-
+mainPage.setPageWidth( '90%' )
+  
 mainPage.addView( { 'id':'row1view', 'title':'Row 1 View', 'height':'100px' } )
 mainPage.addView( { 'id':'row2view', 'title':'Row 2 View', 'height':'300px' } )
