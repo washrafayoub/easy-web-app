@@ -118,8 +118,8 @@ Create a _simpleForm.js_ file with following content
 /** Simple example: Create a web page with form */
 var gui = require ( 'easy-web-app' )
 
-/** Initialize the framework and the default page */
-gui.init ()
+/** Initialize the framework, the default page and define a title */
+gui.init ( 'My 1st Test' )
 
 /**
  * Add a view of type "pong-easy-form" (= plug-in) to the default page the first
@@ -157,6 +157,7 @@ gui.addView (
 
 Run the demo:
 
+	npm install easy-web-app
 	node simpleForm.js
 	
 Open the URL [http://localhost:8888/](http://localhost:8888/) in your Browser.
@@ -174,6 +175,6 @@ Please tell me what you like and what I need to improve! I'm also interested in 
 
 Please contact me: 
 
-![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/email.png) 
+![email address](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/email.png) 
 
 How can I help you?

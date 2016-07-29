@@ -3,7 +3,7 @@
 var gui = require ( '../../' )       // stand alone: replace with  require( 'easy-web-app' )
 
 /** Initialize the framework and the default page */
-gui.init ( 'My First Page' )
+gui.init ( 'First Example' )
 
 /**
  * Add a view of type "pong-easy-form" (= plug-in) to the default page the first
