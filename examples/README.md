@@ -32,11 +32,12 @@ Perhaps start here:
 * [Table demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/table-demo/index.js) \*
 * [Content via MediaWiki API](https://github.com/ma-ha/easy-web-app/blob/master/examples/wiki-demo/index.js)
 * [I/O demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) \*
+* [Tree demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/tree/) \*
 
 ## Other Feature Demos
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
 * [mobile phone, tablet or desktop browser detection](https://github.com/ma-ha/easy-web-app/blob/master/examples/mobile-detect/index.js)
-* [how to provide a customized CSS](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)
+* [how to provide a customized CSS, change the logo, etc.](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)
 * [menu demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/menu-tabs/index.js)
 * [pull-down menu demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/pull-down-menu/index.js)
 * [i18n / internationalization / multi-language support](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/index.js) \*
