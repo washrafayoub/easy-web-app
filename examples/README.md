@@ -221,8 +221,20 @@ mainPage.addView(
 ### page.addIoView ( def \[, config\] )
 Returns IoView, ref. [I/O example](https://github.com/ma-ha/easy-web-app/tree/master/examples/io).
 
+### page.setLogoText ( text )
+Main page only!
+
+See [customize example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css)
+
+### page.setLogoURL ( url )
+Main page only!
+
+See [customize example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css)
+
 ### page.setPageWidth ( width )
 Override CSS and set to `width` value: `px` or `%` are welcome.
+
+See [customize example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css)
 
 
 #### View reference

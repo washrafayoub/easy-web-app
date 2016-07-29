@@ -64,7 +64,22 @@ gui.setDefaults = function setDefaults() {
       , modules: []
     }
   }
-    
+
+  this.pages[ 'main' ].setLogoText =
+    function( text ) {
+      this.header['logoText'] = text
+    }
+
+  this.pages[ 'main' ].setLogoURL =
+    function( url ) {
+      this.header['logoURL'] = url
+    }
+
+  this.pages[ 'main' ].setTitle =
+    function( text ) {
+      this.title = text
+    }
+
   this.pages[ 'main' ].addColumnsRow = 
       function ( id, height ) {
         return gui.addColumnsRow( id, this.rows, height  )
