@@ -222,7 +222,7 @@ mainPage.addView(
 Returns IoView, ref. [I/O example](https://github.com/ma-ha/easy-web-app/tree/master/examples/io).
 
 ### page.setPageWidth ( width )
-Override CSS and set to `width` value. px or % are welcome.
+Override CSS and set to `width` value: `px` or `%` are welcome.
 
 
 #### View reference
