@@ -17,7 +17,7 @@ A lot of plug-ins are available to get a portal it quickly configured:
 * ...
 
 This is how it may look like:
-![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/demo-screen.png) 
+![demo screen shot](http://bit.ly/easy-web-app-screenshot) 
 
 Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/) 
 and [online demos](http://mh-svr.de/pong_dev) of features.
