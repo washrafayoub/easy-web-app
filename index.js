@@ -224,7 +224,7 @@ gui.addViewIn = function addViewIn( def, config, arr ) {
   view.resourceURL = def.resourceURL || "none"
   view.height = def.height || '400px'
   if ( config ) {
-    view.moduleCOnfig = config
+    view.moduleConfig = config
   }
   arr.push( view )
   return view
