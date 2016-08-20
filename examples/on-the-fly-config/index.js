@@ -3,7 +3,8 @@
 var gui = require ( '../../' )       // stand alone: replace with  require( 'easy-web-app' )
 
 // initialize the web app framework and a default main page
-gui.init ()
+var page = gui.init ()
+page.header.logoText = 'Test: Table edit columns on-the-fly'
 
 // add a view of type 'pong-easy-table' (= plug-in) 
 gui.addView ( 
@@ -31,6 +32,7 @@ var jsonParser  = bodyParser.json()
 
 // this is the table config at startup -- but you can change it in the browser
 var moduleConfig =  {
+    dataURL:"", // to load data on page load
     easyCols:
       [
         '*ID|5%',
@@ -42,8 +44,7 @@ var moduleConfig =  {
         'Rating',
         'Description_editable',
         'Product~Page_link'
-      ],
-      maxRows: '5'
+      ]
   }
 var moduleConfigTemplate =  JSON.parse( JSON.stringify( moduleConfig ) ) // clone moduleConfig
 
@@ -77,7 +78,7 @@ svc.post(
     jsonParser,
     function( req, res ) {
       //console.log( JSON.stringify( req.body ) )
-      if ( req.body && req.body.easyCols && req.body.maxRows ) {
+      if ( req.body && req.body.easyCols ) {
         moduleConfig = req.body
         //console.log( 'Response 200' )
         res.statusCode = 200  // request OK

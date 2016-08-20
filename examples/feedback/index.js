@@ -28,7 +28,8 @@ gui.addView (
   },
   // view's "pong-easytable" plug-in config
   {
-    "pollDataSec":"120",   // this generates a button to stop/start updates
+    "pollDataSec":"120",    // this generates a button to stop/start updates
+    "dataURL":"",           // trigger to load data on page load 
     'easyCols':
       [
         '*ID|5%',

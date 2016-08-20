@@ -24,7 +24,8 @@ gui.addView (
   },
   // view's "pong-easytable" plug-in config
   {
-    'easyCols':
+    dataURL:'',
+    easyCols:
       [
         '*ID|5%',
         'Name=Name.0',
