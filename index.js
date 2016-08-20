@@ -165,7 +165,9 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     	// log.info( ' ... '+menuId )
     	if ( this.pullDownMenu[ menuId ] ) {
     		// log.info( 'pullDownMenu: '+menuId )
-    		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( { pageLink:pageId, label:title } )
+    		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( 
+    		    { pageLink:pageId, label:title } 
+    		)
     	} 
     }
 
@@ -222,7 +224,7 @@ gui.addViewIn = function addViewIn( def, config, arr ) {
   view.resourceURL = def.resourceURL || "none"
   view.height = def.height || '400px'
   if ( config ) {
-    def.moduleCOnfig = config
+    view.moduleCOnfig = config
   }
   arr.push( view )
   return view
