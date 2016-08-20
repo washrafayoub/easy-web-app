@@ -11,6 +11,12 @@
 ### 0.8.2
 * API helper:
 	* [page.setPageWidth](https://github.com/ma-ha/easy-web-app/tree/master/examples#pagesetpagewidth--width-)
+	
+### 0.8.5
+* support rest-web-gui@0.7.15 
+	* table auto load changed
+	* histogram view is available
+	* fixes
 
 ## v0.7.0
 * Support [security plugin](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security),
