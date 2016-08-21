@@ -154,15 +154,15 @@ svc.get(
   function( req, res ) {
     var result = []
     if ( req.query.productSpec  && req.query.productSpec != 'all' ) {
-      log.info( '/products', 'search: '+req.query.productSpec  )          
+      //log.info( '/products', 'search: '+req.query.productSpec  )          
       for ( var i = 0; i < tableData.length; i++ ) {
         if ( tableData[i].productSpec.indexOf( req.query.productSpec ) >= 0 ) {
-          log.info( '/products', JSON.stringify( tableData[i].productSpec ) )          
+          //log.info( '/products', JSON.stringify( tableData[i].productSpec ) )          
           result.push( tableData[i] )
         }
       }
     } else {
-      log.info( '/products', "copy whole")
+      //log.info( '/products', "copy whole")
       result = tableData
     }
     // generate some dummy data:
