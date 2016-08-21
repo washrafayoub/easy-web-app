@@ -1,5 +1,4 @@
-TODO ;-)
+This example combines a tree view for a quick filter on categories and 
+a histogram, counting the ratings on the result set.
 
-ref: 
-* [structure sample](https://github.com/ma-ha/rest-web-ui/blob/master/html/svc/layout/tests/tree/structure)
-* [php service mock](https://github.com/ma-ha/rest-web-ui/blob/master/html/svc/mock/product/index.php)
+![demo screen shot](pong-tree-hist.png) 
