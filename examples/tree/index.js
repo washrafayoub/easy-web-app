@@ -7,11 +7,13 @@ var log = require( 'npmlog' );
 var page = gui.init ()
 page.header.logoText = 'Tree + Histogram Example'
 
+// Split page into columns
 var columns = page.addColumnsRow( 'row3', '400px' )
 
+// split left column into rows
 var cRows = columns.addRowsColumn( 'TreeAndHist', '20%' )
 
-
+// add the tree as row in left column
 var treeView = cRows.addView( 
     { rowId:'tree', 
       title:'Categories', 
@@ -30,6 +32,7 @@ var treeView = cRows.addView(
   }
 )
 
+// add the histogram below tree in left column
 var histView = cRows.addView( 
     { rowId:'hist', 
       title:'Rating',  
@@ -49,7 +52,7 @@ var histView = cRows.addView(
     }
   )
 
-// add a view of type 'pong-easy-table' (= plug-in) 
+// add the table view in the right column 
 var view = columns.addView ( 
     // view config
     { columnId:'tableView', title:'Table', type:'pong-easytable', resourceURL:'/products', width:'80%' },
@@ -123,8 +126,10 @@ svc.get(
     }
   )
 
-log.info( 'Page', JSON.stringify( page, ' ', ' ') )
+// show page definition
+//log.info( 'Page', JSON.stringify( page, ' ', ' ') )
 
+// define some mock data
 var tableData = 
   [ 
    {"ID":"yyy1",productSpec:["top","color","blue"],"Name":["Prod A","A"],"Rating":"3","Status":"false","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x02.png","ZoomImg":"img\/tst.jpg"},
@@ -143,6 +148,7 @@ var tableData =
   ]
   
 
+// product service returns all data or filtered data on productSpec
 svc.get( 
   '/products', 
   function( req, res ) {
