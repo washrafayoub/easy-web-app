@@ -32,7 +32,7 @@ Perhaps start here:
 * [Table demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/table-demo/index.js) \*
 * [Content via MediaWiki API](https://github.com/ma-ha/easy-web-app/blob/master/examples/wiki-demo/index.js)
 * [I/O demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) \*
-* [Tree demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/tree/) \*
+* [Tree and Histogram demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/tree/) \*
 
 ## Other Feature Demos
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
