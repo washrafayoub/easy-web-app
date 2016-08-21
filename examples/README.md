@@ -286,12 +286,12 @@ Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-a
 ## "Columns" API
 Used inside a `page`.
 
-### row.addView ( def \[, config\] )
+### column.addView ( def \[, config\] )
 Appends a column with new view and returns the view, see `gui.addView(...)`.
 
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
 
-### addRowsColumn ( id, width )
+### column.addRowsColumn ( id, width )
 Adds and return `rows` object.
 
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
