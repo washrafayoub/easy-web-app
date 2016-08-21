@@ -18,6 +18,10 @@
 	* histogram view is available
 	* fixes
 
+### 0.8.6
+* tree and histogram demo
+** requires rest-web-gui@0.7.16 
+
 ## v0.7.0
 * Support [security plugin](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security),
   see [API ref](https://github.com/ma-ha/easy-web-app/tree/master/examples#guienablesecurity-paramsobj-) 
