@@ -1,3 +1,6 @@
+## 0.9.0
+* `init()` supports location parameter to run portal not only on `/`
+
 ## 0.8.0
 * Pull-down menu [API](https://github.com/ma-ha/easy-web-app/tree/master/examples#guiaddpulldownmenu--menuid-menulabel-), 
   see also [example](https://github.com/ma-ha/easy-web-app/blob/master/examples/pull-down-menu/index.js)
@@ -22,8 +25,6 @@
 * support tree and histogram (demos available) 
 ** requires rest-web-gui@0.7.16 
 
-### 0.8.7
-* `init()` supports location parameter to run portal not only on `/`
 
 ## v0.7.0
 * Support [security plugin](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security),

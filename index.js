@@ -31,11 +31,11 @@ webservices.use( cookieParser() )
 
 /** Initialize the Web GUI */
 gui.init = function init( logoText, port, rootPath ) {
+  this.appRoot = ( rootPath ? rootPath : '/' )
+  if ( this.appRoot.indexOf('/') != 0 ) { this.appRoot = '/'+this.appRoot }
   var mainPage = this.setDefaults()
   mainPage.header.logoText = logoText
   var wsPort = port || 8888
-  this.appRoot = ( rootPath ? rootPath : '/' )
-  if ( this.appRoot.indexOf('/') != 0 ) { this.appRoot = '/'+this.appRoot }
   webservices.use( this.appRoot, router )
   webservices.listen( wsPort )
   log.info( 'Web GUI', 'http://localhost:' + wsPort + this.appRoot )
@@ -49,6 +49,7 @@ gui.getExpress = function getExpress() {
 /** Set defaults for all required configurations */
 gui.setDefaults = function setDefaults() {
   // create a default "main" page minimum config
+  var  navUrl = ( this.appRoot=='/' ? '/svc/nav' : this.appRoot+'/svc/nav' ) 
   this.pages[ 'main' ] = {
       title : 'Test'
     , header : {
@@ -57,8 +58,7 @@ gui.setDefaults = function setDefaults() {
             id : 'MainNav'
             , type : 'pong-navbar'
             , param : {
-                confURL : '/svc/nav' // please define a web service for that
-                                      // ;-)
+                confURL : navUrl
             }
           } ]
         }
