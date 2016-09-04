@@ -19,8 +19,11 @@
 	* fixes
 
 ### 0.8.6
-* tree and histogram demo
+* support tree and histogram (demos available) 
 ** requires rest-web-gui@0.7.16 
+
+### 0.8.7
+* `init()` supports location parameter to run portal not only on `/`
 
 ## v0.7.0
 * Support [security plugin](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security),
