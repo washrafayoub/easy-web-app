@@ -621,12 +621,14 @@ gui.addIoView = function addIoView( page ) {
 gui.enableSecurity = 
   function enableBasicAuth( paramObj ) {
     var secParams = {}
+    var root = this.appRoot
+    if ( root == '/' ) { root='' }
     if ( ! paramObj ) {paramObj = {} }
-    secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : '/login' )
+    secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : root+'/login' )
     secParams.loginPage = ( paramObj.loginPage ? paramObj.loginPage : 'main' )
     secParams.registgerURL = ( paramObj.registgerURL ? paramObj.registgerURL : null )
     secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
-    secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : '/logout' )
+    secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : root+'/logout' )
     this.pages[ 'main' ].header.modules.push(
       { 'id': 'Sec', 'type': 'pong-security', 'param': secParams }
     ) 
