@@ -81,7 +81,7 @@ The `port` defines the TCP port for the Web Services. Default `port` is "8888".
 
 `rootPath` is the location in the URL, e.g. `init( 'XY', 8080, '/myportal' )` 
 will start result in the base URL `http://localhost:8080/myportal` 
-(see [complex-layout example](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/index.js))
+(see [custom-css example](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)))
 
 ### gui.addPage ( pageId \[, title\] \[, viewDef\] \[, viewConfig\] )
 Returns the new `page` object.
