@@ -8,6 +8,7 @@ var gui = exports = module.exports = {
   pages : {}
   ,userTokens : {}
   ,pullDownMenu : {}
+  ,appRoot: '/'
 };
 
 // logger
@@ -16,6 +17,7 @@ var log = require( 'npmlog' );
 // use express for REST services
 var express     = require( 'express' );
 var webservices = express();
+var router = express.Router();
 
 var bodyParser  = require( 'body-parser' );
 // body-parser for JSON payload:
@@ -28,17 +30,20 @@ webservices.use( cookieParser() )
 
 
 /** Initialize the Web GUI */
-gui.init = function init( logoText, port ) {
+gui.init = function init( logoText, port, rootPath ) {
   var mainPage = this.setDefaults()
   mainPage.header.logoText = logoText
   var wsPort = port || 8888
+  this.appRoot = ( rootPath ? rootPath : '/' )
+  if ( this.appRoot.indexOf('/') != 0 ) { this.appRoot = '/'+this.appRoot }
+  webservices.use( this.appRoot, router )
   webservices.listen( wsPort )
-  log.info( 'Web GUI', 'http://localhost:' + wsPort + '/' )
+  log.info( 'Web GUI', 'http://localhost:' + wsPort + this.appRoot )
   return mainPage
 }
 
 gui.getExpress = function getExpress() {
-  return webservices;
+  return router;
 }
 
 /** Set defaults for all required configurations */
@@ -270,15 +275,15 @@ gui.addView = function addView( def, config, page ) {
 
 /* define static directories to load the framework into the web page */
 var staticDir = __dirname + '/node_modules/rest-web-gui/html';
-webservices.use ( '/css',     express.static( staticDir + '/css' ) );
-webservices.use ( '/js',      express.static( staticDir + '/js' ) );
-webservices.use ( '/img',     express.static( staticDir + '/img' ) );
-webservices.use ( '/modules', express.static( staticDir + '/modules' ) );
-// webservices.use ( '/i18n', express.static( staticDir + '/i18n' ) );
+router.use ( '/css',     express.static( staticDir + '/css' ) );
+router.use ( '/js',      express.static( staticDir + '/js' ) );
+router.use ( '/img',     express.static( staticDir + '/img' ) );
+router.use ( '/modules', express.static( staticDir + '/modules' ) );
+// router.use ( '/i18n', express.static( staticDir + '/i18n' ) );
 
 
 /** REST web service to GET layout structure: */
-webservices.get( 
+router.get( 
   '/svc/layout/:id/structure', 
   function( req, res ) {
     
@@ -301,7 +306,7 @@ webservices.get(
           }
         }
       }
-      
+      log.info( "structure", req.params.id  )
       var layout = {
         'layout' : pg 
       }
@@ -314,7 +319,7 @@ webservices.get(
 );
 
 /** REST web service to GET layout structure for sub menu pages: */
-webservices.get( 
+router.get( 
   '/svc/layout/:id/:subid/structure', 
   function( req, res ) {
     var page = req.params.id +'/'+ req.params.subid
@@ -340,15 +345,19 @@ webservices.get(
  * Single page does it all, the layout parameter references the "page". Default
  * is the "main" page
  */
-webservices.get ( 
+router.get ( 
   '/', 
   function( req, res ) {
-    res.redirect( '/index.html' );
+    if ( gui.appRoot == '/' ) {
+      res.redirect( '/index.html' );      
+    } else {
+      res.redirect( gui.appRoot+'/index.html' );      
+    }
   }
 );
 
 
-webservices.get( 
+router.get( 
   '/index.html', 
   function( req, res ) {
     res.sendFile( __dirname + '/index.html' );
@@ -357,7 +366,7 @@ webservices.get(
 
 
 /** web service for multi page navigation bar */
-webservices.get( 
+router.get( 
   '/svc/nav', 
   function( req, res ) {
     var navTabs = []
@@ -463,7 +472,7 @@ gui.addTranslation = function addTranslation( langCode, label, translation ) {
   }
 }
 
-webservices.get(
+router.get(
     '/i18n/:lang',
     function( req, res ) {
       if ( req.params.lang  ) {
@@ -488,7 +497,7 @@ gui.addIoView = function addIoView( page ) {
     this.io = [];
 
     /** REST web service to GET IO data */
-    webservices.get ( 
+    router.get ( 
         '/svc/io/:ioId', 
         function ( req, res ) {
           // console.log( 'ping: ' + req.params.ioId );
@@ -496,7 +505,7 @@ gui.addIoView = function addIoView( page ) {
         } 
     );
 
-    webservices.post( 
+    router.post( 
       '/svc/io/:ioId', 
       jsonParser, 
       function ( req, res ) {
@@ -548,7 +557,7 @@ gui.addIoView = function addIoView( page ) {
       var bgImgPath = imgFullPath.substring( 0, imgFullPath.lastIndexOf( '/' ) );
 // log.info( 'static /local', bgImgPath +' '+ bgImgName);
       this.moduleConfig.imgURL = bgImgName;
-      webservices.use ( '/local', express.static( bgImgPath ) );
+      router.use ( '/local', express.static( bgImgPath ) );
 
   };
 
@@ -625,7 +634,7 @@ gui.enableSecurity =
   }
 
 
-webservices.post(
+router.post(
     '/login', 
     formParser, 
     function(req, res) {
@@ -699,7 +708,7 @@ gui.getUserId = function getUserId( req ) {
   return userId
 }
 
-webservices.post(
+router.post(
     '/logout', 
     formParser, 
     function(req, res) {

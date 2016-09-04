@@ -10,10 +10,9 @@ gui.getExpress().use( '/img-cust', express.static( __dirname + '/img-cust' ) )
   
 
 // define a main page
-var mainPage = gui.init()
+var mainPage = gui.init( 'Customize CSS Demo', 8880, '/test/test' )
 mainPage.setTitle( 'Customize CSS Demo' )
-mainPage.setLogoText( 'Customize CSS Demo' )
-mainPage.setLogoURL( '/img-cust/funnyLogo.png' )
+mainPage.setLogoURL( 'img-cust/funnyLogo.png' )
 mainPage.setPageWidth( '90%' )
   
 mainPage.addView( { 'id':'row1view', 'title':'Row 1 View', 'height':'100px' } )

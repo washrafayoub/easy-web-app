@@ -62,14 +62,9 @@ Notation:
 * (object), (String), (Array) are JavaScript tpyes
 
 ## "GUI" API
-### gui.init ( \[portalName\] \[,port\] )
+### gui.init ( \[portalName\] \[,port\] \[,rootPath\])
 Returns the main `page` object and starts a minimal REST/JSON
 web service eco system for the portal.
-
-The `portalName` appears on every page as `logoText`.
-You are able to change that, or alternatively define an `logoURL` for an image. 
-
-The `port` defines the TCP port for the Web Services. Default `port` is "8888".
 
 Example code:
 
@@ -78,6 +73,15 @@ var gui = require ( 'easy-web-app' )
 var mainPage = gui.init ( )
 ...
 ```
+
+The `portalName` appears on every page as `logoText`.
+You are able to change that, or alternatively define an `logoURL` for an image. 
+
+The `port` defines the TCP port for the Web Services. Default `port` is "8888".
+
+`rootPath` is the location in the URL, e.g. `init( 'XY', 8080, '/myportal' )` 
+will start result in the base URL `http://localhost:8080/myportal` 
+(see [complex-layout example](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/index.js))
 
 ### gui.addPage ( pageId \[, title\] \[, viewDef\] \[, viewConfig\] )
 Returns the new `page` object.
