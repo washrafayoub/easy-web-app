@@ -2,7 +2,7 @@ var gui     = require( '../../' )     // stand alone: replace with  require( 'ea
 var log = require('npmlog');
 
 // define a main page
-var mainPage = gui.init()
+var mainPage = gui.init( 'Security Demo', 8080, 'securitydemo' )
 mainPage.title = 'Home'
 mainPage.header.logoText = 'Security Demo'
 mainPage.addView( { 'id':'row1view', 'title':'Login with any (non empty) user id', 'height':'300px' } )
