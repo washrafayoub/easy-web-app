@@ -1,3 +1,7 @@
+## 0.9.1
+* Security module support password changes
+* Not authorized page redirect to login page
+
 ## 0.9.0
 * `init()` supports location parameter to run portal not only on `/`
 

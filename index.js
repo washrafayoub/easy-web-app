@@ -288,8 +288,12 @@ router.get(
   function( req, res ) {
     
     if ( gui.authorize && ! gui.authorize( gui.getUserId(req), req.params.id ) ) {
-      res.statusCode = 401;
-      return res.send( 'Not authorized' );      
+      // not authorized for this page
+      var redirectPage = ( gui.secParams.loginPage ? gui.secParams.loginPage : 'main' )
+      var layout = {
+          'layout' : gui.pages[ redirectPage ]
+        };
+      res.json( layout );
     }
 
     // console.log( '>>'+req.params.id );
@@ -325,8 +329,12 @@ router.get(
     var page = req.params.id +'/'+ req.params.subid
     // console.log( '>>'+req.params.subid );
     if ( gui.authorize && ! gui.authorize( gui.getUserId(req), page ) ) {
-      res.statusCode = 401;
-      return res.send( 'Not authorized' );      
+      // not authorized for this page
+      var redirectPage = ( gui.secParams.loginPage ? gui.secParams.loginPage : 'main' )
+      var layout = {
+          'layout' : gui.pages[ redirectPage ]
+        };
+      res.json( layout );
     }
     if ( gui.pages[ page ] ) {
       var layout = {
@@ -620,17 +628,16 @@ gui.addIoView = function addIoView( page ) {
 /** add pong-security plug in to header */
 gui.enableSecurity = 
   function enableBasicAuth( paramObj ) {
-    var secParams = {}
-    var root = this.appRoot
-    if ( root == '/' ) { root='' }
+    gui.secParams = {}
+    var root = ( this.appRoot== '/' ? '' : this.appRoot ) 
     if ( ! paramObj ) {paramObj = {} }
-    secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : root+'/login' )
-    secParams.loginPage = ( paramObj.loginPage ? paramObj.loginPage : 'main' )
-    secParams.registgerURL = ( paramObj.registgerURL ? paramObj.registgerURL : null )
-    secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
-    secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : root+'/logout' )
+    gui.secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : root+'/login' )
+    gui.secParams.loginPage = ( paramObj.loginPage ? paramObj.loginPage : 'main' )
+    gui.secParams.registgerURL = ( paramObj.registgerURL ? paramObj.registgerURL : null )
+    gui.secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
+    gui.secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : root+'/logout' )
     this.pages[ 'main' ].header.modules.push(
-      { 'id': 'Sec', 'type': 'pong-security', 'param': secParams }
+      { 'id': 'Sec', 'type': 'pong-security', 'param': gui.secParams }
     ) 
     log.info( "Security is enabled!" )
   }
@@ -663,7 +670,13 @@ router.post(
             res.cookie( 'pong-security', 
                 token, 
                 { expires: new Date(Date.now() + 6400000), httpOnly: true }
-            );
+            )
+            
+            if ( gui.changePassword ) {
+              gui.secParams.changePasswordURL = 
+                ( gui.appRoot=='/' ? '/password' : gui.appRoot+'/password' )
+            }
+            
             res.send(  "Login OK" )
           } else {
             // log.info( "Login failed!" )
@@ -709,6 +722,49 @@ gui.getUserId = function getUserId( req ) {
   }
   return userId
 }
+
+router.post(
+    '/password', 
+    formParser, 
+    function(req, res) {
+      // log.info( "POST Login ..." )
+      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+        var token = req.cookies[ 'pong-security' ]
+        if ( gui.userTokens[ token ] ) {
+          // log.info( "getUserId: userId = "+gui.userTokens[ token ] )
+          var userId = gui.userTokens[ token ]
+          if ( gui.changePassword != null ) {
+            if ( req.body && req.body.oldPassword && req.body.newPassword ) {
+              var oldPwd = req.body.oldPassword
+              var newPwd = req.body.newPassword
+              var result = gui.changePassword( userId, oldPwd, newPwd )
+              if ( result ) {
+                res.statusCode = 200              
+                res.send( "Password changed!" )                 
+              } else {
+                res.statusCode = 400
+                res.send( "Failed to change password!" )              
+              }
+            } else {
+              res.statusCode = 400
+              res.send( "Invalid request!" )                              
+            }
+            // TODO
+          } else {
+            res.statusCode = 405
+            res.send( "Failed to change password!" )                  
+          }
+        } else {
+          res.statusCode = 401
+          res.send( "Login invalid!" )                                    
+        }
+      } else {
+        res.statusCode = 401
+        res.send( "Login required!" )                          
+      }
+   }
+ )
+
 
 router.post(
     '/logout', 

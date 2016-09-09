@@ -22,6 +22,13 @@ gui.authenticate =
     return true
   }
 
+gui.changePassword =  
+  function changePassword( user, oldPasswprd, newPassword ) {
+    log.info( 'Change password for "'+user+'"' )
+    return true;
+  }
+
+
 // grant all to "main" page
 // if user != null then "granted"
 gui.authorize =  
