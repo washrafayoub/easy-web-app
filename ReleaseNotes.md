@@ -1,6 +1,7 @@
-## 0.9.1
+## 0.9.1, 0.9.2
 * Security module support password changes
 * Not authorized page redirect to login page
+* security hooks with callback enable asynchronous operation
 
 ## 0.9.0
 * `init()` supports location parameter to run portal not only on `/`
