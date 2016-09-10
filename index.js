@@ -651,38 +651,46 @@ router.post(
       if ( gui.authenticate != null ) {
         if ( req.body && req.body.userid ) {
           // log.info( "calling authenticate ..." )
-          if ( gui.authenticate( req.body.userid, req.body.password ) ) {
-            // log.info( "Login OK" )
-            res.statusCode = 200
-            // todo set up "session" for user via hook
-            var token = ''
-            if ( gui.createToken ) { 
-              token = gui.createToken( req.body.userid ) 
-            } else {
-              var chrs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-              for ( var i = 0; i < 32; i++ ) {
-                var iRnd = Math.floor( Math.random() * chrs.length )
-                token += chrs.substring( iRnd, iRnd+1 )
-              }
+          gui.authenticate( 
+            req.body.userid, 
+            req.body.password, 
+            function ( err, result ) {
+              if ( !err && result ) {
+                // log.info( "Login OK" )
+                res.statusCode = 200
+                // todo set up "session" for user via hook
+                var token = ''
+                if ( gui.createToken ) { 
+                  token = gui.createToken( req.body.userid ) 
+                } else {
+                  var chrs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                  for ( var i = 0; i < 32; i++ ) {
+                    var iRnd = Math.floor( Math.random() * chrs.length )
+                    token += chrs.substring( iRnd, iRnd+1 )
+                  }
+                }
+                // log.info( "Token: "+token )
+                gui.userTokens[ token ] = req.body.userid 
+                res.cookie( 'pong-security', 
+                    token, 
+                    { expires: new Date(Date.now() + 6400000), httpOnly: true }
+                )
+                
+                if ( gui.changePassword ) {
+                  gui.secParams.changePasswordURL = 
+                    ( gui.appRoot=='/' ? '/password' : gui.appRoot+'/password' )
+                }
+                
+                res.send(  "Login OK" )
+              } else {
+                // log.info( "Login failed!" )
+                res.statusCode = 401
+                res.send(  "Login failed" )
+              }              
             }
-            // log.info( "Token: "+token )
-            gui.userTokens[ token ] = req.body.userid 
-            res.cookie( 'pong-security', 
-                token, 
-                { expires: new Date(Date.now() + 6400000), httpOnly: true }
-            )
-            
-            if ( gui.changePassword ) {
-              gui.secParams.changePasswordURL = 
-                ( gui.appRoot=='/' ? '/password' : gui.appRoot+'/password' )
-            }
-            
-            res.send(  "Login OK" )
-          } else {
-            // log.info( "Login failed!" )
-            res.statusCode = 401
-            res.send(  "Login failed" )
-          }
+          )
+          
+          
         } else if ( gui.getUserId( req ) ) {
           res.statusCode = 200
           res.send( gui.getUserId( req ) )
@@ -737,14 +745,18 @@ router.post(
             if ( req.body && req.body.oldPassword && req.body.newPassword ) {
               var oldPwd = req.body.oldPassword
               var newPwd = req.body.newPassword
-              var result = gui.changePassword( userId, oldPwd, newPwd )
-              if ( result ) {
-                res.statusCode = 200              
-                res.send( "Password changed!" )                 
-              } else {
-                res.statusCode = 400
-                res.send( "Failed to change password!" )              
-              }
+              gui.changePassword( userId, oldPwd, newPwd,
+                 function( err, result ) {
+                    log.info( "callback", "err:"+err+" result:"+result )
+                    if ( result ) {
+                      res.statusCode = 200              
+                      res.send( "Password changed!" )                 
+                    } else {
+                      res.statusCode = 400
+                      res.send( "Failed to change password!" )              
+                    }
+                }
+              )
             } else {
               res.statusCode = 400
               res.send( "Invalid request!" )                              

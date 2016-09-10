@@ -14,18 +14,19 @@ gui.enableSecurity()
 
 // "auth" is ok if any user id is given
 gui.authenticate =  
-  function authenticate( user, password ) {
+  function authenticate( user, password, callback ) {
     log.info( 'Login user "'+user+'"' )
     if ( ! user ) {
-      return false
+      callback( null, false )
+    } else {
+      callback( null, true )
     }
-    return true
   }
 
 gui.changePassword =  
-  function changePassword( user, oldPasswprd, newPassword ) {
+  function changePassword( user, oldPasswprd, newPassword, callback ) {
     log.info( 'Change password for "'+user+'"' )
-    return true;
+    callback( null, true )
   }
 
 

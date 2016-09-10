@@ -174,9 +174,22 @@ Add [pong-security module](https://github.com/ma-ha/rest-web-ui/tree/master/html
 * `logoutPage`: page id to show after a successful logout, default is `main`
 * `registgerURL`: if you need a link to a registration page id, default is `null` 
 
-IMPORTANT: You need to implement a `gui.authenticate(user,password){ ... return true/false}` 
-and a `gui.authorize(user,page){ ... return true/false}` function,
+IMPORTANT: You need to implement 
+* `gui.authenticate = function(user,password,callback){ ... callback(err,true/false) }` and 
+* `gui.authorize = function(user,page){ ... return true/false}` function,
 see [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
+
+Optional you can implement a change password hook. 
+```javascript
+gui.changePassword =  
+  function changePassword( user, oldPasswprd, newPassword, callback ) {
+     ...
+     callback( err, changedStatus )
+  }
+```
+`changedStatus` should be _true_ if password was changed successfully.
+
+If the hook is defined, the Web UI will generate a link and a modal form for you.
 
 Remark:  In HA set up, you need also implement 
 * `createToken( userId ){ ... return token }` 
