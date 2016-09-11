@@ -36,8 +36,7 @@ gui.addView (
         'Rating',
         'Description_editable',
         'Product~Page_link'
-      ],
-      'maxRows':'5'
+      ]
   }
 )
 
