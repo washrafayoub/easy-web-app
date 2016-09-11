@@ -310,7 +310,7 @@ router.get(
           }
         }
       }
-      log.info( "structure", req.params.id  )
+      //log.info( "structure", req.params.id  )
       var layout = {
         'layout' : pg 
       }
@@ -747,7 +747,7 @@ router.post(
               var newPwd = req.body.newPassword
               gui.changePassword( userId, oldPwd, newPwd,
                  function( err, result ) {
-                    log.info( "callback", "err:"+err+" result:"+result )
+                    //log.info( "callback", "err:"+err+" result:"+result )
                     if ( result ) {
                       res.statusCode = 200              
                       res.send( "Password changed!" )                 
