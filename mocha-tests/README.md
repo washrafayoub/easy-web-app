@@ -9,3 +9,8 @@ Run Test:
     for i in test/*; do mocha $i; done
 
 Sorry, that won't work: `mocha --recursive`
+
+
+## Write Tests
+
+Docu: http://zombie.js.org/
