@@ -54,6 +54,10 @@ gui.addPullDownMenu( 'testMenu', 'Menu' )
 gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 1' )
 gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 2' )
 
+// by defining this as subpage of "user", the link will appear in the user security menu
+var profilePage = gui.addPage( 'user/profile', 'User Profile',  { id:'User Profile' }, null )
+var profilePage = gui.addPage( 'user/settings', 'Preferences',  { id:'Preferences' }, null )
+
 
 /* Optional hooks for HA environment, typically using a distributed cache or a DB
 gui.createToken = function createToken( userId ){

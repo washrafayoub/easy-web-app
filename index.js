@@ -168,7 +168,11 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     if ( pageId.indexOf( '/' ) != -1 ) {
     	var menuId = pageId.substr( 0 , pageId.indexOf( '/' ) )
     	// log.info( ' ... '+menuId )
-    	if ( this.pullDownMenu[ menuId ] ) {
+    	if ( menuId == 'user') {
+    		//log.info( 'menu "'+menuId +'": '+pageId)
+    		if ( ! gui.secParams.userPages ) { gui.secParams.userPages = {} }
+    		gui.secParams.userPages[ title ] = pageId
+    	} else if ( this.pullDownMenu[ menuId ] ) {
     		// log.info( 'pullDownMenu: '+menuId )
     		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( 
     		    { pageLink:pageId, label:title } 
