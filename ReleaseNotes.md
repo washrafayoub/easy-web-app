@@ -1,3 +1,9 @@
+## 0.9.5
+Support rest-web-gui v0.7.20:
+* security: change password
+* security: user pages
+* security: pull down menu
+
 ## 0.9.1, 0.9.2
 * Security module support password changes
 * Not authorized page redirect to login page
