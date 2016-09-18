@@ -202,6 +202,27 @@ Returns the "express" web service plug-in, so that you can implement
 web services, e.g. for forms commits or loading i18n translations
 (ref. examples with \*). 
 
+### gui.getLoggedInUserId( req ) 
+Returns users ID, if authenticated or _null_ if not authenticated.
+
+Example usage in ReST service code:
+```javascript
+var svc  = gui.getExpress()
+svc.get( 
+  '/products', 
+  function( req, res ) {
+  	if ( gui.getLoggedInUserId( req ) ) { 
+  	  // user login: OK
+      ...
+      res.status( 200 ).json( products )  		
+  	} else {
+      res.status( 400 ).send( "You must login first!!"  )  		  		
+  	}
+  }
+)
+```
+
+
 ## "Page" API Reference
 Page object reference: 
 [structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/Structure-Specification)
