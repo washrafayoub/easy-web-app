@@ -9,7 +9,7 @@ mainPage.addView( { 'id':'row1view', 'title':'Login with any (non empty) user id
 
 // let's create a hidden page -- only available for logged in users
 var secretPage = gui.addPage( 'secretPage', 'Private Page',  
-		{ id:'DataTable', type:'pong-easytable', resourceURL:'/securitydemo/products' },
+    { id:'DataTable', type:'pong-easytable', resourceURL:'/securitydemo/products' },
 	  {
 	    dataURL:'',
 	    easyCols: [ 'Name', 'Rating' ]
