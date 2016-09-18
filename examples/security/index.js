@@ -72,8 +72,8 @@ var svc  = gui.getExpress()
 svc.get( 
   '/products', 
   function( req, res ) {
-  	if ( gui.getLoggedInUserId( req ) ) {
-    	log.info( 'products service', 'user is logged in' )
+    if ( gui.getLoggedInUserId( req ) ) {
+      log.info( 'products service', 'user is logged in' )
       // generate some dummy data:
       var tableData = 
         [ 
@@ -93,7 +93,7 @@ svc.get(
   	} else {
     	log.info( 'products service', 'not allowed for unauthenticated users' )
       res.status( 401 ).send( "You must login first!!"  )  		  		
-  	}
+    }
   }
 )
 
