@@ -6,7 +6,7 @@ Prepare:
 
 Run Test:
 
-    for i in test/*; do mocha $i; done
+    for i in test/*; do mocha -t 10000 $i; done
 
 Sorry, that won't work: `mocha --recursive`
 
