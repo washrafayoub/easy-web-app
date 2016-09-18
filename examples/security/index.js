@@ -92,7 +92,7 @@ svc.get(
       res.status( 200 ).json( tableData )  		
   	} else {
     	log.info( 'products service', 'not allowed for unauthenticated users' )
-      res.status( 400 ).send( "You must login first!!"  )  		  		
+      res.status( 401 ).send( "You must login first!!"  )  		  		
   	}
   }
 )
