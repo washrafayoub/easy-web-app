@@ -86,8 +86,8 @@ var app  = gui.getExpress()
 var bodyParser  = require( 'body-parser' )
 var jsonParser  = bodyParser.json()
 
-app.locals.pretty = true
-app.set('json spaces', 2)
+//app.locals.pretty = true
+//app.set('json spaces', 2)
 
 
 // serve a table as answer for GET request

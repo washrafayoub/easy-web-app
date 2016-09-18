@@ -3,7 +3,7 @@
 var gui = require( '../../' )          // stand alone: replace with:  require( 'easy-web-app' )
 
 /** Initialize the framework and the default page */
-gui.init()
+gui.init( 'Multi Page Demo' )
 gui.pages['main'].title = '1st Page'
 
 /** Add an empty view to the default page. */
