@@ -1,3 +1,6 @@
+## 0.9.6
+* ReST API authentication and [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/security)
+
 ## 0.9.5
 Support rest-web-gui v0.7.20:
 * security: change password
