@@ -688,29 +688,25 @@ router.post(
                 res.send(  "Login OK" )
               } else {
                 // log.info( "Login failed!" )
-                res.statusCode = 401
-                res.send(  "Login failed" )
+                res.status( 401 ).send(  "Login failed" )
               }              
             }
           )
           
           
         } else if ( gui.getUserId( req ) ) {
-          res.statusCode = 200
-          res.send( gui.getUserId( req ) )
+          res.status( 200 ).send( gui.getUserId( req ) )
           return
         } else {
           // log.info( "user/password or cookie required" )
-          res.statusCode = 401
-          res.send( "Login failed" )          
+          res.status( 401 ).send( "Login failed" )          
         }
       } else {
         // log.info( "Please implement authenticate function:" )
         // log.info( " gui.authenticate = function authenticate(user,
         // password)"+
         // " { ... return true/false }")
-        res.statusCode = 401
-        res.send( "Login failed" )                  
+        res.status( 401 ).send( "Login failed" )                  
       }
     }
   )
@@ -735,16 +731,32 @@ gui.getUserId = function getUserId( req ) {
   return userId
 }
 
+/** returns null, if not logged in */
+gui.getLoggedInUserId = function getLoggedInUserId( req ) {
+	var uid = null 
+	if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+		var token = req.cookies[ 'pong-security' ]
+		if ( gui.userTokens[ token ] ) {
+			// log.info( "getUserId: userId = "+gui.userTokens[ token ] )
+			uid = gui.userTokens[ token ]
+		}
+	}
+	return uid
+}
+
+// Change Password ReST Service
 router.post(
     '/password', 
     formParser, 
     function(req, res) {
       // log.info( "POST Login ..." )
-      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-        var token = req.cookies[ 'pong-security' ]
-        if ( gui.userTokens[ token ] ) {
-          // log.info( "getUserId: userId = "+gui.userTokens[ token ] )
-          var userId = gui.userTokens[ token ]
+      var userId = getLoggedInUserId( req )
+      if ( userId ) {
+//      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+//        var token = req.cookies[ 'pong-security' ]
+//        if ( gui.userTokens[ token ] ) {
+//          // log.info( "getUserId: userId = "+gui.userTokens[ token ] )
+//          var userId = gui.userTokens[ token ]
           if ( gui.changePassword != null ) {
             if ( req.body && req.body.oldPassword && req.body.newPassword ) {
               var oldPwd = req.body.oldPassword
@@ -753,35 +765,30 @@ router.post(
                  function( err, result ) {
                     //log.info( "callback", "err:"+err+" result:"+result )
                     if ( result ) {
-                      res.statusCode = 200              
-                      res.send( "Password changed!" )                 
+                      res.status( 200 ).send( "Password changed!" )                 
                     } else {
-                      res.statusCode = 400
-                      res.send( "Failed to change password!" )              
+                      res.status( 400 ).send( "Failed to change password!" )              
                     }
                 }
               )
             } else {
-              res.statusCode = 400
-              res.send( "Invalid request!" )                              
+              res.status( 400 ).send( "Invalid request!" )                              
             }
             // TODO
           } else {
-            res.statusCode = 405
-            res.send( "Failed to change password!" )                  
+            res.status( 405 ).send( "Failed to change password!" )                  
           }
         } else {
-          res.statusCode = 401
-          res.send( "Login invalid!" )                                    
+          res.status( 401 ).send( "Login invalid!" )                                    
         }
-      } else {
-        res.statusCode = 401
-        res.send( "Login required!" )                          
-      }
+//      } else {
+//        res.statusCode = 401
+//        res.send( "Login required!" )                          
+//      }
    }
  )
 
-
+// logout ReST service
 router.post(
     '/logout', 
     formParser, 
@@ -799,8 +806,7 @@ router.post(
         } else if ( gui.userTokens[ token ] ) {
           delete gui.userTokens[ token ]
         }
-        res.statusCode = 200
-        res.send( "" )
+        res.status( 200 ).send( "" )
       }
     }
   )
