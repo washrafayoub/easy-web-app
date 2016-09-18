@@ -1,4 +1,4 @@
-var gui     = require( '../../' )     // stand alone: replace with  require( 'easy-web-app' ) 
+var gui = require( '../../' )     // stand alone: replace with  require( 'easy-web-app' ) 
 var log = require('npmlog');
 
 // define a main page
