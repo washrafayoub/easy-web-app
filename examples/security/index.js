@@ -55,7 +55,7 @@ gui.authorize =
 
 // pull down menu
 
-//now add the pull down menu:
+// now add the pull down menu:
 gui.addPullDownMenu( 'testMenu', 'Menu' )
 // add static HTML dummy content to menu:
 gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 1' )
