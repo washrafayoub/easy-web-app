@@ -750,7 +750,7 @@ router.post(
     formParser, 
     function(req, res) {
       // log.info( "POST Login ..." )
-      var userId = getLoggedInUserId( req )
+      var userId = gui.getLoggedInUserId( req )
       if ( userId ) {
 //      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
 //        var token = req.cookies[ 'pong-security' ]
