@@ -1,3 +1,6 @@
+## 0.9.8
+* Change password: strength check
+
 ## 0.9.6
 * ReST API authentication and [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/security)
 

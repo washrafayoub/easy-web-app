@@ -640,6 +640,7 @@ gui.enableSecurity =
     gui.secParams.registgerURL = ( paramObj.registgerURL ? paramObj.registgerURL : null )
     gui.secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
     gui.secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : root+'/logout' )
+    gui.secParams.changePasswordStrength = 4
     this.pages[ 'main' ].header.modules.push(
       { 'id': 'Sec', 'type': 'pong-security', 'param': gui.secParams }
     ) 
