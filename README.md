@@ -13,7 +13,7 @@ A lot of plug-ins are available to get a portal it quickly configured:
 * Maps: POIs, routes, traffic, ...
 * Page to page navigation with navigation tabs, menus, links and session data
 * Source code display
-* Security: RESTful, HTTP Basic or OAuth authentication support 
+* Security: RESTful, HTTP Basic or OAuth authentication support, "Change Password" dialog with policy check
 * ...
 
 This is how it may look like:
@@ -22,7 +22,7 @@ This is how it may look like:
 Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/) 
 and [online demos](http://mh-svr.de/pong_dev) of features.
 
-[Release notes](https://github.com/ma-ha/easy-web-app/blob/master/ReleaseNotes.md)
+Check "[Release Notes](https://github.com/ma-ha/easy-web-app/blob/master/ReleaseNotes.md)" for latest changes in this version.
 
 ## Compared with ...
 * jade
