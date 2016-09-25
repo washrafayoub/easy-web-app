@@ -1,3 +1,6 @@
+## 0.9.9
+* Request password change from server side and open dialog after login
+
 ## 0.9.8
 * Change password: strength check
 
