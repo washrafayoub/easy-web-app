@@ -6,18 +6,18 @@ Notation:
 * [  ] means optional
 * `abc` is a class or field name
 * "xyz" is a value
-* <abc> is a placeholder for value
+* `<abc>` is a placeholder for value
 * (object), (String), (Array) are JavaScript tpyes
 
 ## Web Services
 Some REST/JSON web services are provided:
-* GET /svc/layout/<id>/structure
-* GET /svc/layout/<id>/<subid>/structure
-* GET /svc/nav
-* GET /i18n/<lang>
-* POST /login
-* POST /password
-* POST /logout
+* `GET /svc/layout/<id>/structure`
+* `GET /svc/layout/<id>/<subid>/structure`
+* `GET /svc/nav`
+* `GET /i18n/<lang>`
+* `POST /login`
+* `POST /password`
+* `POST /logout`
 
 ## "GUI" API
 ### gui.init ( \[portalName\] \[,port\] \[,rootPath\])
