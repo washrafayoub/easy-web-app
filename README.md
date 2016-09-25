@@ -170,6 +170,9 @@ Remark: To keep this demo simple, there is no REST web service for the
 Have a look at [some feature demos and the API reference](https://github.com/ma-ha/easy-web-app/tree/master/examples/),
 which also contains a form tutorial.
 
+The [API Reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md)
+contains all JS API and all implemented REST web services.
+
 ## Feedback and Support
 Please tell me what you like and what I need to improve! I'm also interested in use cases you do. 
 
