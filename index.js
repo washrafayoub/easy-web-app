@@ -659,8 +659,8 @@ router.post(
           gui.authenticate( 
             req.body.userid, 
             req.body.password, 
-            function ( err, result ) {
-              if ( !err && result ) {
+            function ( err, loginOK, mustChangePassword ) {
+              if ( !err && loginOK ) {
                 // log.info( "Login OK" )
                 res.statusCode = 200
                 // todo set up "session" for user via hook
@@ -685,8 +685,9 @@ router.post(
                   gui.secParams.changePasswordURL = 
                     ( gui.appRoot=='/' ? '/password' : gui.appRoot+'/password' )
                 }
-                
-                res.send(  "Login OK" )
+                var changePassword = false
+                if ( mustChangePassword ) { changePassword = true }
+                res.json( { loginResult: "Login OK", changePassword: changePassword } ) 
               } else {
                 // log.info( "Login failed!" )
                 res.status( 401 ).send(  "Login failed" )

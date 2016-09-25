@@ -5,7 +5,7 @@ var log = require('npmlog');
 var mainPage = gui.init( 'Security Demo', 8080, 'securitydemo' )
 mainPage.title = 'Home'
 mainPage.header.logoText = 'Security Demo'
-mainPage.addView( { 'id':'row1view', 'title':'Login with any (non empty) user id', 'height':'300px' } )
+mainPage.addView( { 'id':'row1view', 'title':'Login with user id "test1" or "test2"', 'height':'300px' } )
 
 // let's create a hidden page -- only available for logged in users
 var secretPage = gui.addPage( 'secretPage', 'Private Page',  
@@ -23,10 +23,14 @@ gui.enableSecurity()
 gui.authenticate =  
   function authenticate( user, password, callback ) {
     log.info( 'Login user "'+user+'"' )
-    if ( ! user ) {
-      callback( null, false )
-    } else {
+    if ( user == "test1" ) {
+      callback( null, true, false )
+    } else if ( user == "test2" ) {
+      callback( null, true, true )
+    } else if ( user == "test3" ) {
       callback( null, true )
+    } else {
+      callback( null, false )
     }
   }
 

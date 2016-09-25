@@ -175,9 +175,14 @@ Add [pong-security module](https://github.com/ma-ha/rest-web-ui/tree/master/html
 * `registgerURL`: if you need a link to a registration page id, default is `null` 
 
 IMPORTANT: You need to implement 
-* `gui.authenticate = function(user,password,callback){ ... callback(err,true/false) }` and 
+* `gui.authenticate = function( user, password, callback ){ ... callback( err, true/false [, true/false] ) }` and 
 * `gui.authorize = function(user,page){ ... return true/false}` function,
 see [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
+
+The `authenticate callback` has two or three parameters:
+* `err`: should be null if authentication is OK
+* `authenticationOK`: `true` or `false`
+* (optional) `mustChangePassword`: `true` or `false`
 
 Optional you can implement a change password hook. 
 ```javascript
