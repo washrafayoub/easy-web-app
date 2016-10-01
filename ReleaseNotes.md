@@ -1,5 +1,8 @@
 ## 0.9.9
 * Request password change from server side and open dialog after login
+* new Rest-Web-UI Features:
+** Search in header
+** RSS
 
 ## 0.9.8
 * Change password: strength check
