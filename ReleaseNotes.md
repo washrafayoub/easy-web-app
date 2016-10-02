@@ -1,3 +1,6 @@
+## 0.9.10
+* Lists with hierarchically DIVs
+
 ## 0.9.9
 * Request password change from server side and open dialog after login
 * new Rest-Web-UI Features:
