@@ -1,4 +1,7 @@
 ## 0.9.11
+* List/table with pie chart, incl. example 
+
+## 0.9.11
 * List/table improvements from Rest-Web-UI 0.8.3
 * List [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/list)
 
