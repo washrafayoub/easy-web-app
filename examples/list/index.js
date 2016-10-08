@@ -108,9 +108,17 @@ svc.get(
   '/service/statistics', 
   function( req, res ) {
     // generate some dummy data:
-    var x= dta1.shift()
-    dta1.push( x )
-    //console.log( dta1 )
+    var d = JSON.parse( JSON.stringify( dta1[ 0 ] ) )
+    for ( var i = 1; i < dta1.length; i++ ) {
+      var d1 = dta1[ i ]
+      var d2 = dta1[ i - 1 ]
+      d2[1] = d1[1]
+    }
+    var d2 = dta1[ dta1.length-1  ]
+    d2[1] = d[1]
+
+    console.log( JSON.stringify( dta1 ))
+    
     var tableData = 
       [ 
        {"ID":"ABC","CustomerCount":"1234","Rating":"3","Status":"false",
