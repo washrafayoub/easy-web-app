@@ -170,3 +170,15 @@ body {
 	height: 50px;
 }
 
+.pongListCellXUsage{
+	width: 100px;
+}
+.pongListCellUsageLb {
+	width: 100px;
+	color: gray;
+}
+.pongListCellUsage {
+	width: 100px;
+	height: 70px;
+}
+
