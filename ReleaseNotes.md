@@ -1,3 +1,6 @@
+## 0.9.14
+* List with polling updates
+
 ## 0.9.13
 * List/table can display graph, incl. [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/list) 
 
