@@ -25,6 +25,7 @@ mainPage.addView(
     {
       maxRows:'4',
       rowId: 'ID',
+      pollDataSec: "5 ",
       divs: [
           { id:'ID', cellType:'text' }, 
           { id:'XCust', cellType:'div',
@@ -99,6 +100,7 @@ mainPage.addView(
        ]
     }
 )
+var dta1 = [[-24,30],[-22,35],[-20,50],[-18,40],[-16,40],[-14,50],[-12,40],[-10,30],[-8,35],[-6,35],[-4,45],[-2,10],[0,30]]
 
 // now we have to implement the web service to serve some data for the example
 var svc  = gui.getExpress();
@@ -106,10 +108,13 @@ svc.get(
   '/service/statistics', 
   function( req, res ) {
     // generate some dummy data:
+    var x= dta1.shift()
+    dta1.push( x )
+    //console.log( dta1 )
     var tableData = 
       [ 
        {"ID":"ABC","CustomerCount":"1234","Rating":"3","Status":"false",
-         "Usage":[{"name":"traffic","data":[[-24,30],[-22,35],[-20,50],[-18,40],[-16,40],[-14,50],[-12,40],[-10,30],[-8,35],[-6,35],[-4,45],[-2,10],[0,30]]}],
+         "Usage":[{"name":"traffic","data":dta1}],
          "SizeStat":[
                      {"val":"40","label":"S","color":"#0aa"},
                      {"val":"30","label":"M","color":"#0cc"},
