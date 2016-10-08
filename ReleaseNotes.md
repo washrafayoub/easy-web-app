@@ -1,5 +1,8 @@
+## 0.9.13
+* List/table can display graph, incl. [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/list) 
+
 ## 0.9.11
-* List/table with pie chart, incl. example 
+* List/table with pie chart, incl. [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/list) 
 
 ## 0.9.11
 * List/table improvements from Rest-Web-UI 0.8.3
