@@ -164,6 +164,8 @@ body {
 }
 .pongListCellSizeGlb {
 	width: 100px;
+	color: gray;
+	text-align: center;
 }
 .pongListCellSizeStat {
 	width:100px;
@@ -176,6 +178,7 @@ body {
 .pongListCellUsageLb {
 	width: 100px;
 	color: gray;
+	text-align: center;
 }
 .pongListCellUsage {
 	width: 100px;
