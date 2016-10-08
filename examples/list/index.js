@@ -117,7 +117,7 @@ svc.get(
     var d2 = dta1[ dta1.length-1  ]
     d2[1] = d[1]
 
-    console.log( JSON.stringify( dta1 ))
+    //console.log( JSON.stringify( dta1 ))
     
     var tableData = 
       [ 
