@@ -20,7 +20,7 @@ This is how it may look like:
 ![demo screen shot](http://bit.ly/rest-web-gui-screenshot) 
 
 Have a look at the "list" [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/list):
-![list demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/list/pong-list.png) 
+![list demo screen shot](https://github.com/ma-ha/easy-web-app/raw/master/examples/list/pong-list.png) 
 
 
 Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/), 
