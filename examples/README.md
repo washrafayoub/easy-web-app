@@ -31,6 +31,7 @@ Perhaps start here:
 * [Simple form -- showing all currently supported field types](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
 * [Table demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/table-demo/index.js) \*
 * [Content via MediaWiki API](https://github.com/ma-ha/easy-web-app/blob/master/examples/wiki-demo/index.js)
+* [Icon navigation demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/icons/) \*
 * [I/O demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) \*
 * [Tree and Histogram demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/tree/) \*
 * [List demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/list/) \*
