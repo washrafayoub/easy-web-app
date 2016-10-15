@@ -1,3 +1,6 @@
+## 0.9.16
+* Icon navigation view with [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/icons) 
+
 ## 0.9.14
 * List with polling updates
 
