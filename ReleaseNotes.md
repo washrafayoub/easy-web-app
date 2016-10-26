@@ -1,4 +1,7 @@
 ## 0.9.16
+* fix table bug by ReST-Web-UI 0.8.9
+
+## 0.9.16
 * Icon navigation view with [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/icons) 
 
 ## 0.9.14
