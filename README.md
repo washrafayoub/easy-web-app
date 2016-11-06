@@ -1,5 +1,5 @@
 # Easy Web App
-Create web applications easily. 
+Create web applications easily and reduce complexity.
 
 This is a [Node.js API package](https://www.npmjs.com/package/easy-web-app) 
 for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
