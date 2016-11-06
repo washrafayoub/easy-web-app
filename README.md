@@ -61,7 +61,7 @@ node index.js
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
 ## How does it work
-To create a web page with one view you simple do:
+To create a web application with one view you simple do:
 
 ```javascript
 // initialize:
@@ -85,7 +85,7 @@ This little package helps you to create the JSON configuration and
 to set up [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) 
 web service to provide the page specification to the browser.
 
-The JSON config of a whole page looks this way:
+The JSON configuration of a whole page looks this way:
 * `title`: a simple String
 * `header` object
   * `logoText` (String) or `logoURL` (String) 
