@@ -1,3 +1,6 @@
+## 0.9.18
+* upgrade to ReST-Web-UI 0.9.0
+
 ## 0.9.17
 * fix table bug by ReST-Web-UI 0.8.9
 
