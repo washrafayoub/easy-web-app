@@ -754,41 +754,32 @@ router.post(
       // log.info( "POST Login ..." )
       var userId = gui.getLoggedInUserId( req )
       if ( userId ) {
-//      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-//        var token = req.cookies[ 'pong-security' ]
-//        if ( gui.userTokens[ token ] ) {
-//          // log.info( "getUserId: userId = "+gui.userTokens[ token ] )
-//          var userId = gui.userTokens[ token ]
-          if ( gui.changePassword != null ) {
-            if ( req.body && req.body.oldPassword && req.body.newPassword ) {
-              var oldPwd = req.body.oldPassword
-              var newPwd = req.body.newPassword
-              gui.changePassword( userId, oldPwd, newPwd,
-                 function( err, result ) {
-                    //log.info( "callback", "err:"+err+" result:"+result )
-                    if ( result ) {
-                      res.status( 200 ).send( "Password changed!" )                 
-                    } else {
-                      res.status( 400 ).send( "Failed to change password!" )              
-                    }
-                }
-              )
-            } else {
-              res.status( 400 ).send( "Invalid request!" )                              
-            }
-            // TODO
+        if ( gui.changePassword != null ) {
+          if ( req.body && req.body.oldPassword && req.body.newPassword ) {
+            var oldPwd = req.body.oldPassword
+            var newPwd = req.body.newPassword
+            gui.changePassword( userId, oldPwd, newPwd,
+               function( err, result ) {
+                  //log.info( "callback", "err:"+err+" result:"+result )
+                  if ( result ) {
+                    res.status( 200 ).send( "Password changed!" )                 
+                  } else {
+                    res.status( 400 ).send( "Failed to change password!" )              
+                  }
+              }
+            )
           } else {
-            res.status( 405 ).send( "Failed to change password!" )                  
+            res.status( 400 ).send( "Invalid request!" )                              
           }
+          // TODO
         } else {
-          res.status( 401 ).send( "Login invalid!" )                                    
+          res.status( 405 ).send( "Failed to change password!" )                  
         }
-//      } else {
-//        res.statusCode = 401
-//        res.send( "Login required!" )                          
-//      }
-   }
- )
+      } else {
+        res.status( 401 ).send( "Login invalid!" )                                    
+      }
+    }
+)
 
 // logout ReST service
 router.post(
