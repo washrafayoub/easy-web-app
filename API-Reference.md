@@ -202,6 +202,12 @@ For page the following structure will be set up:
   * `copyrightText` (String) 
   * `modules` (empty Array)
 
+### addFooterLink (  linkText, linkURL, \[, linkTarget\] )
+Main page only!
+
+Initializes the footer link list and adds the link. 
+The linkTarget is optional, typically you define it to be `_blank`
+
 ### page.addView ( def \[, config\] )
 Adds a new `row` with a new `view` and returns the `view`, ref. `gui.addView`.
 
@@ -222,6 +228,11 @@ mainPage.addView(
 
 ### page.addIoView ( def \[, config\] )
 Returns IoView, ref. [I/O example](https://github.com/ma-ha/easy-web-app/tree/master/examples/io).
+
+### page.setCopyright( text )
+Main page only!
+
+Sets the copyright text in the footer.
 
 ### page.setLogoText ( text )
 Main page only!

@@ -100,6 +100,21 @@ gui.setDefaults = function setDefaults() {
     function setPageWidth( width  ) {
       this[ 'page_width' ] = width
     }
+  
+  this.pages[ 'main' ].setCopyright =
+    function( text ) {
+      this.footer['copyrightText'] = text
+    }
+
+  this.pages[ 'main' ].addFooterLink =
+    function( linkText, linkURL, linkTarget ) {
+    if ( ! this.footer['linkList'] ) {  this.footer['linkList'] = [] }
+    if ( linkTarget ) {
+      this.footer['linkList'].push( { text:linkText, url:linkURL, target:linkTarget } )
+    } else {
+      this.footer['linkList'].push( { text:linkText, url:linkURL } )
+    }
+  }
     
   return this.pages[ 'main' ]
 }
