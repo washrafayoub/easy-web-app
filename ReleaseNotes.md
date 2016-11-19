@@ -1,3 +1,8 @@
+## 0.10.0
+* [new API functions](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#page-api-reference) 
+in mainPage to customize the footer: 
+[example](https://github.com/ma-ha/easy-web-app/blob/master/examples/footer/index.js)
+
 ## 0.9.18
 * upgrade to ReST-Web-UI 0.9.0
 
