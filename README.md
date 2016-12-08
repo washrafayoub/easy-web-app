@@ -35,7 +35,7 @@ Check "[Release Notes](https://github.com/ma-ha/easy-web-app/blob/master/Release
   * jade is descriptive, but low level (HTML structure)
   * jade is perfect for web pages, not for web applications
 * angular 
-  * angular can do everything, but JS programming is required 
+  * angular can do everything, but programming is required 
 * react
   * build web apps with JavaScript in a component way -- but not descriptive
 
