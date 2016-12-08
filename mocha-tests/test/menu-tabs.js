@@ -52,11 +52,11 @@ describe(
     }
     );  
     
-    it( 'should show sub menu tabs', 
+    it( 'should show sub menu tabs and info', 
       function() {
           this.browser.assert.success();
           this.browser.assert.text( '#navItem2', 'myMenu' );
-          this.browser.assert.text( '#navSubMenu2', 'Sub Page 1 Sub Page 2' );
+          this.browser.assert.text( '#navSubMenu2', 'Sub Page 1 42 Sub Page 2' );
         }
     );  
     
