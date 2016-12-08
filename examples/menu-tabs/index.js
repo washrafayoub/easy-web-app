@@ -10,6 +10,7 @@ mainPage.addView ( { id : 'Page abc' }, null )
 
 /** Add a 2nd page page. */
 var page2 = gui.addPage( 'secondpage', 'Page XYZ',  { id:'Page xyz' }, null )
+page2.addInfo( 'New' )
 
 /** Add a 3rd page page. */
 // The page name is an URL and you can define a sub-menu like  
@@ -20,3 +21,4 @@ var page3 = gui.addPage( 'myMenu/foo', 'Sub Page 1', { id:'Page 1' } )
 
 /** Add a 4th page page. */
 var page4 = gui.addPage( 'myMenu/bar', 'Sub Page 2',{ id:'Page 2' }, null )
+page4.addInfo( '42' )

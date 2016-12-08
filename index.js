@@ -115,7 +115,17 @@ gui.setDefaults = function setDefaults() {
       this.footer['linkList'].push( { text:linkText, url:linkURL } )
     }
   }
-    
+
+  this.pages[ 'main' ].addInfo =
+    function( text ) {
+      this.info = text
+    }
+
+  this.pages[ 'main' ].delInfo =
+    function( ) {
+      this.info = null
+    }
+
   return this.pages[ 'main' ]
 }
 
@@ -174,6 +184,16 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
         this[ 'page_width' ] = width
       }
     
+    pgObj.addInfo =
+      function( text ) {
+        this.info = text
+      }
+
+    pgObj.delInfo =
+      function(  ) {
+        this.info = null
+      }
+
     if ( viewDef )  
       pgObj.addView( viewDef, viewConfig )
     
@@ -416,10 +436,12 @@ router.get(
             if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
               // not visible for this user
             } else {
-              navTabs.push( {
-                'layout' : layoutId,
-                'label' : gui.pages[ layoutId ].title
-              } )              
+              var nav = {
+                  'layout' : layoutId,
+                  'label' : gui.pages[ layoutId ].title
+                }
+              if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
+              navTabs.push( nav )              
             }
           }
         } else { // sub-menu
@@ -450,10 +472,16 @@ router.get(
 	          if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
 	            // not visible for this user
 	          } else {
-	            navTabs[ subMenus[ subMenu ] ].menuItems.push({
-	              'layout' : layoutId,
-	              'label' : gui.pages[ layoutId ].title
-	            } )
+	            var nav = {
+	                'layout' : layoutId,
+	                'label' : gui.pages[ layoutId ].title
+	              }
+              if ( gui.pages[ layoutId ].info ) { 
+                nav.info =  gui.pages[ layoutId ].info
+                navTabs[ subMenus[ subMenu ] ].info = '!'
+                //log.info('nav', navTabs )
+              } 
+	            navTabs[ subMenus[ subMenu ] ].menuItems.push( nav )
 	          }
 	        }
         }

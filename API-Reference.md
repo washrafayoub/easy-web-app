@@ -229,6 +229,12 @@ mainPage.addView(
 ### page.addIoView ( def \[, config\] )
 Returns IoView, ref. [I/O example](https://github.com/ma-ha/easy-web-app/tree/master/examples/io).
 
+### page.addInfo ( text )
+Add info (e.g. available updates) to menu tab.
+
+### page.delInfo ( text )
+Removes the info from the menu tab.
+
 ### page.setCopyright( text )
 Main page only!
 
