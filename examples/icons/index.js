@@ -2,13 +2,14 @@ var gui = require( '../../' )     // stand alone: replace with  require( 'easy-w
 
 // the icon navigation must appear on each page:
 
-var icons = { id:'nav1', title:' ', width:'7% ', type:'pong-icons' }
+var icons = { id:'nav1', title:' ', width:'7% ', type:'pong-icons', resourceURL:"navigation" }
 var iconNav =
   { icons:[
         { layout:"main",  label:"Main", img:"img/p01w.png" },
         { layout:"page2", label:"Page 2", img:"img/p02w.png" },
         { layout:"page3", label:"Page 3", img:"img/p03w.png" }
-     ]
+     ],
+     update:"15"
   }
 
 // -------------------------------------------------------------
@@ -48,3 +49,16 @@ nav3.decor = ''
 
 // empty view: do business logic here:
 p3columns.addView( { 'id':'col1view', 'title':'Page 3', 'width':'93%' } )
+
+// -------------------------------------------------------------
+// icon view will request updates:
+var svc  = gui.getExpress()
+var cnt = 0
+svc.get( 
+  '/navigation', 
+  function( req, res ) {
+    cnt++;
+    iconNav.icons[0].info = cnt+''
+    res.status( 200 ).json( iconNav )     
+  }
+)
