@@ -43,6 +43,17 @@ Values:
 * 2 = yellow
 * null = grey
 
+## ioView.addStaticLabel ( text, x, y }
+Create a label. Returns label object.
+
+Feel free to set these options on label object:
+* textAlign
+* textBaseline
+* font
+* textFillColor
+* textStrokeColor
+
+
 ## ioView.addSwitch ( id, x, y, [ value1, value2 [,value3] ], callbackFunction )
 see [example code](https://github.com/ma-ha/rest-web-ui/blob/master/html/modules/pong-io/pong-io.js) 
 

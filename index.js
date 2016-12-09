@@ -607,12 +607,15 @@ gui.addIoView = function addIoView( page ) {
   };
   // IO method to define update polling
   io.setBackgroundImage = function ( imgFullPath ) {
-    
-      var bgImgName = '/local'+imgFullPath.substring( imgFullPath.lastIndexOf( '/' ) );
-      var bgImgPath = imgFullPath.substring( 0, imgFullPath.lastIndexOf( '/' ) );
-// log.info( 'static /local', bgImgPath +' '+ bgImgName);
-      this.moduleConfig.imgURL = bgImgName;
-      router.use ( '/local', express.static( bgImgPath ) );
+      if ( imgFullPath ) {
+        var bgImgName = '/local'+imgFullPath.substring( imgFullPath.lastIndexOf( '/' ) );
+        var bgImgPath = imgFullPath.substring( 0, imgFullPath.lastIndexOf( '/' ) );
+        // log.info( 'static /local', bgImgPath +' '+ bgImgName);
+        this.moduleConfig.imgURL = bgImgName;
+        router.use ( '/local', express.static( bgImgPath ) );
+      } else {
+        this.moduleConfig.imgURL = null
+      }
 
   };
 
@@ -665,6 +668,15 @@ gui.addIoView = function addIoView( page ) {
     } else {
       log.warn( 'addSwitch: ', 'Ignored, values should be an array!' );
     }
+  }
+  
+  io.addStaticLabel = function( text, x, y ) {
+    var label = null
+    if ( text && x && y ) {
+      label = { type:'Label', label:text, pos: { x:''+x, y:''+y } }
+      this.moduleConfig.io.push( label )
+    } 
+    return label
   }
   
   // add general config obj
