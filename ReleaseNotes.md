@@ -1,5 +1,6 @@
-## 0.10.2
+## 0.10.2/3
 * ioView.addIoElementConfig(...) see [IO-API](https://github.com/ma-ha/easy-web-app/tree/master/examples/io) 
+* fix in I/O switch
 
 ## 0.10.0
 * [new API functions](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#page-api-reference) 
