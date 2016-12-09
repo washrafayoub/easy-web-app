@@ -571,10 +571,9 @@ gui.addIoView = function addIoView( page ) {
           if ( gui.io[ ioID ][ ctlID ] ) {
             gui.io[ ioID ][ ctlID ].value = req.body.value;
             if ( gui.io[ ioID ][ ctlID ].callBack ) {
-              gui.io[ ioID ][ ctlID ].callBack ( req.body.value );
+              gui.io[ ioID ][ ctlID ].callBack ( req.body.value , ctlID )
             } else {
-              log.warn( 'POST /svc/io', 
-                  'no CallBack for ID "' + ctlIDreq.body.id + '" defined' );
+              log.warn( 'POST /svc/io', 'CallBack undefined: "' + ctlID + '"' )
             }
           }
         }
