@@ -72,6 +72,14 @@ Add a line to the pull down menu with static HTML.
 ### gui.addView ( viewDef \[, moduleConfig\] \[, page\] ) 
 Returns `view` object (part of the `page` object structure).
 
+By default the view's properties are set to:
+
+```
+  'title'       = 'View:',
+  'decor'       = 'decor',
+  'height'      = '400px',
+  'resourceURL' = 'none'
+``` 
 By default it will add a `view` in a new row to the "main" page.
 
 The `viewDef` must at least define an `id` and should define `type` (check out the
@@ -228,6 +236,8 @@ mainPage.addView(
 
 ### page.addIoView ( def \[, config\] )
 Returns IoView, ref. [I/O example](https://github.com/ma-ha/easy-web-app/tree/master/examples/io).
+
+The `addIoView(...)` calls `addView` and the returns object is based on the view config object.
 
 ### page.addInfo ( text )
 Add info (e.g. available updates) to menu tab.

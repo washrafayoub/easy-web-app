@@ -645,7 +645,7 @@ gui.addIoView = function addIoView( page ) {
     } else {
       log.warn( 'setLED',':id "' + io + '" unknown' );
     }
-  };
+  }
 
   io.addSwitch = function( id, x, y, values, callBack ) {
     if ( values && values.length > 0 ) {
@@ -665,9 +665,15 @@ gui.addIoView = function addIoView( page ) {
     } else {
       log.warn( 'addSwitch: ', 'Ignored, values should be an array!' );
     }
-  };
-  return io;
-};
+  }
+  
+  // add general config obj
+  io.addIoElementConfig = function( config ) {
+    if ( config ) { this.moduleConfig.io.push ( config ) }
+  }
+  
+  return io
+}
 
 // ----------------------------------------------------------------------------
 // security

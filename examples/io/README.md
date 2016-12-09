@@ -45,3 +45,6 @@ Values:
 
 ## ioView.addSwitch ( id, x, y, [ value1, value2 [,value3] ], callbackFunction )
 see [example code](https://github.com/ma-ha/rest-web-ui/blob/master/html/modules/pong-io/pong-io.js) 
+
+## ioView.addIoElementConfig( configObj )
+Adds generic I/O configs to the view. 
