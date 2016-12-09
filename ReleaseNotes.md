@@ -1,3 +1,6 @@
+## 0.10.2
+* ioView.addIoElementConfig(...) see [IO-API](https://github.com/ma-ha/easy-web-app/tree/master/examples/io) 
+
 ## 0.10.0
 * [new API functions](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#page-api-reference) 
 in mainPage to customize the footer: 
