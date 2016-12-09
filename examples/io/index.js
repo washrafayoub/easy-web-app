@@ -30,3 +30,10 @@ ioView.addSwitch(
       }
     } 
 )
+
+var label = ioView.addStaticLabel( 'by MA-HA', 500, 10 )
+label.font = "10px Courier"
+
+ioView.addIoElementConfig( { id: 'lX0', type: 'Label',label: '2016',pos: { x: '500', y: '22' }, font: '10px Courier' }  )
+  
+log.info('>', ioView.moduleConfig.io )

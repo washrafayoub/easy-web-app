@@ -673,7 +673,7 @@ gui.addIoView = function addIoView( page ) {
   io.addStaticLabel = function( text, x, y ) {
     var label = null
     if ( text && x && y ) {
-      label = { type:'Label', label:text, pos: { x:''+x, y:''+y } }
+      label = { id:'label'+(lId++), type:'Label', label:text, pos: { x:''+x, y:''+y } }
       this.moduleConfig.io.push( label )
     } 
     return label
@@ -686,6 +686,7 @@ gui.addIoView = function addIoView( page ) {
   
   return io
 }
+var lId = 0
 
 // ----------------------------------------------------------------------------
 // security
