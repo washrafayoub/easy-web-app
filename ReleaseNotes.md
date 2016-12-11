@@ -1,3 +1,6 @@
+## 0.11.0
+* Solved path issues using newer npm versions (result in 404 and empty page)
+
 ## 0.10.2/3
 * ioView.addIoElementConfig(...) see [IO-API](https://github.com/ma-ha/easy-web-app/tree/master/examples/io) 
 * fix in I/O switch

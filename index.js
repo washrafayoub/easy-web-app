@@ -313,7 +313,28 @@ gui.addView = function addView( def, config, page ) {
 
 
 /* define static directories to load the framework into the web page */
-var staticDir = __dirname + '/node_modules/rest-web-gui/html';
+var fs = require('fs')
+var staticDir = __dirname + '/rest-web-gui/html'
+if ( fs.existsSync( staticDir ) ) {
+    log.info(' Init', 'Using static in '+staticDir )
+} else {
+  var path =require('path')
+  staticDir = path.resolve( __dirname, '../rest-web-gui/html' )
+  if ( fs.existsSync( staticDir ) ) {
+    log.info(' Init', 'Using static in '+staticDir )
+  } else {
+    staticDir = __dirname + '/node_modules/rest-web-gui/html'
+    if ( fs.existsSync( staticDir ) ) {
+      log.info(' Init', 'Using static in '+staticDir )
+    } else {
+      log.error(' Init', 'No path to "rest-web-gui" found! ' )
+      log.error(' Init', 'Tried: '+__dirname + '/rest-web-gui/html' )
+      log.error(' Init', 'Tried: '+path.resolve( __dirname, '../rest-web-gui/html' ) )
+      log.error(' Init', 'Tried: '+staticDir )
+      process.exit(1)
+    }
+  }
+}
 router.use ( '/css',     express.static( staticDir + '/css' ) );
 router.use ( '/js',      express.static( staticDir + '/js' ) );
 router.use ( '/img',     express.static( staticDir + '/img' ) );
