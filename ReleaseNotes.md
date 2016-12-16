@@ -1,3 +1,6 @@
+## 0.11.1
+* Support ReST-Web-UI 0.9.2, with date columns in tabe (editable, with datepicker)
+
 ## 0.11.0
 * Solved path issues using newer npm versions (result in 404 and empty page)
 

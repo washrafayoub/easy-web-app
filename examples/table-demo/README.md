@@ -2,7 +2,9 @@
 This create a page with header, table and footer.
 
 The [pong-easy-table](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-easytable) 
-plug-in defines a form using a naming convention. 
+plug-in defines a form using a naming convention. Have a look at the 
+["Cheats"](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-easytable#cheats) 
+-- can't be easier! 
 
 A goodie is the [help button](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-help). 
 In this case no help content is shown, but the configuration of the view itself -- the demo mode of the _help button_.
