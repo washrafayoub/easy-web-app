@@ -1,4 +1,4 @@
-## 0.11.1
+## 0.11.1/2
 * Support ReST-Web-UI 0.9.2, with date columns in tabe (editable, with datepicker)
 
 ## 0.11.0
