@@ -30,6 +30,12 @@ describe(
           this.browser.assert.element( 'div.copyright-div' );
         }
     );  
+
+    it( 'should show the canvas', 
+      function() {
+          this.browser.assert.element( 'canvas#io0ContentCanvas' );
+        }
+    );  
     
   }
 );
