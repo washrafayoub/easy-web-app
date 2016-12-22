@@ -1,3 +1,6 @@
+## 0.11.4 
+- fix for I/O when using a root-path
+
 ## 0.11.3
 - Support ReST-Web-UI 0.9.2, with I/O update hook and improved info URL parameter "?info=m1,m2"
 
