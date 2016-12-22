@@ -34,6 +34,8 @@ The data is also updated at any action on the view.
 ## ioView.setBackgroundImage ( url )
 Load an image for the panel.
 
+Warning: If the URL does not work, this will block loading of the data!
+
 ## ioView.addLED ( id, x, y, ledValue )
 
 Values:

@@ -613,7 +613,7 @@ gui.addIoView = function addIoView( page ) {
     }, 
     {
       'imgURL' : 'img.png',
-      'dataURL' : 'svc/io/' + ioId,
+      'dataURL' : ( gui.appRoot=='/' ? '' : gui.appRoot ) + '/svc/io/' + ioId,
       'poll' : '10000',
       'io' : []
     }, 
@@ -628,7 +628,8 @@ gui.addIoView = function addIoView( page ) {
   // IO method to define update polling
   io.setBackgroundImage = function ( imgFullPath ) {
       if ( imgFullPath ) {
-        var bgImgName = '/local'+imgFullPath.substring( imgFullPath.lastIndexOf( '/' ) );
+        var bgImgName = ( gui.appRoot=='/' ? '' : gui.appRoot ) + '/local' 
+          + imgFullPath.substring( imgFullPath.lastIndexOf( '/' ) );
         var bgImgPath = imgFullPath.substring( 0, imgFullPath.lastIndexOf( '/' ) );
         // log.info( 'static /local', bgImgPath +' '+ bgImgName);
         this.moduleConfig.imgURL = bgImgName;
