@@ -1,3 +1,6 @@
+## 0.11.5 
+- I/O addIoElementConfig with callback param (e.g.button)
+
 ## 0.11.4 
 - fix for I/O when using a root-path
 

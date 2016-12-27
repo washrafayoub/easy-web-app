@@ -34,6 +34,28 @@ ioView.addSwitch(
 var label = ioView.addStaticLabel( 'by MA-HA', 500, 10 )
 label.font = "10px Courier"
 
-ioView.addIoElementConfig( { id: 'lX0', type: 'Label',label: '2016',pos: { x: '500', y: '22' }, font: '10px Courier' }  )
-  
+ioView.addIoElementConfig( 
+  { id: 'lX0', type: 'Label', label: '2016',
+    pos: { x: '500', y: '22' }, font: '10px Courier' }  
+)
+
+var btnON = false
+function btnPressCallback( val, id ) {
+  gui.io[ ioView.ioId ][ id ].value = ( btnON ? 'OFF' : 'ON' )
+  btnON = !btnON
+  log.info( 'btnPressCallback' , 'id='+id+' '+gui.io[ ioView.ioId ][ id ].value)
+}
+
+ioView.addIoElementConfig(
+  { id: "btn", type: "Button", label: "press me",
+    width: "100", height: "25",
+    pos: { x: '5', y: '300' },
+    values: [
+      { buttonState: "ON",  led: "1" },
+      { buttonState: "OFF", led: "0" }
+    ]
+  },
+  btnPressCallback
+)
+
 log.info('>', ioView.moduleConfig.io )

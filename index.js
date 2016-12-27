@@ -586,17 +586,23 @@ gui.addIoView = function addIoView( page ) {
       jsonParser, 
       function ( req, res ) {
         // console.log( JSON.stringify( req.body ) );
-        if ( req.body && req.body.id && req.body.value && req.params.ioId ) {
+        if ( req.body && req.body.id && req.params.ioId ) {
           var ioID = req.params.ioId;
           var ctlID = req.body.id;
           if ( gui.io[ ioID ][ ctlID ] ) {
-            gui.io[ ioID ][ ctlID ].value = req.body.value;
+            if ( req.body.value ) {
+              gui.io[ ioID ][ ctlID ].value = req.body.value;
+            }
             if ( gui.io[ ioID ][ ctlID ].callBack ) {
               gui.io[ ioID ][ ctlID ].callBack ( req.body.value , ctlID )
             } else {
               log.warn( 'POST /svc/io', 'CallBack undefined: "' + ctlID + '"' )
             }
-          }
+          } else {
+            log.warn( 'POST /svc/io', 'Not defined: gui.io[ '+ioID+' ][ '+ctlID+' ]' ) 
+          } 
+        } else {
+          log.warn( 'POST /svc/io', 'Not valid: req.body && req.body.id && req.params.ioId' )
         }
         res.statusCode = 200;
         return res.json( gui.io[ req.params.ioId ] );
@@ -701,8 +707,15 @@ gui.addIoView = function addIoView( page ) {
   }
   
   // add general config obj
-  io.addIoElementConfig = function( config ) {
-    if ( config ) { this.moduleConfig.io.push ( config ) }
+  io.addIoElementConfig = function( config, callback ) {
+    if ( config ) { 
+      this.moduleConfig.io.push ( config ) 
+      if ( callback && config.id ) {
+        gui.io[ this.ioId ][ config.id ] = {
+          "callBack" : callback
+        }
+      }
+    }
   }
   
   return io
