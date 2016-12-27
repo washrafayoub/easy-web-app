@@ -1,3 +1,6 @@
+## 0.11.6
+- Support ReST-Web-UI 0.9.5, with I/O graph time lines
+
 ## 0.11.5 
 - I/O addIoElementConfig with callback param (e.g.button)
 
