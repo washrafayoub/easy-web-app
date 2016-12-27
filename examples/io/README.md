@@ -11,6 +11,12 @@ The "call back" method of the switch is configured to set the LED.
 2. run `npm install`
 3. in this directory simply run: `node index.js`
  
+# More complex example
+This is my Arduino controller GUI:
+
+![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/io/Lab-Controller.png) 
+
+
 # I/O API
 Initialization:
 ```javascript
