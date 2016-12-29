@@ -1,3 +1,7 @@
+## 0.11.7
+- Support ReST-Web-UI 0.9.6, with I/O graph x-axis grid 
+- added graph to [IO demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/io) 
+
 ## 0.11.6
 - Support ReST-Web-UI 0.9.5, with I/O graph time lines
 
