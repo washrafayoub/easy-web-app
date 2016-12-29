@@ -1,4 +1,4 @@
-## 0.11.7
+## 0.11.7/8
 - Support ReST-Web-UI 0.9.6, with I/O graph x-axis grid 
 - added graph to [IO demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/io) 
 
