@@ -624,13 +624,14 @@ gui.addIoView = function addIoView( page ) {
       'io' : []
     }, 
     page 
-  );
+  )
   io.ioId = ioId;
 
   // IO method to define update polling
   io.setUpdateMilliSec = function (ms ) {
       this.moduleConfig.poll = ms;
-  };
+  }
+
   // IO method to define update polling
   io.setBackgroundImage = function ( imgFullPath ) {
       if ( imgFullPath ) {
@@ -643,26 +644,25 @@ gui.addIoView = function addIoView( page ) {
       } else {
         this.moduleConfig.imgURL = null
       }
-
-  };
+  }
 
   io.addLED = function ( id, x, y, value ) {
     if ( id && (x >= 0) && (y >= 0) ) {
       this.moduleConfig.io.push ( 
         {
-          "id" : id,
-          "type" : "LED",
-          "pos" : { "x" : x, "y" : y }
+          id : id,
+          type : "LED",
+          pos : { "x" : x, "y" : y }
         } 
-      );
+      )
       gui.io[ this.ioId ][ id ] = {
-        "value" : (value || 0)
-      };
+        value : (value || 0)
+      }
 
     } else {
       log.warn( 'addLED', 'need proper "ID", "x" and "y" values!' );
     }
-  };
+  }
 
   io.setLED = function( id, value ) {
     if ( id && gui.io[ this.ioId ][ id ] ) {
@@ -680,17 +680,17 @@ gui.addIoView = function addIoView( page ) {
   io.addSwitch = function( id, x, y, values, callBack ) {
     if ( values && values.length > 0 ) {
       this.moduleConfig.io.push ( {
-        "id" : id,
-        "type" : "Switch",
-        "pos" : {
-          "x" : x,
-          "y" : y
+        id : id,
+        type : "Switch",
+        pos : {
+          x : x,
+          y : y
         },
-        "values" : values
+        values : values
       } );
       gui.io[ this.ioId ][ id ] = {
-        "value" : values[ 0 ],
-        "callBack" : callBack
+        value : values[ 0 ],
+        callBack : callBack
       };
     } else {
       log.warn( 'addSwitch: ', 'Ignored, values should be an array!' );
@@ -712,7 +712,8 @@ gui.addIoView = function addIoView( page ) {
       this.moduleConfig.io.push ( config ) 
       if ( callback && config.id ) {
         gui.io[ this.ioId ][ config.id ] = {
-          "callBack" : callback
+          value : null,
+          callBack : callback
         }
       }
     }

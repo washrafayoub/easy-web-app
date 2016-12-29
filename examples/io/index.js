@@ -4,7 +4,7 @@ var gui = require( '../../' )     // stand alone: replace with  require( 'easy-w
 var log = require( 'npmlog' )
 
 // Initialize the framework and the default page
-gui.init( 'I/O')
+gui.init( 'I/O', 8889 )
   
 // create a IO view on page
 var ioView = gui.addIoView()
@@ -31,12 +31,12 @@ ioView.addSwitch(
     } 
 )
 
-var label = ioView.addStaticLabel( 'by MA-HA', 500, 10 )
+var label = ioView.addStaticLabel( 'by MA-HA', 200, 10 )
 label.font = "10px Courier"
 
 ioView.addIoElementConfig( 
   { id: 'lX0', type: 'Label', label: '2016',
-    pos: { x: '500', y: '22' }, font: '10px Courier' }  
+    pos: { x: '200', y: '22' }, font: '10px Courier' }  
 )
 
 var btnON = false
@@ -57,5 +57,46 @@ ioView.addIoElementConfig(
   },
   btnPressCallback
 )
+
+// add graph w/o data
+ioView.addIoElementConfig(
+  {
+      id:"advGraph",
+      type:"Graph",
+      width:"500", "height":"300",
+      layout:{
+          name:"AD data [V]",
+          graphType:"timeLog",
+          colors:{
+              A0:"#9d5fc6",A1:"#c69d5f",
+              A2:"#c65fc6",A3:"#5f88c6",
+              A4:"#c65f88",A5:"#88c65f" },
+          yAxis:{
+              axisType:"logarithmic",
+              min:"0.8", max:"10",
+              labels:["1","10"],
+              grid:['1','2','3','4','5','6','7','8','9','10']
+          },
+          xAxis:{ axisType:"time", labelCnt:'5', gridColor:'#EEE' }
+      },
+      pos:{ x:"400", y:"20" }
+    }
+)
+var advGraph = []
+for ( var i=0; i<6; i++ ) { 
+    //advGraph.push( { name: 'A' + i, cnt: 0, data: [] } )
+    advGraph.push( 
+      { name: 'A' + i, 
+        cnt: Date.now() - 1000000, // just a helper to generate the time line 
+        data: [] } 
+    )  
+    for ( var j=0; j<500; j++ ) { // fill up with 500 values, to permit streching
+        advGraph[i].data.push( [ advGraph[i].cnt, i+2.2+ Math.random()/2 ] ) //add some dummy data => i+1
+        advGraph[i].cnt = advGraph[i].cnt + 2000
+    }
+}
+// add data for gui elmenet with id="advGraph"
+gui.io[ ioView.ioId ]['advGraph'] = advGraph
+
 
 log.info('>', ioView.moduleConfig.io )
