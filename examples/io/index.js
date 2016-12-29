@@ -4,7 +4,7 @@ var gui = require( '../../' )     // stand alone: replace with  require( 'easy-w
 var log = require( 'npmlog' )
 
 // Initialize the framework and the default page
-gui.init( 'I/O', 8889 )
+gui.init( 'I/O' )
   
 // create a IO view on page
 var ioView = gui.addIoView()
