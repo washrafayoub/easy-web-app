@@ -350,8 +350,21 @@ router.get(
     if ( gui.authorize && ! gui.authorize( gui.getUserId(req), req.params.id ) ) {
       // not authorized for this page
       var redirectPage = ( gui.secParams.loginPage ? gui.secParams.loginPage : 'main' )
+      var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
+      if ( gui.authorize && pg.header ) { // check authorization for header modules
+        var user = gui.getUserId( req )
+        for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
+          //log.info( '>>>>', pg.header.modules[i].type)
+          if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
+            // all others should be checked for authorization
+            if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
+              delete pg.header.modules[i] // not a
+            }
+          }
+        }
+      }
       var layout = {
-          'layout' : gui.pages[ redirectPage ]
+          'layout' : pg
         };
       res.json( layout );
     }
@@ -391,8 +404,21 @@ router.get(
     if ( gui.authorize && ! gui.authorize( gui.getUserId(req), page ) ) {
       // not authorized for this page
       var redirectPage = ( gui.secParams.loginPage ? gui.secParams.loginPage : 'main' )
+      var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
+      if ( gui.authorize && pg.header ) { // check authorization for header modules
+        var user = gui.getUserId( req )
+        for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
+          //log.info( '>>>>', pg.header.modules[i].type)
+          if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
+            // all others should be checked for authorization
+            if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
+              delete pg.header.modules[i] // not a
+            }
+          }
+        }
+      }
       var layout = {
-          'layout' : gui.pages[ redirectPage ]
+          'layout' : pg
         };
       res.json( layout );
     }
