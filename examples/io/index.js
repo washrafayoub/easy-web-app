@@ -72,10 +72,12 @@ ioView.addIoElementConfig(
               A2:"#c65fc6",A3:"#5f88c6",
               A4:"#c65f88",A5:"#88c65f" },
           yAxis:{
-              axisType:"logarithmic",
-              min:"0.8", max:"10",
-              labels:["1","10"],
-              grid:['1','2','3','4','5','6','7','8','9','10']
+//              axisType:"logaritmic",
+              min:"0", max:"10",
+              scaleHiMin:"5", scaleHiMax:"50",
+							scaleLoMin:"0", scaleLoMax:"50",
+              labels:["0","2.5","5","7.5","10","20","30","40","50"],
+              grid:['5','10','15','20','25','30','35','40','45']
           },
           xAxis:{ axisType:"time", labelCnt:'5', gridColor:'#EEE' }
       },
