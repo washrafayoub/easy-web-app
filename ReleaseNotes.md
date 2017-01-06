@@ -1,3 +1,6 @@
+## 0.12.1
+- support ReST-Web-UI 0.9.7, with scalable IO graphs
+ 
 ## 0.12
 - important security fix: header elements (pull down) hidden in non authorized redirects
 
