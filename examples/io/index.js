@@ -8,6 +8,7 @@ gui.init( 'I/O' )
   
 // create a IO view on page
 var ioView = gui.addIoView()
+ioView.height = '600px'
 
 // change update speed to 1 sec (= 1000 ms)
 ioView.setUpdateMilliSec( 10000 )
@@ -76,27 +77,47 @@ ioView.addIoElementConfig(
               min:"0", max:"10",
               scaleHiMin:"5", scaleHiMax:"50",
 							scaleLoMin:"0", scaleLoMax:"50",
-              labels:["0","2.5","5","7.5","10","20","30","40","50"],
-              grid:['5','10','15','20','25','30','35','40','45']
+              labelsLo:["0","10","20","30","40","50"],
+						  labels:["5","15","25","35","45"],
+							labelsHi:["1","2","3","4","6","7","8","9",
+                        "11","12","13","14","16","17","18","19",
+                        "21","22","23","24","26","27","28","29",
+                        "31","32","33","34","36","37","38","39",
+                        "41","42","43","44","46","47","48","49"],
+							grid:"label"
           },
           xAxis:{ axisType:"time", labelCnt:'5', gridColor:'#EEE' }
       },
-      pos:{ x:"400", y:"20" }
+      pos:{ x:"400", y:"100" }
     }
 )
 var advGraph = []
-for ( var i=0; i<6; i++ ) { 
+for ( var i=0; i<4; i++ ) { 
     //advGraph.push( { name: 'A' + i, cnt: 0, data: [] } )
     advGraph.push( 
       { name: 'A' + i, 
-        cnt: Date.now() - 1000000, // just a helper to generate the time line 
+        cnt: Date.now() - 100*2000, // just a helper to generate the time line 
         data: [] } 
     )  
-    for ( var j=0; j<500; j++ ) { // fill up with 500 values, to permit streching
+    for ( var j=0; j<100; j++ ) { // fill up with 500 values, to permit streching
         advGraph[i].data.push( [ advGraph[i].cnt, i+2.2+ Math.random()/2 ] ) //add some dummy data => i+1
         advGraph[i].cnt = advGraph[i].cnt + 2000
     }
 }
+
+for ( var i=4; i<6; i++ ) { 
+    //advGraph.push( { name: 'A' + i, cnt: 0, data: [] } )
+    advGraph.push( 
+      { name: 'A' + i, 
+        cnt: Date.now() - 100*2000, // just a helper to generate the time line 
+        data: [] } 
+    )  
+    for ( var j=0; j<100; j++ ) { // fill up with 500 values, to permit streching
+        advGraph[i].data.push( [ advGraph[i].cnt, i*10-15 + Math.random()*10 ] ) //add some dummy data => i+1
+        advGraph[i].cnt = advGraph[i].cnt + 2000
+    }
+}
+
 // add data for gui elmenet with id="advGraph"
 gui.io[ ioView.ioId ]['advGraph'] = advGraph
 

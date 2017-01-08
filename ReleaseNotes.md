@@ -1,3 +1,6 @@
+## 0.12.2
+- IO graph y-axis scaling supports multi-touch
+
 ## 0.12.1
 - support ReST-Web-UI 0.9.7, with scalable IO graphs
  

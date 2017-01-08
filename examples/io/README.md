@@ -11,9 +11,10 @@ The "call back" method of the switch is configured to set the LED.
 2. run `npm install`
 3. in this directory simply run: `node index.js`
  
-Hint: Drag y-Axis to scale the graph! 
+Hint: Drag y-axis to scale the graph! 
 Click in the upper section and dragging up or down modify the maximum -- 
 click and drag the lower part axis modifies the minimum.
+Touch and multi-rouch is also supported for scaling the y-axis.
 
 # More complex example
 This is my Arduino controller GUI:
