@@ -1,3 +1,4 @@
+WEB_SERVER_PORT = 9885;
 
 //use zombie.js as headless browser
 var Browser = require('zombie');
@@ -12,7 +13,7 @@ describe(
           app = require('../../examples/form-tutorial/form_tutorial_3');
           //this.server = http.createServer(app).listen(3000);
           // initialize the browser using the same port as the test application
-          this.browser = new Browser({ site: 'http://localhost:8888/' });
+          this.browser = new Browser({ site: 'http://localhost:'+WEB_SERVER_PORT+'/' });
         } 
     );
     

@@ -1,8 +1,10 @@
+WEB_SERVER_PORT = 9880;
 
 //use zombie.js as headless browser
 var Browser = require('zombie');
 var assert = require('assert');
 var app = null
+
 describe( 
   'Complex-Layout example page', 
   function() {
@@ -12,7 +14,8 @@ describe(
           app = require('../../examples/complex-layout');
           //this.server = http.createServer(app).listen(3000);
           // initialize the browser using the same port as the test application
-          this.browser = new Browser({ site: 'http://localhost:8888/' });
+          this.browser = new Browser({ site: 'http://localhost:'+WEB_SERVER_PORT});
+          //this.browser = new Browser({ site: 'http://localhost:8888'});
         } 
     );
     
