@@ -36,6 +36,7 @@ gui.init = function init( logoText, port, rootPath ) {
   var mainPage = this.setDefaults()
   mainPage.header.logoText = logoText
   var wsPort = port || 8888
+  if ( typeof WEB_SERVER_PORT !== 'undefined' ) { wsPort = WEB_SERVER_PORT } // overwide by global setting
   webservices.use( this.appRoot, router )
   webservices.listen( wsPort )
   log.info( 'Web GUI', 'http://localhost:' + wsPort + this.appRoot )
