@@ -1,3 +1,6 @@
+## 0.12.4
+- Table: enhanced date format 
+
 ## 0.12.2
 - IO graph y-axis scaling supports multi-touch
 
