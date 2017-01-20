@@ -61,7 +61,7 @@ gui.addView (
 		{ id: 'Picture', label: 'Picture', cellType: 'img' },
 		{ id: 'ZoomImg', label: 'ZoomImg_zooms_Picture', cellType: 'largeimg', forImg: 'Picture' },
 		{ id: 'Status', label: 'Status', cellType: 'checkbox' },
-		{ id: 'Rating', label: 'Rating', cellType: 'rating', 'atingType: '3star' },
+		{ id: 'Rating', label: 'Rating', cellType: 'rating', rtingType: '3star' },
 		{ id: 'Description', label: 'Description', cellType: 'text', editable: 'true' },
 		{ id: 'ProductPage', label: 'Product Page', cellType: 'linkLink' },
 		{ id: 'Created', label: 'Created', cellType: 'datems', editable: 'true' }
