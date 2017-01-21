@@ -1,5 +1,5 @@
-## 0.12.6
-- IO improvements: Button with visual feedback / pollOptions settings
+## 0.12.6/7
+- IO improvements: Button with visual feedback / pollOptions settings /fixes
 
 ## 0.12.4/5
 - Table: enhanced date format 
