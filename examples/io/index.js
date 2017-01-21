@@ -9,6 +9,7 @@ gui.init( 'I/O' )
 // create a IO view on page
 var ioView = gui.addIoView()
 ioView.height = '600px'
+ioView.moduleConfig.pollOptions = ["1","5","10","30","60"]
 
 // change update speed to 1 sec (= 1000 ms)
 ioView.setUpdateMilliSec( 10000 )
@@ -114,6 +115,5 @@ for ( var i=4; i<6; i++ ) {
 
 // add data for gui elmenet with id="advGraph"
 gui.io[ ioView.ioId ]['advGraph'] = advGraph
-
 
 log.info('>', ioView.moduleConfig.io )
