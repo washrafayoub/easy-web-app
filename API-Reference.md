@@ -48,6 +48,7 @@ Header and footer will be included from the "main" `page`,
 but of course you can change this in the `page`.
 
 Example code:
+
 ```javascript
 ...
 gui.addPage( '2ndPage', '2nd Page' ) // will be empty
@@ -106,6 +107,7 @@ gui.addView( { id:'X' } ) // ads another empty view to the main page
 Adds a supported language. 
 
 Translations can be added as an object with `label:translations`, e.g.
+
 ```javascript
 // default language uses normal lables
 gui.addLang( 'EN' ) 
@@ -135,7 +137,8 @@ Add [pong-security module](https://github.com/ma-ha/rest-web-ui/tree/master/html
 
 `paramsObj` can be empty, but you can specify:
 * `loginURL`: request login web service URL to POST the userid and password, default is `/login`
-* `loginPage`: page id to show after a successful login, default is `main`   
+* `loginPage`: page id to show after a successful login, default is `main` 
+* `needLoginPage`: page id shown if unauthenticted user tries to request a protectd page, default is "main"  
 * `logoutURL`: request logout web service URL (POST), default is `/logout` 
 * `logoutPage`: page id to show after a successful logout, default is `main`
 * `registgerURL`: if you need a link to a registration page id, default is `null` 
@@ -151,6 +154,7 @@ The `authenticate callback` has two or three parameters:
 * (optional) `mustChangePassword`: `true` or `false`
 
 Optional you can implement a change password hook. 
+
 ```javascript
 gui.changePassword =  
   function changePassword( user, oldPasswprd, newPassword, callback ) {
@@ -177,6 +181,7 @@ web services, e.g. for forms commits or loading i18n translations
 Returns users ID, if authenticated or _null_ if not authenticated.
 
 Example usage in ReST service code:
+
 ```javascript
 var svc  = gui.getExpress()
 svc.get( 
@@ -220,6 +225,7 @@ The linkTarget is optional, typically you define it to be `_blank`
 Adds a new `row` with a new `view` and returns the `view`, ref. `gui.addView`.
 
 Example code:
+
 ```javascript
 ...
 var gui = require ( 'easy-web-app' )
@@ -283,6 +289,7 @@ By default the view has
 Details ref. [structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/Structure-Specification)
 
 Example code:
+
 ```javascript
 ...
 var myView = mainPage.addView( ... )

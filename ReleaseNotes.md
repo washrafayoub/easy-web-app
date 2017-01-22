@@ -1,3 +1,6 @@
+## 0.12.8
+- redirect unautenticated users to "main" or `needLoginPage`
+
 ## 0.12.6/7
 - IO improvements: Button with visual feedback / pollOptions settings /fixes
 

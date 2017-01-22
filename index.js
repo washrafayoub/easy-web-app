@@ -350,7 +350,7 @@ router.get(
     
     if ( gui.authorize && ! gui.authorize( gui.getUserId(req), req.params.id ) ) {
       // not authorized for this page
-      var redirectPage = ( gui.secParams.loginPage ? gui.secParams.loginPage : 'main' )
+      var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = gui.getUserId( req )
@@ -367,10 +367,8 @@ router.get(
       var layout = {
           'layout' : pg
         };
-      res.json( layout );
-    }
-
-    // console.log( '>>'+req.params.id );
+      return res.json( layout );
+    } else  
     if ( gui.pages[ req.params.id ] ) {
       var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
@@ -388,7 +386,7 @@ router.get(
       var layout = {
         'layout' : pg 
       }
-      res.json( layout )
+      return res.json( layout )
     } else {
       res.statusCode = 404
       return res.send( 'Error 404: No quote found' )
@@ -404,7 +402,7 @@ router.get(
     // console.log( '>>'+req.params.subid );
     if ( gui.authorize && ! gui.authorize( gui.getUserId(req), page ) ) {
       // not authorized for this page
-      var redirectPage = ( gui.secParams.loginPage ? gui.secParams.loginPage : 'main' )
+      var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = gui.getUserId( req )
@@ -421,8 +419,8 @@ router.get(
       var layout = {
           'layout' : pg
         };
-      res.json( layout );
-    }
+      return res.json( layout );
+    } else 
     if ( gui.pages[ page ] ) {
       var layout = {
         'layout' : gui.pages[ page ]
