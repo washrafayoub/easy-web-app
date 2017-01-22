@@ -7,11 +7,14 @@ To authenticate and authorization users on pages you need to tree easy steps:
 `enableSecurity()` also take a parameter object:
 
 ```javascript
+var gui =  require( 'easy-web-app' ) 
+// ...
 var secParams = {
-  loginPage     : 'userwelcome', // page shown after loginPage
-  needLoginPage : 'loginform'    // redirects there  if not logged in  
+  loginPage     : 'userwelcome', // page shown after successful login
+  needLoginPage : 'loginform'    // redirects there  if not logged in, default is "main"
 }
-enableSecurity( secParams )
+gui.enableSecurity( secParams )
+// ...
 ```
 
 __Remark__: Please notice, that the "secret page" in the example
