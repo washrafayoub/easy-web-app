@@ -1,3 +1,6 @@
+## 0.12.10
+- fix and make `col/row.addView( {id:"xy", ...}, ... )` working (instead of using `rowId` or `columnId`)
+
 ## 0.12.9
 - [IO graph](https://github.com/ma-ha/easy-web-app/tree/master/examples/io) zoom x-axis (ReST-Web-UI 0.9.17)
 

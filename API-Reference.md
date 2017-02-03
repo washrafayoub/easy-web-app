@@ -311,6 +311,8 @@ Used inside a `page`.
 ### row.addView ( def \[, config\] )
 Appends a row with new view and returns the view, see `gui.addView(...)`.
 
+In `def` you can just define an `id`. It is automatically converted into `columnId`. 
+
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
 
 ### row.addColumnsRow ( id, height )
@@ -323,6 +325,8 @@ Used inside a `page`.
 
 ### column.addView ( def \[, config\] )
 Appends a column with new view and returns the view, see `gui.addView(...)`.
+
+In `def` you can just define an `id`. It is automatically converted into `rowId`. 
 
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
 

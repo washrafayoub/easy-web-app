@@ -235,6 +235,9 @@ gui.addColumnsRow = function addColumnsRow( id, colArr, height ) {
       }
   colsObj.addView = 
       function ( def, config ) {
+        if ( def.id && ! def.columnId ) {
+          def.columnId = def.id
+        }
         return gui.addViewIn( def, config, this.cols )          
       }
   colArr.push( colsObj )
@@ -256,6 +259,9 @@ gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
       }
   newCol.addView =
       function ( def, config ) { 
+        if ( def.id && ! def.rowId ) {
+          def.rowId = def.id
+        }
         return gui.addViewIn( def, config, this.rows )          
       }
   cols.push( newCol )
