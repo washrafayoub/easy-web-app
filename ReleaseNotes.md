@@ -1,3 +1,6 @@
+## 0.12.11
+- table: filter improvements (date picker, default values, ...)
+
 ## 0.12.10
 - fix and make `col/row.addView( {id:"xy", ...}, ... )` 
   working in [complex layouts](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/index.js) (instead of using `rowId` or `columnId`)

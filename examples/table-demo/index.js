@@ -23,9 +23,16 @@ gui.addView (
         }  
       ]
   },
-  // view's "pong-easytable" plug-in config
+  // view's 'pong-easytable' plug-in config
   {
     dataURL:'',
+    filter:{
+      dataReqParams: [ 
+        { id:'dateMin', label:'Newer than', type:'date',
+          description:'Yes - this should really filer the data!' } 
+      ],
+      dataReqParamsSrc: 'Form'
+    },
     easyCols:
       [
         '*ID|5%',
@@ -43,29 +50,45 @@ gui.addView (
 )
 
 // the table requires a REST web service to serve the data: 
+var d = (new Date()).valueOf()
 var tableData = 
   [ 
-    {"ID":"yyy1","Name":["Prod A","A"],"Rating":"3","Created":(new Date('2016/10/1').valueOf()),"Status":"false","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x02.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yyy3","Name":["Prod B","A"],"Rating":"2","Created":(new Date('2016/12/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x03.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yyy4","Name":["Prod C","A"],"Rating":"2","Created":(new Date('2016/11/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x04.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yyy5","Name":["Prod D","A"],"Rating":"2","Created":(new Date('2016/1/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x05.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yyy6","Name":["Prod E","A"],"Rating":"1","Created":(new Date('2016/2/1').valueOf()),"Status":"false","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x06.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yyy7","Name":["Prod F","A"],"Rating":"2","Created":(new Date('2016/7/1').valueOf()),"Status":"false","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x07.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yyy8","Name":["Prod G","A"],"Rating":"2","Created":(new Date('2016/6/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x08.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yy09","Name":["Prod I","A"],"Rating":"3","Created":(new Date('2016/5/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x10.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yy19","Name":["Prod J","A"],"Rating":"3","Created":(new Date('2016/4/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x11.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yy11","Name":["Prod K","A"],"Rating":"2","Created":(new Date('2016/3/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x12.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yy12","Name":["Prod L","A"],"Rating":"2","Created":(new Date('2016/8/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x13.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yy13","Name":["Prod M","A"],"Rating":"2","Created":(new Date('2016/9/1').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x14.png","ZoomImg":"img\/tst.jpg"},
-    {"ID":"yy14","Name":["Prod N","A"],"Rating":"2","Created":(new Date('2016/12/6').valueOf()),"Status":"true","ProductPage":"http:\/\/mh-svr.de\/pong_dev\/README.md","descr":"Blah blub bubber.","Picture":"img\/x15.png","ZoomImg":"img\/tst.jpg"}
+    {ID:'yyy1',Name:['Prod A','A'],Rating:'3',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x02.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy3',Name:['Prod B','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x03.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy4',Name:['Prod C','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x04.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy5',Name:['Prod D','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x05.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy6',Name:['Prod E','A'],Rating:'1',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x06.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy7',Name:['Prod F','A'],Rating:'2',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x07.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy8',Name:['Prod G','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x08.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yy09',Name:['Prod I','A'],Rating:'3',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x10.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yy19',Name:['Prod J','A'],Rating:'3',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x11.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yy11',Name:['Prod K','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x12.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yy12',Name:['Prod L','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x13.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yy13',Name:['Prod M','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x14.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yy14',Name:['Prod N','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x15.png',ZoomImg:'img\/tst.jpg'}
   ]
-
+for ( var i = 0; i < tableData.length; i++ ) {
+  tableData[i].Created = d
+  d -= 1000000000
+}
 var svc  = gui.getExpress();
 svc.get( 
   '/products', 
+  bodyParser.urlencoded( { extended: false } ),  
   function( req, res ) {
-    // generate some dummy data:
-    res.json( tableData )
+    if ( req.query && req.query.dataFilter && req.query.dataFilter.dateMin ) {
+      var dateFilter = ( new Date( req.query.dataFilter.dateMin ) ).valueOf()
+      console.log( 'dateFilter: Create > '+dateFilter)
+      var result = []
+      for ( var i = 0; i < tableData.length; i++ ) {
+        if ( tableData[i].Created > dateFilter ) {
+          result.push( tableData[i] )
+        }
+      }
+      res.json( result )
+    } else {
+      res.json( tableData )
+    }
   }
 )
 
@@ -77,7 +100,7 @@ svc.post(
       for ( var i = 0; i < tableData.length; i++ ) {
         if ( tableData[i].ID == req.body.ID ) {
           tableData[i].Created = req.body.Created
-          console.log( 'Changed: "Created"='+req.body.Created+' for ID='+req.body.ID )
+          console.log( 'Changed: Created='+req.body.Created+' for ID='+req.body.ID )
           continue
         }
       }
