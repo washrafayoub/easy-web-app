@@ -1,3 +1,8 @@
+## 0.12.12
+- table: filter improvements (select options)
+- table: paginator reset after search or page out of result
+- table: div with optimal heigth and width
+
 ## 0.12.11
 - table: filter improvements (date picker, default values, ...)
 

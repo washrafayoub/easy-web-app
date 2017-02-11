@@ -29,7 +29,13 @@ gui.addView (
     filter:{
       dataReqParams: [ 
         { id:'dateMin', label:'Newer than', type:'date',
-          description:'Yes - this should really filer the data!' } 
+          description:'Yes - this should really filer the data!' },
+        { id:'rating', type:'select', label:'Rating',
+          options: [
+            { value:'0', option:"doesn't matter"},
+            { value:'1', option:"top rated"}
+          ]
+        }
       ],
       dataReqParamsSrc: 'Form'
     },
@@ -76,21 +82,37 @@ svc.get(
   '/products', 
   bodyParser.urlencoded( { extended: false } ),  
   function( req, res ) {
+    var dateFilter   = null
+    var ratingFilter = null
     if ( req.query && req.query.dataFilter && req.query.dataFilter.dateMin ) {
-      var dateFilter = ( new Date( req.query.dataFilter.dateMin ) ).valueOf()
-      console.log( 'dateFilter: Create > '+dateFilter)
-      var result = []
-      for ( var i = 0; i < tableData.length; i++ ) {
-        if ( tableData[i].Created > dateFilter ) {
-          result.push( tableData[i] )
-        }
-      }
-      res.json( result )
-    } else {
-      res.json( tableData )
+      dateFilter = ( new Date( req.query.dataFilter.dateMin ) ).valueOf()
+      console.log( 'dateFilter > '+dateFilter)
     }
+    if ( req.query && req.query.dataFilter && req.query.dataFilter.rating == 1 ) {
+      ratingFilter = true
+      console.log( 'ratingFilter: '+ratingFilter)
+    }
+
+    var result = []
+    for ( var i = 0; i < tableData.length; i++ ) {
+      if ( dateFilterOk( tableData[i].Created, dateFilter ) 
+        && ratingFilterOk(  tableData[i].Rating, ratingFilter ) ) {
+        result.push( tableData[i] )
+      }
+    }
+    res.json( result )
   }
 )
+
+function ratingFilterOk( rec, filter ) {
+  if ( filter && rec != '3' ) {  return false }
+  return true
+}
+
+function dateFilterOk( rec, filter ) {
+  if ( filter && rec <= filter ) { return false }
+  return true
+}
 
 svc.post( 
   '/products',
