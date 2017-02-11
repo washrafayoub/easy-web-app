@@ -38,6 +38,8 @@ Check "[Release Notes](https://github.com/ma-ha/easy-web-app/blob/master/Release
   * angular can do everything, but web GUI programming is required 
 * react
   * build web apps with JavaScript in a component way -- but not descriptive
+* vue.js
+  * still HTML (templating)
 
 They can all work behind the scenes, i.e. for view plug-ins. 
 
