@@ -12,6 +12,7 @@ var secretPage = gui.addPage( 'secretPage', 'Private Page',
     { id:'DataTable', type:'pong-easytable', resourceURL:'/securitydemo/products' },
     {
       dataURL:'',
+      "pollDataSec":"60",	
       easyCols: [ 'Name', 'Rating' ]
     }
  )
@@ -44,7 +45,7 @@ gui.changePassword =
 // grant all to "main" page
 // if user != null then "granted"
 gui.authorize =  
-  function authenticate( user, page ) {
+  function authorize( user, page ) {
     if ( page == 'main') {
       log.info( 'All users are authorized for page "'+page+'", also "'+user+'"' )
       return true;
@@ -77,6 +78,9 @@ svc.get(
   '/products', 
   function( req, res ) {
     if ( gui.getLoggedInUserId( req ) ) {
+      if ( ! gui.checkUserCSRFtoken( req ) ) {
+        log.warn( 'GET products', 'CSRF wrong!!')
+      }
       log.info( 'products service', 'user is logged in' )
       // generate some dummy data:
       var tableData = 

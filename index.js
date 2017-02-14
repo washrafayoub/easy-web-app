@@ -775,6 +775,33 @@ gui.enableSecurity =
     log.info( "Security is enabled!" )
   }
 
+gui.checkUserCSRFtoken = function checkUserCSRFtoken( req ) {
+ if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+    var token = req.cookies[ 'pong-security' ]
+    if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
+      var headerToken = req.get('X-Protect') 
+      var userToken = gui.userTokens[ token ].csrfToken
+      if ( userToken != headerToken ) {
+        return false
+      }
+    }
+  } 
+  return true
+}
+
+webservices.use( // inject CSRF toekn
+  function( req, res, next ) {
+    var csrfToken = 'default'
+    if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+      var token = req.cookies[ 'pong-security' ]
+      if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
+        csrfToken = gui.userTokens[ token ].csrfToken
+      }
+    }
+    res.header( 'X-Protect', csrfToken );
+    next();
+  } 
+);
 
 router.post(
     '/login', 
@@ -796,18 +823,20 @@ router.post(
                 if ( gui.createToken ) { 
                   token = gui.createToken( req.body.userid ) 
                 } else {
-                  var chrs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-                  for ( var i = 0; i < 32; i++ ) {
-                    var iRnd = Math.floor( Math.random() * chrs.length )
-                    token += chrs.substring( iRnd, iRnd+1 )
-                  }
+                  token = gui.mkToken( 32 ) 
                 }
                 // log.info( "Token: "+token )
-                gui.userTokens[ token ] = req.body.userid 
+                gui.userTokens[ token ] = { 
+                  userId : req.body.userid,
+                  expires: new Date( Date.now() + 6400000 ),
+                  csrfToken: gui.mkToken( 20 ) 
+                } 
                 res.cookie( 'pong-security', 
                     token, 
-                    { expires: new Date(Date.now() + 6400000), httpOnly: true }
+                    { //expires: new Date(Date.now() + 6400000), 
+                      httpOnly: true, path: gui.appRoot }
                 )
+                console.log( 'this.appRoot='+gui.appRoot )
                 
                 if ( gui.changePassword ) {
                   gui.secParams.changePasswordURL = 
@@ -841,6 +870,16 @@ router.post(
     }
   )
 
+gui.mkToken = function mkToken( len ) {
+  var chrs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  var token =''
+  for ( var i = 0; i < len; i++ ) {
+    var iRnd = Math.floor( Math.random() * chrs.length )
+    token += chrs.substring( iRnd, iRnd+1 )
+  }
+  return token
+}
+
 gui.getUserId = function getUserId( req ) {
   var userId = null
   if ( req.cookies && req.cookies[ 'pong-security' ] ) {
@@ -853,8 +892,12 @@ gui.getUserId = function getUserId( req ) {
         // log.info( "gui.getUserIdForToken..." )
         userId = gui.getUserIdForToken( token )      
       } else if ( gui.userTokens[ token ] ) {
-        // log.info( "getUserId: userId = "+gui.userTokens[ token ] )
-        userId = gui.userTokens[ token ]
+        log.info( "getUserId: userId = "+gui.userTokens[ token ].userId )
+        if ( Date.now() < gui.userTokens[ token ].expires ) {
+          userId = gui.userTokens[ token ].userId
+        } else {
+          log.info( "getUserId: userId = "+gui.userTokens[ token ].userId+"  >>>> session expired" )
+        }
       }
     }
   }
@@ -868,7 +911,9 @@ gui.getLoggedInUserId = function getLoggedInUserId( req ) {
 		var token = req.cookies[ 'pong-security' ]
 		if ( gui.userTokens[ token ] ) {
 			// log.info( "getUserId: userId = "+gui.userTokens[ token ] )
-			uid = gui.userTokens[ token ]
+      if ( Date.now() < gui.userTokens[ token ].expires ) {
+			  uid = gui.userTokens[ token ].userId
+      }
 		}
 	}
 	return uid

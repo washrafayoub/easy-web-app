@@ -1,3 +1,6 @@
+## 0.13.0
+- cookie security improvements
+
 ## 0.12.12
 - table: filter improvements (select options)
 - table: paginator reset after search or page out of result
