@@ -892,11 +892,11 @@ gui.getUserId = function getUserId( req ) {
         // log.info( "gui.getUserIdForToken..." )
         userId = gui.getUserIdForToken( token )      
       } else if ( gui.userTokens[ token ] ) {
-        log.info( "getUserId: userId = "+gui.userTokens[ token ].userId )
+        log.verbose( "getUserId: userId = "+gui.userTokens[ token ].userId )
         if ( Date.now() < gui.userTokens[ token ].expires ) {
           userId = gui.userTokens[ token ].userId
         } else {
-          log.info( "getUserId: userId = "+gui.userTokens[ token ].userId+"  >>>> session expired" )
+          log.verbose( "getUserId: userId = "+gui.userTokens[ token ].userId+"  >>>> session expired" )
         }
       }
     }
