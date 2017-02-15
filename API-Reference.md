@@ -183,7 +183,7 @@ you can change the value `gui.loginTimeout` to your requirements.
 Returns `true` if the CSRF token in the HTML header is valid.
 A `false` return value may indicate a CSRF attack or a reuse of an outdated session. 
 
-It is recommended to check the CSRF token in all REST service implementations.
+It is recommended to check the CSRF token in all REST web service implementations.
 
 See [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
 
@@ -212,7 +212,6 @@ svc.get(
   }
 )
 ```
-
 
 ## "Page" API Reference
 Page object reference: 

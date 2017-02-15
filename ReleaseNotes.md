@@ -1,5 +1,6 @@
-## 0.13.0/1/2
-- cookie security improvements
+## 0.13.0/1/2/3
+- cookie security improvements 
+- gui.loginTimeout configuration
 
 ## 0.12.12
 - table: filter improvements (select options)
