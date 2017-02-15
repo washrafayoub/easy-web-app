@@ -55,6 +55,7 @@ gui.setDefaults = function setDefaults() {
       title : 'Test'
     , header : {
           logoText : 'Test'
+          ,frameWarning: "true"
           ,modules : [ {
             id : 'MainNav'
             , type : 'pong-navbar'

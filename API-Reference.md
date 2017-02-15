@@ -41,6 +41,10 @@ The `port` defines the TCP port for the Web Services. Default `port` is "8888".
 will start result in the base URL `http://localhost:8080/myportal` 
 (see [custom-css example](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)))
 
+By default the page will show a "click hijacking" security warning, 
+if it's embedded in an iframe.
+Set `mainPage.header.frameWarning = "false"` if embedding is OK.
+
 ### gui.addPage ( pageId \[, title\] \[, viewDef\] \[, viewConfig\] )
 Returns the new `page` object.
 
