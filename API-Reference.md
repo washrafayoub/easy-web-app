@@ -172,6 +172,13 @@ Remark:  In HA set up, you need also implement
 * `gui.deleteUserIdForToken(token)`
 functions, typically using a distributed cache.
 
+### gui.checkUserCSRFtoken( req )
+Returns true if there is no CSRF attack. 
+
+Recommended do check in all REST service implementations, within authorization.
+
+See [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
+
 ### gui.getExpress()
 Returns the "express" web service plug-in, so that you can implement 
 web services, e.g. for forms commits or loading i18n translations
