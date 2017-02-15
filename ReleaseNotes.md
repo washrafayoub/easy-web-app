@@ -1,5 +1,8 @@
 ## 0.13.0/1/2/3
-- cookie security improvements 
+Security enhancements:
+- improved session and cookie security 
+- CSRF token
+- click hijacking warning
 - gui.loginTimeout configuration
 
 ## 0.12.12
