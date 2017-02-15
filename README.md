@@ -173,6 +173,24 @@ Open the URL [http://localhost:8888/](http://localhost:8888/) in your Browser.
 Remark: To keep this demo simple, there is no REST web service for the 
 "Check" button shown here. 
 
+## Security
+.. made easy! You get a best practice implementaion for 
+application security by confguration including 
+* login menu / login dialog
+* authentication and authorization (hooks)
+* authentication can force password change
+* session handling and session timeout
+* API for web service authorization 
+* secure session cookie handling
+* change-password-dialog with password policy check
+* (secure) logout 
+* page redirects for unautorized requests
+* CSRF protection
+* click hijacking detection (user alert)
+* OAuth2 option for web services 
+
+The [security example](https://github.com/ma-ha/easy-web-app/tree/master/examples/security) 
+shows how to write a secure web app in 100 LoC. 
 
 ## Examples and API Reference
 Have a look at [some feature demos](https://github.com/ma-ha/easy-web-app/tree/master/examples/),
