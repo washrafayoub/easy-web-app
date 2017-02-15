@@ -16,6 +16,7 @@ var secretPage = gui.addPage( 'secretPage', 'Private&nbsp;Page',
 
 // switch securiy on:
 gui.enableSecurity()
+gui.loginTimeout = 20000 // hehe: 20 sec session timeout -- good for testing 
 
 // "auth" is ok if any user id is given
 gui.authenticate =  

@@ -762,6 +762,7 @@ var lId = 0
 gui.enableSecurity = 
   function enableBasicAuth( paramObj ) {
     gui.secParams = {}
+    if ( ! gui.loginTimeout ) { gui.loginTimeout = 6400000 }
     var root = ( this.appRoot== '/' ? '' : this.appRoot ) 
     if ( ! paramObj ) {paramObj = {} }
     gui.secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : root+'/login' )
@@ -828,8 +829,8 @@ router.post(
                 }
                 // log.info( "Token: "+token )
                 gui.userTokens[ token ] = { 
-                  userId : req.body.userid,
-                  expires: new Date( Date.now() + 6400000 ),
+                  userId : req.body.userid, 
+                  expires: new Date( Date.now() + gui.loginTimeout ),
                   csrfToken: gui.mkToken( 20 ) 
                 } 
                 res.cookie( 'pong-security', 
