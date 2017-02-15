@@ -972,8 +972,12 @@ router.post(
         } else if ( gui.userTokens[ token ] ) {
           delete gui.userTokens[ token ]
         }
-        res.status( 200 ).send( "" )
       }
+      if ( req.session ) {
+        req.session.destroy() 
+      }
+      res.clearCookie( 'pong-security', { path: gui.appRoot } )
+        .status( 200 ).send( "" )
     }
   )
   

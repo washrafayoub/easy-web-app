@@ -1,4 +1,4 @@
-## 0.13.0
+## 0.13.0/1
 - cookie security improvements
 
 ## 0.12.12
