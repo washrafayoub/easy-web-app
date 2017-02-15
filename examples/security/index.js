@@ -5,16 +5,13 @@ var log = require('npmlog');
 var mainPage = gui.init( 'Security Demo', 8080, 'securitydemo' )
 mainPage.title = 'Home'
 mainPage.header.logoText = 'Security Demo'
+
 mainPage.addView( { 'id':'row1view', 'title':'Login with user id "test1" or "test2"', 'height':'300px' } )
 
 // let's create a hidden page -- only available for logged in users
 var secretPage = gui.addPage( 'secretPage', 'Private&nbsp;Page',  
-    { id:'DataTable', type:'pong-easytable', resourceURL:'/securitydemo/products' },
-    {
-      dataURL:'',
-      "pollDataSec":"60",	
-      easyCols: [ 'Name', 'Rating' ]
-    }
+  { id:'DataTable', type:'pong-easytable', resourceURL:'/securitydemo/products' },
+  { dataURL:'', "pollDataSec":"60", easyCols: [ 'Name', 'Rating' ] }
  )
 
 // switch securiy on:
@@ -35,15 +32,14 @@ gui.authenticate =
     }
   }
 
+// hook for change password requests 
 gui.changePassword =  
   function changePassword( user, oldPasswprd, newPassword, callback ) {
-    log.info( 'Change password for "'+user+'"' )
+    log.info( 'Change password for "'+user+'"' ) //TODO: implement ...
     callback( null, true )
   }
 
-
-// grant all to "main" page
-// if user != null then "granted"
+// grant all to "main" page: if user != null then "granted"
 gui.authorize =  
   function authorize( user, page ) {
     if ( page == 'main') {
@@ -58,8 +54,6 @@ gui.authorize =
     return true  
   }
 
-// pull down menu
-
 // now add the pull down menu:
 gui.addPullDownMenu( 'testMenu', 'Menu' )
 // add static HTML dummy content to menu:
@@ -69,7 +63,6 @@ gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 2' )
 // by defining this as subpage of "user", the link will appear in the user security menu
 var profilePage = gui.addPage( 'user/profile', 'User Profile',  { id:'User Profile' }, null )
 var profilePage = gui.addPage( 'user/settings', 'Preferences',  { id:'Preferences' }, null )
-
 
 // now we need to implement the ReST service for /products 
 // this should also only be available for authenticated users
@@ -90,7 +83,7 @@ svc.get(
          {"Name":"XYZ Product","Rating":"1"},
          {"Name":"My Product","Rating":"1"},
          {"Name":"Secret Product 1","Rating":"2"},
-         {"Name":"Secret Product 2","Rating":"0"},
+         {"Name":"Top Secret Product 2","Rating":"0"},
          {"Name":"Product XYZ","Rating":"0"},
          {"Name":"My Prod","Rating":"0"},
          {"Name":"Your Prod","Rating":"3"},
@@ -104,8 +97,6 @@ svc.get(
     }
   }
 )
-
-
 
 /* Optional hooks for HA environment, typically using a distributed cache or a DB
 gui.createToken = function createToken( userId ){
