@@ -8,7 +8,7 @@ mainPage.header.logoText = 'Security Demo'
 mainPage.addView( { 'id':'row1view', 'title':'Login with user id "test1" or "test2"', 'height':'300px' } )
 
 // let's create a hidden page -- only available for logged in users
-var secretPage = gui.addPage( 'secretPage', 'Private Page',  
+var secretPage = gui.addPage( 'secretPage', 'Private&nbsp;Page',  
     { id:'DataTable', type:'pong-easytable', resourceURL:'/securitydemo/products' },
     {
       dataURL:'',
