@@ -181,6 +181,14 @@ The page looks like this:
 ![form tutorial screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/form_tutorial_3.png) 
 
 
+## Supported Form Input Types
+
+Please have a look at [form_tutorial_4.js](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_3.js)
+for supported form fields.
+
+Please check the [form reference documentation](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-form)
+to read all about forms.
+
 ## Load form fields by after page loading
 TODO
 

@@ -1,3 +1,7 @@
+## 0.14.0
+- Form: Support "text" type imput fields with "datalist" 
+- Form tutorial part 4: [Demo of supported fields](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/index.js) (
+
 ## 0.13.0/1/2/3
 Security enhancements:
 - improved session and cookie security 

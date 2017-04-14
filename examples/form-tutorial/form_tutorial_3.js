@@ -109,6 +109,6 @@ app.get(
            { name: 'Joey', answer:'Huhu!' }
         ]
    
-      return res.json( resultTable )   // empty, but valid response object
+      return res.json( resultTable )  
     }
   )
