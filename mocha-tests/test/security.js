@@ -31,6 +31,26 @@ describe(
           this.browser.assert.element( 'div.copyright-div' );
         }
     );  
+
+    it( 'should not show the private tab', 
+      function() {
+          //this.browser.assert.element( '#navTabsecretPage' );
+        }
+    );  
+
+    describe( 'authorized flow', function() {
+
+      before(function(done) {
+        this.browser.clickLink( '.PongLogin' )
+        this.browser.fill( '#useridInput', 'test1').pressButton('Login', done);
+      })
+      it( 'must show the private page after login', 
+        function() {
+            this.browser.assert.element( '#navTabsecretPage' );
+          }
+      )  
+
+    })
     
   }
 );
