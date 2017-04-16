@@ -1,4 +1,4 @@
-## 0.15.0
+## 0.15.0/1
 - Table with [expand](https://github.com/ma-ha/easy-web-app/blob/master/examples/table-expand/index.js) feature
 
 ## 0.14.0

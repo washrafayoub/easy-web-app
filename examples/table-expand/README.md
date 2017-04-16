@@ -67,12 +67,13 @@ Expands are DIVs, so you need to arranged them via CSS.
 The example code injects the following custom CSS:
 
 ```CSS
-.tableViewContentRowExpand div { 
+.tableExpandRow div { 
   float: left; 
   margin-left: 5px;
   margin-right: 5px;
   text-align: center;
 } 
 ```
-Remark: `tableView` is the ID of the view, 
-so you have to change the CSS class name to your ID names.
+Remark: `tableExpandRow` is a common class for all views. 
+All expands of the `tableView` have the class `tableViewContentRowExpand`
+and of course each DIV has a class to define it style individually.
