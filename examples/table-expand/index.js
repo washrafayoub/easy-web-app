@@ -26,19 +26,18 @@ gui.addView( // view config
       }
     ]
   },
-  // view's 'pong-easytable' plug-in config
+  // view's 'pong-table' plug-in config
   {
     dataURL: '',
     "cols": [
       {
-        "width": "5%",
-        "id": "Det1",
-        "label": "&nbsp;",
-        "cellType": "button",
+        "cellType": "button", 
         "method": "expand",
+        "id": "Det1", "width": "5%", "label": "&nbsp;",
         "expand": {
           "heightMin": "100px",
-          "divs": [
+          // this are the elements of the exand:
+          "divs": [ 
             { "id": "ID", "cellType": "text" },
             { "id": "Picture", "label": "Picture", "cellType": "img" },
             {
@@ -56,8 +55,10 @@ gui.addView( // view config
             },
             { "id": "descr", "label": "Description", "cellType": "text" }
           ]
-        }
+
+        } 
       },
+      // other "normal" table columns ...
       {
         "width": "15%",
         "id": "ID",
