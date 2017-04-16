@@ -6,11 +6,12 @@ Table supports expand with custom DIVs to show JSON tree-data,
 
 ```javascript
 var gui = require( 'easy-web-app' )
+gui.getExpress().use( '/css-custom', express.static( __dirname ) )
 // initialize the web app framework 
 var mainPage = gui.init( 'Table Expand Demo' )
 mainPage.title = 'Table Expand Demo'
 mainPage.header.logoText = 'Table Expand Demo'
-
+// page has only one table view:
 gui.addView( // view config
   {
     'id': 'tableView',
@@ -54,4 +55,23 @@ gui.addView( // view config
 )
 
 ```
-![table expand screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/table-expand/table-expand.png) 
+
+And that's how it may look like
+![table expand screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/table-expand/table-expand.png)
+
+## CSS Hint
+
+Expands are DIVs, so you need to arranged them via CSS. 
+
+The example code injects the following custom CSS:
+
+```CSS
+.tableViewContentRowExpand div { 
+  float: left; 
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+} 
+```
+Remark: `tableView` is the ID of the view, 
+so you have to change the CSS class name to your ID names.
