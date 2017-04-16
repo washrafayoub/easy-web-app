@@ -56,7 +56,8 @@ gui.addView( // view config
 
 ```
 
-And that's how it may look like
+And that's how it may look like:
+
 ![table expand screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/table-expand/table-expand.png)
 
 ## CSS Hint
