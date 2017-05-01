@@ -2,7 +2,7 @@
 - ReST-Web-UI 0.9.26
 - CSS swith and support for `decor='tedge'` (ref [demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css))
 - Form: pass page param to AJAX loads
-- Form: select load data depending on change (ref [form tutorial part 5](https://github.com/ma-ha/easy-web-app/tree/master/examples/form-tutorial))
+- Form: select option load on change (ref [form tutorial part 5](https://github.com/ma-ha/easy-web-app/tree/master/examples/form-tutorial))
 
 ## 0.15.0/1
 - Table with [expand](https://github.com/ma-ha/easy-web-app/blob/master/examples/table-expand/index.js) feature
