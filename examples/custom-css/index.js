@@ -3,6 +3,7 @@ var express = require( 'express' )
 var log = require('npmlog');
 
 log.info( __dirname )
+gui.decor = 'tedge'
 
 // define to load /css-custom/custom.css from local folder
 gui.getExpress().use( '/css-custom', express.static( __dirname ) )

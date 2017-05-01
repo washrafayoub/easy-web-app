@@ -9,6 +9,7 @@ var gui = exports = module.exports = {
   ,userTokens : {}
   ,pullDownMenu : {}
   ,appRoot: '/'
+  ,decor: 'decor'
 };
 
 // logger
@@ -53,6 +54,7 @@ gui.setDefaults = function setDefaults() {
   var  navUrl = ( this.appRoot=='/' ? '/svc/nav' : this.appRoot+'/svc/nav' ) 
   this.pages[ 'main' ] = {
       title : 'Test'
+    , decor : gui.decor
     , header : {
           logoText : 'Test'
           ,frameWarning: "true"
@@ -272,7 +274,7 @@ gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
 gui.addViewIn = function addViewIn( def, config, arr ) {
   var view = JSON.parse( JSON.stringify( def ) ) // clone it
   view.title = def.title || def.id || "View:"
-  view.decor = def.decor || 'decor'
+  view.decor = def.decor || this.decor
   view.resourceURL = def.resourceURL || "none"
   view.height = def.height || '400px'
   if ( config ) {
@@ -301,7 +303,7 @@ gui.addView = function addView( def, config, page ) {
   } else { // OK, add view
     view[ 'rowId' ]  = def.id;
     view[ 'title' ]  = def.title || def.id || "View:";
-    view[ 'decor' ]  = def.decor || 'decor';
+    view[ 'decor' ]  = def.decor || this.decor;
     view[ 'height' ] = def.height || '400px';
     view[ 'resourceURL' ] = def.resourceURL || "none";
     if ( def.type ) {
