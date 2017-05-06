@@ -81,11 +81,18 @@ gui.addView( // view config
         "cellType": "datems",
         "editable": "true"
       },
+      { 
+        "id": "Rating", 
+        "label": "Rating as Number", 
+        "cellType": "number", 
+        digits: 2 
+      },
       {
         "id": "ProductPage",
         "label": "Product Page",
         "cellType": "linkLink"
       }
+      
     ]
   }
 )
