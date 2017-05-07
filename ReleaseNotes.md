@@ -1,6 +1,9 @@
-## 0.17.0
+## 0.17.0/1
 - Table: support number
 - Table improvements (JSON with null and boolean value support)
+- Table: button has dynamic label 
+
+See: [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-expand)
 
 ## 0.16.0/1
 - ReST-Web-UI 0.9.26

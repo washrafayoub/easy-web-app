@@ -29,91 +29,96 @@ gui.addView( // view config
   // view's 'pong-table' plug-in config
   {
     dataURL: '',
-    "cols": [
+    cols: [
       {
-        "cellType": "button", 
-        "method": "expand",
-        "id": "Det1", "width": "5%", "label": "&nbsp;",
-        "expand": {
-          "heightMin": "100px",
+        cellType: "button", 
+        method: "expand",
+        id: "Det1", width: "5%", label: "&nbsp;",
+        expand: {
+          heightMin: "100px",
           // this are the elements of the exand:
-          "divs": [ 
-            { "id": "ID", "cellType": "text" },
-            { "id": "Picture", "label": "Picture", "cellType": "img" },
+          divs: [ 
+            { id: 'id', cellType: "text" },
+            { id: "Picture", label: "Picture", cellType: "img" },
             {
-              "id": "ZoomImg", "label": "ZoomImg_zooms_Picture",
-              "cellType": "largeimg", "forImg": "Picture"
+              id: "ZoomImg", label: "ZoomImg_zooms_Picture",
+              cellType: "largeimg", forImg: "Picture"
             },
             {
-              "id": "XCust", "cellType": "div",
-              "divs": [
-                { "id": "CustomerCountLb", "cellType": "label", "label": "Customers" },
-                { "id": "CustomerCount", "cellType": "text" },
-                { "id": "RatingLb", "cellType": "label", "label": "Rating" },
-                { "id": "Rating", "cellType": "rating", "ratingType": "3star" }
+              id: "XCust", cellType: "div",
+              divs: [
+                { id: "CustomerCountLb", cellType:'label',label: "Customers" },
+                { id: "CustomerCount", cellType: "text" },
+                { id: "RatingLb", cellType:'label', label: "Rating" },
+                { id: "Rating", cellType: "rating", ratingType: "3star" }
               ]
             },
-            { "id": "descr", "label": "Description", "cellType": "text" }
+            { id: "descr", label: "Description", cellType: "text" }
           ]
 
         } 
       },
       // other "normal" table columns ...
       {
-        "width": "15%",
-        "id": "ID",
-        "label": "ID",
-        "cellType": "text"
+        width: "15%",
+        id: 'id',
+        label: 'id',
+        cellType: "text"
       },
       {
-        "id": "Name.0",
-        "label": "Name",
-        "cellType": "text"
+        id: "Name.0",
+        label: "Name",
+        cellType: "text"
       },
       {
-        "id": "Status",
-        "label": "Status",
-        "cellType": "checkbox"
+        id: "Status",
+        label: "Status",
+        cellType: "checkbox"
       },
       {
-        "id": "Created",
-        "label": "Created",
-        "cellType": "datems",
-        "editable": "true"
+        id: "Created",
+        label: "Created",
+        cellType: "datems",
+        editable: "true"
       },
       { 
-        "id": "Rating", 
-        "label": "Rating as Number", 
-        "cellType": "number", 
+        id: "Rating", 
+        label: "Rating as Number", 
+        cellType: "number", 
         digits: 2 
       },
       {
-        "id": "ProductPage",
-        "label": "Product Page",
-        "cellType": "linkLink"
+        id: "ProductPage",
+        label: "Product Page",
+        cellType: "linkLink"
+      },
+      {
+        id: "act",
+        cellType: "button",
+        URL: '/products',
+        update: [ {resId:'tableView'} ]
       }
-      
     ]
   }
 )
 
 // the table requires a REST web service to serve the data: 
 var d = (new Date()).valueOf()
-var tableData =
-  [
-    { ID: 'yyy1', Name: [ 'Prod A', 'A' ], Rating: '3', Status: 'false', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x02.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yyy3', Name: [ 'Prod B', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x03.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yyy4', Name: [ 'Prod C', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x04.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yyy5', Name: [ 'Prod D', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x05.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yyy6', Name: [ 'Prod E', 'A' ], Rating: '1', Status: 'false', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x06.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yyy7', Name: [ 'Prod F', 'A' ], Rating: '2', Status: 'false', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x07.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yyy8', Name: [ 'Prod G', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x08.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yy09', Name: [ 'Prod I', 'A' ], Rating: '3', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x10.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yy19', Name: [ 'Prod J', 'A' ], Rating: '3', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x11.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yy11', Name: [ 'Prod K', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x12.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yy12', Name: [ 'Prod L', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x13.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yy13', Name: [ 'Prod M', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x14.png', ZoomImg: 'img\/tst.jpg' },
-    { ID: 'yy14', Name: [ 'Prod N', 'A' ], Rating: '2', Status: 'true', ProductPage: 'http:\/\/mh-svr.de\/pong_dev\/README.md', descr: 'Blah blub bubber.', Picture: 'img\/x15.png', ZoomImg: 'img\/tst.jpg' }
+var tableData = 
+  [ 
+    {ID:'yyy1',Name:['Prod A','A'],Rating:'3',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x02.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yyy3',Name:['Prod B','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x03.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy4',Name:['Prod C','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x04.png',ZoomImg:'img\/tst.jpg',act:'Mark'},
+    {ID:'yyy5',Name:['Prod D','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x05.png',ZoomImg:'img\/tst.jpg',act:'Do something'},
+    {ID:'yyy6',Name:['Prod E','A'],Rating:'1',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x06.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yyy7',Name:['Prod F','A'],Rating:'2',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x07.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yyy8',Name:['Prod G','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x08.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yy09',Name:['Prod I','A'],Rating:'3',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x10.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yy19',Name:['Prod J','A'],Rating:'3',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x11.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yy11',Name:['Prod K','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x12.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yy12',Name:['Prod L','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x13.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yy13',Name:['Prod M','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x14.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yy14',Name:['Prod N','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x15.png',ZoomImg:'img\/tst.jpg',act:'Buy'}
   ]
 for (var i = 0; i < tableData.length; i++) {
   tableData[ i ].Created = d
