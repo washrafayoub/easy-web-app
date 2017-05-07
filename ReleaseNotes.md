@@ -1,4 +1,4 @@
-## 0.17.0/1
+## 0.17.0/1/2
 - Table: support number
 - Table improvements (JSON with null and boolean value support)
 - Table: button has dynamic label 
