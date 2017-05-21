@@ -3,6 +3,7 @@
 - Table improvements (JSON with null and boolean value support)
 - Table/List: button has dynamic label 
 - Table/List: new "select" type
+- Table/List: fixes for id in POST with hierarchical structure
 
 See: [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-expand)
 

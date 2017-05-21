@@ -55,7 +55,7 @@ gui.addView( // view config
               ]
             },
             { id: "Descr", cellType: "text" },
-            { id: "Sel", cellType: "select",
+            { id: "ColSel", cellType: "select",
               options: [
                 { option:'Red' },{ option:'Green' },{ option:'Blue' }
               ]
@@ -112,7 +112,7 @@ gui.addView( // view config
 var d = (new Date()).valueOf()
 var tableData = 
   [ 
-    {ID:'yyy1',Name:['Prod A','A'],Rating:'3',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x02.png',ZoomImg:'img\/tst.jpg',act:'Buy'},
+    {ID:'yyy1',Name:['Prod A','A'],Rating:'3',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x02.png',ZoomImg:'img\/tst.jpg',act:'Buy',ColSel:'Blue'},
     {ID:'yyy3',Name:['Prod B','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x03.png',ZoomImg:'img\/tst.jpg'},
     {ID:'yyy4',Name:['Prod C','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x04.png',ZoomImg:'img\/tst.jpg',act:'Mark'},
     {ID:'yyy5',Name:['Prod D','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x05.png',ZoomImg:'img\/tst.jpg',act:'Do something'},
