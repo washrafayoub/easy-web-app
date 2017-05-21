@@ -29,6 +29,7 @@ gui.addView( // view config
   // view's 'pong-table' plug-in config
   {
     dataURL: '',
+    rowId: 'ID', // required for editable cells and select
     cols: [
       {
         cellType: "button", 
@@ -39,7 +40,7 @@ gui.addView( // view config
           // this are the elements of the exand:
           divs: [ 
             { id: 'id', cellType: "text" },
-            { id: "Picture", label: "Picture", cellType: "img" },
+            { id: "Picture", cellType: "img" },
             {
               id: "ZoomImg", label: "ZoomImg_zooms_Picture",
               cellType: "largeimg", forImg: "Picture"
@@ -53,7 +54,12 @@ gui.addView( // view config
                 { id: "Rating", cellType: "rating", ratingType: "3star" }
               ]
             },
-            { id: "descr", label: "Description", cellType: "text" }
+            { id: "Descr", cellType: "text" },
+            { id: "Sel", cellType: "select",
+              options: [
+                { option:'Red' },{ option:'Green' },{ option:'Blue' }
+              ]
+            }
           ]
 
         } 

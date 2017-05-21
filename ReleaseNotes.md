@@ -1,7 +1,8 @@
-## 0.17.0/1/2
-- Table: support number
+## 0.17.x
+- Table/List: support number
 - Table improvements (JSON with null and boolean value support)
-- Table: button has dynamic label 
+- Table/List: button has dynamic label 
+- Table/List: new "select" type
 
 See: [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-expand)
 
