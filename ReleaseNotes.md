@@ -7,6 +7,8 @@
 
 See: [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-expand)
 
+- [theme and decor](https://github.com/ma-ha/easy-web-app/tree/master/examples/theme)
+
 ## 0.16.0/1
 - ReST-Web-UI 0.9.26
 - CSS swith and support for `decor='tedge'` (ref [demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css))
