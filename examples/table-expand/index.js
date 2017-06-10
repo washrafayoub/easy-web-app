@@ -74,7 +74,8 @@ gui.addView( // view config
       {
         id: "Name.0",
         label: "Name",
-        cellType: "text"
+        cellType: "text",
+        editable: "true"
       },
       {
         id: "Status",

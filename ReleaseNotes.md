@@ -4,6 +4,7 @@
 - Table/List: button has dynamic label 
 - Table/List: new "select" type
 - Table/List: fixes for id in POST with hierarchical structure
+- Table: Editable now as input (fixes inline HTML) + URLs as links
 
 See: [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-expand)
 
