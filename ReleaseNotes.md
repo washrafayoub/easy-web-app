@@ -5,6 +5,7 @@
 - Table/List: new "select" type
 - Table/List: fixes for id in POST with hierarchical structure
 - Table: Editable now as input (fixes inline HTML) + URLs as links
+- fix i18n in view title
 
 See: [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-expand)
 
