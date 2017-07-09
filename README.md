@@ -1,11 +1,14 @@
 # Easy Web App
 Create web applications easily and reduce complexity.
 
-This is a [Node.js API package](https://www.npmjs.com/package/easy-web-app) 
-for the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework.
+**No GUI programming required!** The **Web GUI is defined by JSON files**, static or served via REST service.
+This package helps you to create complex and full featured web GUIs via REST services.
 
-Focus is on _web applications_ (not simple web pages). 
-A lot of plug-ins are available to get a portal it quickly configured:
+This [Node.js API package](https://www.npmjs.com/package/easy-web-app) 
+includes the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework and make its usage comfortable and easy.
+
+Focus is on **web applications** _(not simple web pages)_. 
+View type plug-ins are available to get a portal it quickly set-up:
 * Forms, Tables, Lists, Trees, Histograms
 * Content: via MediaWiki API, plain HTML views, RSS-/atom-feeds or help dialogs
 * I/O: control switches/drawer, gauges, graphs, LEDs, displays, ...
