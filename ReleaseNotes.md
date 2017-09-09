@@ -1,3 +1,6 @@
+## 0.18.x
+- new [nav-embed](https://github.com/ma-ha/easy-web-app/tree/master/examples/nev-embed) module 
+
 ## 0.17.x
 - Table/List: support number
 - Table improvements (JSON with null and boolean value support)

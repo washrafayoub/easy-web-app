@@ -31,10 +31,10 @@ webservices.use( cookieParser() )
 
 
 /** Initialize the Web GUI */
-gui.init = function init( logoText, port, rootPath ) {
+gui.init = function init( logoText, port, rootPath, options ) {
   this.appRoot = ( rootPath ? rootPath : '/' )
   if ( this.appRoot.indexOf('/') != 0 ) { this.appRoot = '/'+this.appRoot }
-  var mainPage = this.setDefaults()
+  var mainPage = this.setDefaults( options )
   mainPage.header.logoText = logoText
   var wsPort = port || 8888
   if ( typeof WEB_SERVER_PORT !== 'undefined' ) { wsPort = WEB_SERVER_PORT } // overwide by global setting
@@ -49,22 +49,15 @@ gui.getExpress = function getExpress() {
 }
 
 /** Set defaults for all required configurations */
-gui.setDefaults = function setDefaults() {
+gui.setDefaults = function setDefaults( options ) {
   // create a default "main" page minimum config
   var  navUrl = ( this.appRoot=='/' ? '/svc/nav' : this.appRoot+'/svc/nav' ) 
   this.pages[ 'main' ] = {
       title : 'Test'
-    , decor : gui.decor
     , header : {
           logoText : 'Test'
           ,frameWarning: "true"
-          ,modules : [ {
-            id : 'MainNav'
-            , type : 'pong-navbar'
-            , param : {
-                confURL : navUrl
-            }
-          } ]
+          ,modules : [ ]
         }
     , rows : []
     , footer : {
@@ -130,6 +123,29 @@ gui.setDefaults = function setDefaults() {
       this.info = null
     }
 
+  if ( options && options.nav == 'embedded' ) {
+    var navView = {
+      id : 'Nav', title:'',
+      type:'pong-nav-embed',
+      resourceURL:'/svc/nav-embed', 
+      height:'XX', decor:"none"
+    }
+    this.pages[ 'main' ].addView ( navView )
+    options.decor = 'none'
+    this.pages[ 'main' ].header.embedNav = true
+  } else {
+    var navbar = { 
+        id : 'MainNav' , type : 'pong-navbar'
+        , param : {
+            confURL : navUrl
+        }
+      } 
+    this.pages[ 'main' ].header.modules.push( navbar )
+  }
+  if ( options && options.decor != 'none' ) {
+    this.pages[ 'main' ].decor = gui.decor
+  }
+  
   return this.pages[ 'main' ]
 }
 
@@ -171,7 +187,7 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     }
     if ( title ) 
       pgObj.title = title 
-      
+    
     pgObj.addColumnsRow = 
         function ( id, height) {
           // log.info( 'pages[].addColumns', id )
@@ -198,7 +214,28 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
         this.info = null
       }
 
-    if ( viewDef )  
+    if ( this.pages[ 'main' ].header.embedNav ) {
+      var navView = {
+        id : 'Nav', title:'',
+        type:'pong-nav-embed',
+        resourceURL:'/svc/nav-embed', 
+        height:'XX', decor:"none"
+      }
+      pgObj.addView ( navView )
+    }
+
+    pgObj.addSubNav =
+      function(  ) {
+          var navView = {
+            id : 'SubNav', title:'',
+            type:'pong-nav-embed',
+            resourceURL:'/svc/nav-embed-sub', 
+            height:'XX', decor:"none"
+          }
+          pgObj.addView ( navView )
+      }
+
+      if ( viewDef )  
       pgObj.addView( viewDef, viewConfig )
     
     this.pages[ pageId ] = pgObj
@@ -273,7 +310,8 @@ gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
 
 gui.addViewIn = function addViewIn( def, config, arr ) {
   var view = JSON.parse( JSON.stringify( def ) ) // clone it
-  view.title = def.title || def.id || "View:"
+  if ( def.title == '' ) { view.title = null } 
+    else { view.title = def.title || def.id || "View:" }
   view.decor = def.decor || this.decor
   view.resourceURL = def.resourceURL || "none"
   view.height = def.height || '400px'
@@ -467,6 +505,71 @@ router.get(
 );
 
 
+/** web service to assemble top level menu items for embedded navigation bar */
+router.get( 
+  '/svc/nav-embed', 
+  function( req, res ) {
+    var navTabs = []
+    var layout =  req.query.page
+    //  main menu
+    for ( var layoutId in gui.pages ) {
+      if ( gui.pages.hasOwnProperty ( layoutId ) ) {
+        if ( layoutId.indexOf( '/' ) == -1 && 
+            layoutId.indexOf( '-m' ) != layoutId.length -2 && 
+            layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
+            // check authorization for page
+          if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
+            // not visible for this user
+          } else {
+            var nav = {
+                'layout' : layoutId,
+                'label' : gui.pages[ layoutId ].title
+              }
+            if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
+            navTabs.push( nav )              
+          }
+        }
+      }
+    }
+    res.json( { 'navigations' : navTabs } )
+  }
+)
+
+/** web service to assemble sub level menu items for embedded navigation bar */
+router.get( 
+  '/svc/nav-embed-sub', 
+  function( req, res ) {
+    var navTabs = []
+    var layout =  req.query.page
+    var masterPage = layout + '/'
+    if ( layout && layout.indexOf( '/' ) > 0 ){
+      masterPage = layout.substr( 0, ( layout.indexOf( '/' )+1) )
+    } 
+    //log.info( 'nav-embed-sub', masterPage )
+    for ( var layoutId in gui.pages ) {
+        //log.info( 'nav-embed-sub', layoutId +' -> '+layoutId.indexOf( masterPage ) )
+        if ( layoutId.indexOf( masterPage ) == 0 ) {
+        if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && 
+              layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
+          // check authorization for page
+          if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
+            // not visible for this user
+          } else {
+            var nav = {
+                'layout' : layoutId,
+                'label' : gui.pages[ layoutId ].title
+              }
+            if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
+            navTabs.push( nav )              
+          }
+        }
+      }
+    }
+  
+    res.json( { 'navigations' : navTabs } )
+  }
+)
+
 /** web service for multi page navigation bar */
 router.get( 
   '/svc/nav', 
@@ -479,14 +582,9 @@ router.get(
       // console.log( '>>'+layoutId );
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
         if ( layoutId.indexOf( '/' ) == -1 ) {
-          if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore
-                                                                  // alternate
-                                                                  // mobile
-                                                                  // layouts
-               layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore
-                                                                    // alternate
-                                                                    // tablet
-                                                                    // layouts
+          // ignore alternate mobile and tablet layouts
+          if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && 
+               layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
             // check authorization for page
             if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
               // not visible for this user
@@ -502,17 +600,10 @@ router.get(
         } else { // sub-menu
           var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
           if ( ! gui.pullDownMenu[ subMenu ] ) { // if this is not a pull down
-	          if ( ! subMenus[ subMenu ] ) { // first sub menu item creates
-                                              // menu
-	            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && // ignore
-                                                                        // alternate
-                                                                        // mobile
-                                                                        // layouts
-	                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  // ignore
-                                                                        // alternate
-                                                                        // tablet
-                                                                        // layouts
-	  
+            if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
+              // ignore alternate mobile and tablet layouts
+	            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && 
+	                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  	  
 	              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
 	                // not visible for this user
 	              } else {
