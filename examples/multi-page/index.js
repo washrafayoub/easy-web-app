@@ -19,3 +19,7 @@ gui.addView(
   , null                           // no view plug-in config 
   , 'secondpage'                   // page ID to add that view
 )
+
+/** Add a page page and exclude from nav view. */
+var page2 = gui.addPage( 'exclpage-nonav', 'Page XYZ',  { id:'Page xyz' }, null )
+page2.addInfo( 'New' )

@@ -35,3 +35,8 @@ page3c.addView( { id:'Page 1c' } )
 var page3d = gui.addPage( 'myMenu/bard', 'Sub Page 1d' )
 page3d.addSubNav()
 page3d.addView( { id:'Page 1d' } )
+
+/** Add a page page and exclude from nav view. */
+var page2 = gui.addPage( 'exclpage-nonav', 'Page XYZ',  { id:'Page xyz' }, null )
+page2.addInfo( 'New' )
+
