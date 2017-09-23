@@ -2,6 +2,7 @@
 - new [nav-embed](https://github.com/ma-ha/easy-web-app/tree/master/examples/nev-embed) module 
 - form: fix defaultVal in textarea
 - exclude dedicated pages from navigation bar or view by `...-nonav` paggeId
+- hidden field fix
 
 ## 0.17.x
 - Table/List: support number
