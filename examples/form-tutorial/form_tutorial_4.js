@@ -18,6 +18,7 @@ var formPlugInConfig = {
           {
             formFields: [
               { id: 'f01', label: 'Text', type: 'text' },
+              { id: 'f01r', label: 'Textarea', type: 'text', rows:'3', defaultVal:'...' },
               { id: 'f01r', label: 'Text readonly', type: 'text', defaultVal:"Can't change", readonly:'true' },
               { id: 'f01o', label: 'Text+Options', type: 'text',
                 options:[ {value:'ABC'}, {value:'XYZ'}, {value:'12345'} ] },

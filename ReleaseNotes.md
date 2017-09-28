@@ -1,3 +1,21 @@
+## 0.18.x
+- new [nav-embed](https://github.com/ma-ha/easy-web-app/tree/master/examples/nev-embed) module 
+- form: fix defaultVal in textarea
+- exclude dedicated pages from navigation bar or view by `...-nonav` paggeId
+
+## 0.17.x
+- Table/List: support number
+- Table improvements (JSON with null and boolean value support)
+- Table/List: button has dynamic label 
+- Table/List: new "select" type
+- Table/List: fixes for id in POST with hierarchical structure
+- Table: Editable now as input (fixes inline HTML) + URLs as links
+- fix i18n in view title
+
+See: [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-expand)
+
+- [theme and decor](https://github.com/ma-ha/easy-web-app/tree/master/examples/theme)
+
 ## 0.16.0/1
 - ReST-Web-UI 0.9.26
 - CSS swith and support for `decor='tedge'` (ref [demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css))

@@ -20,7 +20,7 @@ Some REST/JSON web services are provided:
 * `POST /logout`
 
 ## "GUI" API
-### gui.init ( \[portalName\] \[,port\] \[,rootPath\])
+### gui.init ( \[portalName\] \[,port\] \[,rootPath\ \[,options\]])
 Returns the main `page` object and starts a minimal REST/JSON
 web service eco system for the portal.
 
@@ -45,6 +45,10 @@ By default the page will show a "click hijacking" security warning,
 if it's embedded in an iframe.
 Set `mainPage.header.frameWarning = "false"` if embedding is OK.
 
+Supportet options:
+* `nav: 'embedded'`: Display a menu (pong-nav-embed) in the page and not in the header
+
+
 ### gui.addPage ( pageId \[, title\] \[, viewDef\] \[, viewConfig\] )
 Returns the new `page` object.
 
@@ -64,7 +68,9 @@ gui.addPage( 'XYZ/PageB', '3rd Page', { id:'b1', type:'pong-table', height:'500p
 Remark: All pages are stored in the `gui.pages[]` array. 
 By `gui.addPage(...)` also a navigation menu for page navigation 
 will provided automatically. In the example "PageA" and "PageB" 
-are in a "XYZ" navigation menu tab.
+are in a "XYZ" navigation menu tab. 
+
+If you want to exclude a page from the navigation, the pageId should end with `-nonav` 
 
 ### gui.addPullDownMenu ( menuId, menuLabel ) 
 Add a pull down menu. Pages can be assigned to this menu by labeling them
@@ -234,6 +240,12 @@ Main page only!
 
 Initializes the footer link list and adds the link. 
 The linkTarget is optional, typically you define it to be `_blank`
+
+### page.addSubNav ( )
+Adds a new `row` with a 2nd level menu. 
+Pages with a '/' are dsiplayed. if the root is the active page.
+
+See [embedded nav example](https://github.com/ma-ha/easy-web-app/tree/master/examples/nav-embed).
 
 ### page.addView ( def \[, config\] )
 Adds a new `row` with a new `view` and returns the `view`, ref. `gui.addView`.
