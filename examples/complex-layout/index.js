@@ -21,6 +21,7 @@
   */
 var gui = require( '../../' )     // stand alone: replace with  require( 'easy-web-app' ) 
 var log = require( 'npmlog' )
+var express = require( 'express' )
 
 // Initialize the framework and the default page
 var mainPage = gui.init()
@@ -37,5 +38,5 @@ var col2rows = columns.addRowsColumn( 'col2', '60%' )
 col2rows.addView( { 'id':'rowX', 'title':'Row X', 'height':'100px' } )
 col2rows.addView( { 'id':'rowY', 'title':'Row Y', 'height':'100px' } )
 
-mainPage.addView( { 'id':'row4view', 'title':'Row 4 View', 'height':'100px' } )
-  
+mainPage.addView( { 'id':'row4view', 'title':'Row 4 View', 'height':'200px', resourceURL:'test' } )
+gui.getExpress().use( '/test/html', express.static( __dirname + '/test' ) )
