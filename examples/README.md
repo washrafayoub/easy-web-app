@@ -30,11 +30,13 @@ Perhaps start here:
 ## View Type examples  
 * [Simple form -- showing all currently supported field types](https://github.com/ma-ha/easy-web-app/blob/master/examples/simple/index.js)
 * [Table demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/table-demo/index.js) \*
+  * [Table with expands](https://github.com/ma-ha/easy-web-app/blob/master/examples/table-expand/index.js) \*
 * [Content via MediaWiki API](https://github.com/ma-ha/easy-web-app/blob/master/examples/wiki-demo/index.js)
 * [Icon navigation demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/icons/) 
 * [I/O demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/io/index.js) \*
 * [Tree and Histogram demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/tree/) \*
 * [List demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/list/) \*
+* [Embedded page-navigation view](https://github.com/ma-ha/easy-web-app/blob/master/examples/nav-embed/index.js)
 
 ## Other Feature Demos
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
@@ -46,6 +48,8 @@ Perhaps start here:
 * ["complex" layout demo -- more than one view on a page](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/index.js)
 * [change view configuration "on-the-fly"](https://github.com/ma-ha/easy-web-app/blob/master/examples/on-the-fly-config/index.js)
 * [Security: Login, logout and page authorization](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/)
+* [event feedback for user in footer](https://github.com/ma-ha/easy-web-app/blob/master/examples/feedback/index.js)
+* [theme demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/theme/index.js)
 
 <sub>_Remark: (\*) includes a REST/JSON web service implementation_</sub>  
 
