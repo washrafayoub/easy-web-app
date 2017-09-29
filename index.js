@@ -389,13 +389,21 @@ router.use ( '/img',     express.static( staticDir + '/img' ) );
 router.use ( '/modules', express.static( staticDir + '/modules' ) );
 // router.use ( '/i18n', express.static( staticDir + '/i18n' ) );
 
+function getBasePageName( page ) {
+  var len2 = page.length -2
+  if ( page.indexOf( '-m' ) == len2  ||  page.indexOf( '-t' ) == len2 ) {
+    return page.substring( 0, len2 )
+  } else { 
+    return page
+  }
+}
 
 /** REST web service to GET layout structure: */
 router.get( 
   '/svc/layout/:id/structure', 
   function( req, res ) {
-    
-    if ( gui.authorize && ! gui.authorize( gui.getUserId(req), req.params.id ) ) {
+    var pgId = getBasePageName( req.params.id )
+    if ( gui.authorize && ! gui.authorize( gui.getUserId(req), pgId ) ) {
       // not authorized for this page
       var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
@@ -416,8 +424,8 @@ router.get(
         };
       return res.json( layout );
     } else  
-    if ( gui.pages[ req.params.id ] ) {
-      var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloned
+    if ( gui.pages[ pgId ] ) {
+      var pg = JSON.parse( JSON.stringify( gui.pages[ pgId ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = gui.getUserId( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
@@ -587,7 +595,7 @@ router.get(
           // ignore alternate mobile and tablet layouts
           if ( layoutId.indexOf( '-nonav' ) != layoutId.length -6 && 
               layoutId.indexOf( '-m' ) != layoutId.length -2 && 
-               layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
+              layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
             // check authorization for page
             if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
               // not visible for this user
