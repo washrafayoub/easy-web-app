@@ -10,3 +10,6 @@ So all you need is to call the API:
 # Run example
 1. You need to [get a local copy of the easy-web gui](https://github.com/ma-ha/easy-web-gui).
 2. in this directory simply run: `nodejs index.js` 
+
+# Security
+`LangSel`is a header module and needs to be authorized, if you enable security.
