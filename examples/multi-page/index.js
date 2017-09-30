@@ -10,8 +10,8 @@ gui.pages['main'].title = '1st Page'
 gui.addView( { 'id':'myFirstView' } ) 
 
 /** Add a second page page. */
-gui.addPage( 'secondpage' )
-gui.pages['secondpage'].title = '2nd Page'
+gui.addPage( 'usage' ) 
+gui.pages['usage'].title = '2nd Page'
 
 /** Add an empty view to the second page page. */
 gui.addView( 

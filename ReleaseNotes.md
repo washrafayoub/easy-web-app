@@ -4,6 +4,7 @@
 - exclude dedicated pages from navigation bar or view by `...-nonav` paggeId
 - hidden field fix
 - plan HTML fix and added to [complex layout example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
+- fix ignored page layouts in nav
 
 ## 0.17.x
 - Table/List: support number

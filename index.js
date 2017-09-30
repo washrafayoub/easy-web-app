@@ -522,10 +522,12 @@ router.get(
     //  main menu
     for ( var layoutId in gui.pages ) {
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
-        if ( layoutId.indexOf( '/' ) == -1 && 
-            layoutId.indexOf( '-nonav' ) != layoutId.length -6 && 
-            layoutId.indexOf( '-m' ) != layoutId.length -2 && 
-            layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
+        if (( layoutId.indexOf( '-nonav' ) == -1 ||
+              layoutId.indexOf( '-nonav' ) != layoutId.length -6  ) && 
+            ( layoutId.indexOf( '-m' ) == -1 ||
+              layoutId.indexOf( '-m' ) != layoutId.length -2 ) && 
+            ( layoutId.indexOf( '-t' ) == -1 ||
+              layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {  
             // check authorization for page
           if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
             // not visible for this user
@@ -558,10 +560,12 @@ router.get(
     for ( var layoutId in gui.pages ) {
         //log.info( 'nav-embed-sub', layoutId +' -> '+layoutId.indexOf( masterPage ) )
         if ( layoutId.indexOf( masterPage ) == 0 ) {
-        if (  layoutId.indexOf( '-nonav' ) != layoutId.length -6 && 
-              layoutId.indexOf( '-m' ) != layoutId.length -2 && 
-              layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
-          // check authorization for page
+          if ( ( layoutId.indexOf( '-nonav' ) == -1 ||
+                 layoutId.indexOf( '-nonav' ) != layoutId.length -6  ) && 
+               ( layoutId.indexOf( '-m' ) == -1 ||
+                 layoutId.indexOf( '-m' ) != layoutId.length -2 ) && 
+               ( layoutId.indexOf( '-t' ) == -1 ||
+                 layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {            // check authorization for page
           if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
             // not visible for this user
           } else {
@@ -593,9 +597,12 @@ router.get(
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
         if ( layoutId.indexOf( '/' ) == -1 ) {
           // ignore alternate mobile and tablet layouts
-          if ( layoutId.indexOf( '-nonav' ) != layoutId.length -6 && 
-              layoutId.indexOf( '-m' ) != layoutId.length -2 && 
-              layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  
+          if ( ( layoutId.indexOf( '-nonav' ) == -1 ||
+                 layoutId.indexOf( '-nonav' ) != layoutId.length -6  ) && 
+               ( layoutId.indexOf( '-m' ) == -1 ||
+                 layoutId.indexOf( '-m' ) != layoutId.length -2 ) && 
+               ( layoutId.indexOf( '-t' ) == -1 ||
+                 layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {  
             // check authorization for page
             if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
               // not visible for this user
