@@ -46,7 +46,7 @@ gui.addView (
         'ProductPage_linkForCol_1',
         'Picture',
         'ZoomImg_zooms_Picture',
-        'Status_checkbox',
+        'Status_checkbox_editable',
         'Rating',
         'Description_editable',
         'Product~Page_link',
