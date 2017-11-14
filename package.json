@@ -13,7 +13,8 @@
 		"portal", "REST", "RESTful", "web", "service",
 		"form", "table", "I/O", "content", 
 		"serverless", "API centric", 
-		"tablet", "mobile", "desktop"
+    "tablet", "mobile", "desktop", 
+    "front-end", "framework"
 	],
 	"repository":{
 		"type":"git",
