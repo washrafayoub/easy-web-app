@@ -60,7 +60,7 @@ var d = (new Date()).valueOf()
 var tableData = 
   [ 
     {ID:'yyy1',Name:['Prod A','A'],Rating:'3',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x02.png',ZoomImg:'img\/tst.jpg'},
-    {ID:'yyy3',Name:['Prod B','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x03.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy3',Name:['Prod B','A'],Rating:'2',Status:'true',ProductPage:'',descr:'Blah blub bubber.',Picture:'img\/x03.png',ZoomImg:'img\/tst.jpg'},
     {ID:'yyy4',Name:['Prod C','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x04.png',ZoomImg:'img\/tst.jpg'},
     {ID:'yyy5',Name:['Prod D','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x05.png',ZoomImg:'img\/tst.jpg'},
     {ID:'yyy6',Name:['Prod E','A'],Rating:'1',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x06.png',ZoomImg:'img\/tst.jpg'},

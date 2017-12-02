@@ -7,6 +7,7 @@
 - fix ignored page layouts in nav
 - table: fix editable checkbox 
 - form checkbox: enable/disable other form elements
+- table: fix "linkFor" and suppress empty links
 
 ## 0.17.x
 - Table/List: support number
