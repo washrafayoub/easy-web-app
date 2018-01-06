@@ -935,7 +935,7 @@ gui.checkUserCSRFtoken = function checkUserCSRFtoken( req ) {
   return true
 }
 
-webservices.use( // inject CSRF toekn
+webservices.use( // inject CSRF token
   function( req, res, next ) {
     var csrfToken = 'default'
     if ( req.cookies && req.cookies[ 'pong-security' ] ) {
