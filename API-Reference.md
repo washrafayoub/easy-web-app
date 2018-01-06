@@ -363,7 +363,8 @@ Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-a
 
 # Config-Reference
 
-The `config` npm package is great for staging and CI/CD automation. It helps you also to make the code short and simple.
+The [config npm package](https://www.npmjs.com/package/config)
+is great for staging and CI/CD automation. It helps you also to make the code short and simple.
 
 Supported config elemtents
 * `easy-web-app.port`: port number

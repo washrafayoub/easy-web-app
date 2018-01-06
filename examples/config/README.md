@@ -1,4 +1,4 @@
-The `config` npm package is great for staging and CI/CD automation. It helps you also to make the code short and simple.
+The [config npm package](https://www.npmjs.com/package/config) is great for staging and CI/CD automation. It helps you also to make the code short and simple.
 
 Now `easy-web-app` supports `config` for:
 * port
