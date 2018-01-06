@@ -7,7 +7,7 @@ Now `easy-web-app` supports `config` for:
 * security
 * ...
 
-See [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#Config-Reference) 
+See [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#config-reference) 
 
 
 To run the example you must install config into this folder by
