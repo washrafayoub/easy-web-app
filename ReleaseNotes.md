@@ -1,3 +1,6 @@
+## 0.19.x
+Support `config` package, see [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/config) and [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#Config-Reference) 
+
 ## 0.18.x
 - new [nav-embed](https://github.com/ma-ha/easy-web-app/tree/master/examples/nev-embed) module 
 - form: fix defaultVal in textarea

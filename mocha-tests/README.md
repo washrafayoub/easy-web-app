@@ -10,6 +10,10 @@ Run Test:
 
 Sorry, that won't work: `mocha --recursive`
 
+The _config test_ must be done separately:
+
+    cd config-test
+    mocha -t 10000 config.js 
 
 ## Write Tests
 

@@ -360,3 +360,38 @@ Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-a
 Adds and return `rows` object.
 
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
+
+# Config-Reference
+
+The `config` npm package is great for staging and CI/CD automation. It helps you also to make the code short and simple.
+
+Supported config elemtents
+* `easy-web-app.port`: port number
+* `easy-web-app.rootPath: example`: URL path string, w/o leading `/`
+* `easy-web-app.enableSecurity`: false / true
+* `easy-web-app.enableCustomCSS`: false / true (requires ./css/custom.css file)
+* `easy-web-app.loginTimeout`: number, milli seconds
+* `easy-web-app.img-cust`: relative dir name , w/o leading `/`
+* `easy-web-app.logoURL`: realtiv file, should start with `img-cust/`
+* `easy-web-app.logoText`: string
+* `easy-web-app.title`: string
+* `easy-web-app.copyrightText`: string
+
+Example `config/default.yml`:
+```yaml
+staging: TEST
+loglevel: info
+easy-web-app:
+  port: 8900
+  rootPath: example
+  enableSecurity: false
+```
+
+By using `config` you only need these stripped down code to run your GUI:
+
+```javascript    
+var gui    = require( 'easy-web-app' ) 
+var config = require( 'config' )
+var main = gui.init() 
+main.addView( { 'id':'V1', 'title':'Empty View' } )
+```

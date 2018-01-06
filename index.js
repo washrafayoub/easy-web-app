@@ -1,6 +1,6 @@
 /*!
  * easy-web-gui
- * Copyright(c) 2016 ma-ha
+ * Copyright(c) 2018 ma-ha
  * MIT Licensed
  */
 
@@ -29,18 +29,51 @@ var formParser  = bodyParser.urlencoded( { extended: true } );
 var cookieParser = require( 'cookie-parser' )
 webservices.use( cookieParser() )
 
+// support external confugation
+var config = require( 'config' )
+var cfg = {}
+if ( config.has('easy-web-app') ) { 
+  cfg = config.get( 'easy-web-app' ) 
+  if ( cfg.enableCustomCSS ) {
+    router.use( '/css-custom', express.static( process.cwd()+'/css' ) )
+    log.info( 'Web GUI', 'use '+process.cwd() +'/custom.css' )
+  }
+  if ( cfg['img-cust'] ) {
+    router.use( '/img-cust', express.static( process.cwd() +'/'+ cfg['img-cust'] ) )
+    log.info( 'Web GUI', 'get "/img-cust" from folder '+process.cwd() +'/'+ cfg['img-cust']   )
+  }
+}
+log.info( 'Web GUI', 'config port: '+cfg.port )
+
+if ( config.staging ) { log.info( 'Web GUI', 'config stage: '+config.staging ) }
+if ( config.loglevel ) { 
+  log.info( 'Web GUI', 'config loglevel: '+config.loglevel )
+  log.level = config.loglevel 
+}
 
 /** Initialize the Web GUI */
 gui.init = function init( logoText, port, rootPath, options ) {
-  this.appRoot = ( rootPath ? rootPath : '/' )
+  this.appRoot = rootPath || cfg.rootPath || '/'
   if ( this.appRoot.indexOf('/') != 0 ) { this.appRoot = '/'+this.appRoot }
   var mainPage = this.setDefaults( options )
-  mainPage.header.logoText = logoText
-  var wsPort = port || 8888
-  if ( typeof WEB_SERVER_PORT !== 'undefined' ) { wsPort = WEB_SERVER_PORT } // overwide by global setting
+  mainPage.header.logoText = cfg.logoText || logoText
+  mainPage.title           = cfg.title || mainPage.title
+  mainPage.footer.copyrightText = cfg.copyrightText || mainPage.footer.copyrightText
+  if ( cfg.logoURL ) { mainPage.setLogoURL( cfg.logoURL ) }
+
+  var wsPort = port || cfg.port || 8888
+  if ( typeof WEB_SERVER_PORT !== 'undefined' ) { 
+    wsPort = WEB_SERVER_PORT  //  global setting override
+  }
   webservices.use( this.appRoot, router )
   webservices.listen( wsPort )
   log.info( 'Web GUI', 'http://localhost:' + wsPort + this.appRoot )
+  if ( cfg.enableSecurity === true ) {
+    gui.enableSecurity()
+    if ( cfg.loginTimeout ) {
+      gui.loginTimeout = cfg.loginTimeout 
+    }
+  }
   return mainPage
 }
 
@@ -53,7 +86,7 @@ gui.setDefaults = function setDefaults( options ) {
   // create a default "main" page minimum config
   var  navUrl = ( this.appRoot=='/' ? '/svc/nav' : this.appRoot+'/svc/nav' ) 
   this.pages[ 'main' ] = {
-      title : 'Test'
+      title : 'Main Page'
     , header : {
           logoText : 'Test'
           ,frameWarning: "true"
