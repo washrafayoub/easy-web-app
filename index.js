@@ -31,6 +31,7 @@ webservices.use( cookieParser() )
 
 // support external confugation
 var config = require( 'config' )
+if ( config.staging ) { log.info( 'Web GUI', 'config stage: '+config.staging ) }
 var cfg = {}
 if ( config.has('easy-web-app') ) { 
   cfg = config.get( 'easy-web-app' ) 
@@ -45,9 +46,8 @@ if ( config.has('easy-web-app') ) {
 }
 log.info( 'Web GUI', 'config port: '+cfg.port )
 
-if ( config.staging ) { log.info( 'Web GUI', 'config stage: '+config.staging ) }
 if ( config.loglevel ) { 
-  log.info( 'Web GUI', 'config loglevel: '+config.loglevel )
+  log.info( 'Web GUI', 'switch to log level: '+config.loglevel )
   log.level = config.loglevel 
 }
 
