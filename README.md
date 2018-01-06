@@ -2,22 +2,28 @@
 Create web applications easily and reduce complexity.
 
 **No GUI programming required!** The **Web GUI is defined by JSON files**, static or served via REST service.
-This package helps you to create complex and full featured web GUIs via REST services.
+Create your complex and full featured web GUIs just by JSON configuration.  So you focus on programming business logic REST services. 
 
 This [Node.js API package](https://www.npmjs.com/package/easy-web-app) 
 includes the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework and make its usage comfortable and easy.
 
 Focus is on **web applications** _(not simple web pages)_. 
-View type plug-ins are available to get a portal it quickly set-up:
+Available view types:
 * Forms, Tables, Lists, Trees, Histograms
 * Content: via MediaWiki API, plain HTML views, RSS-/atom-feeds or help dialogs
 * I/O: control switches/drawer, gauges, graphs, LEDs, displays, ...
-* i18n: switch language
 * Maps: POIs, routes, traffic, ...
-* Page to page navigation with navigation tabs, menus, links, icon views and session data
+* Icons 
 * Source code display
-* Security: RESTful, HTTP Basic or OAuth authentication support, "Change Password" dialog with policy check
-* ...
+
+Features:
+* Rich page haeder and footer
+* Page to page navigation with navigation tabs, menus, links, ...
+* i18n: switch language
+* Security: RESTful, HTTP Basic or OAuth authentication support, "Change Password" dialog with policy check, ... (see below)
+* Session data
+* CSS customizing and themes
+* layout alternatives: desktop / mobile phone / tablet detection 
 
 This is how it may look like:
 ![demo screen shot](http://bit.ly/rest-web-gui-screenshot) 
@@ -103,9 +109,7 @@ The JSON configuration of a whole page looks this way:
 Inside the browser this is rendered to a full featured web app by
 [the "rest-web-gui" JavaScript framework and it's plug-ins](https://github.com/ma-ha/rest-web-ui/) -- magic!!
 
-Of course you may need to customize the CSS themes. You can also develop your own JavaScript view plug-ins.
-
-All tested browsers and devices works fine (special layouts for mobile phones and tablets is now a feature):
+Tested on all modern browsers and devices (support alternate layouts for mobile phones and tablets is now a feature):
 
 ![demo screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/gui-on-devices-s.png) 
 
