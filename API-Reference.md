@@ -65,12 +65,24 @@ gui.addPage( 'XYZ/PageB', '3rd Page', { id:'b1', type:'pong-table', height:'500p
 ...
 ```
 
+
 Remark: All pages are stored in the `gui.pages[]` array. 
 By `gui.addPage(...)` also a navigation menu for page navigation 
 will provided automatically. In the example "PageA" and "PageB" 
-are in a "XYZ" navigation menu tab. 
+are in a "XYZ" navigation menu tab as a pull down submenu. 
 
-If you want to exclude a page from the navigation, the pageId should end with `-nonav` 
+Special page names:
+* If you want to exclude a page from the navigation, the pageId should end with `-nonav` 
+* Mobile phone optimized page: You can add a page with the same name, 
+  but append `-m`. 
+  This page does not show in the navigation menu and it will autmatically be 
+  loaded on a smart phone, instead of the normal page.
+* Tablet optimized pages: Same as mobile, but append `-t` to the page name instead.
+* After authentication the user may have access to his personal settings.
+  Any page starting with `user/` will appear in the users drop down, where also 
+  logout and change password is available. 
+  These pages are hidden in the normal navigation menu.
+
 
 ### gui.addPullDownMenu ( menuId, menuLabel ) 
 Add a pull down menu. Pages can be assigned to this menu by labeling them

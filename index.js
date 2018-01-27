@@ -277,10 +277,12 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     if ( pageId.indexOf( '/' ) != -1 ) {
     	var menuId = pageId.substr( 0 , pageId.indexOf( '/' ) )
     	// log.info( ' ... '+menuId )
-    	if ( menuId == 'user') {
-    		//log.info( 'menu "'+menuId +'": '+pageId)
-    		if ( ! gui.secParams.userPages ) { gui.secParams.userPages = {} }
-    		gui.secParams.userPages[ title ] = pageId
+    	if ( menuId == 'user' ) {
+        if ( gui.secParams ) { // only if security is enabled 
+          //log.info( 'menu "'+menuId +'": '+pageId)
+          if ( ! gui.secParams.userPages ) { gui.secParams.userPages = {} }
+          gui.secParams.userPages[ title ] = pageId
+        }
     	} else if ( this.pullDownMenu[ menuId ] ) {
     		// log.info( 'pullDownMenu: '+menuId )
     		this.pullDownMenu[ menuId ].moduleConfig.menuItems.push( 
@@ -560,7 +562,8 @@ router.get(
             ( layoutId.indexOf( '-m' ) == -1 ||
               layoutId.indexOf( '-m' ) != layoutId.length -2 ) && 
             ( layoutId.indexOf( '-t' ) == -1 ||
-              layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {  
+              layoutId.indexOf( '-t' ) != layoutId.length -2 ) && 
+            ( layoutId.indexOf( 'user/' ) != 0 ) ) {  
             // check authorization for page
           if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
             // not visible for this user
@@ -598,7 +601,8 @@ router.get(
                ( layoutId.indexOf( '-m' ) == -1 ||
                  layoutId.indexOf( '-m' ) != layoutId.length -2 ) && 
                ( layoutId.indexOf( '-t' ) == -1 ||
-                 layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {            // check authorization for page
+                 layoutId.indexOf( '-t' ) != layoutId.length -2 ) && 
+               ( layoutId.indexOf( 'user/' ) != 0 ) ) {            // check authorization for page
           if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
             // not visible for this user
           } else {
@@ -624,9 +628,9 @@ router.get(
     var navTabs = []
     var subMenus = {}
     var userId = gui.getUserId( req )
-    // console.log( 'GET /svc/nav '+gui.pages.length );
+    // console.log( 'GET /svc/nav '+gui.pages.length )
     for ( var layoutId in gui.pages ) {
-      // console.log( '>>'+layoutId );
+      // console.log( '>>'+layoutId )
       if ( gui.pages.hasOwnProperty ( layoutId ) ) {
         if ( layoutId.indexOf( '/' ) == -1 ) {
           // ignore alternate mobile and tablet layouts
@@ -650,7 +654,7 @@ router.get(
           }
         } else { // sub-menu
           var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
-          if ( ! gui.pullDownMenu[ subMenu ] ) { // if this is not a pull down
+          if ( ! gui.pullDownMenu[ subMenu ] && subMenu != 'user' ) { // if this is not a pull down
             if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
               // ignore alternate mobile and tablet layouts
 	            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && 
@@ -666,9 +670,11 @@ router.get(
 	              }
 	            }
 	          }
-	          if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+	          if ( ( gui.authorize && ! gui.authorize(userId,layoutId) ) ) {
 	            // not visible for this user
-	          } else {
+	          } else if ( subMenu == 'user' ) {
+              //log.verbose( 'nav','hide user in nav tabs' )
+            } else {
 	            var nav = {
 	                'layout' : layoutId,
 	                'label' : gui.pages[ layoutId ].title

@@ -8,17 +8,22 @@ var mainPage = gui.init ( 'Menu Demo' )
 mainPage.title = 'Page ABC' // replace default = "main"
 mainPage.addView ( { id : 'Page abc' }, null )
 
-/** Add a 2nd page page. */
+/** Add a 2nd page. */
 var page2 = gui.addPage( 'secondpage', 'Page XYZ',  { id:'Page xyz' }, null )
 page2.addInfo( 'New' )
 
-/** Add a 3rd page page. */
+/** Add a 3rd page. */
 // The page name is an URL and you can define a sub-menu like  
 // this "myMenu" as name. If you need a non URL conform name 
 // (e.g. "My Menu" with spaces etc.) you can use the i18n 
 // feature to map technical labels in any language. 
 var page3 = gui.addPage( 'myMenu/foo', 'Sub Page 1', { id:'Page 1' } )
 
-/** Add a 4th page page. */
+/** Add a 4th page. */
 var page4 = gui.addPage( 'myMenu/bar', 'Sub Page 2',{ id:'Page 2' }, null )
 page4.addInfo( '42' )
+
+/** Add a user settingse page. */
+gui.addPage( 'user/settings', 'User Settings', { id:'User Settings' }, null )
+// this page is hidden from the normal navigation menu
+// the page appears after login in the user pull-down menu
