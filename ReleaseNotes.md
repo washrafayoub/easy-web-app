@@ -1,6 +1,9 @@
 ## 0.19.x
 - Support `config` package, see [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/config) and [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#config-reference) 
 - hide `user\*` üages in navigaion tabs, since they are in sec-header pull down
+- fix for mobile detect and extended 
+  [mobile detect](https://github.com/ma-ha/easy-web-app/tree/master/examples/mobile-detect) 
+  example with CSS
 
 ## 0.18.x
 - new [nav-embed](https://github.com/ma-ha/easy-web-app/tree/master/examples/nev-embed) module 
