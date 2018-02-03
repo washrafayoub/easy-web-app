@@ -459,8 +459,8 @@ router.get(
         };
       return res.json( layout );
     } else  
-    if ( gui.pages[ pgId ] ) {
-      var pg = JSON.parse( JSON.stringify( gui.pages[ pgId ] ) ) // cloned
+    if ( gui.pages[ req.params.id ] ) {
+      var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = gui.getUserId( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
