@@ -4,6 +4,8 @@
 - fix for mobile detect and extended 
   [mobile detect](https://github.com/ma-ha/easy-web-app/tree/master/examples/mobile-detect) 
   example with CSS
+- meta viewport in HTML
+- raw access to express
 
 ## 0.18.x
 - new [nav-embed](https://github.com/ma-ha/easy-web-app/tree/master/examples/nev-embed) module 

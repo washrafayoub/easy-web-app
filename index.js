@@ -19,6 +19,7 @@ var log = require( 'npmlog' );
 var express     = require( 'express' );
 var webservices = express();
 var router = express.Router();
+gui.express = webservices
 
 var bodyParser  = require( 'body-parser' );
 // body-parser for JSON payload:

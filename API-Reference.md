@@ -206,9 +206,12 @@ It is recommended to check the CSRF token in all REST web service implementation
 See [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
 
 ### gui.getExpress()
-Returns the "express" web service plug-in, so that you can implement 
+Returns the "express" router web service plug-in, 
+so that you can implement 
 web services, e.g. for forms commits or loading i18n translations
 (ref. examples with \*). 
+
+If you need express and not the router, you can access it via `gui.express`.
 
 ### gui.getLoggedInUserId( req ) 
 Returns users ID, if authenticated or _null_ if not authenticated.
