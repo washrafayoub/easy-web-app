@@ -8,18 +8,20 @@ var express = require( 'express' )
 var mainPageNormal = gui.init()
 mainPageNormal.title = 'Demo'
 mainPageNormal.header.logoText = 'Mobile-Detect Demo'
-mainPageNormal.addView( { 'id':'row1view', 'title':'Desktop Browser Page', 'height':'600px' } )
+mainPageNormal.addView( { 'id':'DemoView', 'title':'Dummy View', 'height':'600px' } )
 
 // important: there are 3 CSS files
 // so you can define different styles for desktop, tablet and smartphone 
 gui.getExpress().use( '/css-custom', express.static( __dirname + '/css' ) )
 
 // Add a "main" page for tablet browsers
-var mainPageTablet = gui.addPage( 'main-t', 'Demo',  { id:'Tablet Page' }, null )
 // The -t and -m are ignored for the menu tabs
+var mainPageTablet = gui.addPage( 'main-t', 'Demo',  
+  { id:'DemoViewT', 'title':'Dummy View', 'height':'600px' }, null )
 
 // Add a "main" page for tablet browsers
-var mainPageMobile = gui.addPage( 'main-m', 'Demo',  { id:'Mobile Phone Page' }, null )
+var mainPageMobile = gui.addPage( 'main-m', 'Demo',  
+  { id:'DemoViewM', 'title':'Dummy View', 'height':'380px' }, null )
 
 // this will generate a menu tab
 var otherPageNormal = gui.addPage( 'other', 'Other Page',  { id:'Normal Page' }, null )

@@ -37,7 +37,7 @@ var label = ioView.addStaticLabel( 'by MA-HA', 200, 10 )
 label.font = "10px Courier"
 
 ioView.addIoElementConfig( 
-  { id: 'lX0', type: 'Label', label: '2016',
+  { id: 'lX0', type: 'Label', label: '2018',
     pos: { x: '200', y: '22' }, font: '10px Courier' }  
 )
 

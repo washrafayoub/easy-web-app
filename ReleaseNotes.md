@@ -1,3 +1,8 @@
+## 1.0.0
+- rest-web-ui v1.0.0 
+- responsive layout improvements
+- bug fixes
+
 ## 0.19.x
 - Support `config` package, see [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/config) and [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#config-reference) 
 - hide `user\*` üages in navigaion tabs, since they are in sec-header pull down

@@ -1,7 +1,7 @@
 # Easy Web App
 Create web applications easily and reduce complexity.
 
-**No GUI programming required!** The **Web GUI is defined by JSON files**, static or served via REST service.
+**No GUI programming required!** The **Web GUI is defined by JSON**, static files or served via REST service.
 Create complex and full featured web GUIs just by configuration.  
 You focus on programming business logic (REST services). 
 
@@ -35,7 +35,7 @@ Have a look at the ["list" example](https://github.com/ma-ha/easy-web-app/tree/m
 
 Check out [docu on "rest-web-gui" GIT project](https://github.com/ma-ha/rest-web-ui/), 
 the [examples](https://github.com/ma-ha/easy-web-app/tree/master/examples/)
-and the [online demos](http://mh-svr.de/pong_dev) of all features.
+and the [online demos](https://mh-svr.de/pong_dev) of all features.
 
 
 Check "[Release Notes](https://github.com/ma-ha/easy-web-app/blob/master/ReleaseNotes.md)" for latest changes in this version.

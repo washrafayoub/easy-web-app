@@ -40,7 +40,7 @@ Perhaps start here:
 
 ## Other Feature Demos
 * [2 pages with navigation](https://github.com/ma-ha/easy-web-app/blob/master/examples/multi-page/index.js)
-* [mobile phone, tablet or desktop browser detection](https://github.com/ma-ha/easy-web-app/blob/master/examples/mobile-detect/index.js)
+* [Responsive layout for mobile phones, tablets or desktop browsers](https://github.com/ma-ha/easy-web-app/blob/master/examples/mobile-detect/index.js)
 * [how to provide a customized CSS, change the logo, etc.](https://github.com/ma-ha/easy-web-app/blob/master/examples/custom-css/index.js)
 * [menu demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/menu-tabs/index.js)
 * [pull-down menu demo](https://github.com/ma-ha/easy-web-app/blob/master/examples/pull-down-menu/index.js)

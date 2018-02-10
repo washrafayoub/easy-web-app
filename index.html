@@ -2,12 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>Portal NG</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <!--
 The MIT License (MIT)
 
-Copyright (c) 2014 Markus Harms, ma@mh-svr.de
+Copyright (c) 2018 Markus Harms, ma@mh-svr.de
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +27,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. 
 -->
 
-<!-- unfortunatey you have to set the location of the base packeges here per file: -->
+<title>Portal NG</title>
+
+<link rel="stylesheet" type="text/css" href="css/eggplant/jquery-ui-1.10.4.custom.min.css">
+<link rel="stylesheet" type="text/css" href="css/pong.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/decor.css">
+
+<style id="viewSizes">
+
+</style>
+
 <script src="js/jquery-2.1.0.min.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="js/portal-ng.js"></script>
@@ -37,49 +46,52 @@ THE SOFTWARE.
 <script src="js/i18n/jquery.i18n.js"></script>
 <script src="js/i18n/jquery.i18n.messagestore.js"></script>
 <script src="js/i18n/jquery.i18n.fallbacks.js"></script>
-<script src="html/js/i18n/jquery.i18n.parser.js"></script>
+<script src="js/i18n/jquery.i18n.parser.js"></script>
 <script src="js/i18n/jquery.i18n.emitter.js"></script>
 <script src="js/i18n/jquery.i18n.language.js"></script>
-
-<script src="js/initI18n.js"></script>
-
 <script src="js/ext/mobile-detect.js"></script>
 
 
 <script type="text/javascript">
-//EDIT THIS VAR TO SHARE THE INSTALL PACKAGES 
-cssPath      = "css/";
-themeCssPath = "css/";
-jsPath       = "js/";
-modulesPath  = "modules/"; 
+  //EDIT THIS VAR TO SHARE THE INSTALL PACKAGES 
+  cssPath      = "css/";
+  themeCssPath = "css/";
+  jsPath       = "js/";
+  modulesPath  = "modules/"; 
+  </script>
+  
+  <!-- 
+  
+  
+   D O    N O T    A D D    A N Y    H T M L   T O   T H I S    F I L E    ! ! !
+   
+   
+   (HTML it will be replaced dynamically)
+  
+  -->
+  
+  <script type="text/javascript">
+  
+    // include CSS files
+    loadThemeCSS( "eggplant/jquery-ui-1.10.4.custom.min.css" );
+    loadCSS( "pong.css" );
+    loadCSS( "theme.css" );
+    loadCSS( "decor.css" );
+
+    // wait for the DOM to be loaded 
+  $(document).ready( 
+	function() {
+		// loop to wait for async loaders to get resource HTML and do callbacks
+		initTimerId = setInterval( "inits()", 10 );
+	} 
+  );
 </script>
 
 <!-- 
 
-
- D O    N O T    A D D    A N Y    H T M L   T O   T H I S    F I L E    ! ! !
- 
- 
- (because it will be replaced dynamically)
+ D O    N O T    E D I T    T H E    B O D Y    ! ! !
 
 -->
-
-<script type="text/javascript">
-
-	// include CSS files
-	loadThemeCSS( "eggplant/jquery-ui-1.10.4.custom.min.css" );
-	loadCSS( "pong.css" );
-	loadCSS( "theme.css" );
-	loadCSS( "decor.css" );
-	
-	// wait for the DOM to be loaded 
-	$(document).ready( 
-		function() {
-			// loop to wait for async loaders to get resource HTML and do callbacks
-			initTimerId = setInterval( "inits()", 10 );
-		} 
-	);
-</script>
 
 </head>
 <body>
