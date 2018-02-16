@@ -20,6 +20,7 @@ var formPlugInConfig = {
               { id: 'f01', label: 'Text', type: 'text' },
               { id: 'f01r', label: 'Textarea', type: 'text', rows:'3', defaultVal:'...' },
               { id: 'f01r', label: 'Text readonly', type: 'text', defaultVal:"Can't change", readonly:'true' },
+              { id: 'f01d', label: 'Text disabled', type: 'text', defaultVal:"Can't select", disabled:'true' },
               { id: 'f01o', label: 'Text+Options', type: 'text',
                 options:[ {value:'ABC'}, {value:'XYZ'}, {value:'12345'} ] },
               { id: 'f01h', label: 'HTML-Header', type: 'text', request:'header', descr:'press F12 and look at network request header to verify' },

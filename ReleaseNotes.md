@@ -1,7 +1,12 @@
-## 1.0.0
-- rest-web-ui v1.0.0 
-- responsive layout improvements
-- bug fixes
+## 1.0.x
+* v1.0.1
+  - rest-web-ui v1.0.0 
+  - responsive layout improvements
+  - bug fixes
+* v1.0.1
+  - rest-web-ui v1.0.1
+  - Form supports readonly and disabled, see [form tutorial part 3](https://github.com/ma-ha/easy-web-app/tree/master/examples/form-tutorial)
+  - width and height can be changed in `custom.css`
 
 ## 0.19.x
 - Support `config` package, see [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/config) and [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#config-reference) 
