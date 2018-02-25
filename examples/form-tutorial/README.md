@@ -189,9 +189,11 @@ for supported form fields.
 Please check the [form reference documentation](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-form)
 to read all about forms.
 
-## Load form fields by after page loading
+## Load dynamic form fields after page loading
 TODO
 
+## Validation and Captcha
+see [form_tutorial_6.js](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_6.js)
 
 ## Off-Topic: "Table" as "Form"
 The table plug in provides an _editable_ attribute for text cells: 

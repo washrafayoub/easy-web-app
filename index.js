@@ -468,7 +468,7 @@ router.get(
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
             // all others should be checked for authorization
             if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
-              delete pg.header.modules[i] // not a
+              delete pg.header.modules[i] // not authorized
             }
           }
         }

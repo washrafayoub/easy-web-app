@@ -7,6 +7,12 @@
   - rest-web-ui v1.0.1
   - Form supports readonly and disabled, see [form tutorial part 3](https://github.com/ma-ha/easy-web-app/tree/master/examples/form-tutorial)
   - width and height can be changed in `custom.css`
+* v1.0.2
+  - form fields supports `required = true`
+  - form support Google reCAPTCHA -> https://developers.google.com/recaptcha/intro
+    see [form_tutorial_6.js](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_6.js)
+  - async 
+
 
 ## 0.19.x
 - Support `config` package, see [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/config) and [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#config-reference) 
