@@ -250,6 +250,9 @@ For page the following structure will be set up:
   * `copyrightText` (String) 
   * `modules` (empty Array)
 
+Optional you can add:
+* `navLabel` (String) seaparate page title and menu label
+
 ### addFooterLink (  linkText, linkURL, \[, linkTarget\] )
 Main page only!
 
