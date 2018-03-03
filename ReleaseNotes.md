@@ -1,3 +1,9 @@
+## 1.1.x
+* 1.1.0
+  - optional `page.navLabel`, to differ from `page.title`
+  - fix for dependency to GIT
+  - engine: node > v8.9.4 LTS
+
 ## 1.0.x
 * v1.0.1
   - rest-web-ui v1.0.0 
@@ -12,7 +18,6 @@
   - form support Google reCAPTCHA -> https://developers.google.com/recaptcha/intro
     see [form_tutorial_6.js](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_6.js)
   - async 
-
 
 ## 0.19.x
 - Support `config` package, see [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/config) and [config reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md#config-reference) 

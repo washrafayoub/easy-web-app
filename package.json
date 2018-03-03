@@ -1,40 +1,61 @@
 {
-	"name":"easy-web-app",
-	"version":"1.0.2",
-	"description":"Create web applications easily.",
-	"author":"ma-ha",
-	"license":"MIT",
-	"main":"index.js",
-	"scripts":{
-		"test":"echo \"Ref mocha/README.md\" && exit 1"
+	"name": "easy-web-app",
+	"version": "1.1.0",
+	"description": "Create web applications easily.",
+	"author": "ma-ha",
+	"license": "MIT",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Ref mocha/README.md\" && exit 1"
 	},
-	"keywords":[
-		"GUI","web", "app", "browser", "AJAX", "easy",
-		"portal", "REST", "RESTful", "web", "service",
-		"form", "table", "I/O", "content", 
-		"serverless", "API centric", 
-    "tablet", "mobile", "desktop", 
-    "front-end", "framework"
+	"keywords": [
+		"GUI",
+		"web",
+		"app",
+		"browser",
+		"AJAX",
+		"easy",
+		"portal",
+		"REST",
+		"RESTful",
+		"web",
+		"service",
+		"form",
+		"table",
+		"I/O",
+		"content",
+		"serverless",
+		"API centric",
+		"tablet",
+		"mobile",
+		"desktop",
+		"front-end",
+		"framework"
 	],
-	"repository":{
-		"type":"git",
-		"url":"https://github.com/ma-ha/easy-web-app.git"
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ma-ha/easy-web-app.git"
 	},
-	"dependencies":{
-		"express":">=4.15.2",
-		"body-parser":">=1.17.1",
-		"cookie-parser":">=1.4.3",
-		"npmlog":">=2.0.0",
-    "rest-web-gui":"ma-ha/rest-web-ui",
-    "config":"^1.29.0",
-    "js-yaml": "^3.10.0"
+	"dependencies": {
+		"body-parser": ">=1.17.1",
+		"config": "^1.30.0",
+		"cookie-parser": ">=1.4.3",
+		"express": ">=4.15.2",
+		"js-yaml": "^3.10.0",
+		"npmlog": ">=2.0.0",
+		"rest-web-gui": "git+https://github.com/ma-ha/rest-web-ui.git",
+		"zombie": "^5.0.8"
 	},
-	"files":[
+	"files": [
 		"Readme.md",
 		"index.js",
 		"index.html"
 	],
-	"directories": { 
-		"example":"examples"
+	"directories": {
+		"example": "examples"
+	},
+	"engines": {
+		"node": "^8.9.4",
+		"npm": "^5.6.0"
 	}
 }
