@@ -571,7 +571,8 @@ router.get(
           } else {
             var nav = {
                 'layout' : layoutId,
-                'label' : gui.pages[ layoutId ].title
+                'label' : ( gui.pages[ layoutId ].navLabel ? 
+                  gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
               }
             if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
             navTabs.push( nav )              
@@ -609,7 +610,8 @@ router.get(
           } else {
             var nav = {
                 'layout' : layoutId,
-                'label' : gui.pages[ layoutId ].title
+                'label' : ( gui.pages[ layoutId ].navLabel ? 
+                  gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
               }
             if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
             navTabs.push( nav )              
@@ -647,7 +649,8 @@ router.get(
             } else {
               var nav = {
                   'layout' : layoutId,
-                  'label' : gui.pages[ layoutId ].title
+                  'label' : ( gui.pages[ layoutId ].navLabel ? 
+                    gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
                 }
               if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
               navTabs.push( nav )              
@@ -678,7 +681,8 @@ router.get(
             } else {
 	            var nav = {
 	                'layout' : layoutId,
-	                'label' : gui.pages[ layoutId ].title
+	                'label' : ( gui.pages[ layoutId ].navLabel ? 
+                    gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
 	              }
               if ( gui.pages[ layoutId ].info ) { 
                 nav.info =  gui.pages[ layoutId ].info
