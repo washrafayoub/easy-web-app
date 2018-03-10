@@ -2,7 +2,6 @@ var gui = require( '../../' )     // stand alone: replace with  require( 'easy-w
 var log = require('npmlog');
 
 var redis = require( 'redis' )
-const {promisify} = require('util')
 var cacheOptions = { prefix: 'loginsession-' }
 var cache = redis.createClient( cacheOptions )
 
