@@ -16,7 +16,7 @@ var secretPage = gui.addPage( 'secretPage', 'Private&nbsp;Page',
 
 // switch securiy on:
 gui.enableSecurity()
-gui.loginTimeout = 20000 // hehe: 20 sec session timeout -- good for testing 
+// gui.loginTimeout = 2000  // ignored, we have to implement that now in Redis
 
 // "auth" is ok if any user id is given
 gui.authenticate =  
@@ -62,7 +62,7 @@ gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 1' )
 gui.addPullDownMenuHtmlItem( 'testMenu', 'Test 2' )
 
 // by defining this as subpage of "user", the link will appear in the user security menu
-var profilePage = gui.addPage( 'user/profile', 'User Profile',  { id:'User Profile' }, null )
+var profilePage = gui.addPage( 'user/profile', 'User Profile',  { id:'UserProfile' }, null )
 var profilePage = gui.addPage( 'user/settings', 'Preferences',  { id:'Preferences' }, null )
 
 // now we need to implement the ReST service for /products 
@@ -70,46 +70,51 @@ var profilePage = gui.addPage( 'user/settings', 'Preferences',  { id:'Preference
 var svc  = gui.getExpress()
 svc.get( 
   '/products', 
-  function( req, res ) {
-    if ( gui.getLoggedInUserId( req ) ) {
-      if ( ! gui.checkUserCSRFtoken( req ) ) {
-        log.warn( 'GET products', 'CSRF wrong!!')
+  async function( req, res ) {
+    try {
+      if ( await gui.getUserIdFromReq( req ) ) {
+        if ( ! gui.checkUserCSRFtoken( req ) ) {
+          log.warn( 'GET products', 'CSRF wrong!!')
+        }
+        log.info( 'products service', 'user is logged in' )
+        // generate some dummy data:
+        var tableData = 
+          [ 
+          {"Name":"Product AB","Rating":"3"},
+          {"Name":"Product 1","Rating":"2"},
+          {"Name":"XYZ Product","Rating":"1"},
+          {"Name":"My Product","Rating":"1"},
+          {"Name":"Secret Product 1","Rating":"2"},
+          {"Name":"Top Secret Product 2","Rating":"0"},
+          {"Name":"Product XYZ","Rating":"0"},
+          {"Name":"My Prod","Rating":"0"},
+          {"Name":"Your Prod","Rating":"3"},
+          {"Name":"Other Product","Rating":"1"},
+          {"Name":"Just a Product","Rating":"2"}
+          ]
+        res.status( 200 ).json( tableData )  		
+      } else {
+        log.info( 'products service', 'not allowed for unauthenticated users' )
+        res.status( 401 ).send( "You must login first!!"  )  		  		
       }
-      log.info( 'products service', 'user is logged in' )
-      // generate some dummy data:
-      var tableData = 
-        [ 
-         {"Name":"Product AB","Rating":"3"},
-         {"Name":"Product 1","Rating":"2"},
-         {"Name":"XYZ Product","Rating":"1"},
-         {"Name":"My Product","Rating":"1"},
-         {"Name":"Secret Product 1","Rating":"2"},
-         {"Name":"Top Secret Product 2","Rating":"0"},
-         {"Name":"Product XYZ","Rating":"0"},
-         {"Name":"My Prod","Rating":"0"},
-         {"Name":"Your Prod","Rating":"3"},
-         {"Name":"Other Product","Rating":"1"},
-         {"Name":"Just a Product","Rating":"2"}
-        ]
-      res.status( 200 ).json( tableData )  		
-  	} else {
-    	log.info( 'products service', 'not allowed for unauthenticated users' )
-      res.status( 401 ).send( "You must login first!!"  )  		  		
+    } catch ( exc ) { 
+      log.error('products service', exc )
+      res.status( 500 ).send('Oups')
     }
   }
 )
 
 /* Optional hooks for HA environment, typically using a distributed cache or a DB
-gui.createToken = function createToken( userId ){
+gui.createToken = async function createToken( userId ){
   //TODO: implement for HA cluster
   return token 
 }
 
-gui.getUserIdForToken = function getUserIdForToken( token ){
+gui.getUserIdForToken = async function getUserIdForToken( token ){
   //TODO: implement for HA cluster
   return userId
 }
-gui.deleteUserIdForToken = function gui.deleteUserIdForToken( token ) {
+gui.deleteUserIdForToken = async function gui.deleteUserIdForToken( token ) {
   // TODO: implement for HA cluster
 }
 */

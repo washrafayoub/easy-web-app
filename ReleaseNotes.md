@@ -1,3 +1,11 @@
+## 1.2.x
+* 1.2.0 support for async session cache (e.g. REDIS) 
+  - DEPRECATED getLoggedInUserId( req ) 
+  - use `async getUserIdFromReq( req )` instead
+
+TODO: 
+ - add Redis cache example to sync login session on multi node set up
+
 ## 1.1.x
 * 1.1.0
   - optional `page.navLabel`, to differ from `page.title`

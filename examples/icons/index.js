@@ -24,7 +24,7 @@ var columns = mainPage.addColumnsRow( 'row3', '600px' )
 var nav = columns.addView( icons, iconNav )
 nav.decor = null
 // empty view: do business logic here:
-columns.addView( { 'id':'col1view', 'title':'Main Page', 'width':'93%' } )
+columns.addView( { 'id':'col1view1', 'title':'Main Page', 'width':'93%' } )
   
 
 // -------------------------------------------------------------
@@ -36,7 +36,7 @@ var nav2 = p2columns.addView( icons, iconNav )
 nav2.decor = ''
 
 // empty view: do business logic here:
-p2columns.addView( { 'id':'col1view', 'title':'Page 2', 'width':'93%' } )
+p2columns.addView( { 'id':'col1view2', 'title':'Page 2', 'width':'93%' } )
 
 
 // -------------------------------------------------------------
@@ -48,7 +48,7 @@ var nav3 = p3columns.addView( icons, iconNav )
 nav3.decor = ''
 
 // empty view: do business logic here:
-p3columns.addView( { 'id':'col1view', 'title':'Page 3', 'width':'93%' } )
+p3columns.addView( { 'id':'col1view3', 'title':'Page 3', 'width':'93%' } )
 
 // -------------------------------------------------------------
 // icon view will request updates:

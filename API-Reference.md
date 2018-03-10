@@ -188,11 +188,13 @@ gui.changePassword =
 
 If the hook is defined, the Web UI will generate a link and a modal form for you.
 
-Remark:  In HA set up, you need also implement 
-* `createToken( userId ){ ... return token }` 
-* `getUserIdForToken( token ){ ... return userId }`
-* `gui.deleteUserIdForToken(token)`
-functions, typically using a distributed cache.
+Remark:  In multi node set up, you need to sync login sessions.
+To do this, you need to implement the async functions `createToken`,
+`getUserIdForToken` and `deleteUserIdForToken`:
+* `gui.createToken = async function createToken( userId ){ ... return token }` 
+* `gui.getUserIdForToken = async function getUserIdForToken( token ){ ... return userId }`
+* `gui.deleteUserIdForToken = async function deleteUserIdForToken(token) { ... }`
+Typically you use a Redis cache, to store `token: userid`.
 
 Login session timeout is set to 6400000 ms, 
 you can change the value `gui.loginTimeout` to your requirements.
@@ -214,6 +216,9 @@ web services, e.g. for forms commits or loading i18n translations
 If you need express and not the router, you can access it via `gui.express`.
 
 ### gui.getLoggedInUserId( req ) 
+DEPRECATED, use `async getUserIdFromReq( req )`
+
+### async gui.getUserIdFromReq( req )
 Returns users ID, if authenticated or _null_ if not authenticated.
 
 Example usage in ReST service code:
@@ -222,14 +227,16 @@ Example usage in ReST service code:
 var svc  = gui.getExpress()
 svc.get( 
   '/products', 
-  function( req, res ) {
-  	if ( gui.getLoggedInUserId( req ) ) { 
-  	  // user login: OK
-      ...
-      res.status( 200 ).json( products )  		
-  	} else {
-      res.status( 401 ).send( "You must login first!!"  )  		  		
-  	}
+  async ( req, res ) => {
+    try { // required to avoid silent errors
+      if ( await gui.getLoggedInUserId( req ) ) { 
+        // user login: OK
+        ...
+        res.status( 200 ).json( products )  		
+      } else {
+        res.status( 401 ).send( "You must login first!!"  )  		  		
+      }
+    } catch ( exc ) { res.status( 500 ).send( 'Oups' )  } 
   }
 )
 ```
@@ -268,6 +275,9 @@ See [embedded nav example](https://github.com/ma-ha/easy-web-app/tree/master/exa
 ### page.addView ( def \[, config\] )
 Adds a new `row` with a new `view` and returns the `view`, ref. `gui.addView`.
 
+IMPORTANT (v10 and higher): 
+The view def id must be a string w/o spaces. also numbers are not allowed.
+
 Example code:
 
 ```javascript
@@ -275,7 +285,7 @@ Example code:
 var gui = require ( 'easy-web-app' )
 var mainPage = gui.init ( )
 mainPage.addView( 
-	{ id:'42', type:'pong-mediawiki', resourceURL:'http://${lang}.wikipedia.org/w/' },
+	{ id:'p42', type:'pong-mediawiki', resourceURL:'http://${lang}.wikipedia.org/w/' },
 	{ page: { EN: "Main_Page",
 	          DE: "Wikipedia:Hauptseite",
 	          IT: "Pagina_principale" },
@@ -412,5 +422,5 @@ By using `config` you only need these stripped down code to run your GUI:
 var gui    = require( 'easy-web-app' ) 
 var config = require( 'config' )
 var main = gui.init() 
-main.addView( { 'id':'V1', 'title':'Empty View' } )
+main.addView( { 'id':'View01', 'title':'Empty View' } )
 ```

@@ -39,17 +39,17 @@ describe(
     }
     );  
     
-    it( 'should show menu ABC', 
+    it( 'should show menu 1', 
       function() {
           this.browser.assert.success();
           this.browser.assert.link( '.pongNavBarItemActive a', 'Page ABC', 'index.html?layout=main' );
     }
     );  
     
-    it( 'should show menu XYZ', 
+    it( 'should show menu 2', 
       function() {
           this.browser.assert.success();
-          this.browser.assert.link( '.pongNavBarItem a:not(.pongNavBarItemActive)', 'Page XYZ', 'index.html?layout=secondpage' );
+          this.browser.assert.link( '.pongNavBarItem a:not(.pongNavBarItemActive)', 'New Page', 'index.html?layout=secondpage' );
     }
     );  
     

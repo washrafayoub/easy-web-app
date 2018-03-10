@@ -1,6 +1,6 @@
 {
 	"name": "easy-web-app",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Create web applications easily.",
 	"author": "ma-ha",
 	"license": "MIT",
@@ -41,8 +41,10 @@
 		"config": "^1.30.0",
 		"cookie-parser": ">=1.4.3",
 		"express": ">=4.15.2",
-		"js-yaml": "^3.10.0",
+		"js-yaml": "^3.11.0",
+		"minimist": "^1.2.0",
 		"npmlog": ">=2.0.0",
+		"redis": "^2.8.0",
 		"rest-web-gui": "git+https://github.com/ma-ha/rest-web-ui.git",
 		"zombie": "^5.0.8"
 	},

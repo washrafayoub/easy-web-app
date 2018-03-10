@@ -10,8 +10,8 @@ gui.pages['main'].title = '1st Page'
 gui.addView( { 'id':'myFirstView' } ) 
 
 /** Add a second page page. */
-gui.addPage( 'usage' ) 
-gui.pages['usage'].title = '2nd Page'
+gui.addPage( 'secondpage' ) 
+gui.pages['secondpage'].title = '2nd Page'
 
 /** Add an empty view to the second page page. */
 gui.addView( 
@@ -21,5 +21,5 @@ gui.addView(
 )
 
 /** Add a page page and exclude from nav view. */
-var page2 = gui.addPage( 'exclpage-nonav', 'Page XYZ',  { id:'Page xyz' }, null )
+var page2 = gui.addPage( 'exclpage-nonav', 'Page XYZ',  { id:'PageXyz' }, null )
 page2.addInfo( 'New' )

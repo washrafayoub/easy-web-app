@@ -15,13 +15,13 @@ gui.addPullDownMenu( 'testMenu', 'Menu' )
 gui.addPullDownMenuHtmlItem( 'testMenu', '<b>Some more menu tests:</b>' )
 
 // Add a 2nd page page, visible in the pull-down menu
-gui.addPage( 'testMenu/secondpage', 'Page 2', { id:'Page 2' } )
+gui.addPage( 'testMenu/secondpage', 'Page 2', { id:'Page2' } )
 
 // Add a 3rd page page, visible in the pull-down menu
-gui.addPage( 'testMenu/thirdpage', 'Page 3', { id:'Page 3' } )
+gui.addPage( 'testMenu/thirdpage', 'Page 3', { id:'Page3' } )
 
 // Add a 4th page page, visible in the pull-down menu
-gui.addPage( 'testMenu/fourthpage', 'Page 4', { id:'Page 4' } )
+gui.addPage( 'testMenu/fourthpage', 'Page 4', { id:'Page4' } )
 
 // add further static HTML content to menu:
 gui.addPullDownMenuHtmlItem( 'testMenu', '<hr/>' )

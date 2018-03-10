@@ -437,14 +437,17 @@ function getBasePageName( page ) {
 /** REST web service to GET layout structure: */
 router.get( 
   '/svc/layout/:id/structure', 
-  function( req, res ) {
+  async function( req, res ) {
     var pgId = getBasePageName( req.params.id )
-    if ( gui.authorize && ! gui.authorize( gui.getUserId(req), pgId ) ) {
+    var userId = null
+    try { userId = await gui.getUserIdFromReq( req ) }
+    catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/structure', exc ) }
+    if ( gui.authorize && ! gui.authorize( userId, pgId ) ) {
       // not authorized for this page
       var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
-        var user = gui.getUserId( req )
+        var user = await gui.getUserIdFromReq( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
           //log.info( '>>>>', pg.header.modules[i].type)
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
@@ -463,7 +466,7 @@ router.get(
     if ( gui.pages[ req.params.id ] ) {
       var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
-        var user = gui.getUserId( req )
+        var user = await gui.getUserIdFromReq( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
             // all others should be checked for authorization
@@ -488,15 +491,18 @@ router.get(
 /** REST web service to GET layout structure for sub menu pages: */
 router.get( 
   '/svc/layout/:id/:subid/structure', 
-  function( req, res ) {
+  async function( req, res ) {
     var page = req.params.id +'/'+ req.params.subid
     // console.log( '>>'+req.params.subid );
-    if ( gui.authorize && ! gui.authorize( gui.getUserId(req), page ) ) {
+    var userId = null
+    try { userId = await gui.getUserIdFromReq( req ) }
+    catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/:subid/structure', exc ) }
+    if ( gui.authorize && ! gui.authorize( userId, page ) ) {
       // not authorized for this page
       var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
-        var user = gui.getUserId( req )
+        var user = await gui.getUserIdFromReq( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
           //log.info( '>>>>', pg.header.modules[i].type)
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
@@ -519,7 +525,7 @@ router.get(
       res.json( layout );
     } else {
       res.statusCode = 404;
-      return res.send( 'Error 404: No quote found' );
+      return res.send( 'Error 404: Page "'+page+'" not found' );
     }
   } 
 );
@@ -627,77 +633,82 @@ router.get(
 /** web service for multi page navigation bar */
 router.get( 
   '/svc/nav', 
-  function( req, res ) {
-    var navTabs = []
-    var subMenus = {}
-    var userId = gui.getUserId( req )
-    // console.log( 'GET /svc/nav '+gui.pages.length )
-    for ( var layoutId in gui.pages ) {
-      // console.log( '>>'+layoutId )
-      if ( gui.pages.hasOwnProperty ( layoutId ) ) {
-        if ( layoutId.indexOf( '/' ) == -1 ) {
-          // ignore alternate mobile and tablet layouts
-          if ( ( layoutId.indexOf( '-nonav' ) == -1 ||
-                 layoutId.indexOf( '-nonav' ) != layoutId.length -6  ) && 
-               ( layoutId.indexOf( '-m' ) == -1 ||
-                 layoutId.indexOf( '-m' ) != layoutId.length -2 ) && 
-               ( layoutId.indexOf( '-t' ) == -1 ||
-                 layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {  
-            // check authorization for page
-            if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
-              // not visible for this user
-            } else {
-              var nav = {
-                  'layout' : layoutId,
-                  'label' : ( gui.pages[ layoutId ].navLabel ? 
-                    gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
+  async function( req, res ) {
+    try { 
+      var navTabs = []
+      var subMenus = {}
+      var userId = await gui.getUserIdFromReq( req )
+      // console.log( 'GET /svc/nav '+gui.pages.length )
+      for ( var layoutId in gui.pages ) {
+        // console.log( '>>'+layoutId )
+        if ( gui.pages.hasOwnProperty ( layoutId ) ) {
+          if ( layoutId.indexOf( '/' ) == -1 ) {
+            // ignore alternate mobile and tablet layouts
+            if ( ( layoutId.indexOf( '-nonav' ) == -1 ||
+                  layoutId.indexOf( '-nonav' ) != layoutId.length -6  ) && 
+                ( layoutId.indexOf( '-m' ) == -1 ||
+                  layoutId.indexOf( '-m' ) != layoutId.length -2 ) && 
+                ( layoutId.indexOf( '-t' ) == -1 ||
+                  layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {  
+              // check authorization for page
+              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+                // not visible for this user
+              } else {
+                var nav = {
+                    'layout' : layoutId,
+                    'label' : ( gui.pages[ layoutId ].navLabel ? 
+                      gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
+                  }
+                if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
+                navTabs.push( nav )              
+              }
+            }
+          } else { // sub-menu
+            var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
+            if ( ! gui.pullDownMenu[ subMenu ] && subMenu != 'user' ) { // if this is not a pull down
+              if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
+                // ignore alternate mobile and tablet layouts
+                if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && 
+                    layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  	  
+                  if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+                    // not visible for this user
+                  } else {
+                    subMenus[ subMenu ] = navTabs.length
+                    navTabs.push( {
+                      label : subMenu,
+                      menuItems: []
+                    } )
+                  }
                 }
-              if ( gui.pages[ layoutId ].info ) { nav.info =  gui.pages[ layoutId ].info } 
-              navTabs.push( nav )              
+              }
+              if ( ( gui.authorize && ! gui.authorize(userId,layoutId) ) ) {
+                // not visible for this user
+              } else if ( subMenu == 'user' ) {
+                //log.verbose( 'nav','hide user in nav tabs' )
+              } else {
+                var nav = {
+                    'layout' : layoutId,
+                    'label' : ( gui.pages[ layoutId ].navLabel ? 
+                      gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
+                  }
+                if ( gui.pages[ layoutId ].info ) { 
+                  nav.info =  gui.pages[ layoutId ].info
+                  navTabs[ subMenus[ subMenu ] ].info = '!'
+                  //log.info('nav', navTabs )
+                } 
+                navTabs[ subMenus[ subMenu ] ].menuItems.push( nav )
+              }
             }
           }
-        } else { // sub-menu
-          var subMenu = layoutId.substr( 0 , layoutId.indexOf( '/' ) )
-          if ( ! gui.pullDownMenu[ subMenu ] && subMenu != 'user' ) { // if this is not a pull down
-            if ( ! subMenus[ subMenu ] ) { // first sub menu item creates menu
-              // ignore alternate mobile and tablet layouts
-	            if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && 
-	                layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  	  
-	              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
-	                // not visible for this user
-	              } else {
-	                subMenus[ subMenu ] = navTabs.length
-	                navTabs.push( {
-	                  label : subMenu,
-	                  menuItems: []
-	                } )
-	              }
-	            }
-	          }
-	          if ( ( gui.authorize && ! gui.authorize(userId,layoutId) ) ) {
-	            // not visible for this user
-	          } else if ( subMenu == 'user' ) {
-              //log.verbose( 'nav','hide user in nav tabs' )
-            } else {
-	            var nav = {
-	                'layout' : layoutId,
-	                'label' : ( gui.pages[ layoutId ].navLabel ? 
-                    gui.pages[ layoutId ].navLabel : gui.pages[ layoutId ].title )
-	              }
-              if ( gui.pages[ layoutId ].info ) { 
-                nav.info =  gui.pages[ layoutId ].info
-                navTabs[ subMenus[ subMenu ] ].info = '!'
-                //log.info('nav', navTabs )
-              } 
-	            navTabs[ subMenus[ subMenu ] ].menuItems.push( nav )
-	          }
-	        }
         }
       }
-    }
-    // show only menu, if it's more than one page
-    if ( navTabs.length == 1 && ! Object.keys( gui.pullDownMenu ).length > 0 )  navTabs = [] 
-    res.json( { 'navigations' : navTabs } )
+      // show only menu, if it's more than one page
+      if ( navTabs.length == 1 && ! Object.keys( gui.pullDownMenu ).length > 0 )  navTabs = [] 
+      res.json( { 'navigations' : navTabs } )
+    } catch ( exc ) {
+      log.warn( 'easy-web-app /svc/nav', exc )
+      res.json( { 'navigations' : [] } )
+    }  
   }
 );
 
@@ -947,23 +958,28 @@ gui.checkUserCSRFtoken = function checkUserCSRFtoken( req ) {
 }
 
 webservices.use( // inject CSRF token
-  function( req, res, next ) {
-    var csrfToken = 'default'
-    if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-      var token = req.cookies[ 'pong-security' ]
-      if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
-        csrfToken = gui.userTokens[ token ].csrfToken
+  async function( req, res, next ) {
+    try { 
+      var csrfToken = 'default'
+      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+        var token = req.cookies[ 'pong-security' ]
+        if ( gui.getCsrfTokenForUser ) {
+          csrfToken = await gui.getCsrfTokenForUser( token )
+        } else if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
+          csrfToken = gui.userTokens[ token ].csrfToken
+        }
       }
-    }
+    } catch ( exc ) { log.warn('easy-web-app CSRF token, exc') }
     res.header( 'X-Protect', csrfToken );
     next();
   } 
 );
 
 router.post(
-    '/login', 
-    formParser, 
-    function(req, res) {
+  '/login', 
+  formParser, 
+  async function(req, res) {
+    try{ 
       // log.info( "POST Login ..." )
       if ( gui.authenticate != null ) {
         if ( req.body && req.body.userid ) {
@@ -971,14 +987,14 @@ router.post(
           gui.authenticate( 
             req.body.userid, 
             req.body.password, 
-            function ( err, loginOK, mustChangePassword ) {
+            async function ( err, loginOK, mustChangePassword ) {
               if ( !err && loginOK ) {
                 // log.info( "Login OK" )
                 res.statusCode = 200
                 // todo set up "session" for user via hook
                 var token = ''
                 if ( gui.createToken ) { 
-                  token = gui.createToken( req.body.userid ) 
+                  token = await gui.createToken( req.body.userid ) 
                 } else {
                   token = gui.mkToken( 32 ) 
                 }
@@ -1010,22 +1026,30 @@ router.post(
           )
           
           
-        } else if ( gui.getUserId( req ) ) {
-          res.status( 200 ).send( gui.getUserId( req ) )
-          return
         } else {
-          // log.info( "user/password or cookie required" )
-          res.status( 401 ).send( "Login failed" )          
+          var reqUser = await gui.getUserIdFromReq( req )
+          if ( reqUser ) {
+            res.status( 200 ).send( reqUser )
+            return
+          } else {
+            // log.info( "user/password or cookie required" )
+            res.status( 401 ).send( "Login failed" )  
+            return        
+          }
         }
       } else {
         // log.info( "Please implement authenticate function:" )
         // log.info( " gui.authenticate = function authenticate(user,
         // password)"+
         // " { ... return true/false }")
-        res.status( 401 ).send( "Login failed" )                  
+        res.status( 401 ).send( "Login failed" )
       }
+    } catch ( exc ) {
+      log.warn( 'easy-web-app /login', exc )
+      res.status( 500 ).send( "Login failed" )
     }
-  )
+  }
+)
 
 gui.mkToken = function mkToken( len ) {
   var chrs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -1037,37 +1061,47 @@ gui.mkToken = function mkToken( len ) {
   return token
 }
 
-gui.getUserId = function getUserId( req ) {
+/** returns null, if not logged in */
+gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
   var userId = null
-  if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-    // log.info( "getUserId: pong-security cookie ..." )
+  try {
+    if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+    // log.info( "UserIdFromReq: pong-security cookie ..." )
 
-    var token = req.cookies[ 'pong-security' ]
-    // log.info( "getUserId: token = "+token )
-    if ( token ) {
-      if ( gui.getUserIdForToken ) {
-        // log.info( "gui.getUserIdForToken..." )
-        userId = gui.getUserIdForToken( token )      
-      } else if ( gui.userTokens[ token ] ) {
-        log.verbose( "getUserId: userId = "+gui.userTokens[ token ].userId )
-        if ( Date.now() < gui.userTokens[ token ].expires ) {
-          userId = gui.userTokens[ token ].userId
-        } else {
-          log.verbose( "getUserId: userId = "+gui.userTokens[ token ].userId+"  >>>> session expired" )
+      var token = req.cookies[ 'pong-security' ]
+      // log.info( "UserIdFromReq: token = "+token )
+      if ( token ) {
+        if ( gui.getUserIdForToken ) {
+          // log.info( "UserIdFromReq..." )
+          userId = await gui.getUserIdForToken( token )
+        } else if ( gui.userTokens[ token ] ) {
+          log.verbose( "UserIdFromReq: userId = "+gui.userTokens[ token ].userId )
+          if ( Date.now() < gui.userTokens[ token ].expires ) {
+            userId = gui.userTokens[ token ].userId
+          } else {
+            log.verbose( "UserIdFromReq: userId = "+gui.userTokens[ token ].userId+"  >>>> session expired" )
+          }
         }
       }
     }
+  } catch ( exc ) {
+    log.error( 'easy-web-app getUserIdFromReq', exc )
+    userId = null
   }
   return userId
 }
 
-/** returns null, if not logged in */
+/** please use  getUserIdFromReq instead */
+gui.getUserId = function getUserId( req ) {
+  WARNING_DEPRECATED_UserId_FUNCTION() 
+  return gui.getLoggedInUserId( req )
+}
 gui.getLoggedInUserId = function getLoggedInUserId( req ) {
+  WARNING_DEPRECATED_UserId_FUNCTION() 
 	var uid = null 
 	if ( req.cookies && req.cookies[ 'pong-security' ] ) {
 		var token = req.cookies[ 'pong-security' ]
-		if ( gui.userTokens[ token ] ) {
-			// log.info( "getUserId: userId = "+gui.userTokens[ token ] )
+    if ( gui.userTokens[ token ] ) {
       if ( Date.now() < gui.userTokens[ token ].expires ) {
 			  uid = gui.userTokens[ token ].userId
       }
@@ -1075,14 +1109,21 @@ gui.getLoggedInUserId = function getLoggedInUserId( req ) {
 	}
 	return uid
 }
+var showUserIdReprecated = true
+function WARNING_DEPRECATED_UserId_FUNCTION() {
+  if ( showUserIdReprecated ) {
+    showUserIdReprecated = false
+    log.warn( 'DEPRECATED: gui.getUserId(req)', 'Use "await getUserIdFromReq()" instead' )
+  }
+}
 
 // Change Password ReST Service
 router.post(
     '/password', 
     formParser, 
-    function(req, res) {
+    async function(req, res) {
       // log.info( "POST Login ..." )
-      var userId = gui.getLoggedInUserId( req )
+      var userId = await gui.getUserIdFromReq( req )
       if ( userId ) {
         if ( gui.changePassword != null ) {
           if ( req.body && req.body.oldPassword && req.body.newPassword ) {

@@ -23,9 +23,9 @@ mainPage.addView(
       resourceURL:'/service/statistics'
     },
     {
-      maxRows:'4',
+      maxRows:'r4',
       rowId: 'ID',
-      pollDataSec: "5 ",
+      pollDataSec: "5",
       divs: [
           { id:'ID', cellType:'text' }, 
           { id:'XCust', cellType:'div',
