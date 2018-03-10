@@ -73,6 +73,7 @@ gui.getUserIdForToken = async function getUserIdForToken( token ) {
   return new Promise( ( resolve, reject ) => {
     cache.hgetall( token, ( err, loginObj ) => {
       log.info( 'getUserIdForToken', token )
+      // TODO: check session timeout
       if ( ! err ) {
         resolve( ( loginObj ? loginObj.userId : null ) )
       } else { resolve( null ) }
