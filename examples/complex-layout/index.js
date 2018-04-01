@@ -28,7 +28,7 @@ var mainPage = gui.init()
 mainPage.title = 'Complex Layout Demo'
 mainPage.header.logoText = 'Complex Layout Demo'
 
-mainPage.addView( { 'id':'row1view', 'title':'Row 1 View', 'height':'100px' } )
+mainPage.addView( { 'id':'row1view', 'title':'Row 1 View', 'height':'100px,', resourceURL:'paramtest' } )
 mainPage.addView( { 'id':'row2view', 'title':'Row 2 View', 'height':'100px' } )
 
 var columns = mainPage.addColumnsRow( 'row3', '200px' )
@@ -40,3 +40,13 @@ col2rows.addView( { 'id':'rowY', 'title':'Row Y', 'height':'100px' } )
 
 mainPage.addView( { 'id':'row4view', 'title':'Row 4 View', 'height':'200px', resourceURL:'test' } )
 gui.getExpress().use( '/test/html', express.static( __dirname + '/test' ) )
+
+// sinve v1.2.1 params must be passed to plain html view:
+gui.getExpress().get( '/paramtest/html', (req,res) => {
+  var html = 'Params:<ul>'
+  for ( var param in req.query ) {
+    html += '<li id="parm_'+param+'">'+param+': '+req.query[param]+'</li>'
+  }
+  html += '</ul>'
+  res.status( 200 ).send( html )
+})

@@ -2,6 +2,8 @@
 * 1.2.0 support for async session cache (e.g. REDIS) 
   - DEPRECATED getLoggedInUserId( req ) 
   - use `async getUserIdFromReq( req )` instead
+* 1.2.1 
+  - pass URL parameters to html view
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up
