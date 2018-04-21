@@ -4,6 +4,8 @@
   - use `async getUserIdFromReq( req )` instead
 * 1.2.1 
   - pass URL parameters to html view
+* 1.2.3
+  - From action: Support `navto:'<url>'` if action has `target:'modal'` ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_2a.js)) 
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up
