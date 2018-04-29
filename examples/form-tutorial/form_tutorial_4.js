@@ -22,14 +22,20 @@ var formPlugInConfig = {
               { id: 'f01r', label: 'Text readonly', type: 'text', defaultVal:"Can't change", readonly:'true' },
               { id: 'f01d', label: 'Text disabled', type: 'text', defaultVal:"Can't select", disabled:'true' },
               { id: 'f01o', label: 'Text+Options', type: 'text',
-                options:[ {value:'ABC'}, {value:'XYZ'}, {value:'12345'} ] },
+                options:[ {value:'ABC'}, {value:'XYZ'}, {value:'ZXY', disabled:true}, {value:'12345'} ] },
               { id: 'f01h', label: 'HTML-Header', type: 'text', request:'header', descr:'press F12 and look at network request header to verify' },
               { id: 'f02', label: 'Password', type: 'password' },
               { id: 'f03', label: 'Hidden', type: 'text', hidden:true, value:'secret' },
               { id: 'f04', label: 'E-Mail', type: 'email' },
               { id: 'f05', label: 'Date', type: 'date' },
               { id: 'f06', label: 'Select', type: 'select',
-                options:[ {option:'first',value:'Option1'}, {option:'second',value:'Option2'}, {option:'third',value:'Option3'} ] }
+                options:[ 
+                  {option:'first',  value:'Option1' }, 
+                  {option:'second', value:'Option2', selected:true }, 
+                  {option:'second and a half', value:'Option2.5', disabled:true }, 
+                  {option:'third', value:'Option3' } 
+                ] 
+              }
             ]
           },
           {

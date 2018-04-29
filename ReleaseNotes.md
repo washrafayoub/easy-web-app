@@ -6,7 +6,11 @@
   - pass URL parameters to html view
 * 1.2.3
   - From action: Support `navto:'<url>'` if action has `target:'modal'` ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_2a.js)) 
-
+* 1.2.4
+  - Form: DIVs have IDs (better support for stripe elements)
+* v1.2.5
+  * Form: Select/options support `"selected"=true` and `"disabled"=true`
+  
 TODO: 
  - add Redis cache example to sync login session on multi node set up
 
