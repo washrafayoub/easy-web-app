@@ -10,7 +10,10 @@
   - Form: DIVs have IDs (better support for stripe elements)
 * v1.2.5
   * Form: Select/options support `"selected"=true` and `"disabled"=true`
-  
+* v1.2.6
+  * Form: Waiting cursor
+  * Form: label field has id and can be set/updated
+
 TODO: 
  - add Redis cache example to sync login session on multi node set up
 
