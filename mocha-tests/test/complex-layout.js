@@ -53,7 +53,7 @@ describe(
     })
 
     it( 'should show html via gui.getExpress().use(...)', () => {
-      browser.assert.element( '#Lorem_ipsum' );
+      browser.assert.element( '#tab21Content' );
     })
 
   }
