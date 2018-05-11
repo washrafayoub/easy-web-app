@@ -126,6 +126,9 @@ gui.setDefaults = function setDefaults( options ) {
         return gui.addViewIn( def, config, this.rows )          
       }
 
+  this.pages[ 'main' ].addTabContainer =
+    function( def ) { return addTabCont( def, 'row', this.rows ) }
+   
   /** set page width attribute and override CSS */
   this.pages[ 'main' ].setPageWidth = 
     function setPageWidth( width  ) {
@@ -183,6 +186,42 @@ gui.setDefaults = function setDefaults( options ) {
   return this.pages[ 'main' ]
 }
 
+function addTabCont( def, type, arr ) {
+  var tabDiv = {}
+  tabDiv.tabs = []
+  if ( type == 'row' ) {
+    tabDiv.height = def.height || '400px'
+    tabDiv.rowId  = def.rowId || def.id
+  } else {
+    tabDiv.width    = def.width || '100%'
+    tabDiv.columnId = def.columnId || def.id
+  }
+  tabDiv.addView = ( def, vConfig ) => {
+    var view = { 
+      tabId : def.id,
+      title : def.title || def.id || ' ',
+      resourceURL : def.resourceURL || null
+    }
+    if ( def.type ) { view.type = def.type }
+    if ( def. actions ) { view.actions = def.actions }
+    if ( vConfig ) { view.moduleConfig = vConfig }
+    tabDiv.tabs.push( view )
+    return view
+  }
+  tabDiv.addRows = ( id, title ) => {
+    var rows = gui.addRowsColumn( id, null, '100%' )
+    rows.title = title
+    rows.tabId = id
+    delete rows.columnId
+    delete rows.width
+    tabDiv.tabs.push( rows )
+    return rows
+  }
+  arr.push( tabDiv )
+  return tabDiv   
+}
+
+
 /** add new pull down menu */
 gui.addPullDownMenu = function addPullDownMenu( menuId, menuLabel ) {
 	var newMenu = 
@@ -230,8 +269,11 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     pgObj.addView =  
         function ( def, config ) {
           def.rowId = def.rowId || def.id;   
-          return gui.addViewIn( def, config, this.rows )          
+          var tabs = gui.addViewIn( def, config, pgObj.rows )
         }
+    pgObj.addTabContainer =
+      function( def ) { return addTabCont( def, 'row', pgObj.rows ) }
+
     /** set page width attribute and override CSS */
     pgObj.setPageWidth = 
       function setPageWidth( width  ) {
@@ -300,25 +342,27 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
 /** split the column into a rows, to add views */
 gui.addColumnsRow = function addColumnsRow( id, colArr, height ) {
   // log.info( 'addColumns', id )
-  var colsObj = {
+  var rowObj = {
       rowId : id
     , height: height || "300px"
     , cols : []
   }
-  colsObj.addRowsColumn = 
+  rowObj.addRowsColumn = 
       function ( id, width ) {
         return gui.addRowsColumn( id, this.cols, width )
       }
-  colsObj.addView = 
-      function ( def, config ) {
-        if ( def.id && ! def.columnId ) {
-          def.columnId = def.id
-        }
-        return gui.addViewIn( def, config, this.cols )          
+  rowObj.addView = 
+    function ( def, config ) {
+      if ( def.id && ! def.columnId ) {
+        def.columnId = def.id
       }
-  colArr.push( colsObj )
-  // log.info( 'addColumns', 'colsObj='+JSON.stringify( colsObj ) )
-  return colsObj
+      return gui.addViewIn( def, config, this.cols )          
+    }
+  rowObj.addTabContainer =
+      function( def ) { return addTabCont( def , 'col', rowObj.cols ) }
+  colArr.push( rowObj )
+  // log.info( 'addColumns', 'rowObj='+JSON.stringify( rowObj ) )
+  return rowObj
 }
 
 
@@ -340,7 +384,10 @@ gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
         }
         return gui.addViewIn( def, config, this.rows )          
       }
-  cols.push( newCol )
+  newCol.addTabContainer =
+      function( def ) { return addTabCont( def , 'row', this.rows ) }
+
+  if ( cols ) cols.push( newCol )
   return newCol
 }
 

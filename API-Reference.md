@@ -272,6 +272,12 @@ Pages with a '/' are dsiplayed. if the root is the active page.
 
 See [embedded nav example](https://github.com/ma-ha/easy-web-app/tree/master/examples/nav-embed).
 
+### addTabContainer ( def )
+
+`def` usually only requires an `id` and `width` or `heigth`
+
+Returns: TabContainer
+
 ### page.addView ( def \[, config\] )
 Adds a new `row` with a new `view` and returns the `view`, ref. `gui.addView`.
 
@@ -326,7 +332,7 @@ Override CSS and set to `width` value: `px` or `%` are welcome.
 See [customize example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css)
 
 
-#### View reference
+## View API reference
 By default the view has
 * `title` (String) 
   * set to `def.title` or `def.id` or "View: "
@@ -388,6 +394,21 @@ Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-a
 Adds and return `rows` object.
 
 Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
+
+## TabContainer API
+
+### tabs.addView ( config )
+
+Adds a tab with the `config.title` 
+and a view for this tab as defined in the config.
+
+Example code, see ["complex-layout" example](https://github.com/ma-ha/easy-web-app/tree/master/examples/complex-layout)
+
+### tabs.addRows ( id, title )  -- TODO
+
+Adds a tab with the `title` and returns a `row` (see "Rows API" above). 
+By this you can add more than one view per tab.
+
 
 # Config-Reference
 

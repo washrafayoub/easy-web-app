@@ -13,6 +13,8 @@
 * v1.2.6
   * Form: Waiting cursor
   * Form: label field has id and can be set/updated
+* v1.2.7
+  * Tab container (see [complex layout example](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/))
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up
