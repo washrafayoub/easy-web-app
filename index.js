@@ -373,6 +373,11 @@ gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
     , width: width || "300px"
     , rows : []
   }
+  newCol.addColumnsRow = 
+      function ( id, height) {
+        // log.info( 'pages[].addColumns', id )
+        return gui.addColumnsRow( id, this.rows, height )
+      }  
   newCol.addRows = 
       function ( height ) {
        return gui.addColumns( this.rows, height )
