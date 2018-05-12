@@ -7,46 +7,56 @@ var app = null
 describe( 
   'Security example page', 
   function() {
-  
+    var browser = null
     before( 
         function() {
           app = require('../../examples/security');
           //this.server = http.createServer(app).listen(3000);
           // initialize the browser using the same port as the test application
-          this.browser = new Browser({ site: 'http://localhost:'+WEB_SERVER_PORT+'/' });
+          browser = new Browser({ site: 'http://localhost:'+WEB_SERVER_PORT+'/' });
         } 
     );
     
     // load the contact page
     before(
         function( done ) {
-          this.browser.visit( '/securitydemo/', done);
+          browser.visit( '/securitydemo/', done);
         }
     );
     
     it( 'should show the header and footer', 
       function() {
-          this.browser.assert.success();
-          this.browser.assert.text( 'h1', 'Security Demo' );
-          this.browser.assert.element( 'div.copyright-div' );
+          browser.assert.success();
+          browser.assert.text( 'h1', 'Security Demo' );
+          browser.assert.element( 'div.copyright-div' );
         }
     );  
 
     it( 'should not show the private tab', 
       function() {
-          //this.browser.assert.element( '#navTabsecretPage' );
+          //browser.assert.element( '#navTabsecretPage' );
         }
     );  
 
     describe( 'authorized flow', function() {
 
-      before(function(done) {
-        this.browser.clickLink( '.PongLogin' )
-        this.browser.fill( '#useridInput', 'test1').pressButton('Login', done);
+      it( 'must login click the Login Button', () => {
+        browser.clickLink( '.PongLogin' )
       })
+
+      it( 'must show the login form', () => {
+        browser.assert.element( '#useridInput' );
+        browser.assert.element( '#passwordInput' );
+      })
+
+      it( 'must login click the Login Button', (done) => {
+          browser.fill( '#useridInput', 'test1')
+          browser.pressButton( 'Login', done )
+      })
+
       it( 'must show the private page after login', 
         function() {
-            this.browser.assert.element( '#navTabsecretPage' );
+            browser.assert.element( '#navTabsecretPage' );
           }
       )  
 

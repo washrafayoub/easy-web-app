@@ -4,6 +4,8 @@ Prepare:
 1. `sudo npm install -g mocha`
 2. `npm install zombie`
 
+(maybe we need old zombie: `npm install zombie@5.0.8 `)
+
 Run Test:
 
     for i in test/*; do mocha -t 10000 $i; done

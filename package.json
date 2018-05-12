@@ -1,6 +1,6 @@
 {
 	"name": "easy-web-app",
-	"version": "1.2.7",
+	"version": "1.2.8",
 	"description": "Create web applications easily.",
 	"author": "ma-ha",
 	"license": "MIT",
@@ -45,8 +45,7 @@
 		"minimist": "^1.2.0",
 		"npmlog": ">=2.0.0",
 		"redis": "^2.8.0",
-		"rest-web-gui": "git+https://github.com/ma-ha/rest-web-ui.git",
-		"zombie": "^5.0.8"
+		"rest-web-gui": "git+https://github.com/ma-ha/rest-web-ui.git"
 	},
 	"files": [
 		"Readme.md",
