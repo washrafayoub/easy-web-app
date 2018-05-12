@@ -269,7 +269,7 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
     pgObj.addView =  
         function ( def, config ) {
           def.rowId = def.rowId || def.id;   
-          var tabs = gui.addViewIn( def, config, pgObj.rows )
+          return gui.addViewIn( def, config, pgObj.rows )
         }
     pgObj.addTabContainer =
       function( def ) { return addTabCont( def, 'row', pgObj.rows ) }
