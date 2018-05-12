@@ -19,6 +19,7 @@ Available view types:
 
 Features:
 * Rich page haeder and footer
+* Flexible layout for multiple views on one page 
 * Page to page navigation with navigation tabs, menus, links, ...
 * i18n: switch language
 * Security: RESTful, HTTP Basic or OAuth authentication support, "Change Password" dialog with policy check, ... (see below)
