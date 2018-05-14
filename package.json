@@ -1,6 +1,6 @@
 {
 	"name": "easy-web-app",
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"description": "Create web applications easily.",
 	"author": "ma-ha",
 	"license": "MIT",
@@ -37,7 +37,7 @@
 		"url": "https://github.com/ma-ha/easy-web-app.git"
 	},
 	"dependencies": {
-		"body-parser": ">=1.17.1",
+		"body-parser": "^1.18.3",
 		"config": "^1.30.0",
 		"cookie-parser": ">=1.4.3",
 		"express": "^4.16.3",
