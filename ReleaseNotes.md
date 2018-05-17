@@ -13,8 +13,11 @@
 * v1.2.6
   * Form: Waiting cursor
   * Form: label field has id and can be set/updated
-* v1.2.7
+* v1.2.7ff
   * Tab container (see [complex layout example](https://github.com/ma-ha/easy-web-app/blob/master/examples/complex-layout/))
+* v1.2.11
+  * Catch `footerURL` exception in IE
+  * CSS Example [demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css): added `footerURL` 
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up
