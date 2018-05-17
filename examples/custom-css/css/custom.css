@@ -63,3 +63,9 @@ body {
 .tedge-bl, .tedge-bm, .tedge-br {
 	background-color: #33F;
 }
+#Lorem {
+  height: 335px;
+}
+#LoremContent {
+  width: 1394px;
+}

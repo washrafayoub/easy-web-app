@@ -2,7 +2,7 @@
 Create web applications easily and reduce complexity.
 
 **No GUI programming required!** The **Web GUI is defined by JSON**, static files or served via REST service.
-Create complex and full featured web GUIs just by configuration.  
+Create complex and full featured web GUIs incredibly fast just by configuration.  
 You focus on programming business logic (REST services). 
 
 This [Node.js API package](https://www.npmjs.com/package/easy-web-app) 
