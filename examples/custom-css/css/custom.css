@@ -43,6 +43,8 @@ body {
 
 #footer .copyright-div {
 	color: #FFF;
+  position: absolute;
+  top: 10px;
 }
 
 #maindiv {
