@@ -31,6 +31,18 @@ describe(
           this.browser.assert.element( 'div.copyright-div' );
         }
     );  
-    
+
+    it( 'should show "lorem ipsum..."', 
+    function() {
+        this.browser.assert.element( '#Lorem_ipsum' );
+      }
+    );  
+
+    it( 'should show "lorem ipsum..." view footer', 
+    function() {
+        this.browser.assert.element( '#LoremFooterContent' );
+      }
+    );  
+
   }
 );
