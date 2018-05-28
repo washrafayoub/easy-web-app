@@ -2,7 +2,7 @@ var gui = require( '../../' )     // stand alone: replace with  require( 'easy-w
 var log = require('npmlog');
 
 // define a main page
-var mainPage = gui.init( 'Security Demo', 8080, 'securitydemo' )
+var mainPage = gui.init( 'Security Demo', 8081, 'securitydemo' )
 mainPage.title = 'Home'
 mainPage.header.logoText = 'Security Demo'
 
@@ -114,7 +114,20 @@ gui.getUserIdForToken = async function getUserIdForToken( token ){
   //TODO: implement for HA cluster
   return userId
 }
+
+//optional
+gui.getUserNameForToken = function getUserNameForToken( token ) {
+
+}
+
 gui.deleteUserIdForToken = async function gui.deleteUserIdForToken( token ) {
   // TODO: implement for HA cluster
 }
 */
+
+// example to separate UserId from UserName
+gui.getUserNameForToken = function getUserNameForToken( token ) {
+  return new Promise( ( resolve, reject ) => {
+    resolve( 'Just Me' )
+  })
+}

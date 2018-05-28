@@ -18,6 +18,8 @@
 * v1.2.11
   * Catch `footerURL` exception in IE
   * CSS Example [demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css): added `footerURL` 
+* v1.2.12
+  * added hook getUserNameForToken() to separate ID and Name, see  [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/security/)
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up

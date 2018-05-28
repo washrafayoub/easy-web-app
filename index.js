@@ -1079,7 +1079,7 @@ router.post(
           
           
         } else {
-          var reqUser = await gui.getUserIdFromReq( req )
+          var reqUser = await gui.getUserNameFromReq( req ) // just to display in GUI
           if ( reqUser ) {
             res.status( 200 ).send( reqUser )
             return
@@ -1141,6 +1141,26 @@ gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
     userId = null
   }
   return userId
+}
+
+gui.getUserNameFromReq = async function getUserNameFromReq( req ) {
+  var userName = null
+  try {
+    if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+      var token = req.cookies[ 'pong-security' ]
+      if ( token ) {
+        if ( gui.getUserNameForToken ) {
+          userName = await gui.getUserNameForToken( token )
+        } else {
+          userName = getUserIdFromReq( req )
+        }
+      }
+    }
+  } catch ( exc ) {
+    log.error( 'easy-web-app getUserIdFromReq', exc )
+    userName = null
+  }
+  return userName
 }
 
 /** please use  getUserIdFromReq instead */
