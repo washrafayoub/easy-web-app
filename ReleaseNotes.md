@@ -20,6 +20,8 @@
   * CSS Example [demo](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css): added `footerURL` 
 * v1.2.12
   * added hook getUserNameForToken() to separate ID and Name, see  [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/security/)
+* v1.2.13
+  * fix wiki view breadcrumps
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up
