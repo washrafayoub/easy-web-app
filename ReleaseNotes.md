@@ -22,6 +22,8 @@
   * added hook getUserNameForToken() to separate ID and Name, see  [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/security/)
 * v1.2.13
   * fix wiki view breadcrumps and hide edit section links
+* v1.2.14
+  * login dialog: cookie info  
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up
