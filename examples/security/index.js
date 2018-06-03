@@ -2,7 +2,7 @@ var gui = require( '../../' )     // stand alone: replace with  require( 'easy-w
 var log = require('npmlog');
 
 // define a main page
-var mainPage = gui.init( 'Security Demo', 8081, 'securitydemo' )
+var mainPage = gui.init( 'Security Demo', 8011, 'securitydemo' )
 mainPage.title = 'Home'
 mainPage.header.logoText = 'Security Demo'
 
@@ -16,7 +16,9 @@ var secretPage = gui.addPage( 'secretPage', 'Private&nbsp;Page',
 
 // switch securiy on:
 gui.enableSecurity()
-// gui.loginTimeout = 2000  // ignored, we have to implement that now in Redis
+gui.loginTimeout = 120000 // milli sec  
+gui.secParams.sessionExpiredAlert = true 
+// other user friendly option is to redirect the user to a logout page
 
 // "auth" is ok if any user id is given
 gui.authenticate =  
@@ -106,18 +108,22 @@ svc.get(
 
 /* Optional hooks for HA environment, typically using a distributed cache or a DB
 gui.createToken = async function createToken( userId ){
-  //TODO: implement for HA cluster
-  return token 
+  return new Promise( ( resolve, reject ) => {
+    resolve( 'TODO TOKEN' )
+  })
 }
 
 gui.getUserIdForToken = async function getUserIdForToken( token ){
-  //TODO: implement for HA cluster
-  return userId
+  return new Promise( ( resolve, reject ) => {
+    resolve( 'TODO USER ID' )
+  })
 }
 
 //optional
 gui.getUserNameForToken = function getUserNameForToken( token ) {
-
+  return new Promise( ( resolve, reject ) => {
+    resolve( 'TODO USER NAME' )
+  })
 }
 
 gui.deleteUserIdForToken = async function gui.deleteUserIdForToken( token ) {
@@ -128,6 +134,18 @@ gui.deleteUserIdForToken = async function gui.deleteUserIdForToken( token ) {
 // example to separate UserId from UserName
 gui.getUserNameForToken = function getUserNameForToken( token ) {
   return new Promise( ( resolve, reject ) => {
-    resolve( 'Just Me' )
+    
+    if ( gui.userTokens[ token ] ) {
+      log.info( "getUserNameForToken: userId = "+gui.userTokens[ token ].userId )
+      if ( Date.now() < gui.userTokens[ token ].expires ) {
+        resolve( 'Just Me' )
+      } else {
+        log.info( "getUserNameForToken: userId = "+gui.userTokens[ token ].userId+"  >>>> session expired" )
+        resolve() // return null indicates: session is invalid
+      }
+    } else {
+      log.warn('getUserNameForToken', 'no token' )
+      resolve()
+    }
   })
 }

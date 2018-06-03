@@ -23,7 +23,9 @@
 * v1.2.13
   * fix wiki view breadcrumps and hide edit section links
 * v1.2.14
-  * login dialog: cookie info  
+  * login dialog: cookie info 
+* v1.2.15
+  * detect expired login session and navigate to logout page  
 
 TODO: 
  - add Redis cache example to sync login session on multi node set up
