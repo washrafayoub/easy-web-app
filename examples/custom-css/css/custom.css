@@ -19,6 +19,11 @@ body {
 	padding-left: 180px;
 }
 
+.pong-navbar {
+  position: absolute;
+  left: 90px;
+}
+
 #footer {
 	color: #FFF;
 	height: 30px;

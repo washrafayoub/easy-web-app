@@ -14,7 +14,11 @@ gui.getExpress().use( '/lorem/html', express.static( __dirname + '/lorem' ) )
 // define a main page
 var mainPage = gui.init( 'Customize CSS Demo', 8880, '/test/test' )
 mainPage.setTitle( 'Customize CSS Demo' )
-mainPage.setLogoURL( 'img-cust/funnyLogo.png' )
+
+// create logo (incl. link to main and hide main in menu tabs)
+mainPage.setLogo( 'Customize CSS Demo', 'img-cust/funnyLogo.png' ) 
+
+// mainPage.setLogoURL( 'img-cust/funnyLogo.png' ) // deprecated, but fallback
 mainPage.setPageWidth( '90%' )
   
 mainPage.addView( { 'id':'row1view', 'title':'Row 1 View', 'height':'100px' } )
@@ -26,6 +30,9 @@ mainPage.addView( {
   footerURL: 'lorem/footer' // you need to adjust the #Lorem height via custom.css
 } )
 
+
+gui.addPage( 'page2', 'Page 2',  { id:'Page2' }, null )
+gui.addPage( 'page3', 'Page 3',  { id:'Page3' }, null )
 
 gui.getExpress().get( '/lorem/footer', (req,res) => {
   res.status( 200 ).sendFile( __dirname + '/lorem/footer.html' )

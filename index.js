@@ -101,6 +101,13 @@ gui.setDefaults = function setDefaults( options ) {
     }
   }
 
+  this.pages[ 'main' ].setLogo =
+    function( text, imgLink ) {
+      if ( ! text ) return
+      this.header['logo'] = { text: text, url: gui.appRoot + '/index.html' }
+      if ( imgLink ) this.header['logo']['img'] = imgLink 
+    }
+
   this.pages[ 'main' ].setLogoText =
     function( text ) {
       this.header['logoText'] = text
@@ -626,6 +633,8 @@ router.get(
             // check authorization for page
           if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
             // not visible for this user
+          } else if ( layoutId == 'main' && gui.pages['main'].header.logo ) {
+            // not displayed, because header link
           } else {
             var nav = {
                 'layout' : layoutId,
@@ -665,6 +674,8 @@ router.get(
                ( layoutId.indexOf( 'user/' ) != 0 ) ) {            // check authorization for page
           if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
             // not visible for this user
+          } else if ( layoutId == 'main' && gui.pages['main'].header.logo ) {
+            // not displayed, because header link
           } else {
             var nav = {
                 'layout' : layoutId,
@@ -705,6 +716,8 @@ router.get(
               // check authorization for page
               if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
                 // not visible for this user
+              } else if ( layoutId == 'main' && gui.pages['main'].header.logo ) {
+                // not displayed, because header link
               } else {
                 var nav = {
                     'layout' : layoutId,

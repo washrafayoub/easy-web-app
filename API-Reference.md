@@ -316,12 +316,20 @@ Main page only!
 
 Sets the copyright text in the footer.
 
-### page.setLogoText ( text )
+### page.setLogo( logoText \[, imgURL\]  )
 Main page only!
 
 See [customize example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css)
 
-### page.setLogoURL ( url )
+Remark: THe logo img and text will link to main page. 
+By that, the main page is hidden in the menu tabs. 
+
+### page.setLogoText ( text ) 
+Main page only!
+
+See [customize example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css)
+
+### page.setLogoURL ( url ) 
 Main page only!
 
 See [customize example](https://github.com/ma-ha/easy-web-app/tree/master/examples/custom-css)

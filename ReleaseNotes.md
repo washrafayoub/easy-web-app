@@ -1,3 +1,7 @@
+## 1.3.x
+* 1.3.0 mainPage.setLogo( text [, imgURL] )
+
+
 ## 1.2.x
 * 1.2.0 support for async session cache (e.g. REDIS) 
   - DEPRECATED getLoggedInUserId( req ) 
