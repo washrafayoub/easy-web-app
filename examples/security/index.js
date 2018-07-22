@@ -13,9 +13,14 @@ var secretPage = gui.addPage( 'secretPage', 'Private&nbsp;Page',
   { id:'DataTable', type:'pong-easytable', resourceURL:'/securitydemo/products' },
   { dataURL:'', "pollDataSec":"60", easyCols: [ 'Name', 'Rating' ] }
  )
+ 
+gui.addPage( 'forgotPwd', 'Forgot Password' ) 
 
 // switch securiy on:
-gui.enableSecurity()
+gui.enableSecurity({ 
+  divLayout: true,
+  resetPasswordURL: 'index.html?layout=forgotPwd' 
+})
 gui.loginTimeout = 120000 // milli sec  
 gui.secParams.sessionExpiredAlert = true 
 // other user friendly option is to redirect the user to a logout page

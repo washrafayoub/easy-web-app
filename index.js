@@ -996,9 +996,11 @@ gui.enableSecurity =
     if ( ! gui.loginTimeout ) { gui.loginTimeout = 6400000 }
     var root = ( this.appRoot== '/' ? '' : this.appRoot ) 
     if ( ! paramObj ) {paramObj = {} }
+    gui.secParams.divLayout = ( paramObj.divLayout ? true : false )
     gui.secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : root+'/login' )
+    if ( paramObj.resetPasswordURL ) gui.secParams.resetPasswordURL = paramObj.resetPasswordURL
     gui.secParams.loginPage = ( paramObj.loginPage ? paramObj.loginPage : 'main' )
-    gui.secParams.registgerURL = ( paramObj.registgerURL ? paramObj.registgerURL : null )
+    if ( paramObj.registgerURL ) gui.secParams.registgerURL = paramObj.registgerURL
     gui.secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
     gui.secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : root+'/logout' )
     gui.secParams.sessionExpiredAlert = ( paramObj.sessionExpiredAlert ? paramObj.sessionExpiredAlert : false )
