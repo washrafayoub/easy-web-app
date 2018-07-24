@@ -1,5 +1,5 @@
 ## 1.4.x
-* 1.4.0 Modal page message ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/page-message/)) 
+* 1.4.0 Modal page message ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/page-message/index.js)) 
 
 ## 1.3.x
 * 1.3.0 mainPage.setLogo( text [, imgURL] )
