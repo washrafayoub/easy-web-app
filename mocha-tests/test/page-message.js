@@ -20,7 +20,7 @@ describe(
     // load the contact page
     before(
       function( done ) {
-        this.browser.visit( '/', done);
+        this.browser.visit( '/demo/', done);
       }
     );
     
@@ -32,12 +32,17 @@ describe(
       }
     );  
     
-    it( 'should show modal message', 
+    it( 'should show modal dialog', 
       function() {
         this.browser.assert.success();
         this.browser.assert.element( '.ui-dialog' );
         this.browser.assert.element( '#PgMesgDlg' );
       }
     );
-  }
+    it( 'should show Okey Dokey button', 
+        function() {
+          this.browser.assert.element( '.ui-dialog-buttonpane .ui-button-text' )
+        }
+      );
+    }
 );
