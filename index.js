@@ -261,9 +261,9 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
   } else {
     var pgObj = {
         title : pageId
-      , includeHeader : 'main'
+      , header : this.pages[ 'main' ].header
       , rows : []
-      , includeFooter : 'main'
+      , footer : this.pages[ 'main' ].footer
     }
     if ( title ) 
       pgObj.title = title 
