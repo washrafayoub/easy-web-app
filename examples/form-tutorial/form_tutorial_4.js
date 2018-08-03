@@ -48,14 +48,15 @@ var formPlugInConfig = {
               { id: 'fs2', label: 'Separator', type: 'separator' },
               { id: 'f07', label: 'This is a "label"', type: 'label' },
               { id: 'f08a', label: 'Radio 1st', type: 'radio', name:'myRadio', value:'1st' },
-              { id: 'f08b', label: 'Radio 2nd', type: 'radio', name:'myRadio', value:'2nd' }
+              { id: 'f08b', label: 'Radio 2nd', type: 'radio', name:'myRadio', value:'2nd' },
+              { id: 'f09', label: 'This is a link', type: 'link', linkText: 'to same page ;-)', defaultVal:'index.html' }
             ]
           }
         ]
       }
     ],
     actions: [
-      {  id: 'actionGet',  actionName: 'GET',  method: 'GET',  actionURL: 'test' },
+      {  id: 'actionGet',  actionName: 'GET',  method: 'GET',  actionURL: 'test', setData:[ {resId: 'myForm'} ] },
       {  id: 'actionPost', actionName: 'POST', method: 'POST', actionURL: 'test', enabled:false }      
     ]
   }
@@ -79,7 +80,7 @@ app.get(
       res.statusCode = 200    // = OK
       console.log( 'GET Header: f01h="'+req.get('f01h')+'"' )
       console.log( 'GET Params: '+JSON.stringify( req.query ) )
-      return  res.json( {} )
+      return  res.json( {"f09":"/"} ) // this will change the link href to href="/" in the form 
     }
   )
 
