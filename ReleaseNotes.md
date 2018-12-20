@@ -2,6 +2,7 @@
 * 1.4.0 Modal page message ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/page-message/index.js)) 
 * 1.4.3 replace includeHeader and includeFooter by copy of main page
 * 1.4.4 form: support link field ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_4.js)) 
+* 1.4.5 form: some improvements on radio label
 
 ## 1.3.x
 * 1.3.0 mainPage.setLogo( text [, imgURL] )

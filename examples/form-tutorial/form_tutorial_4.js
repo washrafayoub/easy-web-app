@@ -48,7 +48,7 @@ var formPlugInConfig = {
               { id: 'fs2', label: 'Separator', type: 'separator' },
               { id: 'f07', label: 'This is a "label"', type: 'label' },
               { id: 'f08a', label: 'Radio 1st', type: 'radio', name:'myRadio', value:'1st' },
-              { id: 'f08b', label: 'Radio 2nd', type: 'radio', name:'myRadio', value:'2nd' },
+              { id: 'f08b', type: 'radio', name:'myRadio', value:'2nd' }, // w/o explizit label: the value will get the label
               { id: 'f09', label: 'This is a link', type: 'link', linkText: 'to same page ;-)', defaultVal:'index.html' }
             ]
           }
