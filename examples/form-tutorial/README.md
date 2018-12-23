@@ -208,6 +208,6 @@ Yes -- forms can look like this (screen shot):
  
 ![crazy form screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/crazyform.png) 
 
-This is done using a JS field to load a script to create a HTML canvas as background.
+This is done using a JS field to load a script and create a HTML canvas as background.
 The radio buttons are arranged ontop the canvas. 
 A "click" event handler re-draws the routing lines in a different color to highlight them.
