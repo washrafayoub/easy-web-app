@@ -202,4 +202,11 @@ The table plug in provides an _editable_ attribute for text cells:
 This makes life much easier, because you can modify data records directly in 
 the table. 
 
+# Forms On Steroids
+
+This is also a fully interactive form:
+ 
+![crazy form screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/crazyform.png) 
+
+
 
