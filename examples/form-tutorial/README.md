@@ -204,9 +204,6 @@ the table.
 
 # Forms On Steroids
 
-This is also a fully interactive form:
+Yes -- forms can look like this (screen shot):
  
 ![crazy form screen shot](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/examples/form-tutorial/crazyform.png) 
-
-
-
