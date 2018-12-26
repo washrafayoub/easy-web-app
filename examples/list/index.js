@@ -23,9 +23,9 @@ mainPage.addView(
       resourceURL:'/service/statistics'
     },
     {
-      maxRows:'r4',
+      maxRows:'4',
       rowId: 'ID',
-      pollDataSec: "5",
+      // pollDataSec: "5",
       divs: [
           { id:'ID', cellType:'text' }, 
           { id:'XCust', cellType:'div',
@@ -84,14 +84,17 @@ mainPage.addView(
               { id : 'UsageLb', cellType: 'label', label: 'Traffic (1d)' }, 
               { id : 'Usage', cellType: 'graph',
                 layout:{
-                  name:'P[kPa]',
+                  name:'# requests',
                   graphType:'timeLog',
                   colors: { traffic: '#5A5' },
                   yAxis: {
-                    axisType :'linear',
-                    min      :'0',
-                    max      :'100',
-                    labels   :['0','25','50','75','100']
+                    axisType : 'linear',
+                    min      : '0',
+                    max      : 'auto',
+                    labelCnt : 5
+                    // alternatively:
+                    // max      :'100',
+                    // labels   :['0','25','50','75','100']
                   }
                 } 
               } 

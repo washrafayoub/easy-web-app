@@ -1,3 +1,6 @@
+## 1.5.x
+* 1.5.0 List/Table: Graph with auto max for y-axis
+
 ## 1.4.x
 * 1.4.0 Modal page message ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/page-message/index.js)) 
 * 1.4.3 replace includeHeader and includeFooter by copy of main page
