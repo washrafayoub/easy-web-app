@@ -22,6 +22,7 @@ var formPlugInConfig = {
               { id: 'f02', label: 'Textarea', type: 'text', rows:'3', defaultVal:'...' },
               { id: 'f03', label: 'E-Mail', type: 'email' },
               { id: 'f04', label: 'Date', type: 'date' },
+              { id: 'f05', label: 'Check', type: 'checkbox' },
             ]
           }
         ]
@@ -56,7 +57,10 @@ app.get(
     return res.json( {
       l01 : 'New label',
       f01 : 'example text',
-      f04 : Date.now() // will be ignored (is a TODO)
+      f02 : 'more\nexample text',
+      f03 : 'abc@xyz.com',
+      f04 : Date.now(), // will be ignored (is a TODO)
+      f05 : true
     })
   }
 )
