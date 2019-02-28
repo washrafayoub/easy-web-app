@@ -2,7 +2,7 @@
 * 1.5.0 List/Table: Graph with auto max for y-axis
 * 1.5.1 List/Table: fix graph tooltip when scrolling
 * 1.5.2 Form: OnInit sets checkbox ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_4a.js)) 
-* 1.5.4 Media Wiki: (optional) `page` query parameter  
+* 1.5.5 Media Wiki: (optional) `page` query parameter  
 
 ## 1.4.x
 * 1.4.0 Modal page message ([example](https://github.com/ma-ha/easy-web-app/blob/master/examples/page-message/index.js)) 
