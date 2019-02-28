@@ -1,6 +1,6 @@
 {
 	"name": "easy-web-app",
-	"version": "1.5.2",
+	"version": "1.5.3",
 	"description": "Create web applications easily.",
 	"author": "ma-ha",
 	"license": "MIT",
@@ -39,9 +39,9 @@
 	"dependencies": {
 		"body-parser": "^1.18.3",
 		"config": "^1.31.0",
-		"cookie-parser": ">=1.4.3",
+		"cookie-parser": "^1.4.4",
 		"express": "^4.16.4",
-		"js-yaml": "^3.12.1",
+		"js-yaml": "^3.12.2",
 		"minimist": "^1.2.0",
 		"npmlog": ">=2.0.0",
 		"redis": "^2.8.0",

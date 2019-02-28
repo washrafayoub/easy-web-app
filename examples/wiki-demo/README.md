@@ -34,3 +34,8 @@ This works for me:
 
 The `wikiRef` string will be deleted from the internal page links. 
 The remaining string will send to the MediaWiki API to replace the page.
+
+# Query parameter `page`
+
+Deep links from other views or pages can be done using the `page`query parameter.
+Start the example and try out e.g. http://localhost:8888/index.html?page=DNA
