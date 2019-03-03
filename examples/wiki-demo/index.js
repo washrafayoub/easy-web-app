@@ -28,7 +28,7 @@ page.header.modules.push(
 gui.addView( 
   { 
     'id':'WikiView'
-     ,'title':'WIKI Content View'
+     ,'title':'WIKI: ${page}'
      ,'type':'pong-mediawiki'
      ,"resourceURL": "http://${lang}.wikipedia.org/w/"      
      ,"actions":[
