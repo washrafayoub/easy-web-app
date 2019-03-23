@@ -1,5 +1,5 @@
 ## 1.6.x
-* 1.6.0: List/Table: new field types "cssClass" and "linkText"
+* 1.6.1: List/Table: new field types "cssClass" and "linkText"
 
 ## 1.5.x
 * 1.5.0 List/Table: Graph with auto max for y-axis
