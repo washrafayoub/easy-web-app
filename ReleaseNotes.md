@@ -1,3 +1,10 @@
+## 2.0.x
+* New Layout gives you more CSS flexibility (mostly compatible to old page layout)
+  * See docu of [structure and html changes](https://github.com/ma-ha/rest-web-ui/blob/master/html/js/README_structure.md)
+  * To switch to the v1 layout mode, simply set version to "1":   
+     `var mainPage = gui.init()`  
+     `mainPage.version = '1'`
+
 ## 1.6.x
 * 1.6.1: List/Table: new field types "cssClass" and "linkText"
 
@@ -50,8 +57,7 @@
 * v1.2.15
   * detect expired login session and navigate to logout page  
 
-TODO: 
- - add Redis cache example to sync login session on multi node set up
+Contact me, if you need a Redis cache example to sync login session on multi node set up w/o sticky sessions
 
 ## 1.1.x
 * 1.1.0
@@ -130,7 +136,7 @@ Security enhancements:
 ## 0.12.12
 - table: filter improvements (select options)
 - table: paginator reset after search or page out of result
-- table: div with optimal heigth and width
+- table: div with optimal height and width
 
 ## 0.12.11
 - table: filter improvements (date picker, default values, ...)

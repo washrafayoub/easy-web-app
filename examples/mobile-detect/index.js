@@ -26,6 +26,6 @@ var mainPageMobile = gui.addPage( 'main-m', 'Demo',
 // this will generate a menu tab
 var otherPageNormal = gui.addPage( 'other', 'Other Page',  { id:'Normal Page' }, null )
 // this will NOT generate a menu tab
-var otherPageTablet = gui.addPage( 'other-t', 'Other Page',  { id:'Tablet Page' }, null )
+var otherPageTablet = gui.addPage( 'other-t', 'Other Page',  { id:'TabletPage' }, null )
 // this will NOT generate a menu tab
-var otherPageMobile = gui.addPage( 'other-m', 'Other Page',  { id:'Mobile Page' }, null )
+var otherPageMobile = gui.addPage( 'other-m', 'Other Page',  { id:'MobilePage' }, null )

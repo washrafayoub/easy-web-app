@@ -5,12 +5,9 @@ body {
 	background-color: #D2EEF2;
 }
 
-#maindiv {
+#headerdiv {
 	background-color: #14606B;
- 	margin: 0 auto;	
-	width: 100%;
 }
-
 #header {
 	height: 80px;
 	background-image: url();
@@ -111,6 +108,9 @@ label {
 .cellresource {
 	font-weight: bold;
 }
+#footerdiv {
+	background-color: #14606B;
+}
 
 #footer {
 	background-color: #14606B;
@@ -119,13 +119,13 @@ label {
 .decor-tm, .decor-tl, .decor-tr, 
 .decor-lm, .decor-rm,
 .decor-bl, .decor-bm, .decor-br {
-	background-color: #14606B;
+	background-color: #D2EEF2;
 }
 
 .tedge-tm, .tedge-tl, .tedge-tr, 
 .tedge-lm, .tedge-rm,
 .tedge-bl, .tedge-bm, .tedge-br {
-	background-color: #14606B;
+	background-color: #D2EEF2;
 }
 
 

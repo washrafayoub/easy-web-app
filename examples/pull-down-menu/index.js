@@ -6,7 +6,7 @@ var gui = require ( '../../' )
 // initialize the web app framework and a default main page
 var mainPage = gui.init ( 'Pull-Down-Menu Demo' )
 mainPage.title = 'Home' // replace default = "main"
-mainPage.addView ( { id : 'Page 1' }, null )
+mainPage.addView ( { 'id':'row1view', 'title':'Row 1 View', 'height':'500px' } )
 
 // now add the pull down menu:
 gui.addPullDownMenu( 'testMenu', 'Menu' )

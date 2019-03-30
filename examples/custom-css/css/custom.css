@@ -3,9 +3,12 @@ body {
 	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana",
 		"sans-serif";
 	color: #55F;
-	background-color: #EEE;
+  background-color: #55F;
 }
 
+#headerdiv {
+  background-color: #33F;
+}
 #header {
 	color: #DDD;
 	background-image: url(g4631.png);
@@ -24,6 +27,9 @@ body {
   left: 90px;
 }
 
+#footerdiv {
+  background-color: #33F;
+}
 #footer {
 	color: #FFF;
 	height: 30px;
@@ -68,7 +74,7 @@ body {
 .tedge-tm, .tedge-tl, .tedge-tr, 
 .tedge-lm, .tedge-rm,
 .tedge-bl, .tedge-bm, .tedge-br {
-	background-color: #33F;
+	background-color: #55F;
 }
 #Lorem {
   height: 335px;

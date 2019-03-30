@@ -88,6 +88,7 @@ gui.setDefaults = function setDefaults( options ) {
   var  navUrl = ( this.appRoot=='/' ? '/svc/nav' : this.appRoot+'/svc/nav' ) 
   this.pages[ 'main' ] = {
       title : 'Main Page'
+    , version: '2'
     , header : {
           logoText : 'Test'
           ,frameWarning: "true"
@@ -129,6 +130,7 @@ gui.setDefaults = function setDefaults( options ) {
       }
   this.pages[ 'main' ].addView =  
       function ( def, config ) {
+        if ( def.id ) { def.id = def.id.replace( ' ', '' ) }
         def.rowId = def.rowId || def.id;   
         return gui.addViewIn( def, config, this.rows )          
       }
@@ -261,6 +263,7 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
   } else {
     var pgObj = {
         title : pageId
+      , version: '2'
       , header : this.pages[ 'main' ].header
       , rows : []
       , footer : this.pages[ 'main' ].footer
@@ -275,7 +278,8 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
         }
     pgObj.addView =  
         function ( def, config ) {
-          def.rowId = def.rowId || def.id;   
+          def.rowId = def.rowId || def.id;
+          if ( def.rowId ) { def.rowId = def.rowId.replace( ' ','' ) }
           return gui.addViewIn( def, config, pgObj.rows )
         }
     pgObj.addTabContainer =
@@ -318,8 +322,10 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
           pgObj.addView ( navView )
       }
 
-      if ( viewDef )  
-      pgObj.addView( viewDef, viewConfig )
+      if ( viewDef ) {
+        if ( viewDef.id ) { viewDef.id = viewDef.id.replace( ' ', '' ) }
+        pgObj.addView( viewDef, viewConfig )
+      }
     
     this.pages[ pageId ] = pgObj
 
@@ -363,6 +369,7 @@ gui.addColumnsRow = function addColumnsRow( id, colArr, height ) {
       if ( def.id && ! def.columnId ) {
         def.columnId = def.id
       }
+      if ( def.columnId ) { def.columnId =  def.columnId .replace( ' ', '' ) }
       return gui.addViewIn( def, config, this.cols )          
     }
   rowObj.addTabContainer =
@@ -394,6 +401,7 @@ gui.addRowsColumn = function addRowsColumn( id, cols, width ) {
         if ( def.id && ! def.rowId ) {
           def.rowId = def.id
         }
+        if ( def.rowId ) { def.rowId = def.rowId.replace( ' ', '' ) }
         return gui.addViewIn( def, config, this.rows )          
       }
   newCol.addTabContainer =
@@ -413,6 +421,7 @@ gui.addViewIn = function addViewIn( def, config, arr ) {
   if ( config ) {
     view.moduleConfig = config
   }
+  if ( view.id ) { view.id = view.id.replace( ' ', '' ) }
   arr.push( view )
   return view
 }
@@ -434,7 +443,7 @@ gui.addView = function addView( def, config, page ) {
     log.warn( 'gui.addView','"def.id" is required!' );
     return null;
   } else { // OK, add view
-    view[ 'rowId' ]  = def.id;
+    view[ 'rowId' ]  = def.id.replace( ' ', '' ) ;
     view[ 'title' ]  = def.title || def.id || "View:";
     view[ 'decor' ]  = def.decor || this.decor;
     view[ 'height' ] = def.height || '400px';

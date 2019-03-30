@@ -274,7 +274,7 @@ See [embedded nav example](https://github.com/ma-ha/easy-web-app/tree/master/exa
 
 ### addTabContainer ( def )
 
-`def` usually only requires an `id` and `width` or `heigth`
+`def` usually only requires an `id` and `width` or `height`
 
 Returns: TabContainer
 

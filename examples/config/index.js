@@ -9,4 +9,8 @@ var mainPage = gui.init()
 // port, path, title etc are defined in external config
 // Remark: log.level is set by init() to config loglevel value
 
-mainPage.addView( { 'id':'V1', 'title':'Empty View' } )
+// Uncomment next line, to switch to the v1 Layout
+// mainPage.version = '1'
+
+
+let page = mainPage.addView( { id:'V1', title:'Empty View', decor: 'none' } )

@@ -14,8 +14,6 @@ var secretPage = gui.addPage( 'secretPage', 'Private&nbsp;Page',
   { dataURL:'', "pollDataSec":"60", easyCols: [ 'Name', 'Rating' ] }
  )
  
-gui.addPage( 'forgotPwd', 'Forgot Password' ) 
-
 // switch securiy on:
 gui.enableSecurity({ 
   divLayout: true,
