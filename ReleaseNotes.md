@@ -1,3 +1,7 @@
+## 2.1.x
+* Table: Support "checkbox" type in filter, see
+  [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-demo/index.js)
+
 ## 2.0.x
 * New Layout gives you more CSS flexibility (mostly compatible to old page layout)
   * See docu of [structure and html changes](https://github.com/ma-ha/rest-web-ui/blob/master/html/js/README_structure.md)

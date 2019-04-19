@@ -13,6 +13,7 @@ gui.addView (
     'id'    : 'tableView',
     'title' : 'Table Demo (sorry, zoom is always a flower ;-)',
     'type'  : 'pong-easytable',
+    'height': '800px',
     'resourceURL' : '/products',
     'actions':
       [
@@ -30,6 +31,7 @@ gui.addView (
       dataReqParams: [ 
         { id:'dateMin', label:'Newer than', type:'date',
           description:'Yes - this should really filer the data!' },
+        { id: 'status', label: 'Status', type: 'checkbox' },
         { id:'rating', type:'select', label:'Rating',
           options: [
             { value:'0', option:"doesn't matter"},
@@ -46,7 +48,7 @@ gui.addView (
         'ProductPage_linkForCol_1',
         'Picture',
         'ZoomImg_zooms_Picture',
-        'Status_checkbox_editable',
+        'Status_checkbox',
         'Rating',
         'Description_editable',
         'Product~Page_link',
@@ -84,6 +86,7 @@ svc.get(
   function( req, res ) {
     var dateFilter   = null
     var ratingFilter = null
+    var statusFilter = false
     if ( req.query && req.query.dataFilter && req.query.dataFilter.dateMin ) {
       dateFilter = ( new Date( req.query.dataFilter.dateMin ) ).valueOf()
       console.log( 'dateFilter > '+dateFilter)
@@ -92,11 +95,16 @@ svc.get(
       ratingFilter = true
       console.log( 'ratingFilter: '+ratingFilter)
     }
+    if ( req.query && req.query.dataFilter && req.query.dataFilter.status === 'true' ) {
+      statusFilter = true
+    }
+    console.log( 'statusFilter: '+statusFilter)
 
     var result = []
     for ( var i = 0; i < tableData.length; i++ ) {
       if ( dateFilterOk( tableData[i].Created, dateFilter ) 
-        && ratingFilterOk(  tableData[i].Rating, ratingFilter ) ) {
+          && ratingFilterOk(  tableData[i].Rating, ratingFilter ) 
+          && statusFilterOk(  tableData[i].Status, statusFilter ) ){
         result.push( tableData[i] )
       }
     }
@@ -112,6 +120,14 @@ function ratingFilterOk( rec, filter ) {
 function dateFilterOk( rec, filter ) {
   if ( filter && rec <= filter ) { return false }
   return true
+}
+
+function statusFilterOk( rec, filter ) {
+  if ( filter ) { 
+    return ( rec === 'true' )
+  } else {
+    return true
+  }
 }
 
 svc.post( 
