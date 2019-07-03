@@ -1,3 +1,6 @@
+## 2.2.1
+* New "iconrows" view supported
+
 ## 2.1.x
 * Table: Support "checkbox" type in filter, see
   [table example](https://github.com/ma-ha/easy-web-app/tree/master/examples/table-demo/index.js)
