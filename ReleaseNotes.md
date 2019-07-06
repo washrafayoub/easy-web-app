@@ -1,3 +1,7 @@
+## 2.3.0
+* Generate config for rows, navtab, title, header or footer per request by callback function 
+  * [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/dynamic-on-request/index.js)
+
 ## 2.2.1
 * New "iconrows" view supported
 

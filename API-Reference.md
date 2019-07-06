@@ -207,6 +207,59 @@ It is recommended to check the CSRF token in all REST web service implementation
 
 See [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
 
+### gui.dynamicHeader( callback ) / gui.dynamicFooter( callback ) /gui.dynamicTitle( callback )
+The callbacks can manipulate or
+replace the title, header or footer layout configuration per request.
+
+Callback function should e.g. be:
+```javascript
+( originalHeader, req ) => {
+  return new Promise( ( resolve, reject ) => {
+    //...
+    resolve( manipulatedHeader )
+  })
+}
+```
+
+The `title` must be a simple string. 
+The `header` and `footer` are complex objects.
+
+See also:
+* [example code](https://github.com/ma-ha/easy-web-app/tree/master/examples/dynamic-on-request/index.js).
+* [Structure format documentation](https://github.com/ma-ha/rest-web-ui/tree/master/html/js)
+
+
+### gui.dynamicNav( callback )
+The callback can manipulate or
+replace the navigation menu item array by new layout configuration per request.
+
+Callback function should be:
+```javascript
+( navType, navTabs, req ) => {
+  return new Promise( ( resolve, reject ) => {
+    //...
+    resolve( newRowsArray )
+  })
+}
+```
+Parameters are:
+* `navType` is one of 
+  * `'nav'` = main menu,
+  * `'nav-embed'` = embedded menu,
+  * `'nav-embed-sub'` = sub-menu of embedded menu,
+* `navTabs` generated menu, you can change and return this or build a new array
+* `req` the GET request object
+
+Return must be an array of navigation objects, e.g.
+```json
+[
+  { layout: 'main', label: 'Main Page' },
+  { layout: 'pagename', label: 'Menu Label' }
+]
+```
+
+[Example code](https://github.com/ma-ha/easy-web-app/tree/master/examples/dynamic-on-request/index.js).
+
 ### gui.getExpress()
 Returns the "express" router web service plug-in, 
 so that you can implement 
@@ -307,6 +360,26 @@ The `addIoView(...)` calls `addView` and the returns object is based on the view
 
 ### page.addInfo ( text )
 Add info (e.g. available updates) to menu tab.
+
+
+### page.dynamicRow( callback )
+The callback is called per request an can manipulate or
+replace the `staticRows` array by new layout configuration.
+
+Callback function should be:
+```javascript
+( staticRows, request ) => {
+  return new Promise( ( resolve, reject ) => {
+    //...
+    resolve( newRowsArray )
+  })
+}
+```
+
+See also:
+* [example code](https://github.com/ma-ha/easy-web-app/tree/master/examples/dynamic-on-request/index.js).
+* [Structure format documentation](https://github.com/ma-ha/rest-web-ui/tree/master/html/js)
+
 
 ### page.delInfo ( text )
 Removes the info from the menu tab.

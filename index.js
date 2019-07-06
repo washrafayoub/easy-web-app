@@ -159,6 +159,7 @@ gui.setDefaults = function setDefaults( options ) {
     }
   }
 
+
   this.pages[ 'main' ].addInfo =
     function( text ) {
       this.info = text
@@ -167,6 +168,11 @@ gui.setDefaults = function setDefaults( options ) {
   this.pages[ 'main' ].delInfo =
     function( ) {
       this.info = null
+    }
+
+  this.pages[ 'main' ].dynamicRow =
+    function( dynamicRowCallback ) {
+      this.dynamicRowCallback = dynamicRowCallback
     }
 
   if ( options && options.nav == 'embedded' ) {
@@ -194,6 +200,21 @@ gui.setDefaults = function setDefaults( options ) {
   
   return this.pages[ 'main' ]
 }
+
+gui.dynamicTitle =
+  function( dynamicTitleCallback ) {
+    this.dynamicTitleCallback = dynamicTitleCallback
+  }
+
+gui.dynamicHeader =
+  function( dynamicHeaderCallback ) {
+    this.dynamicHeaderCallback = dynamicHeaderCallback
+  }
+
+gui.dynamicFooter =
+  function( dynamicFooterCallback ) {
+    this.dynamicFooterCallback = dynamicFooterCallback
+  }
 
 function addTabCont( def, type, arr ) {
   var tabDiv = {}
@@ -254,6 +275,10 @@ gui.addPullDownMenuHtmlItem = function addPullDownMenuHtmlItem( menuId, htmlStri
 	}
 }
 
+gui.dynamicNav = function dynamicNav( dynamicNavCallback ) {
+  this.dynamicNavCallback = dynamicNavCallback
+}
+
 /** add new page to portal, navigation tabs included */
 gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
   if ( ! pageId ) {
@@ -300,7 +325,12 @@ gui.addPage = function addPage( pageId, title, viewDef, viewConfig  ) {
       function(  ) {
         this.info = null
       }
-
+    
+    pgObj.dynamicRow =
+      function( dynamicRowCallback ) {
+        this.dynamicRowCallback = dynamicRowCallback
+      }
+    
     if ( this.pages[ 'main' ].header.embedNav ) {
       var navView = {
         id : 'Nav', title:'',
@@ -526,10 +556,11 @@ router.get(
           }
         }
       }
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ redirectPage ].dynamicRowCallback, req )
       var layout = {
-          'layout' : pg
-        };
-      return res.json( layout );
+        'layout' : pg
+      }
+      return res.json( layout )
     } else  
     if ( gui.pages[ req.params.id ] ) {
       var pg = JSON.parse( JSON.stringify( gui.pages[ req.params.id ] ) ) // cloned
@@ -544,6 +575,7 @@ router.get(
           }
         }
       }
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ req.params.id ].dynamicRowCallback, req )
       //log.info( "structure", req.params.id  )
       var layout = {
         'layout' : pg 
@@ -581,14 +613,17 @@ router.get(
           }
         }
       }
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ redirectPage ].dynamicRowCallback, req )
       var layout = {
           'layout' : pg
         };
       return res.json( layout );
     } else 
     if ( gui.pages[ page ] ) {
+      var pg = JSON.parse( JSON.stringify( gui.pages[ page] ) ) // cloned
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ page ].dynamicRowCallback, req )
       var layout = {
-        'layout' : gui.pages[ page ]
+        'layout' : pg
       };
       res.json( layout );
     } else {
@@ -597,6 +632,44 @@ router.get(
     }
   } 
 );
+
+// enable to replace the static structure of header, rows and footer per request using calbacks
+async function dynamicStructureCallbacks( pg, dynamicRowCallback, req ) {
+  if ( gui.dynamicTitleCallback )  { // manipulate title on the fly
+    try { 
+      let newTitle = await gui.dynamicTitleCallback( pg.title, req ) 
+      if ( newTitle ) {
+        pg.title = newTitle
+      }
+    } catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/structure dynamicRowCallback', exc ) }
+  }
+  if ( gui.dynamicHeaderCallback ) { // manipulate header content on the fly via callback
+    try { 
+      let newHeader = await gui.dynamicHeaderCallback( pg.header, req ) 
+      if ( newHeader ) {
+        pg.header = newHeader
+      }
+    } catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/structure dynamicRowCallback', exc ) }
+  }
+  if ( dynamicRowCallback ) { // generate rows content on the fly via callback
+    try { 
+      let newRows = await dynamicRowCallback( pg.rows, req ) 
+      if ( newRows ) {
+        pg.rows = newRows
+      }
+    } catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/structure dynamicRowCallback', exc ) }
+  }
+  if ( gui.dynamicFooterCallback ) { // manipulate footer content on the fly via callback
+    try { 
+      let newFooter = await gui.dynamicFooterCallback( pg.footer, req ) 
+      if ( newFooter ) {
+        pg.footer = newFooter
+      }
+    } catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/structure dynamicRowCallback', exc ) }
+  }
+  return pg
+}
+
 
 
 /**
@@ -626,7 +699,7 @@ router.get(
 /** web service to assemble top level menu items for embedded navigation bar */
 router.get( 
   '/svc/nav-embed', 
-  function( req, res ) {
+  async function( req, res ) {
     var navTabs = []
     var layout =  req.query.page
     //  main menu
@@ -656,6 +729,13 @@ router.get(
         }
       }
     }
+    if ( gui.dynamicNavCallback ) { // generate nav on the fly via callback
+      try { 
+        let newNavTabs = await gui.dynamicNavCallback( 'nav-embed', navTabs, req ) 
+        if ( newNavTabs ) { navTabs = newNavTabs }
+      } catch( exc ) { log.warn( 'easy-web-app /svc/nav-embed dynamicNavCallback', exc ) }
+    }
+
     res.json( { 'navigations' : navTabs } )
   }
 )
@@ -663,7 +743,7 @@ router.get(
 /** web service to assemble sub level menu items for embedded navigation bar */
 router.get( 
   '/svc/nav-embed-sub', 
-  function( req, res ) {
+  async function( req, res ) {
     var navTabs = []
     var layout =  req.query.page
     var masterPage = layout + '/'
@@ -697,7 +777,13 @@ router.get(
         }
       }
     }
-  
+    if ( gui.dynamicNavCallback ) { // generate nav on the fly via callback
+      try { 
+        let newNavTabs = await gui.dynamicNavCallback( 'nav-embed-sub', navTabs, req ) 
+        if ( newNavTabs ) { navTabs = newNavTabs }
+      } catch( exc ) { log.warn( 'easy-web-app /svc/nav-embed-sub dynamicNavCallback', exc ) }
+    }
+
     res.json( { 'navigations' : navTabs } )
   }
 )
@@ -776,7 +862,15 @@ router.get(
           }
         }
       }
-      // show only menu, if it's more than one page
+
+      if ( gui.dynamicNavCallback ) { // generate nav on the fly via callback
+        try { 
+          let newNavTabs = await gui.dynamicNavCallback( 'nav', navTabs, req ) 
+          if ( newNavTabs ) { navTabs = newNavTabs }
+        } catch( exc ) { log.warn( 'easy-web-app /svc/nav dynamicNavCallback', exc ) }
+      }
+  
+      // show menu only, if it's more than one page
       if ( navTabs.length == 1 && ! Object.keys( gui.pullDownMenu ).length > 0 )  navTabs = [] 
       res.json( { 'navigations' : navTabs } )
     } catch ( exc ) {
