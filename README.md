@@ -14,7 +14,7 @@ Available view types:
 * Content: via MediaWiki API, plain HTML views, RSS-/atom-feeds or help dialogs
 * I/O: control switches/drawer, gauges, graphs, LEDs, displays, ...
 * Maps: POIs, routes, traffic, ...
-* Icons 
+* Icons or icon rows with expands
 * Source code display
 
 Features:
@@ -40,6 +40,11 @@ and the [online demos](https://mh-svr.de/pong_dev) of all features.
 
 
 Check "[Release Notes](https://github.com/ma-ha/easy-web-app/blob/master/ReleaseNotes.md)" for latest changes in this version.
+
+By v2.3.0 you are able to use callbacks to inject dynamic configuration per request. 
+This gives you full flexibility to replace or customize title, header, navigation menu, rows or footer. 
+Have a look at the [example code](https://github.com/ma-ha/easy-web-app/blob/master/examples/dynamic-on-request/index.js).
+I needed dynamic configuration to do customizations and white-labeling per tenant in multi-tenant scenarios.
 
 ## Compared with ...
 * jade
