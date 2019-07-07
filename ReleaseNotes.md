@@ -1,3 +1,6 @@
+## 2.3.1
+* pass 'id' parameter to structure url, so in dynamic callbacks (see v2.3.0), you have this in the request
+
 ## 2.3.0
 * Generate config for rows, navtab, title, header or footer per request by callback function 
   * [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/dynamic-on-request/index.js)

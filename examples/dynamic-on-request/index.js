@@ -58,10 +58,14 @@ gui.dynamicTitle( ( title, req ) => {
   })
 })
 
+// try out http://localhost:8888/index.html?layout=dynamicPage&id=1234
 gui.dynamicHeader( ( headerDef, req ) => {
   return new Promise( ( resolve, reject ) => {
     console.log( 'Change header logo text...' )
     headerDef.logoText += ' ...'
+    if ( req.query.id ) {
+      headerDef.logoText += req.query.id // "id" is passes by v2.3.1 to structure request
+    }
     resolve( headerDef )
   })
 })
