@@ -15,11 +15,9 @@ gui.addView (
 
   },
   {
-    page: {
-      EN: "EN/main.md",
-      DE: "DE/main.md"
-    },
-    edit: true
+    page  : '${lang}/${page}',
+    start : 'main.md',
+    edit  : true
   }
 )
 
@@ -31,15 +29,26 @@ var urlParser = bodyParser.urlencoded({ extended: false })
 
 // API:
 
-let mainMd = "Bla"
+let mainMd = "# Title\nLorem ipsum dolor sit amet\n [[second.md]]"
+let secondMd = "# Page2\nblabla bla blabl abla\n [[main.md]]"
 
 svc.get( '/md/:lang/:page', ( req, res ) => {
-  res.send( mainMd )
+  if ( req.params.page == 'main.md' ) {
+    res.send( mainMd )
+  } else if ( req.params.page == 'second.md' ) {
+    res.send( secondMd )
+  } else {
+    res.send( mainMd )
+  }
 })
 
 svc.post( '/md/:lang/:page', urlParser, ( req, res ) => {
   if ( req.body.markdown ) {
-    mainMd = req.body.markdown 
+    if ( req.params.page == 'main.md' ) {
+      mainMd = req.body.markdown 
+    } else if ( req.params.page == 'second.md' ) {
+      secondMd = req.body.markdown 
+    } 
     res.send( 'Saved' ) 
   } else {
     res.send( 'ERROR' ) 

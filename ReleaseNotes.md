@@ -1,6 +1,7 @@
-## 2.4.0
+## 2.4.1
 * supports `pong-markdown`
   * [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/markdown/index.js)
+* markdown with Wiki style linls  
 
 ## 2.3.1
 * pass 'id' parameter to structure url, so in dynamic callbacks (see v2.3.0), you have this in the request
