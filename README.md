@@ -11,7 +11,7 @@ includes the [rest-web-gui](https://github.com/ma-ha/rest-web-ui) framework and 
 Focus is on **web applications** _(not simple web pages)_. 
 Available view types:
 * Forms, Tables, Lists, Trees, Histograms
-* Content: via MediaWiki API, plain HTML views, RSS-/atom-feeds or help dialogs
+* Content: Markdown, WikiML via MediaWiki API, plain HTML views, RSS-/atom-feeds or help dialogs
 * I/O: control switches/drawer, gauges, graphs, LEDs, displays, ...
 * Maps: POIs, routes, traffic, ...
 * Icons or icon rows with expands

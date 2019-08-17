@@ -124,12 +124,12 @@ svc.get(
     
     var tableData = 
       [ 
-       {"ID":"ABC","CustomerCount":"1234","Rating":"3","Status":"false",
+       {"ID":"ABC","CustomerCount":1234,"Rating":"3","Status":"false",
          "Usage":[{"name":"traffic","data":dta1}],
          "SizeStat":[
-                     {"val":"40","label":"S","color":"#0aa"},
-                     {"val":"30","label":"M","color":"#0cc"},
-                     {"val":"30","label":"L","color":"#0ee"}],
+                     {"val":40,"label":"S","color":"#0aa"},
+                     {"val":30,"label":"M","color":"#0cc"},
+                     {"val":30,"label":"L","color":"#0ee"}],
          "Size":{"S":"40%","Strend":"arrow-1-e","M":"30%","Mtrend":"arrow-1-e","L":"30%","Ltrend":"arrow-1-ne"},
          "Orders":{"D":"4","W":"11","M":"123","Dtrend":"arrow-1-n","Wtrend":"arrow-1-e","Mtrend":"arrow-1-se"},"Availability":"<span style=\"color:green\">100%</span>"},
        {"ID":"XYZ","CustomerCount":"345","Rating":"1","Status":"true",

@@ -1,3 +1,6 @@
+## 2.4.2
+* table/list: text more robust, can also consume numbers
+
 ## 2.4.1
 * supports `pong-markdown`
   * [example](https://github.com/ma-ha/easy-web-app/tree/master/examples/markdown/index.js)
