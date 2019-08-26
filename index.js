@@ -540,7 +540,7 @@ router.get(
     var userId = null
     try { userId = await gui.getUserIdFromReq( req ) }
     catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/structure', exc ) }
-    if ( gui.authorize && ! gui.authorize( userId, pgId ) ) {
+    if ( gui.authorize && ! await gui.authorize( userId, pgId, req ) ) {
       // not authorized for this page
       var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
@@ -550,13 +550,13 @@ router.get(
           //log.info( '>>>>', pg.header.modules[i].type)
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
             // all others should be checked for authorization
-            if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
+            if (  pg.header.modules[i].id  && ! await gui.authorize( user, pg.header.modules[i].id, req ) ) {
               delete pg.header.modules[i] // not a
             }
           }
         }
       }
-      pg = await dynamicStructureCallbacks( pg, gui.pages[ redirectPage ].dynamicRowCallback, req )
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ redirectPage ].dynamicRowCallback, req, pgId )
       var layout = {
         'layout' : pg
       }
@@ -569,13 +569,13 @@ router.get(
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
             // all others should be checked for authorization
-            if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
+            if (  pg.header.modules[i].id  && ! await gui.authorize( user, pg.header.modules[i].id, req ) ) {
               delete pg.header.modules[i] // not authorized
             }
           }
         }
       }
-      pg = await dynamicStructureCallbacks( pg, gui.pages[ req.params.id ].dynamicRowCallback, req )
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ req.params.id ].dynamicRowCallback, req, pgId )
       //log.info( "structure", req.params.id  )
       var layout = {
         'layout' : pg 
@@ -597,7 +597,7 @@ router.get(
     var userId = null
     try { userId = await gui.getUserIdFromReq( req ) }
     catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/:subid/structure', exc ) }
-    if ( gui.authorize && ! gui.authorize( userId, page ) ) {
+    if ( gui.authorize && ! gui.authorize( userId, page, req ) ) {
       // not authorized for this page
       var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
@@ -607,13 +607,13 @@ router.get(
           //log.info( '>>>>', pg.header.modules[i].type)
           if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
             // all others should be checked for authorization
-            if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id ) ) {
+            if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id, req ) ) {
               delete pg.header.modules[i] // not a
             }
           }
         }
       }
-      pg = await dynamicStructureCallbacks( pg, gui.pages[ redirectPage ].dynamicRowCallback, req )
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ redirectPage ].dynamicRowCallback, req, page )
       var layout = {
           'layout' : pg
         };
@@ -621,7 +621,7 @@ router.get(
     } else 
     if ( gui.pages[ page ] ) {
       var pg = JSON.parse( JSON.stringify( gui.pages[ page] ) ) // cloned
-      pg = await dynamicStructureCallbacks( pg, gui.pages[ page ].dynamicRowCallback, req )
+      pg = await dynamicStructureCallbacks( pg, gui.pages[ page ].dynamicRowCallback, req, page )
       var layout = {
         'layout' : pg
       };
@@ -634,10 +634,10 @@ router.get(
 );
 
 // enable to replace the static structure of header, rows and footer per request using calbacks
-async function dynamicStructureCallbacks( pg, dynamicRowCallback, req ) {
+async function dynamicStructureCallbacks( pg, dynamicRowCallback, req, page ) {
   if ( gui.dynamicTitleCallback )  { // manipulate title on the fly
     try { 
-      let newTitle = await gui.dynamicTitleCallback( pg.title, req ) 
+      let newTitle = await gui.dynamicTitleCallback( pg.title, req, page ) 
       if ( newTitle ) {
         pg.title = newTitle
       }
@@ -645,7 +645,7 @@ async function dynamicStructureCallbacks( pg, dynamicRowCallback, req ) {
   }
   if ( gui.dynamicHeaderCallback ) { // manipulate header content on the fly via callback
     try { 
-      let newHeader = await gui.dynamicHeaderCallback( pg.header, req ) 
+      let newHeader = await gui.dynamicHeaderCallback( pg.header, req, page ) 
       if ( newHeader ) {
         pg.header = newHeader
       }
@@ -653,7 +653,7 @@ async function dynamicStructureCallbacks( pg, dynamicRowCallback, req ) {
   }
   if ( dynamicRowCallback ) { // generate rows content on the fly via callback
     try { 
-      let newRows = await dynamicRowCallback( pg.rows, req ) 
+      let newRows = await dynamicRowCallback( pg.rows, req, page ) 
       if ( newRows ) {
         pg.rows = newRows
       }
@@ -661,7 +661,7 @@ async function dynamicStructureCallbacks( pg, dynamicRowCallback, req ) {
   }
   if ( gui.dynamicFooterCallback ) { // manipulate footer content on the fly via callback
     try { 
-      let newFooter = await gui.dynamicFooterCallback( pg.footer, req ) 
+      let newFooter = await gui.dynamicFooterCallback( pg.footer, req, page ) 
       if ( newFooter ) {
         pg.footer = newFooter
       }
@@ -713,7 +713,7 @@ router.get(
               layoutId.indexOf( '-t' ) != layoutId.length -2 ) && 
             ( layoutId.indexOf( 'user/' ) != 0 ) ) {  
             // check authorization for page
-          if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
+          if ( gui.authorize && ! await gui.authorize( userId, layoutId, req ) ) {
             // not visible for this user
           } else if ( layoutId == 'main' && gui.pages['main'].header.logo ) {
             // not displayed, because header link
@@ -761,7 +761,7 @@ router.get(
                ( layoutId.indexOf( '-t' ) == -1 ||
                  layoutId.indexOf( '-t' ) != layoutId.length -2 ) && 
                ( layoutId.indexOf( 'user/' ) != 0 ) ) {            // check authorization for page
-          if ( gui.authorize && ! gui.authorize( userId, layoutId ) ) {
+          if ( gui.authorize && ! await gui.authorize( userId, layoutId, req ) ) {
             // not visible for this user
           } else if ( layoutId == 'main' && gui.pages['main'].header.logo ) {
             // not displayed, because header link
@@ -809,7 +809,7 @@ router.get(
                 ( layoutId.indexOf( '-t' ) == -1 ||
                   layoutId.indexOf( '-t' ) != layoutId.length -2 ) ) {  
               // check authorization for page
-              if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+              if ( gui.authorize && ! await gui.authorize( userId,layoutId, req ) ) {
                 // not visible for this user
               } else if ( layoutId == 'main' && gui.pages['main'].header.logo ) {
                 // not displayed, because header link
@@ -830,7 +830,7 @@ router.get(
                 // ignore alternate mobile and tablet layouts
                 if ( layoutId.indexOf( '-m' ) != layoutId.length -2 && 
                     layoutId.indexOf( '-t' ) != layoutId.length -2 ) {  	  
-                  if ( gui.authorize && ! gui.authorize(userId,layoutId) ) {
+                  if ( gui.authorize && ! await gui.authorize( userId, layoutId, req ) ) {
                     // not visible for this user
                   } else {
                     subMenus[ subMenu ] = navTabs.length
@@ -841,7 +841,7 @@ router.get(
                   }
                 }
               }
-              if ( ( gui.authorize && ! gui.authorize(userId,layoutId) ) ) {
+              if ( ( gui.authorize && ! await gui.authorize( userId,  layoutId, req ) ) ) {
                 // not visible for this user
               } else if ( subMenu == 'user' ) {
                 //log.verbose( 'nav','hide user in nav tabs' )

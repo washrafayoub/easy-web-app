@@ -11,10 +11,10 @@ page.header.logoText = 'Test: Dynamic on-the-fly page genaration'
 let dynamicPage = gui.addPage( 'dynamicPage', 'Dynamic', { id:'Page2' } )
 
 // generate page structure per request
-dynamicPage.dynamicRow( ( staticRows, request ) => {
+dynamicPage.dynamicRow( ( staticRows, request, page ) => {
   return new Promise( ( resolve, reject ) => {
     let rnd5 = Math.random() * 5
-    console.log( 'Gen random row-views for dynamic page' )
+    console.log( 'Gen random row-views for dynamic page: '+page )
       // per call you can re-define all the page rows here
     let newRows = [] 
     for ( let i = 0; i < rnd5; i++ ) {
@@ -50,18 +50,18 @@ gui.dynamicNav( ( navType, navTabs, req ) => {
 // ============================================================================
 // define callback to manipulate title, header and footer
 
-gui.dynamicTitle( ( title, req ) => {
+gui.dynamicTitle( ( title, req, page ) => {
   return new Promise( ( resolve, reject ) => {
-    console.log( 'Change title text...' )
+    console.log( 'Change title text for page '+ page +'...' )
     title = 'Dynamic Demo'
     resolve( title )
   })
 })
 
 // try out http://localhost:8888/index.html?layout=dynamicPage&id=1234
-gui.dynamicHeader( ( headerDef, req ) => {
+gui.dynamicHeader( ( headerDef, req, page ) => {
   return new Promise( ( resolve, reject ) => {
-    console.log( 'Change header logo text...' )
+    console.log( 'Change header logo text  for page '+ page +'...' )
     headerDef.logoText += ' ...'
     if ( req.query.id ) {
       headerDef.logoText += req.query.id // "id" is passes by v2.3.1 to structure request
@@ -70,9 +70,9 @@ gui.dynamicHeader( ( headerDef, req ) => {
   })
 })
 
-gui.dynamicFooter( ( footerDef, req ) => {
+gui.dynamicFooter( ( footerDef, req, page ) => {
   return new Promise( ( resolve, reject ) => {
-    console.log( 'Change footer ...' )
+    console.log( 'Change footer  for page '+ page +'...' )
     footerDef.copyrightText += ' :-)'
     resolve( footerDef )
   })

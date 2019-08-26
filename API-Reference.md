@@ -167,8 +167,18 @@ Add [pong-security module](https://github.com/ma-ha/rest-web-ui/tree/master/html
 
 IMPORTANT: You need to implement 
 * `gui.authenticate = function( user, password, callback ){ ... callback( err, true/false [, true/false] ) }` and 
-* `gui.authorize = function(user,page){ ... return true/false}` function,
-see [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
+* `gui.authorize = function( user, page req ){ ... return true/false}` function,
+   see [security example](https://github.com/ma-ha/easy-web-app/blob/master/examples/security/index.js). 
+
+The `gui.authorize` function can also return a Promise, e.g.:
+
+```javascript
+gui.authorize = ( user, page, req ) => {
+  return new Promise( ( resolve, reject ) => {
+    ...
+  })
+}
+```
 
 The `authenticate callback` has two or three parameters:
 * `err`: should be null if authentication is OK
@@ -213,10 +223,10 @@ replace the title, header or footer layout configuration per request.
 
 Callback function should e.g. be:
 ```javascript
-( originalHeader, req ) => {
+( originalStructure, req, pageName ) => {
   return new Promise( ( resolve, reject ) => {
     //...
-    resolve( manipulatedHeader )
+    resolve( manipulatedStructure )
   })
 }
 ```
@@ -235,7 +245,7 @@ replace the navigation menu item array by new layout configuration per request.
 
 Callback function should be:
 ```javascript
-( navType, navTabs, req ) => {
+( navType, navTabs, req, pageName ) => {
   return new Promise( ( resolve, reject ) => {
     //...
     resolve( newRowsArray )
@@ -368,7 +378,7 @@ replace the `staticRows` array by new layout configuration.
 
 Callback function should be:
 ```javascript
-( staticRows, request ) => {
+( staticRows, request, pageName ) => {
   return new Promise( ( resolve, reject ) => {
     //...
     resolve( newRowsArray )
