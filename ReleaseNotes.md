@@ -1,3 +1,6 @@
+## 2.5.1
+* markdown: navigation 
+
 ## 2.5.0
 * gui.authorize supports now async, see [API reference](https://github.com/ma-ha/easy-web-app/blob/master/API-Reference.md) 
 * dynamicHeader/dynamicFooter/dynamicTitle/dynamicRow : added pageName as parameter

@@ -30,13 +30,19 @@ var urlParser = bodyParser.urlencoded({ extended: false })
 // API:
 
 let mainMd = "# Title\nLorem ipsum dolor sit amet\n [[second.md]]"
-let secondMd = "# Page2\nblabla bla blabl abla\n [[main.md]]"
+let secondMd = "# Page 2\nblabla bla blabl abla\n [[third.md]]"
+let thirdMd  = "# Page 3\nblabla bla babla bla blabl abla\n [[fourth.md]]"
+let fourthMd = "# Page 4 \nblabla abla bla b bla blabl abla\n [[second.md]]"
 
 svc.get( '/md/:lang/:page', ( req, res ) => {
   if ( req.params.page == 'main.md' ) {
     res.send( mainMd )
   } else if ( req.params.page == 'second.md' ) {
     res.send( secondMd )
+  } else if ( req.params.page == 'third.md' ) {
+    res.send( thirdMd )
+  } else if ( req.params.page == 'fourth.md' ) {
+    res.send( fourthMd )
   } else {
     res.send( mainMd )
   }
