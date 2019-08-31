@@ -1,4 +1,7 @@
 ## 2.5.1
+* hook to load i18n on the fly , see [i18n example](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/indexOnTheFly.js)
+
+## 2.5.1
 * markdown: navigation 
 
 ## 2.5.0

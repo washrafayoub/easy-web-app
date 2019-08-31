@@ -304,6 +304,23 @@ svc.get(
 )
 ```
 
+## gui.getTranslations
+
+You can define this function to serve translations on the fly:
+
+```javascript
+// ...your code ...
+gui.getTranslation = async ( req, lang ) => {
+  let translations = {
+    // 'label1': 'label1 translation',
+    // 'label2': 'label2 translation' 
+  }
+  // e.g. load translation tale from DB
+  return translations
+}
+```
+
+
 ## "Page" API Reference
 Page object reference: 
 [structure specification of rest-web-ui](https://github.com/ma-ha/rest-web-ui/wiki/Structure-Specification)

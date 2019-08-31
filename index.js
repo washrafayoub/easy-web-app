@@ -916,10 +916,13 @@ gui.addTranslation = function addTranslation( langCode, label, translation ) {
 
 router.get(
     '/i18n/:lang',
-    function( req, res ) {
+    async function( req, res ) {
       if ( req.params.lang  ) {
         var langCode = req.params.lang.substring( 0, 2 )
-        if ( gui.lang && gui.lang[ langCode ] ) {
+        if ( gui.getTranslation ) {
+          var translation = await  gui.getTranslation( req, langCode )
+          res.json( translation )
+        } else if ( gui.lang && gui.lang[ langCode ] ) {
           res.json( gui.lang[ langCode ] )
         } else {
           res.json( {} ) // don't offer any translations
