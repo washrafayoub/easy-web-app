@@ -1,3 +1,6 @@
+## 2.6.0
+* upload files , see [i18n example](https://github.com/ma-ha/easy-web-app/blob/master/examples/upload/index.js)
+
 ## 2.5.1
 * hook to load i18n on the fly , see [i18n example](https://github.com/ma-ha/easy-web-app/blob/master/examples/i18n/indexOnTheFly.js)
 
