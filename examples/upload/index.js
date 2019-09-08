@@ -1,5 +1,5 @@
 var gui = require ( '../../' )       // stand alone: replace with  require( 'easy-web-app' )
-var fileupload = require("express-fileupload")
+var fileupload = require('express-fileupload')
 
 // initialize the web app framework and a default main page
 var page = gui.init ()
@@ -12,10 +12,13 @@ gui.addView (
     title : 'Upload',
     type  : 'pong-upload',
     resourceURL : '/upload',
-    height: '100px'
+    height: '115px'
   },
   {
-    update: [ 'Files' ]
+    update: [ 'Files' ],
+    input: [
+      { id: 'name', label: 'Name' }
+    ]
   }
 )
 
@@ -33,28 +36,34 @@ gui.addView (
     rowId: 'ID', // required for editable cells and select
     cols: [
       {
-        width: "30%",
+        width: '30%',
         id: 'filename',
-        label: 'filename',
-        cellType: "text"
+        label: 'File',
+        cellType: 'text'
       },
       {
-        width: "20%",
+        width: '20%',
+        id: 'name',
+        label: 'Name',
+        cellType: 'text'
+      },
+      {
+        width: '15%',
         id: 'mimeType',
-        label: 'mimeType',
-        cellType: "text"
+        label: 'MimeType',
+        cellType: 'text'
       },
       {
-        width: "20%",
+        width: '15%',
         id: 'size',
-        label: 'size',
-        cellType: "text"
+        label: 'Size',
+        cellType: 'text'
       },
       {
-        width: "20%",
+        width: '20%',
         id: 'date',
-        label: 'date',
-        cellType: "datems"
+        label: 'Uploaded',
+        cellType: 'datems'
       }
     ]
   }
@@ -74,14 +83,15 @@ svc.use(fileupload())
 svc.post( '/upload', (req, res) => {
     if ( ! req.files ) { 
       console.log( 'File not foud' )
-      return res.send("File was not found")
+      return res.send('File was not found')
     }
     console.log( req.files )
     fileList.push({
+      name     : req.body.name,
       filename : req.files.file.name,
       mimeType : req.files.file.mimetype,
       size     : req.files.file.size,
       date     : Date.now()
     })    
-    res.send("File Uploaded")
+    res.send('File Uploaded')
 })

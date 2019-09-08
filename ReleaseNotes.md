@@ -1,4 +1,4 @@
-## 2.6.0
+## 2.6.x
 * upload files , see [i18n example](https://github.com/ma-ha/easy-web-app/blob/master/examples/upload/index.js)
 
 ## 2.5.1
