@@ -2,7 +2,7 @@ var gui = require ( '../../' )       // stand alone: replace with  require( 'eas
 
 // initialize the web app framework and a default main page
 var page = gui.init ()
-page.header.logoText = 'Markdwon WIKI'
+page.header.logoText = 'Markdown WIKI'
 
 // add a view of type 'pong-easy-table' (= plug-in) 
 gui.addView ( 
