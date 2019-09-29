@@ -1,3 +1,6 @@
+## 2.6.5
+* id param for mobile redirect (fix)
+
 ## 2.6.4
 * fix .page-with and .root-row 
 
