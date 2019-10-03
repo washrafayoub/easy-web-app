@@ -1,3 +1,6 @@
+## 2.6.6
+* `pong-icons` and `pong-iconrows` pass GET-parameters to the resource load request
+
 ## 2.6.5
 * id param for mobile redirect (fix)
 
