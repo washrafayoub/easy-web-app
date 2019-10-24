@@ -1,5 +1,6 @@
 const express  = require( 'express' )
 const cfg      = require( 'config' )
+const log      = require( 'npmlog' )
 
 exports: module.exports = { 
   setupGUI : setupGUI,

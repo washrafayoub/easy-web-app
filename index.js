@@ -1326,8 +1326,8 @@ gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
       if ( parts.length == 2  &&  parts[0] == 'Bearer' ) {
         var tokenStr = parts[1]
         var token = jwt.decode( tokenStr, { complete: true }) || {}
-        if ( dtoken.payload  &&  dtoken.payload.name ) {
-          userId = dtoken.payload.name
+        if ( token.payload  &&  token.payload.name ) {
+          userId = token.payload.name
         }
       } 
     }
