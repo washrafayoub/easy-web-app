@@ -202,6 +202,7 @@ application security by confguration including
 * CSRF protection
 * click hijacking detection (user alert)
 * OAuth2 option for web services 
+* OpenID Connect option
 
 The [security example](https://github.com/ma-ha/easy-web-app/tree/master/examples/security) 
 shows how to write a secure web app in 100 LoC. 

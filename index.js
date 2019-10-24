@@ -20,6 +20,7 @@ var express     = require( 'express' );
 var webservices = express();
 var router = express.Router();
 gui.express = webservices
+var jwt = require( 'jsonwebtoken' )
 
 var bodyParser  = require( 'body-parser' );
 // body-parser for JSON payload:
@@ -542,13 +543,17 @@ router.get(
     catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/structure', exc ) }
     if ( gui.authorize && ! await gui.authorize( userId, pgId, req ) ) {
       // not authorized for this page
-      var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
+      var redirectPage =  'main'
+      if ( gui.secParams && gui.secParams.needLoginPage ) {
+        redirectPage = gui.secParams.needLoginPage
+      }
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = await gui.getUserIdFromReq( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
           //log.info( '>>>>', pg.header.modules[i].type)
-          if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
+          let allowedModules = [ 'pong-security', 'pong-security2', 'pong-navbar'  ]
+          if ( allowedModules.indexOf( pg.header.modules[i].type ) == -1 ) { 
             // all others should be checked for authorization
             if (  pg.header.modules[i].id  && ! await gui.authorize( user, pg.header.modules[i].id, req ) ) {
               delete pg.header.modules[i] // not a
@@ -567,7 +572,8 @@ router.get(
       if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = await gui.getUserIdFromReq( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
-          if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
+          let allowedModules = [ 'pong-security', 'pong-security2', 'pong-navbar'  ]
+          if ( allowedModules.indexOf( pg.header.modules[i].type ) == -1 ) { 
             // all others should be checked for authorization
             if (  pg.header.modules[i].id  && ! await gui.authorize( user, pg.header.modules[i].id, req ) ) {
               delete pg.header.modules[i] // not authorized
@@ -599,13 +605,17 @@ router.get(
     catch( exc ) { log.warn( 'easy-web-app /svc/layout/:id/:subid/structure', exc ) }
     if ( gui.authorize && ! gui.authorize( userId, page, req ) ) {
       // not authorized for this page
-      var redirectPage = ( gui.secParams.needLoginPage ? gui.secParams.needLoginPage : 'main' )
+      var redirectPage =  'main'
+      if ( gui.secParams && gui.secParams.needLoginPage ) {
+        redirectPage = gui.secParams.needLoginPage
+      }
       var pg = JSON.parse( JSON.stringify( gui.pages[ redirectPage ] ) ) // cloned
       if ( gui.authorize && pg.header ) { // check authorization for header modules
         var user = await gui.getUserIdFromReq( req )
         for ( var i = pg.header.modules.length-1; i >= 0; i-- ) {
           //log.info( '>>>>', pg.header.modules[i].type)
-          if ( pg.header.modules[i].type != 'pong-security' &&  pg.header.modules[i].type != 'pong-navbar' ) { 
+          let allowedModules = [ 'pong-security', 'pong-security2', 'pong-navbar'  ]
+          if ( allowedModules.indexOf( pg.header.modules[i].type ) == -1 ) { 
             // all others should be checked for authorization
             if (  pg.header.modules[i].id  && ! gui.authorize( user, pg.header.modules[i].id, req ) ) {
               delete pg.header.modules[i] // not a
@@ -1096,63 +1106,27 @@ var lId = 0
 // security
 
 /** add pong-security plug in to header */
-gui.enableSecurity = 
-  function enableBasicAuth( paramObj ) {
-    gui.secParams = {}
-    if ( ! gui.loginTimeout ) { gui.loginTimeout = 6400000 }
-    var root = ( this.appRoot== '/' ? '' : this.appRoot ) 
-    if ( ! paramObj ) {paramObj = {} }
-    gui.secParams.divLayout = ( paramObj.divLayout ? true : false )
-    gui.secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : root+'/login' )
-    if ( paramObj.resetPasswordURL ) gui.secParams.resetPasswordURL = paramObj.resetPasswordURL
-    gui.secParams.loginPage = ( paramObj.loginPage ? paramObj.loginPage : 'main' )
-    if ( paramObj.registgerURL ) gui.secParams.registgerURL = paramObj.registgerURL
-    gui.secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
-    gui.secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : root+'/logout' )
-    gui.secParams.sessionExpiredAlert = ( paramObj.sessionExpiredAlert ? paramObj.sessionExpiredAlert : false )
-    gui.secParams.changePasswordStrength = 4
-    this.pages[ 'main' ].header.modules.push(
-      { 'id': 'Sec', 'type': 'pong-security', 'param': gui.secParams }
-    ) 
-    log.info( "Security is enabled!" )
-  }
+gui.enableSecurity = function enableBasicAuth( paramObj ) {
+  if ( gui.sec2Params ) { delete gui.sec2Params }
+  gui.secParams = {}
+  if ( ! gui.loginTimeout ) { gui.loginTimeout = 6400000 }
+  var root = ( this.appRoot== '/' ? '' : this.appRoot ) 
+  if ( ! paramObj ) {paramObj = {} }
+  gui.secParams.divLayout = ( paramObj.divLayout ? true : false )
+  gui.secParams.loginURL = ( paramObj.loginURL ? paramObj.loginURL : root+'/login' )
+  if ( paramObj.resetPasswordURL ) gui.secParams.resetPasswordURL = paramObj.resetPasswordURL
+  gui.secParams.loginPage = ( paramObj.loginPage ? paramObj.loginPage : 'main' )
+  if ( paramObj.registgerURL ) gui.secParams.registgerURL = paramObj.registgerURL
+  gui.secParams.logoutPage = ( paramObj.logoutPage ? paramObj.logoutPage : 'main' )
+  gui.secParams.logoutURL = ( paramObj.logoutURL ? paramObj.logoutURL : root+'/logout' )
+  gui.secParams.sessionExpiredAlert = ( paramObj.sessionExpiredAlert ? paramObj.sessionExpiredAlert : false )
+  gui.secParams.changePasswordStrength = 4
+  this.pages[ 'main' ].header.modules.push(
+    { 'id': 'Sec', 'type': 'pong-security', 'param': gui.secParams }
+  )
 
-gui.checkUserCSRFtoken = function checkUserCSRFtoken( req ) {
- if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-    var token = req.cookies[ 'pong-security' ]
-    if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
-      var headerToken = req.get('X-Protect') 
-      var userToken = gui.userTokens[ token ].csrfToken
-      if ( userToken != headerToken ) {
-        return false
-      }
-    }
-  } 
-  return true
-}
-
-webservices.use( // inject CSRF token
-  async function( req, res, next ) {
-    try { 
-      var csrfToken = 'default'
-      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-        var token = req.cookies[ 'pong-security' ]
-        if ( gui.getCsrfTokenForUser ) {
-          csrfToken = await gui.getCsrfTokenForUser( token )
-        } else if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
-          csrfToken = gui.userTokens[ token ].csrfToken
-        }
-      }
-    } catch ( exc ) { log.warn('easy-web-app CSRF token, exc') }
-    res.header( 'X-Protect', csrfToken );
-    next();
-  } 
-);
-
-router.post(
-  '/login', 
-  formParser, 
-  async function(req, res) {
+  // basic login impl calls authenticate
+  router.post( '/login', formParser, async function(req, res) {
     try{ 
       // log.info( "POST Login ..." )
       if ( gui.authenticate != null ) {
@@ -1222,7 +1196,95 @@ router.post(
       log.warn( 'easy-web-app /login', exc )
       res.status( 500 ).send( "Login failed" )
     }
-  }
+  })
+
+  // Change Password ReST Service
+  router.post( '/password', formParser, async function(req, res) {
+    // log.info( "POST Login ..." )
+    var userId = await gui.getUserIdFromReq( req )
+    if ( userId ) {
+      if ( gui.changePassword != null ) {
+        if ( req.body && req.body.oldPassword && req.body.newPassword ) {
+          var oldPwd = req.body.oldPassword
+          var newPwd = req.body.newPassword
+          gui.changePassword( userId, oldPwd, newPwd,
+            function( err, result ) {
+                //log.info( "callback", "err:"+err+" result:"+result )
+                if ( result ) {
+                  res.status( 200 ).send( "Password changed!" )                 
+                } else {
+                  res.status( 400 ).send( "Failed to change password!" )              
+                }
+            }
+          )
+        } else {
+          res.status( 400 ).send( "Invalid request!" )                              
+        }
+        // TODO
+      } else {
+        res.status( 405 ).send( "Failed to change password!" )                  
+      }
+    } else {
+      res.status( 401 ).send( "Login invalid!" )                                    
+    }
+  })
+
+  // logout ReST service
+  router.post( '/logout', formParser,  function(req, res) {
+    // log.info( "POST Logout ..." )
+    // log.info( 'Cookies: ', req.cookies )
+    if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+      // log.info( "pong-security cookie ..." )
+
+      var token = req.cookies[ 'pong-security' ]
+      // log.info( "token = "+token )
+      // log.info( "user = " + gui.userTokens[ token ] )
+      if ( gui.deleteUserIdForToken ) {
+        gui.deleteUserIdForToken( token )
+      } else if ( gui.userTokens[ token ] ) {
+        delete gui.userTokens[ token ]
+      }
+    }
+    if ( req.session ) {
+      req.session.destroy() 
+    }
+    res.clearCookie( 'pong-security', { path: gui.appRoot } )
+      .status( 200 ).send( "" )
+  })
+
+  log.info( "Security is enabled!" )
+}
+
+gui.checkUserCSRFtoken = function checkUserCSRFtoken( req ) {
+ if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+    var token = req.cookies[ 'pong-security' ]
+    if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
+      var headerToken = req.get('X-Protect') 
+      var userToken = gui.userTokens[ token ].csrfToken
+      if ( userToken != headerToken ) {
+        return false
+      }
+    }
+  } 
+  return true
+}
+
+webservices.use( // inject CSRF token
+  async function( req, res, next ) {
+    try { 
+      var csrfToken = 'default'
+      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+        var token = req.cookies[ 'pong-security' ]
+        if ( gui.getCsrfTokenForUser ) {
+          csrfToken = await gui.getCsrfTokenForUser( token )
+        } else if ( gui.userTokens[ token ] && gui.userTokens[ token ].csrfToken ) {
+          csrfToken = gui.userTokens[ token ].csrfToken
+        }
+      }
+    } catch ( exc ) { log.warn('easy-web-app CSRF token, exc') }
+    res.header( 'X-Protect', csrfToken );
+    next();
+  } 
 )
 
 gui.mkToken = function mkToken( len ) {
@@ -1239,7 +1301,8 @@ gui.mkToken = function mkToken( len ) {
 gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
   var userId = null
   try {
-    if ( req.cookies && req.cookies[ 'pong-security' ] ) {
+    if ( ! req.cookies ) { return null }
+    if ( req.cookies[ 'pong-security' ] ) {
     // log.info( "UserIdFromReq: pong-security cookie ..." )
 
       var token = req.cookies[ 'pong-security' ]
@@ -1257,6 +1320,16 @@ gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
           }
         }
       }
+    } else if ( req.headers  &&  req.headers.authorization ) { 
+      // try to parse JWT token
+      var parts = req.headers.authorization.split( ' ' )
+      if ( parts.length == 2  &&  parts[0] == 'Bearer' ) {
+        var tokenStr = parts[1]
+        var token = jwt.decode( tokenStr, { complete: true }) || {}
+        if ( dtoken.payload  &&  dtoken.payload.name ) {
+          userId = dtoken.payload.name
+        }
+      } 
     }
   } catch ( exc ) {
     log.error( 'easy-web-app getUserIdFromReq', exc )
@@ -1311,65 +1384,14 @@ function WARNING_DEPRECATED_UserId_FUNCTION() {
   }
 }
 
-// Change Password ReST Service
-router.post(
-    '/password', 
-    formParser, 
-    async function(req, res) {
-      // log.info( "POST Login ..." )
-      var userId = await gui.getUserIdFromReq( req )
-      if ( userId ) {
-        if ( gui.changePassword != null ) {
-          if ( req.body && req.body.oldPassword && req.body.newPassword ) {
-            var oldPwd = req.body.oldPassword
-            var newPwd = req.body.newPassword
-            gui.changePassword( userId, oldPwd, newPwd,
-               function( err, result ) {
-                  //log.info( "callback", "err:"+err+" result:"+result )
-                  if ( result ) {
-                    res.status( 200 ).send( "Password changed!" )                 
-                  } else {
-                    res.status( 400 ).send( "Failed to change password!" )              
-                  }
-              }
-            )
-          } else {
-            res.status( 400 ).send( "Invalid request!" )                              
-          }
-          // TODO
-        } else {
-          res.status( 405 ).send( "Failed to change password!" )                  
-        }
-      } else {
-        res.status( 401 ).send( "Login invalid!" )                                    
-      }
-    }
-)
+// ============================================================================
+// sec2 - OpenID Connect 
 
-// logout ReST service
-router.post(
-    '/logout', 
-    formParser, 
-    function(req, res) {
-      // log.info( "POST Logout ..." )
-      // log.info( 'Cookies: ', req.cookies )
-      if ( req.cookies && req.cookies[ 'pong-security' ] ) {
-        // log.info( "pong-security cookie ..." )
-
-        var token = req.cookies[ 'pong-security' ]
-        // log.info( "token = "+token )
-        // log.info( "user = " + gui.userTokens[ token ] )
-        if ( gui.deleteUserIdForToken ) {
-          gui.deleteUserIdForToken( token )
-        } else if ( gui.userTokens[ token ] ) {
-          delete gui.userTokens[ token ]
-        }
-      }
-      if ( req.session ) {
-        req.session.destroy() 
-      }
-      res.clearCookie( 'pong-security', { path: gui.appRoot } )
-        .status( 200 ).send( "" )
-    }
-  )
-  
+gui.enableSec2 = function enableSec2( paramObj ) {
+  if ( gui.secParams ) { delete gui.secParams }
+  gui.sec2Params = paramObj
+  this.pages[ 'main' ].header.modules.push(
+    { 'id': 'Sec2', 'type': 'pong-security2', 'param': gui.sec2Params }
+  ) 
+  log.info( "Security v2 is enabled!" )
+}

@@ -15,9 +15,16 @@ Some REST/JSON web services are provided:
 * `GET /svc/layout/<id>/<subid>/structure`
 * `GET /svc/nav`
 * `GET /i18n/<lang>`
+
+Additional services, if you enable basic auth security 
+using `gui.enableSecurity( ... )`: 
 * `POST /login`
 * `POST /password`
 * `POST /logout`
+
+If you enable OpenID Connect `gui.enableSec2( ... )` these 
+service endpoints are not available, since the identity provider
+must be used.
 
 ## "GUI" API
 ### gui.init ( \[portalName\] \[,port\] \[,rootPath\ \[,options\]])
@@ -208,6 +215,31 @@ Typically you use a Redis cache, to store `token: userid`.
 
 Login session timeout is set to 6400000 ms, 
 you can change the value `gui.loginTimeout` to your requirements.
+
+IMPORTANT: You can not use `gui.enableSec2( ... )`
+and `gui.enableSecurity( ... )` in the same app.
+
+
+### gui.enableSec2( paramsObj )
+Add [pong-security2 module](https://github.com/ma-ha/rest-web-ui/tree/master/html/modules/pong-security2) to the header. 
+This implements OAuth 2.0 and OpenID Connect security. 
+
+Please find docu of paramsObj in link above or in the [Auth0 example](https://github.com/ma-ha/easy-web-app/blob/master/examples/openid/)
+
+
+You need to implement the GUI authorization function
+```javascript
+gui.authorize = ( user, page, req ) => {
+  return new Promise( ( resolve, reject ) => {
+    ...
+    resolve( true|false )
+  })
+}
+```
+
+IMPORTANT: You can not use `gui.enableSec2( ... )`
+and `gui.enableSecurity( ... )` in the same app.
+
 
 ### gui.checkUserCSRFtoken( req )
 Returns `true` if the CSRF token in the HTML header is valid.
