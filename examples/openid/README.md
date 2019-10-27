@@ -15,4 +15,5 @@ The example works with Auth0 as provider. The confoguration for the provider nee
 6. Create a role `Reader` and assign the `read:all` four our API
 
 TODO: 
+- nav too fast -> shows unautorized menu
 - solve API problem with the audience and aud (get clientID, expects URL)
