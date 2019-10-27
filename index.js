@@ -565,6 +565,7 @@ router.get(
       var layout = {
         'layout' : pg
       }
+      console.log( layout )
       return res.json( layout )
     } else  
     if ( gui.pages[ req.params.id ] ) {
@@ -1299,11 +1300,16 @@ gui.mkToken = function mkToken( len ) {
 
 /** returns null, if not logged in */
 gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
+  // console.log( req.headers );
   var userId = null
+  // for ( let c in  req.cookies ) {
+  //   log.info( 'Cookie: '+ c )
+  //   log.info( req.cookies[c] )
+  // }
   try {
     if ( ! req.cookies ) { return null }
     if ( req.cookies[ 'pong-security' ] ) {
-    // log.info( "UserIdFromReq: pong-security cookie ..." )
+      // log.info( "UserIdFromReq: pong-security cookie ..." )
 
       var token = req.cookies[ 'pong-security' ]
       // log.info( "UserIdFromReq: token = "+token )
@@ -1320,7 +1326,8 @@ gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
           }
         }
       }
-    } else if ( req.headers  &&  req.headers.authorization ) { 
+    } else if ( req.headers && req.headers.authorization ) { 
+      // log.info( "UserIdFromReq: authorization header ..." )
       // try to parse JWT token
       var parts = req.headers.authorization.split( ' ' )
       if ( parts.length == 2  &&  parts[0] == 'Bearer' ) {
@@ -1330,6 +1337,13 @@ gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
           userId = token.payload.name
         }
       } 
+    } else if ( req.cookies[ 'pongSec2JWT' ] ) { 
+      // log.info( "UserIdFromReq: pongSec2JWT cookie ..." )
+      var tokenStr = req.cookies[ 'pongSec2JWT' ]
+      var token = jwt.decode( tokenStr, { complete: true }) || {}
+      if ( token.payload  &&  token.payload.name ) {
+        userId = token.payload.name
+      }
     }
   } catch ( exc ) {
     log.error( 'easy-web-app getUserIdFromReq', exc )

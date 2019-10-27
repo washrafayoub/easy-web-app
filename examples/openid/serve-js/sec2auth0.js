@@ -33,16 +33,16 @@ function mSec_Login( params ) {
   });
   var authParam = {
     responseType : 'token id_token',
-    // clientID     : params.clientId,
+    clientID     : params.clientId,
     redirectUri  : params.loginRedirect,
-    //scope        : 'openid',
+    scope        : 'openid profile email read:all',
     // grant_type:"client_credentials",
-    audience     : params.audience,
+    //audience     : params.audience,
     state        : 234564678909890   // TODO
   }
-  // if ( params.audience ) {
-  //   authParam.audience = params.audience
-  // }
+  if ( params.audience ) {
+    authParam.audience = params.audience
+  }
   alert( JSON.stringify(authParam) );
   webAuth.authorize( authParam );
 }

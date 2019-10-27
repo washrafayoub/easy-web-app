@@ -1,5 +1,5 @@
 ## 2.7.x
-* OpenID Connect support, see [example for GUI and API](https://github.com/ma-ha/easy-web-app/blob/master/examples/openid/)
+* OpenID Connect and OAuth 2.0 support, see [example for GUI and API](https://github.com/ma-ha/easy-web-app/blob/master/examples/openid/)
 
 ## 2.6.6
 * `pong-icons` and `pong-iconrows` pass GET-parameters to the resource load request
