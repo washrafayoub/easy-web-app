@@ -1326,7 +1326,14 @@ gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
           }
         }
       }
-    } else if ( req.headers && req.headers.authorization ) { 
+    } else if ( req.cookies[ 'pongSec2IdTkn' ] ) { 
+      // log.info( "UserIdFromReq: pongSec2JWT cookie ..." )
+      var tokenStr = req.cookies[ 'pongSec2IdTkn' ]
+      var token = jwt.decode( tokenStr, { complete: true }) || {}
+      if ( token.payload  &&  token.payload.name ) {
+        userId = token.payload.name
+      }
+    } else if ( req.headers && req.headers.authorization ) {
       // log.info( "UserIdFromReq: authorization header ..." )
       // try to parse JWT token
       var parts = req.headers.authorization.split( ' ' )
@@ -1337,13 +1344,6 @@ gui.getUserIdFromReq = async function getUserIdFromReq( req ) {
           userId = token.payload.name
         }
       } 
-    } else if ( req.cookies[ 'pongSec2JWT' ] ) { 
-      // log.info( "UserIdFromReq: pongSec2JWT cookie ..." )
-      var tokenStr = req.cookies[ 'pongSec2JWT' ]
-      var token = jwt.decode( tokenStr, { complete: true }) || {}
-      if ( token.payload  &&  token.payload.name ) {
-        userId = token.payload.name
-      }
     }
   } catch ( exc ) {
     log.error( 'easy-web-app getUserIdFromReq', exc )

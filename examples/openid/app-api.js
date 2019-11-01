@@ -75,50 +75,74 @@ function setupAPI( app ) {
 // Authorization Checker
 
 function initJWTcheck() {
-  let clientID = cfg.CLIENT_ID
+  // let clientID = cfg.CLIENT_ID
   let audience = cfg.AUDIENCE
   let issuer   = cfg.ISSUER
 
   let check = (req, res, next) => {
-    console.log( 'check called' )
+    if ( ! req.headers.authorization ) {
+      log.info( 'JWTcheck', 'API call is not authorized: Authorization header not found' )
+      return next( new UnauthorizedError(
+        'No Authorization header found', 
+        { message: 'Format is "Authorization: Bearer [token]"' }
+      ))
+    }
     // parse JWT
     let parts = req.headers.authorization.split( ' ' )
     if ( parts.length == 2  &&  parts[0] == 'Bearer' ) {
       let tokenStr = parts[1]
       let token = jwtParser.decode( tokenStr, { complete: true }) || {}
-      // console.log( token.payload )
-      if ( token.payload && token.payload.name && token.payload.aud&& token.payload.iss ) {
-        // let userId = token.payload.name
-        // console.log( 'JWT: user = '+ userId )
 
+      log.info( 'JWTcheck', 'check JWO token:' )
+      log.info( 'JWTcheck', token.payload )
+  
+      if ( token.payload && token.payload.aud && token.payload.iss ) {
         // check audience
-        if ( token.payload.aud != clientID ) {
+        if ( typeof token.payload.aud === 'string' && token.payload.aud != audience ) {
+          log.info( 'JWTcheck', 'API call is not authorized: payload.aud string not correct ' )
           return next( new UnauthorizedError(
             'JWT audience incorrect', 
-            { message: 'JWT audience (payload.aud) is not Client ID' }
+            { message: 'JWT audience (payload.aud) is not correct' }
+          ))
+        } else if ( typeof token.payload.aud === 'array' && token.payload.aud.indexOf( audience ) == -1 ) {
+          log.info( 'JWTcheck', 'API call is not authorized: payload.aud array not correct' )
+          return next( new UnauthorizedError(
+            'JWT audience incorrect', 
+            { message: 'JWT audience array (payload.aud) is not correct' }
           ))
         }
 
         // check issuer
         if ( token.payload.iss != issuer ) {
+          log.info( 'JWTcheck', 'API call is not authorized: issuer not correct' )
           return next( new UnauthorizedError(
             'JWT audience issuer', 
             { message: 'JWT issuer (payload.iss) is not '+issuer }
           ))
         }
+
+        // rest-web-gui will provide the id-token with the user info as "id-jwt" header
+        if ( req.headers[ 'id-jwt' ] ) {
+          let idToken = jwtParser.decode( req.headers[ 'id-jwt' ], { complete: true }) || {}
+          log.info( 'JWTcheck idToken', idToken.payload )
+        }
+
       } else {
+        log.info( 'JWTcheck', 'API call is not authorized: aud or iss not found' )
         return next( new UnauthorizedError(
           'Bearer token contains no JWT user name', 
           { message: 'JWT requries payload.name' }
         ))
       }
     } else {
+      log.info( 'JWTcheck', 'API call is not authorized: No Bearer token found' )
       return next( new UnauthorizedError(
         'No Bearer token found', 
         { message: 'Format is Authorization: Bearer [token]' }
       ))
     }
     // OK, check passed
+    log.info( 'JWTcheck', 'API call is authorized' )
     return next();
   }
   return check

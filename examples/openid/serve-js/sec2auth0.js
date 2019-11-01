@@ -43,7 +43,7 @@ function mSec_Login( params ) {
   if ( params.audience ) {
     authParam.audience = params.audience
   }
-  alert( JSON.stringify(authParam) );
+  // alert( JSON.stringify(authParam) );
   webAuth.authorize( authParam );
 }
 
@@ -65,14 +65,14 @@ function mSec_isAuthenticated( params, token, callback ) {
   });
 }
 
-function mSec_getJWTfromURL() {
+function mSec_getIdTokenfromURL() {
   var idx = window.location.href.indexOf( 'id_token' )
   if (  idx > 0 ) {
     var tokenStr = window.location.href.substring( idx + 9 ) 
     if ( tokenStr.indexOf('&') > 0 ) { 
       tokenStr = tokenStr.substring( 0, tokenStr.indexOf('&') )
     }
-    alert( tokenStr );
+    // alert( tokenStr );
     return tokenStr
   } else {
     return false
