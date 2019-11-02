@@ -6,7 +6,7 @@ var formConfig = {
     title: 'Form: Field Types',
     type : 'pong-form',
     resourceURL: 'hello',
-    height: '750px'
+    height: 'auto'
   }
   
 var formPlugInConfig = {

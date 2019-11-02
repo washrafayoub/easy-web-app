@@ -1,3 +1,6 @@
+## 2.7.3: 
+* Forms support `height: 'auto'`
+
 ## 2.7.x
 * OpenID Connect and OAuth 2.0 support, see [example for GUI and API](https://github.com/ma-ha/easy-web-app/blob/master/examples/openid/)
 

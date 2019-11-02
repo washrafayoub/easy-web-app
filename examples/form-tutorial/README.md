@@ -202,6 +202,15 @@ The table plug in provides an _editable_ attribute for text cells:
 This makes life much easier, because you can modify data records directly in 
 the table. 
 
+# Form with auto height
+
+If you don't know the heigth of a form in the design phase, you can set `height: 'auto'`.
+
+Check out 
+[form_tutorial_4.js](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_4.js)
+
+A little trick is done here in HTML, but you don't have to care about.
+
 # Forms On Steroids
 
 Yes -- forms can look like this (screen shot):
