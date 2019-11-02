@@ -1,6 +1,26 @@
 ## 2.7.3: 
 * Forms support `height: 'auto'`
 
+IMPORTANT (and SORRY for that):  
+Form CSS may have some problems, since the buttons are now below the form, 
+
+To  fix that and re-render the action buttons as a column as before.
+
+For single-column form you can add e.g.:
+
+    #My1stForm .pongFormInputGrp0 {
+      width: 30%;
+      float: left;
+    }
+
+... and for 2-col forms add e.g.
+
+    #MyForm .pongFormInputGrp0 {
+      width: 60%;
+      float: left;
+    }
+
+
 ## 2.7.x
 * OpenID Connect and OAuth 2.0 support, see [example for GUI and API](https://github.com/ma-ha/easy-web-app/blob/master/examples/openid/)
 
