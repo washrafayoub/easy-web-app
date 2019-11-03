@@ -565,7 +565,7 @@ router.get(
       var layout = {
         'layout' : pg
       }
-      console.log( layout )
+      // console.log( layout )
       return res.json( layout )
     } else  
     if ( gui.pages[ req.params.id ] ) {
@@ -1158,7 +1158,7 @@ gui.enableSecurity = function enableBasicAuth( paramObj ) {
                     { //expires: new Date(Date.now() + 6400000), 
                       httpOnly: true, path: gui.appRoot }
                 )
-                console.log( 'this.appRoot='+gui.appRoot )
+                // console.log( 'this.appRoot='+gui.appRoot )
                 
                 if ( gui.changePassword ) {
                   gui.secParams.changePasswordURL = 

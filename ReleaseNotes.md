@@ -1,3 +1,6 @@
+## 2.7.4:
+* Forms: select supports `multiple: true`
+ 
 ## 2.7.3: 
 * Forms support `height: 'auto'`
 
