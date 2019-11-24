@@ -1,3 +1,6 @@
+## 2.8.0:
+* Form: `modalQuestion` for action button ([see example](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_4.js)) 
+
 ## 2.7.4:
 * Forms: select supports `multiple: true`
  

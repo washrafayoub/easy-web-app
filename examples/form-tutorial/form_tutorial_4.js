@@ -57,6 +57,7 @@ var formPlugInConfig = {
     ],
     actions: [
       {  id: 'actionGet',  actionName: 'GET',  method: 'GET',  actionURL: 'test', setData:[ {resId: 'myForm'} ] },
+      {  id: 'actionSave',  actionName: 'Save', method: 'POST', actionURL: 'test', modalQuestion: 'Do you want to save the data now?' },
       {  id: 'actionPost', actionName: 'POST', method: 'POST', actionURL: 'test', enabled:false }      
     ]
   }
