@@ -1,3 +1,6 @@
+## 2.8.1:
+* Table: Show error alert with response text, if editable cell POST get no 200 response code.
+
 ## 2.8.0:
 * Form: `modalQuestion` for action button ([see example](https://github.com/ma-ha/easy-web-app/blob/master/examples/form-tutorial/form_tutorial_4.js)) 
 

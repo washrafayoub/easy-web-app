@@ -50,7 +50,7 @@ gui.addView (
         'ZoomImg_zooms_Picture',
         'Status_checkbox',
         'Rating',
-        'Description_editable',
+        'descr_editable',
         'Product~Page_link',
         'Created_datems_editable'
       ]
@@ -61,7 +61,7 @@ gui.addView (
 var d = (new Date()).valueOf()
 var tableData = 
   [ 
-    {ID:'yyy1',Name:['Prod A','A'],Rating:'3',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x02.png',ZoomImg:'img\/tst.jpg'},
+    {ID:'yyy1',Name:['Prod A','A'],Rating:'3',Status:'false',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Changing this will cause an error ;-)',Picture:'img\/x02.png',ZoomImg:'img\/tst.jpg'},
     {ID:'yyy3',Name:['Prod B','A'],Rating:'2',Status:'true',ProductPage:'',descr:'Blah blub bubber.',Picture:'img\/x03.png',ZoomImg:'img\/tst.jpg'},
     {ID:'yyy4',Name:['Prod C','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x04.png',ZoomImg:'img\/tst.jpg'},
     {ID:'yyy5',Name:['Prod D','A'],Rating:'2',Status:'true',ProductPage:'http:\/\/mh-svr.de\/pong_dev\/README.md',descr:'Blah blub bubber.',Picture:'img\/x05.png',ZoomImg:'img\/tst.jpg'},
@@ -134,6 +134,9 @@ svc.post(
   '/products',
   bodyParser.urlencoded( { extended: false } ),  
   function( req, res ) {
+    if ( req.body.ID == 'yyy1') {
+      return res.status(400).send('This is an error test ;-)')
+    }
     if ( req.body && req.body.ID && req.body.Created )  {
       for ( var i = 0; i < tableData.length; i++ ) {
         if ( tableData[i].ID == req.body.ID ) {
