@@ -1,3 +1,6 @@
+## 2.8.2
+* fix setPageWidth( )
+
 ## 2.8.1:
 * Table: Show error alert with response text, if editable cell POST get no 200 response code.
 

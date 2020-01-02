@@ -12,13 +12,13 @@ gui.getExpress().use( '/img-cust', express.static( __dirname + '/img-cust' ) )
 // define a main page
 var mainPage = gui.init( 'List Demo', 8880 )
 mainPage.setTitle( 'List Demo' )
-mainPage.setPageWidth( '100%' )
+mainPage.setPageWidth( '1200px' )
   
 mainPage.addView( 
     { 
       id:'row1view', 
       title:'Service Dashboard',
-      height:'470px', 
+      height:'480px', 
       type:'pong-list',
       resourceURL:'/service/statistics'
     },
