@@ -68,7 +68,7 @@ Get a local copy and start example:
 ```bash
 git clone https://github.com/ma-ha/easy-web-app.git
 
-cd easy-web-gui
+cd easy-web-app
 npm install
  
 cd examples
@@ -78,7 +78,7 @@ node index.js
 
 Now open the web app in your browser: [http://localhost:8888/](http://localhost:8888/)
 	
-## How does it work
+## How does it work?
 To create a web application with one view you simple do:
 
 ```javascript

@@ -1,5 +1,5 @@
 var gui = require( '../../' )   
-gui.init ( 'Form Tutorial: Page 3' )
+gui.init ( 'Form Tutorial: Page 4' )
 
 var formConfig = {
     id   : 'myForm',
@@ -35,7 +35,8 @@ var formPlugInConfig = {
                   {option:'second and a half', value:'Option2.5', disabled:true }, 
                   {option:'third', value:'Option3' } 
                 ] 
-              }
+              },
+              { id: 'f07', label: 'Color', type: 'color' }
             ]
           },
           {

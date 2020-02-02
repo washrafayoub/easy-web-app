@@ -1,3 +1,6 @@
+## 2.8.3
+* form input type "color"
+
 ## 2.8.2
 * fix setPageWidth( )
 
