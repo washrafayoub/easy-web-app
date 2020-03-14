@@ -1,3 +1,6 @@
+## 2.8.4
+* security updates
+
 ## 2.8.3
 * form input type "color"
 

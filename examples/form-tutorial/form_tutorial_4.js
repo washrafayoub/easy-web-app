@@ -36,7 +36,7 @@ var formPlugInConfig = {
                   {option:'third', value:'Option3' } 
                 ] 
               },
-              { id: 'f07', label: 'Color', type: 'color' }
+              { id: 'f07', label: 'Color', type: 'color', defaultVal:'#01699B' }
             ]
           },
           {
