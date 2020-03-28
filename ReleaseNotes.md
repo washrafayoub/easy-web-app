@@ -1,3 +1,7 @@
+## 2.9.0
+* addTabContainer(): Tabs can be pre-selecetd via URL parameter <containerId>=<tabId>
+* package updates
+
 ## 2.8.4/5
 * security updates
 
