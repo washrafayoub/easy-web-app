@@ -1,6 +1,6 @@
 {
 	"name": "easy-web-app",
-	"version": "2.9.1",
+	"version": "2.9.2",
 	"description": "Create web applications easily.",
 	"author": "ma-ha",
 	"license": "MIT",
@@ -61,7 +61,7 @@
 		"npm": "^5.6.0"
 	},
 	"devDependencies": {
-		"express-jwt": "^5.3.3",
+		"express-jwt": "^6.0.0",
 		"express-jwt-authz": "^2.4.0",
 		"jwks-rsa": "^1.8.1",
 		"zombie": "^6.1.4"

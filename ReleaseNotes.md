@@ -1,4 +1,4 @@
-## 2.9.1
+## 2.9.1/2
 * security fixes: package dependencies
 
 ## 2.9.0
