@@ -1,3 +1,6 @@
+## 2.9.1
+* security fixes: package dependencies
+
 ## 2.9.0
 * addTabContainer(): Tabs can be pre-selecetd via URL parameter <containerId>=<tabId>
 * package updates
