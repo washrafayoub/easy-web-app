@@ -1,3 +1,6 @@
+## 2.9.4
+* table with `"height":"auto"`
+
 ## 2.9.1/2/3
 * security fixes: package dependencies
 
