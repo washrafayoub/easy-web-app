@@ -29,3 +29,4 @@ jobs:
     - run: npm install
     - run: cd examples/simple
     - run: node index.js
+    - run: firefox http://localhost:8888/
