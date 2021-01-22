@@ -25,13 +25,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: git clone https://github.com/ma-ha/easy-web-app.git
-    - run: cd easy-web-app
+
     - run: npm install
- 
-    - run: cd examples
-    - run: cd simple
-    - run: node index.js
+    - run: node examples/simple/index.js
 
 ##############
 - name: Upload a Build Artifact
