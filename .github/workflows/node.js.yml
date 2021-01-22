@@ -27,4 +27,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - run: npm install
-    - run: node examples/simple/index.js
+    - run: cd examples/simple
+    - run: node index.js
