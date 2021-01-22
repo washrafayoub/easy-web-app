@@ -222,3 +222,5 @@ Please contact me:
 ![email address](https://raw.githubusercontent.com/ma-ha/easy-web-app/master/email.png) 
 
 How can I help you?
+
+New: edits by Walaa to test the flow
