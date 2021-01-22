@@ -25,10 +25,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: cd easy-web-app
+    - run: npm install
+ 
+    - run: cd examples
+    - run: cd simple
+    - run: node index.js
 
+##############
 - name: Upload a Build Artifact
   uses: actions/upload-artifact@v2.2.2
   with:
