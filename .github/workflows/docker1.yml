@@ -22,11 +22,13 @@ jobs:
           #password: ${{ secrets.DOCKERHUB_TOKEN }}
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          #password: ${{ secrets.CR_PAT }}
+          password: ${{ cf18baf8-5a67-4835-95e9-2d2228570f08 }}
       -
         name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
+        #uses: docker push washrafayoub/washraf_repo:tagname
         with:
           push: true
           tags: user/app:latest
