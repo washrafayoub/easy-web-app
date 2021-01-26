@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,7 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - run: ls
     - run: npm install
+    - run: ls
     - run: cd examples/simple
     - run: node index.js
-    - run: firefox http://localhost:8888/
+    - run: ls
