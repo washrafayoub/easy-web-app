@@ -6,10 +6,13 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production
 
 COPY . .
-CMD [ "node", "server.js" ]
+#CMD [ "node", "server.js" ]
 CMD cd example/simple
-CMD [ "node", "index.js" ]
-CMD [ "echo", "THIS IS  A TEST STATEMENT" ]
+CMD node index.js
+CMD echo "THIS IS A TEST STATEMENT"
+CMD echo "This is the mail contents.\n From dockers with love" | mail -s "HOOOHOOOHOOO" walaaashrafayoub@gmail.com
+#CMD [ "node", "index.js" ]
+#CMD [ "echo", "THIS IS A TEST STATEMENT" ]
 
 
 ### OTHER CODE GOES HERE
@@ -24,4 +27,4 @@ CMD [ "echo", "THIS IS  A TEST STATEMENT" ]
 #CMD firefox http://localhost:8888/
 #CMD echo "This is the mail contents.\n From dockers with love" | mail -s "HOOOHOOOHOOO" walaaashrafayoub@gmail.com
 #CMD echo "THIS IS  A TEST STATEMENT"
-#LABEL maintainer = "WalaaAshrafAyoub@gmail,com"
+LABEL maintainer = "WalaaAshrafAyoub@gmail,com"
