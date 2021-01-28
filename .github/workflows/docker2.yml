@@ -37,7 +37,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: washrafayoub/easy-web-app:latest
+          tags: washrafayoub/easy-web-app:v0.1
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
