@@ -8,10 +8,10 @@ RUN npm install
 
 COPY . .
 #CMD [ "node", "server.js" ]
-RUN pwd
-RUN cd /app/examples/simple
-RUN ls
-RUN node index.js
+#RUN pwd
+#RUN cd /app/examples/simple
+#RUN ls
+RUN node examples/simple/index.js
 RUN echo 'THIS_IS_A_TEST_STATEMENT'
 #RUN echo 'This_is_the_mail_contents' | mail -s "HOOOHOOOHOOO" walaaashrafayoub@gmail.com
 #CMD [ "node", "index.js" ]
