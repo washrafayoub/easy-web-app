@@ -7,10 +7,12 @@ RUN npm install --production
 
 COPY . .
 #CMD [ "node", "server.js" ]
+RUN pwd
 CMD cd examples/simple
+RUN pwd
 CMD node index.js
-CMD echo 'THIS IS A TEST STATEMENT'
-CMD echo 'This is the mail contents. From dockers with love' | mail -s "HOOOHOOOHOOO" walaaashrafayoub@gmail.com
+CMD echo 'THIS_IS_A_TEST_STATEMENT'
+CMD `echo 'This_is_the_mail_contents' | mail -s "HOOOHOOOHOOO" walaaashrafayoub@gmail.com`
 #CMD [ "node", "index.js" ]
 #CMD [ "echo", "THIS IS A TEST STATEMENT" ]
 
