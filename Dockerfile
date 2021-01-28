@@ -15,8 +15,9 @@ RUN ls
 #RUN which npm
 CMD npm install
 RUN ls
-RUN cd example
+CMD cd example/simple
 RUN ls
+CMD node index.js
 #COPY static /usr/share/nginx/html
 LABEL maintainer = "WalaaAshrafAyoub@gmail,com"
 #CMD npm install
