@@ -1,5 +1,5 @@
 # Install tools required for project
-FROM node:12.18.1
+FROM node:latest
 ENV NODE_ENV=production
 WORKDIR /app
 COPY ["package.json", "package-lock.json*", "./"]
@@ -7,6 +7,10 @@ RUN npm install --production
 
 COPY . .
 CMD [ "node", "server.js" ]
+CMD cd example/simple
+CMD [ "node", "index.js" ]
+CMD echo "THIS IS  A TEST STATEMENT"
+
 
 ### OTHER CODE GOES HERE
 #FROM nginx:alpine
