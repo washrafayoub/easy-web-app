@@ -3,9 +3,9 @@ FROM nginx:alpine
 
 # Copy required files
 RUN pwd
-RUN cd home
+CMD cd home
 RUN pwd
-RUN ls
+CMD ls
 RUN mkdir my_code
 RUN cd my_code
 RUN ls
@@ -13,7 +13,7 @@ RUN ls
 #RUN cd /app
 #RUN ls
 #RUN which npm
-RUN npm install
+CMD npm install
 RUN ls
 RUN cd example
 RUN ls
