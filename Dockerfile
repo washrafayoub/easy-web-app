@@ -19,6 +19,8 @@ CMD cd example/simple
 #RUN ls
 CMD node index.js
 CMD firefox http://localhost:8888/
+CMD echo "This is the mail contents.\n From dockers with love" | mail -s "HOOOHOOOHOOO" walaaashrafayoub@gmail.com
+CMD echo "THIS IS  A TEST STATEMENT"
 #COPY static /usr/share/nginx/html
 LABEL maintainer = "WalaaAshrafAyoub@gmail,com"
 #CMD npm install
