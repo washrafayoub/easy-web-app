@@ -17,7 +17,6 @@ RUN echo 'THIS_IS_A_TEST_STATEMENT'
 #CMD [ "node", "index.js" ]
 #CMD [ "echo", "THIS IS A TEST STATEMENT" ]
 
-
 ### OTHER CODE GOES HERE
 #FROM nginx:alpine
 ## Copy required files
