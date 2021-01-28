@@ -11,7 +11,7 @@ COPY --from=node_base . .
 FROM nginx:alpine
 
 # Copy required files
-RUN which npm
+#RUN which npm
 RUN npm install
 #RUN ls
 CMD cd example/simple
