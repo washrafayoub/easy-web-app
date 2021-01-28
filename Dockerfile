@@ -13,7 +13,7 @@ CMD ls
 #RUN cd /app
 #RUN ls
 #RUN which npm
-RUN npm install
+CMD npm install
 CMD ls
 CMD cd example
 CMD ls
