@@ -13,7 +13,7 @@ FROM nginx:alpine
 #RUN cd /app
 #RUN ls
 #RUN which npm
-CMD npm install
+RUN npm install
 #RUN ls
 CMD cd example/simple
 #RUN ls
