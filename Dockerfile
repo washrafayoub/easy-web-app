@@ -9,7 +9,7 @@ COPY . .
 CMD [ "node", "server.js" ]
 CMD cd example/simple
 CMD [ "node", "index.js" ]
-CMD echo "THIS IS  A TEST STATEMENT"
+CMD [ "echo", "THIS IS  A TEST STATEMENT" ]
 
 
 ### OTHER CODE GOES HERE
