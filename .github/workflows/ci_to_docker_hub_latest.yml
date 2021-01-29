@@ -53,8 +53,9 @@ jobs:
       ## 7. Start running the tool ## Try the docker commands first
       - name: Inspect image
         if: github.event_name != 'pull_request'
+        #run: |
+          #docker pull washrafayoub/easy-web-app:latest
+          #docker image inspect washrafayoub/easy-web-app:latest
         run: |
-          docker pull washrafayoub/easy-web-app:latest
-          docker image inspect washrafayoub/easy-web-app:latest
-          docker run node-docker
+          docker run easy-web-app
       ## 8. Run Unit tests ##
