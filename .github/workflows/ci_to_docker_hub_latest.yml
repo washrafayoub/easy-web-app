@@ -51,11 +51,12 @@ jobs:
       #      ${{ runner.os }}-buildx-
       
       ## 7. Start running the tool ## Try the docker commands first
-      - name: Inspect image
+      - name: Inspect and Run image
         if: github.event_name != 'pull_request'
         #run: |
           #docker pull washrafayoub/easy-web-app:latest
           #docker image inspect washrafayoub/easy-web-app:latest
         run: |
-          docker run easy-web-app
+          docker image inspect washrafayoub/easy-web-app:latest
+          docker run washrafayoub/easy-web-app:latest
       ## 8. Run Unit tests ##
