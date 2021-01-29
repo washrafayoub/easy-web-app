@@ -41,7 +41,7 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
       
-      ## 6. Build a cash for the added image ##
+      ## 6. Build a cash for the added image ## ** This step is needed only once I guess **
       #- name: Cache Docker layers
       #  uses: actions/cache@v2
       #  with:
@@ -49,3 +49,12 @@ jobs:
       #    key: ${{ runner.os }}-buildx-${{ github.sha }}
       #    restore-keys: |
       #      ${{ runner.os }}-buildx-
+      
+      ## 7. Start running the tool ## Try the docker commands first
+      - name: Inspect image
+        if: github.event_name != 'pull_request'
+        run: |
+          docker pull washrafayoub/easy-web-app:latest
+          docker image inspect washrafayoub/easy-web-app:latest
+          docker run node-docker
+      ## 8. Run Unit tests ##
