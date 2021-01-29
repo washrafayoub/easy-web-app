@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 #CMD [ "node", "server.js" ]
 #RUN pwd
-RUN cd examples/simple
+CMD cd examples/simple
 #RUN ls
 RUN node index.js
 #RUN node examples/simple/index.js
