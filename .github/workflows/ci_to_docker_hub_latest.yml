@@ -49,14 +49,16 @@ jobs:
       #    key: ${{ runner.os }}-buildx-${{ github.sha }}
       #    restore-keys: |
       #      ${{ runner.os }}-buildx-
-      
+
+  Run_app:
+    runs-on: ubuntu-latest
+
+    steps:
       ## 7. Start running the tool ## Try the docker commands first
       - name: Inspect and Run image
         if: github.event_name != 'pull_request'
-        #run: |
-          #docker pull washrafayoub/easy-web-app:latest
-          #docker image inspect washrafayoub/easy-web-app:latest
         run: |
+          docker pull washrafayoub/easy-web-app:latest
           docker image inspect washrafayoub/easy-web-app:latest
           docker run washrafayoub/easy-web-app:latest
       ## 8. Run Unit tests ##
