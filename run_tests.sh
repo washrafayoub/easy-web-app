@@ -7,8 +7,11 @@ done
 
 ### Start running testcases ###
 cd mocha-tests
+echo "FLAG 1"
 npm install -g mocha
+echo "FLAG 2"
 npm install zombie
+echo "FLAG 3"
 
 ## The config test must be done separately:
 #cd config-test
