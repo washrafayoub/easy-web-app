@@ -21,9 +21,9 @@ RUN echo 'THIS_IS_A_TEST_STATEMENT'
 #CMD [ "echo", "THIS IS A TEST STATEMENT" ]
 
 ### Fix the permission issue of a file ##
-RUN apt-get update && apt-get install -y apt-utils vim curl
+#RUN apt-get update && apt-get install -y apt-utils vim curl
 RUN chmod +x run_tests.sh
-RUN ls
+RUN ls -al
 ###
 
 LABEL maintainer = "WalaaAshrafAyoub@gmail.com"
