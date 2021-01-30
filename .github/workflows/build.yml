@@ -19,8 +19,8 @@ jobs:
       matrix:
         #node-version: [14.x, 15.x]
         #node-version: [latest] # not working
-        node-version: [15.x]
-        node: [8.9.4]
+        #node-version: [15.x]
+        node-version: [8.9.4]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
