@@ -1,6 +1,7 @@
 # Install tools required for project
 #FROM node:latest
-FROM node:8.9.4
+#FROM node:8.9.4
+FROM node:8.x
 #FROM node:12.12.0
 #ENV NODE_ENV=production
 WORKDIR /app
