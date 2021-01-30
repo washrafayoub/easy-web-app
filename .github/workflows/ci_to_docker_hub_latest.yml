@@ -34,8 +34,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: washrafayoub/easy-web-app:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          #cache-from: type=local,src=/tmp/.buildx-cache
+          #cache-to: type=local,dest=/tmp/.buildx-cache
 
       ## 5. Check on the added image ##
       - name: Image digest
