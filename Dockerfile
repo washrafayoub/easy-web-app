@@ -1,6 +1,7 @@
 # Install tools required for project
-FROM node:latest
+#FROM node:latest
 #FROM node:8.9.4
+FROM node:12.x
 #ENV NODE_ENV=production
 WORKDIR /app
 COPY ["package.json", "package-lock.json*", "./"]
