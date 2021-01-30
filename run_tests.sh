@@ -11,9 +11,9 @@ npm install -g mocha
 npm install zombie
 
 ## The config test must be done separately:
-cd config-test
-mocha -t 10000 config.js
-cd ../
+#cd config-test
+#mocha -t 10000 config.js
+#cd ../
 
 ### Run the tests
 #for i in test/*; do
